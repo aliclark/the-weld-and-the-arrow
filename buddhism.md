@@ -1,5 +1,7 @@
 # Buddhism
 
+*work-in-progress - please check in later too*
+
 An ontology-based reading of Zen / #Chan  —  Jizang-grounded, Dōgen-formulated, Hakuin-inspired.
 
 Nishitani provides the impetus - absolute non-being is not a privative void but lies beyond the being/non-being distinction, which is named by emptiness.
