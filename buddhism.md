@@ -41,7 +41,7 @@ Why not a table of just 1 row? Hakuin provides the corrective: the *not-yet-budd
 
 ## Karma
 
-Why not a table of just 2 rows? *The Gateless Gate (Mumonkan), Case 2, compiled by Wumen Huikai* is the test. The old man's error was to assert not-fall where not-obscure was owed — a floor-truth claimed at the conventional level, which is antinomian, since a floor-truth can only ever be *spoken inside* a conventional act. Held each at its proper tier, the two are non-dual.
+Why not a table of just 2 rows? The fox koan (*The Gateless Gate (Mumonkan), Case 2, compiled by Wumen Huikai*) is the test. The old man's error was to assert not-fall where not-obscure was owed — a floor-truth claimed at the conventional level, which is antinomian, since a floor-truth can only ever be *spoken inside* a conventional act. Held each at its proper tier, the two are non-dual.
 
 Karma is a circuit, not a payload one row carries. **All acting is at Row 3**, at act-time: a deed welds an agent-index onto the blind arrow, and the being's reception of the arrow's returned result is itself a deed, not a state. **Row 2 is where the result lands** — it only *states* the being's re-pitched resonance (the fit between this call and this contraction, not a faculty it holds, which would re-base the empty agent); it has no verbs. So the loop closes inside the grid: a deed welds an index → the arrow returns → the being's reception of it re-pitches the Row 2 configuration → which the next deed reads from. (This also fixes the grid's reach: where no self appears — a stone — there is no resonance to speak of; where a self appears — a hell-dweller, sometimes — there is. Row 2 exists wherever a not-yet-buddha does.)
 
