@@ -2,66 +2,71 @@
 
 An ontology-under-erasure reading of Zen / #Chan *(work in progress).*
 
+A moral metaphysics with no substrate: take one emptiness posit and follow what it forces for karma, action, and awakening.
+
+## The principle
+
+The floor is emptiness that empties even itself (Jizang, 空空): the ultimate is never a thing, never a final substrate. Everything here is conventional — the path, the grid's distinctions, the two truths themselves — and no level stands as the last floor.
+
+The grid's enactment column is Dōgen's two title-compounds taken apart. **Genjōkōan** splits as *genjō* — Row 1's enactment, the actualizing — plus the *kōan*, Row 2: the particular case in which it becomes present (*can this being listen to Hyakujō?*). **Shushō** (practice-realization) splits as *shu* — Row 3's enactment, practice — plus *shō*, realization, which is Row 1's genjō again. Row 1 is the shared hinge: realization pairs leftward with Row 2's kōan and rightward with Row 3's practice. So the three enactment cells are the parts of Dōgen's one sentence — *carrying the self forward to practice-realize the myriad dharmas is delusion; the myriad dharmas advancing (banpō susumite) to practice-realize the self is satori* — and practice and realization are non-dual (shushō-ittō): genjō is nothing but Row 3 practice run scaffold-free. (genjō stands in for the *shō* of shushō — near-synonyms in Dōgen, not a strict equation.)
+
+The one posit is that **the karma-holder has no own-being** (the attunement axiom; anchor **MMK 17**, with MMK 8 and 18): the agent is mere-designation, floating free of any base like the chariot. And with no fixed base, moral direction can never be *read off* the facts — only *enacted*. So dependence and enactment are one fact seen twice: no-substrate on one side *is* the necessity of welding on the other. This is **the weld**, and it wears two faces, each true at its own tier:
+
+- **not-fall** (不落), at the floor: no own-being, so no substance is caught in the causal net — anātman, not escape.
+- **not-obscure** (不昧), conventionally: the karmic arrow is real and inescapable, never evaded.
+
+The fox kōan (Hyakujō's fox) is the test. The old man's error was to assert not-fall where not-obscure was owed — a floor-truth claimed at the conventional level, which is antinomian, since a floor-truth can only ever be *spoken inside* a conventional act. Held each at its proper tier, the two are non-dual (Dōgen reads the fox both ways — Daishugyō, Shinjin-inga).
+
+## The grid
+
+The weld laid out. Three rows, each a dependence/enactment pair; all three conventional.
+
 | Dependence | Enactment |
-|------------|-----------|
-| **mujishō-sōe** — no-own-being as mutual-dependence; jiji-muge, each-in-all, no substrate. | **genjō** — manifesting fully; the seam where the scaffold dissolves. |
-| **kannō-sōe** — resonance as mutual-dependence; the sōe where *this* call and *this* contraction come to pitch together, no privileged *substance* and no priority either way. | **banpō susumite** — the myriad dharmas advance and clarify the self. |
-| **engi / inga** — value-free directedness; the morally blind arrow. | **gan / gyōji / fumai-inga** — the weld: kannō's act-time direction bound along the blind arrow; not-obscure (不昧). |
+|---|---|
+| **mujishō-sōe** — no-own-being as mutual-dependence; each-in-all, no substrate. | **genjō** — manifesting fully; the seam where the scaffold dissolves. |
+| **kannō-sōe** — resonance as mutual-dependence; how resonant a being is to the dharma now (*can it listen to Hyakujō?*). | **banpō susumite** — the myriad dharmas advance and clarify the self. |
+| **engi / inga** — value-free directedness; the morally blind arrow. | **shu** — practice (gyōji); the weld at act-time, direction bound along the blind arrow; not-obscure (不昧). |
+
+*(kannō-sōe rather than the canonical kannō-dōkō, to keep the coupling connotation-light: the -sōe already carries mutual-dependence.)*
+
+## How the grid moves
+
+Karma is a circuit, not a payload one row carries. **All acting is at Row 3**, at act-time: a deed welds an agent-index onto the blind arrow, and the being's reception of the arrow's returned result is itself a deed, not a state. **Row 2 is where the result lands** — it only *states* the being's re-pitched resonance (the fit between this call and this contraction, not a faculty it holds, which would re-base the empty agent); it has no verbs. So the loop closes inside the grid: a deed welds an index → the arrow returns → the being's reception of it re-pitches the Row 2 configuration → which the next deed reads from. (This also fixes the grid's reach: where no self appears — a stone — there is no resonance to speak of; where a self appears — a hell-dweller, sometimes — there is. Row 2 exists wherever a not-yet-buddha does.)
+
+That reception is oriented, and its orientation is the whole difference between realization and delusion. **Dharmas-forward** is **banpō susumite** — the myriad dharmas advancing to clarify the self; the fox's *listening*, where release occurs. **Self-forward** — pushing the self at the dharmas, decreeing one's own pitch — is delusion. Both are Row 3 deeds; Row 2 only records the resonance each leaves behind.
+
+The everyday psychology — a bad act dulls the mind, a later practice-moment lapses — is karma's impersonal *shadow*: it shares karma's shape, so row 2 models it well, but it is not karma. The karmic content is the agent-index — *my* arrow returning to re-pitch *me as mine* — which no impersonal story captures. Read as identity, karma is quietly naturalised and the floor is lost.
+
+## Genjō
+
+Genjō is not a state reached, nor a discrete event: it is a *mode* of running the loop **scaffold-free** — row-3 action run dharmas-forward, not-fall enacted (no substance caught) while not-obscure still binds (the arrow never went anywhere). Both tiers hold at once, so genjō is conditional and renewable, never exemptive: the butcher's scaffold-free acting is enlightenment only as long as the stream keeps honouring not-obscure. The moment it is claimed to have *discharged* the arrow — floor-content passed off as a conventional debt paid — that is the old man's error.
+
+So enlightenment is a description of the stream run one way, renewed each moment, not a quantum cashed once and thereafter possessed. This is anātman in the time register (uji): each now total, history *shaping* the pitch but never *deposited* in it — no tank, no substance in any pitch-state, not-fall intact all the way along.
+
+## Why karma won't reduce
+
+The principle leans on karma being irreducible to the impersonal field of conditions. Here is why it is.
+
+Karma is *act-of-an-agent* bearing *fruit-for-an-agent* — an agent-indexed designation with no substrate of its own, not the impersonal field wearing a veil. Because the agent has no base, karma cannot be *read off* that field: the reduction is not merely hard, it is **malformed** — there is no agent-base to read from.
+
+This does not over-generate. Emptiness is universal, so *generic* no-own-being can't be the licence, or every reduction would collapse. The verdict fires *only where a designation's answer must route through a self.* Impersonal conditioning among dharmas — dependent arising without a doer — lets convention fix an answer without locating a self, so it stays determinate and the reduction is merely hard. (I take citta impersonally, bracketing for-me-ness, so only the agent goes no-base.) Only karma, whose answer can't be fixed without locating the empty agent, crosses from hard to malformed.
+
+Two guards hold the line. The agent resists reduction by being *more* thoroughly empty, not by being a special substance — said otherwise, a soul is re-smuggled. And the moral is not a Moorean non-natural fact: the reduction is malformed *because its base is empty* — a dissolutionist reading, and the honest one on a self-emptying floor.
+
+## Tiering
+
+The ultimate is the self-emptying floor; every row is conventional (MMK 24: emptiness = dependent origination = conventional designation), and the two-truths distinction is itself conventional — Jizang's fourfold two truths (四重二諦), each pair re-emptied as merely conventional at the next level, so no level is a final floor. The grid's joints are scaffold; genjō names where the scaffold is kicked away, not a separate ultimate row. The tiering and kannō-sōe are conventional and my own — contra Dōgen, who keeps all ultimate.
 
 ## Credits
 
-- **Nishitani** — the impetus: absolute non-being is not a privative void but lies beyond the being/non-being distinction, which emptiness names.
-- **Jizang** — the self-emptying floor: emptiness empties even emptiness (空空), so the ultimate is never reified as a thing. The floor's emptiness, reaching the karma-holder, is what makes karma underivable-from-the-impersonal-field of conditions.
+- **Nishitani** — the impetus: absolute non-being is not a privative void but lies beyond the being/non-being distinction that emptiness names.
+- **Jizang** — the self-emptying floor: emptiness empties even emptiness, so the ultimate is never reified; reaching the karma-holder, this is what makes karma underivable from the impersonal field.
 - **Dōgen** — the philosophical material.
-- **Hakuin** — the corrective: the conceptual truth of non-Buddha — the *not-yet-buddha* — mustn't be ignored. Realization must meet beings where they are (not just silent illumination), which is what necessitates kannō-sōe's responsiveness — and, with it, why row 2 exists at all: there are sentient beings who are not yet Buddha.
-- **Linji** — the weld's agential face: the true person of no rank — no metaphysical rank, yet always going in and out, acting.
-
-## Notes
-
-**Tiering.** The ultimate is the self-emptying floor (Jizang). All three rows are *conventional* — MMK 24: emptiness = dependent origination = conventional designation; the path lives entirely on the conventional side. The two truths are themselves a conventional distinction — Jizang's fourfold two truths (四重二諦): each conventional/ultimate pair is re-emptied as merely conventional at the next level, so no level stands as a final floor. The grid's joints are scaffold, and genjō names where the scaffold is kicked away (the seam dissolving), not a separate ultimate row. The tiering and kannō-sōe are conventional and my own — contra Dōgen, who keeps all ultimate.
-
-**Why kannō-sōe and not kannō-dōkō.** The canonical term for the non-dual coupling is *kannō-dōkō* (感応道交), and its existence confirms the coupling read here isn't idiosyncratic. But it drags in Tendai / Pure Land grace-apparatus the theory doesn't want to be constrained to; and the bare *-sōe* suffix already de-sequences kannō structurally (sōe *is* mutual-dependence, so no call-then-response gets a foothold). So kannō-dōkō is kept as an *unimported neighbour*, not adopted — the minimal, connotation-light coinage is preferred.
-
-**Attunement axiom** — one irreducible posit: *śūnyatā — the karma-holder has no own-being.* (Anchor: **MMK 17**, *karmaphalaparīkṣā* — Nāgārjuna directly on act, fruit, and the unfindable agent; with **MMK 8** on act-and-agent and **MMK 18** on the self. MMK 24 is reserved for the tiering above. No niyāma-order commitment: "karma" here is the Madhyamaka act/fruit vocabulary, not a Theravāda causal taxonomy.) Two faces:
-
-- *definitional*: conventionally, "karma" designates events under an agent-index — act-*of-an-agent*, fruit-*for-an-agent* — a distinct *designation* with no substrate of its own; not the impersonal field of conditions wearing a veil.
-- *relational*: karma is underivable-from-the-impersonal-field because the reduction would have to read an agent-indexed fact off a base, and the holder (agent) is empty — there is no fixed agent-base to read off. So the reduction question is malformed, not merely unanswerable.
-
-**Why this doesn't over-generate.** Emptiness of own-being is universal, so *generic* no-own-being can't be what licenses the malformed verdict, or it would flatten every reduction. Determinacy must be sourced where it doesn't reintroduce own-being — not in the relata but in the convention. Following Candrakīrti, conventional truth is worldly transactional usage (*lokavyavahāra*); "conventionally determinate" means *convention fixes an answer* — a fact about designation-practice, not about relata possessing a base. This keeps the determinate side fully empty.
-
-The verdict fires *only where the designation's answer must route through the self.* Impersonal conditionings among dharmas — dependent arising without a doer — let convention fix an answer without locating a self: dependent yet determinate, the reduction merely hard. Karma is act-*of-an-agent* bearing fruit-*for-an-agent*; its answer cannot be fixed without locating the agent, and the agent is the paradigm mere-designation — not findable as identical to or different from the act (MMK 17, MMK 8), floating free of any base like the chariot (MMK 18; Candrakīrti, *Madhyamakāvatāra* VI). So karma's base is not conventionally determinate even in principle. Only karma crosses from hard-reduction to malformed-reduction, and it crosses because its answer routes through the self.
-
-So the firing condition is *designation-whose-answer-routes-through-the-self* — not "real process vs. unreal self," but *anātman localized to where an agent appears*, not a generic emptiness-hammer. One fork, *intra-Madhyamaka*: *mind* construed impersonally (conditioning among dharmas, no cognizer needed as a relatum) stays determinate-by-convention; *mind* construed phenomenally — the experiencer of **MMK 9**, unfindable apart from the seeing — crosses the line with the agent. I take citta impersonally and bracket for-me-ness, so only the agent goes no-base. (Guard: the agent resists reduction by being *more* thoroughly empty — no findable base — not by being a special substance; said wrong, this re-smuggles a soul.) And this determinate/no-base line is itself a conventional joint — emptied at the floor (空空), kicked away at genjō.
-
-The firing condition also fixes the grid's domain: where no self appears (a stone), the axiom doesn't fire — pure row-1 impersonal dharma, no pitch, not a row-2 locus at all; where a self appears (a hell-dweller, sometimes), it fires — a karma-holder, hence a pitch, hence couplings sometimes available. So **row 2's domain of application is co-extensive with where the axiom fires**, which re-grounds "why row 2 exists": wherever a self appears to be off-pitch, i.e. wherever the axiom fires on a not-yet-buddha (Hakuin).
-
-*Dissolutionist, not Moorean*: the moral isn't posited as a sui generis non-natural fact; rather the reduction is malformed because its base is empty. That spends the strong non-naturalism a distinct moral order first seemed to promise — a deliberate trade, and the honest one for a Jizang-grounded theory.
-
-**The weld** — one empty-yet-efficacious joining, in two orientations:
-
-- *vertical / agential* (Linji): joins the rankless floor to conventional action — the true person of no rank. At the floor, **not-fall** (不落): no own-being, so no substance is caught in the causal net — anātman, not escape.
-- *horizontal / causal* (Dōgen, row three): within the conventional, practice binds soteriological direction onto the blind karmic arrow — **not-obscure** (不昧): the arrow is real and inescapable, never evaded.
-
-Because there is no fixed base, soteriological direction can never be *read off* the facts — only *enacted*. So the enactment column is mandatory, not decorative: the left column's *no-substrate* and the right column's *must-weld* are one fact seen twice. Emptiness of the holder (dependence) *is* the necessity of welding (enactment).
-
-**The two rows — pitch and the weld.** Rows 2 and 3 are kannō in two registers, not two contents. Row 3 is kannō at *act-time*: the weld, each deed laying an agent-index on the blind arrow — the event-flow of karma. Row 2 is kannō as *standing pitch*: the configuration, the receptiveness — how resonant the being is to the dharma now (*can it listen to Hyakujō?*). All *acting* is row 3 — one can only act conventionally, at act-time; row 2 is the state the acting reads from and rewrites, never a separate site of action.
-
-So karma is not a payload row 3 *adds*. Row 3 is its outgoing pole (the deed welding an index); row 2 is its return pole (the arrow coming back and re-pitching); karma is the whole circuit between them. Row 2 was the receiving end all along — which is why the ordinary karmic story ("do bad → dulled configuration → a later practice-moment lapses"; "do good → the inverse") drops straight into it.
-
-The coupling is not itself a cell: **banpō susumite is the row-3 → row-2 transition operator** — the update rule applied each nikon that runs the edge — the myriad dharmas (results, the returned arrow) advancing and *clarifying* (re-pitching) the self. So the loop closes inside the grid: a row-3 deed welds an index → the arrow returns a result → received as banpō susumite, it re-pitches the row-2 configuration → which the next row-3 deed reads from. Row 3 is the flow; row 2 is the configuration the flow keeps rewriting. As an operator it carries two independent parameters at each application: an **orientation/sign** — dharmas-forward (realization-tending) or self-forward (delusion-tending) — and a **tier-well-formedness** — whether the application honours not-obscure (conventional debt paid) or welds not-fall as exemption (mis-tiered: the fox). The fork below and *Rows ≠ tiers* are these two parameters spelt out.
-
-That edge carries the fall/free fork, because the re-pitching has a direction (Dōgen). banpō susumite names only the realization pole — the dharmas advancing to *clarify* the self; its complement is implied in the same edge: the *self* advancing to confirm the dharmas — pushing the self at the dharmas, decreeing one's own pitch — which is delusion. Both are row-3 acts; what differs is the orientation of the re-pitching they drive through row 2. "Saying not-fall" was self-forward (assert exemption, set my own pitch); "listening to not-obscure" is dharmas-forward (let the result clarify me). The fox is self-forward feedback; the release is the same edge run the other way.
-
-**Isomorphism without identity.** The ordinary psychological law — bad act → dulled state → lapsed practice — is the impersonal *shadow* of karma under citta-taken-impersonally: it shares karma's shape (convention fixes an answer), so row 2 models it well, but it is not identical to the karmic fact. The karmic content is the **agent-index** — *my* arrow returning to re-pitch *me as mine* (banpō susumite clarifying *the self*), whose reduction is malformed, not merely hard. Said as identity ("bad acts just cause foggy states"), karma is quietly naturalised and the anti-reductionist floor is lost. Two truths again: the psychology tracks the shape; karma rides the same track and adds the index that makes *its* reduction malformed.
-
-*Rows ≠ tiers* — different axes. The row gives the register (state / event); the tier gives which truth the welded content claims (floor 不落 / conventional 不昧). Because all acting is row 3, a floor-truth can only ever be *spoken inside* a conventional act — which is exactly the antinomian slot. The old man's error is a *cross* of the axes: a row-3 act (event-register) welding floor-tier content (not-fall) as if it discharged a conventional-tier debt. The floor-truth was true; welding it as exemption made it the misweld.
-
-**Genjō as mode, not destination.** Genjō is not a state reached off the end of the gradient, and not a discrete *event* — there is no flip. It is a *mode* of running the loop **scaffold-free**: row-3 karmic action (there is no other kind of acting — row 2 has no verbs) run dharmas-forward, not-fall enacted (no substance caught) *while* not-obscure still binds (the arrow never went anywhere). Both tiers hold at once. So genjō is **conditional and renewable**, not terminal and not exemptive: the butcher's scaffold-free acting counts as enlightenment only as long as the stream keeps honouring not-obscure. The moment it is claimed to have *discharged* the arrow, that is the old man's cross — floor-content welded as conventional-debt payment. Consequence worth banking: enlightenment is a description of the stream run one way, renewed each nikon, never a quantum cashed at an instant and thereafter possessed — there is nothing stored to inspect. This is the no-tank guardrail in the time register: uji / nikon — each now total, history *shaping* the pitch but not *deposited* in it, so "in-the-moment" and "accumulative" stop competing.
-
-*Guardrail.* Row-2 "ability to take this karmic action now" stays relational — row 2 is kannō-*sōe*, resonance as mutual-dependence — a fact about the fit between *this call* and *this contraction*, not a faculty the being possesses (which would re-base the empty holder). Contraction is *how far off-pitch*, not *how much is left in a tank*. This keeps not-fall intact all the way up the gradient: infinitely many pitch-states, no substance deposited in any.
-
-*The row-2 gradient — a dissolved metric.* Earlier drafts posited a metric still owed: a row-2 → row-3 *gating function* with a tipping-*threshold* at which dharmas-forward reception crosses into genjō, with the displaced **ki 機** (spring-catch, poised-to-tip) relocated onto it. That was the ki-indexing error committed once more — it reifies row 2 into a mechanism that *operates*, a catch that trips, an onset-event to be poised at. But row 2 has no verbs. It only *states* how resonant a being is now ("some beings are less resonant with the dharma"), and that resonance is non-dual with the shaping, so it is even describable only once engi/inga (row 3) is included. There is no crossing to locate: what looked like tipping-into-genjō is just row-3 karmic action run scaffold-free at this configuration. So no gating metric is owed. What survives is a purely *descriptive* ordering — beings are more or less resonant — stated, never operated; and ki, if it keeps a use, names how the row-3 arrow lands on a configuration, not a spring in row 2 waiting to trip. (The kannō-sōe cell stays clean either way: indexing ki to a pole is what broke the *sōe* spine and got it dropped in the first place.)
-
-The fox kōan (Hyakujō's fox) supplies both, and the two tiers keep them honest: not-fall holds at the floor (no substance to fall), not-obscure holds conventionally (the arrow binds, never evaded). The old man's 500 fox-lives were for asserting not-fall where not-obscure was owed — floor-truth claimed at the conventional level is antinomian. Held across both tiers they are non-dual (Daishugyō's non-duality and Shinjin-inga's hard causal affirmation, each at its proper tier).
+- **Hakuin** — the corrective: the *not-yet-buddha* mustn't be ignored; realization must meet beings where they are — which is why row 2 exists at all.
+- **Linji** — the agential face: the true person of no rank — no metaphysical rank, yet always going in and out, acting.
 
 *A limited lens — other doctrines hold too.*
+
+---
+
+*With thanks to Claude (Anthropic) — a sparring partner across several revisions of this draft, and midwife to the practice/realization reading of the enactment column.*
