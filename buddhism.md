@@ -75,7 +75,7 @@ Two guards hold the line. The agent resists reduction by being *more* thoroughly
 
 ## Disclaimers
 
-The tiering, the separate/fuse rule, kannō-sōe, and the coined compound shugenjō are conventional and my own — contra Dōgen, who keeps all ultimate, and who fused the very shushō I have re-tiered (shō at the floor, shu conventional).
+The tiering, the separate/fuse rule, kannō-sōe, and the coined compound shugenjō are conventional and my own — contra Dōgen, who keeps all ultimate, and who fused the very shushō I have re-tiered (shō at the floor, shu conventional). So too are: shō's agency as *conferred* — necessarily agential because never unwelded, yet not agential of itself; resonance as *stated, not held* — Row 2 an adverb on Row 3's verb, with no verb of its own; the *malformed*-not-merely-hard verdict by which karma resists reduction to the impersonal field; and the stone as the resonance scale's zero, marked from outside it. The stone is doubly mujō — impermanent (無常) and insentient (無情) — and the grid answers each axis differently: null on the subject-axis (no resonance, no realization of its own), yet a full dharma on the object-axis, among the myriad that advance to clarify a practitioner (banpō susumite). So the grid gives a deflationary point of contact with Dōgen's impermanence-buddha-nature (無常仏性) — buddha-nature as floor-residence, the stone's empty-impermanent being — and even a deflated insentient-preaching (無情説法): the stone expounds as a dharma read, not as a voice of its own. What it declines is insentient realization as a subject (無情有性).
 
 This is a fresh theory, not an exegesis of Abhidharma nor a reconstruction of Dōgen. Karma here is explained entirely within the grid.
 
