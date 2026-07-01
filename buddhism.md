@@ -14,7 +14,17 @@ Jizang — the ultimate is the self-emptying floor; every level is conventional 
 
 The *non-attaining middle* is Linji's "true person of no rank", no metaphysical rank yet always going in and out, acting.
 
-## The principle
+## The soteriological principle
+
+Three rows, each a dependence/enactment pair; all three conventional.
+
+| Dependence | Enactment |
+|---|---|
+| **mujishō-sōe** — no-own-being as mutual-dependence; each-in-all, no substrate. | **genjō** — manifesting fully; the seam where the scaffold dissolves. |
+| **kannō-sōe** — resonance as mutual-dependence; how resonant a being is to the dharma now (*can it listen to Hyakujō?*). | **banpō susumite** — the myriad dharmas advance and clarify the self. |
+| **engi / inga** — value-free directedness; the blind arrow. | **shu** — practice (gyōji); the weld at act-time, direction bound along the blind arrow; not-obscure (不昧). |
+
+*(kannō-sōe rather than the canonical kannō-dōkō, to keep the coupling connotation-light: the -sōe already carries mutual-dependence.)*
 
 The floor is emptiness that empties even itself (Jizang, 空空): the ultimate is never a thing, never a final substrate. Everything here is conventional — the path, the grid's distinctions, the two truths themselves — and no level stands as the last floor.
 
@@ -24,18 +34,6 @@ The one posit is that **the karma-holder has no own-being** (the attunement axio
 
 - **shō** (証, realization), at the floor: no own-being, so no substance is caught in the causal net — **not-fall** (不落), anātman, not escape. That shō is agential, never a still attainment: the true person of no rank.
 - **shu** (修, practice), conventionally: the karmic arrow is real and inescapable, never evaded — **not-obscure** (不昧).
-
-## The grid
-
-The weld laid out. Three rows, each a dependence/enactment pair; all three conventional.
-
-| Dependence | Enactment |
-|---|---|
-| **mujishō-sōe** — no-own-being as mutual-dependence; each-in-all, no substrate. | **genjō** — manifesting fully; the seam where the scaffold dissolves. |
-| **kannō-sōe** — resonance as mutual-dependence; how resonant a being is to the dharma now (*can it listen to Hyakujō?*). | **banpō susumite** — the myriad dharmas advance and clarify the self. |
-| **engi / inga** — value-free directedness; the blind arrow. | **shu** — practice (gyōji); the weld at act-time, direction bound along the blind arrow; not-obscure (不昧). |
-
-*(kannō-sōe rather than the canonical kannō-dōkō, to keep the coupling connotation-light: the -sōe already carries mutual-dependence.)*
 
 ## Attainment
 
