@@ -12,7 +12,7 @@ Per Nishitani — absolute non-being is not a privative void but lies beyond the
 
 Jizang — the ultimate is the self-emptying floor; every level is conventional (MMK 24: emptiness = dependent origination = conventional designation), and the two-truths distinction is itself conventional — Jizang's fourfold two truths (四重二諦), each pair re-emptied as merely conventional at the next level, so no level is a final floor.
 
-THe *non-attaining middle* is Linji's "true person of no rank", no metaphysical rank yet always going in and out, acting.
+The *non-attaining middle* is Linji's "true person of no rank", no metaphysical rank yet always going in and out, acting.
 
 ## The principle
 
