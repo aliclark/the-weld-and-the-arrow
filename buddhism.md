@@ -36,7 +36,7 @@ Why not a table of just the first row? Hakuin provides the corrective: the *not-
 
 Row 2 is the being's resonance to dharmas — the difference between realization and delusion.
 
-Where no self appears — a stone — there is no resonance to speak of; where a self appears — a hell-dweller, sometimes — there is. Row 2 exists wherever a not-yet-buddha does.
+Where no self appears — a stone — there is no differentiation of resonance to speak of; where a self appears — sometimes, a hell-dweller — almost always. Row 2 exists wherever a not-yet-buddha does.
 
 ## Karma
 
