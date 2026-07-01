@@ -10,10 +10,10 @@ The floor is emptiness that empties even itself (Jizang, 空空): the ultimate i
 
 The grid's enactment column is Dōgen's two title-compounds taken apart. **Genjōkōan** splits as *genjō* — Row 1's enactment, the actualizing — plus the *kōan*, Row 2: the particular case in which it becomes present (*can this being listen to Hyakujō?*). **Shushō** (practice-realization) splits as *shu* — Row 3's enactment, practice — plus *shō*, realization, which is Row 1's genjō again. Row 1 is the shared hinge: realization pairs leftward with Row 2's kōan and rightward with Row 3's practice. So the three enactment cells are the parts of Dōgen's one sentence — *carrying the self forward to practice-realize the myriad dharmas is delusion; the myriad dharmas advancing (banpō susumite) to practice-realize the self is satori* — and practice and realization are non-dual (shushō-ittō): genjō is nothing but Row 3 practice run scaffold-free. (genjō stands in for the *shō* of shushō — near-synonyms in Dōgen, not a strict equation.)
 
-The one posit is that **the karma-holder has no own-being** (the attunement axiom; anchor **MMK 17**, with MMK 8 and 18): the agent is mere-designation, floating free of any base like the chariot. And with no fixed base, moral direction can never be *read off* the facts — only *enacted*. So dependence and enactment are one fact seen twice: no-substrate on one side *is* the necessity of welding on the other. This is **the weld**, and it wears two faces, each true at its own tier:
+The one posit is that **the karma-holder has no own-being** (the attunement axiom; anchor **MMK 17**, with MMK 8 and 18): the agent is mere-designation, floating free of any base like the chariot. And with no fixed base, moral direction can never be *read off* the facts — only *enacted*. So dependence and enactment are one fact seen twice: no-substrate on one side *is* the necessity of welding on the other. This is **the weld** — Dōgen's shushō, practice-realization — and it wears two faces, each true at its own tier:
 
-- **not-fall** (不落), at the floor: no own-being, so no substance is caught in the causal net — anātman, not escape.
-- **not-obscure** (不昧), conventionally: the karmic arrow is real and inescapable, never evaded.
+- **shō** (証, realization), at the floor: no own-being, so no substance is caught in the causal net — **not-fall** (不落), anātman, not escape.
+- **shu** (修, practice), conventionally: the karmic arrow is real and inescapable, never evaded — **not-obscure** (不昧).
 
 The fox kōan (Hyakujō's fox) is the test. The old man's error was to assert not-fall where not-obscure was owed — a floor-truth claimed at the conventional level, which is antinomian, since a floor-truth can only ever be *spoken inside* a conventional act. Held each at its proper tier, the two are non-dual (Dōgen reads the fox both ways — Daishugyō, Shinjin-inga).
 
@@ -63,7 +63,7 @@ The ultimate is the self-emptying floor; every row is conventional (MMK 24: empt
 - **Jizang** — the self-emptying floor: emptiness empties even emptiness, so the ultimate is never reified; reaching the karma-holder, this is what makes karma underivable from the impersonal field.
 - **Dōgen** — the philosophical material.
 - **Hakuin** — the corrective: the *not-yet-buddha* mustn't be ignored; realization must meet beings where they are — which is why row 2 exists at all.
-- **Linji** — the agential face: the true person of no rank — no metaphysical rank, yet always going in and out, acting.
+- **Linji** — that shō is agential, never a still attainment: the true person of no rank, no metaphysical rank yet always going in and out, acting.
 
 *A limited lens — other doctrines hold too.*
 
