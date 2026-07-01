@@ -73,7 +73,7 @@ Two guards hold the line. The agent resists reduction by being *more* thoroughly
 
 The tiering, the separate/fuse rule, kannō-sōe, and the coined compound shugenjō are conventional and my own — contra Dōgen, who keeps all ultimate, and who fused the very shushō I have re-tiered (shō at the floor, shu conventional).
 
-This is a fresh theory, not an exegesis of Abhidharma nor a reconstruction of Dōgen; both, on this construction, are in places muddled. Karma here is explained entirely within the grid.
+This is a fresh theory, not an exegesis of Abhidharma nor a reconstruction of Dōgen. Karma here is explained entirely within the grid.
 
 Constructed with a purposefully minimalist lens — other doctrines can and do hold too.
 
