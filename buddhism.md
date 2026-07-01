@@ -1,6 +1,6 @@
 # Buddhism
 
-An ontology-under-erasure reading of Zen *(work in progress).*
+An ontology-under-erasure reading of Zen / Chan *(work in progress).*
 
 A soteriological metaphysics with no substrate and no value: take one emptiness posit and follow what it forces for karma, action, and awakening. There is no value anywhere in the system — the karma loop and the resonance that grades it are all there is, and are all that karma is.
 
@@ -10,7 +10,7 @@ Per Nishitani — absolute non-being is not a privative void but lies beyond the
 
 ## Provisionally-designated middle
 
-Jizang — the ultimate is the self-emptying floor; every level is conventional (MMK (Nāgārjuna's *Mūlamadhyamakakārikā*) 24: emptiness = dependent origination = conventional designation), and the two-truths distinction is itself conventional — Jizang's fourfold two truths (四重二諦), each pair re-emptied as merely conventional at the next level, so no level is a final floor. This is **genjō**, the provisional middle: manifestation, always going out into a particular case.
+Jizang — the ultimate is the self-emptying floor; every level is conventional (Nāgārjuna's *Mūlamadhyamakakārikā*, MMK 24: emptiness = dependent origination = conventional designation), and the two-truths distinction is itself conventional — Jizang's fourfold two truths (四重二諦), each pair re-emptied as merely conventional at the next level, so no level is a final floor. This is **genjō**, the provisional middle: manifestation, always going out into a particular case.
 
 Distinct from it, and never equated with it, is the **non-attaining middle** at the floor — Linji's "true person of no rank", no metaphysical rank yet always going in and out, acting. This is **shō**: realization as anātman, agential, never a still attainment. Two middles: genjō provisional, shō non-attaining. The system turns on keeping them apart.
 
@@ -42,7 +42,7 @@ So the column is one act seen through three dependence-lenses, and **all acting 
 
 Why not a table of just the first row? Hakuin gives the corrective: the *not-yet-buddha* mustn't be ignored; realization must meet beings where they are — which is why Row 2 exists.
 
-Row 2 is the being's resonance to the dharmas — the difference between realization and delusion, *stated* as a magnitude, not held as a faculty. It grades like a temperature: hell-dweller → buddha, with awakening at the top of the scale without the top being *good* — the soteriology orients *along* the grade (toward de-contraction) without that orientation being a value. Where no self appears — a stone — there is no resonance to speak of; where a self appears — a hell-dweller, sometimes — there is. Row 2 exists wherever a not-yet-buddha does.
+Row 2 is the being's resonance to the dharmas — the difference between realization and delusion, *stated* as a magnitude, not held as a faculty. It grades like a temperature: not-yet-buddha → buddha, with awakening at the top of the scale without the top being *good* — the soteriology orients *along* the grade (toward de-contraction) without that orientation being a value. Where no self appears — a stone — there is no resonance to speak of: the scale's zero, marked from outside it, not its first rung. Where a self appears — a hell-dweller, sometimes — there is. Row 2 exists wherever a not-yet-buddha does.
 
 And the grade is where *for-me-ness* comes from. A being that is not fully realized is not fully resonant, and that shortfall in resonance *is* the contraction into which the arrow's return pitches — a self for the fruit to be *for*. Full resonance is genjō: scaffold gone, no contraction left for the return to route through. Partial resonance is a self appearing. None is a stone. So the agent-index karma needs is never stipulated — it is generated, and generated as a relation (kannō-sōe, call and contraction), stated not held.
 
@@ -58,7 +58,7 @@ Karma is a circuit, not a payload one row carries. At act-time a deed welds an a
 
 The karma-agent has no own-being (anchor **MMK 17**, with MMK 8 and 18): mere-designation, floating free of any base like the chariot. With no fixed base, soteriological direction can never be *read off* the facts — only *enacted*. So dependence and enactment are one fact seen twice: no-substrate on one side *is* the necessity of welding on the other. This is **the weld** — Dōgen's shushō, practice-realization — and it wears two faces, each true at its own tier:
 
-- **shō** (証, realization), at the floor: no own-being, so no substance is caught in the causal net — **not-fall** (不落), anātman, not escape. That shō is agential, never a still attainment: the true person of no rank, the non-attaining middle.
+- **shō** (証, realization), at the floor: no own-being, so no substance is caught in the causal net — **not-fall** (不落), anātman, not escape. That shō is agential — but agential *because* welded, never on its own: there is no lone shō to rest in, only shushō-ittō, the true person of no rank going in and out. So shō is necessarily agential (it never occurs unwelded) without being agential of itself (the acting is shu's, conferred at act-time) — the non-attaining middle, shō its floor-face, never a still attainment.
 - **shu** (修, practice), conventionally: the karmic arrow is real and inescapable, never evaded — **not-obscure** (不昧).
 
 ## Why karma won't reduce
