@@ -37,7 +37,7 @@ The one posit is that **the karma-holder has no own-being** (the attunement axio
 
 ## Attainment
 
-Why not a table of just 1 row? Hakuin provides the corrective: the *not-yet-buddha* mustn't be ignored; realization must meet beings where they are — which is why row 2 exists.
+Why not a table of just the first row? Hakuin provides the corrective: the *not-yet-buddha* mustn't be ignored; realization must meet beings where they are — which is why row 2 exists.
 
 ## Karma
 
