@@ -9,7 +9,7 @@ draft was written in (no local install, and no network access to fetch one),
 so nothing below has been through the elaborator. It is written conservatively
 — term-mode proofs over tactics wherever a term-mode proof was available, only
 core-Lean4 lemmas whose exact signature I was confident of (`Nat.le_refl`,
-`Nat.le_trans`, `Nat.zero_le`, `Option.noConfusion`, `Classical.em`), no
+`Nat.le_trans`, `Nat.zero_le`), no
 `simp`/`decide`/`rcases`/`obtain` calls whose success depends on a simp-set or
 tactic availability I couldn't check. Treat every `theorem`/`example` as a
 claim to be checked, not a checked fact. The most likely failure points, if
@@ -228,12 +228,11 @@ def share (w : G.Weld) : Contrib := (G.driveOf w.agent w.call w.response).selfDr
     share-zero. -/
 def HasSelfPoleIndex (w : G.Weld) : Prop := G.share w ≠ shareZero
 
-/-- The live self-pole index, when there is one. At the terminus this is
-    `none`; at a clenched act it is the occurrence's agent tag. -/
-noncomputable def selfPoleIndex (w : G.Weld) : Option G.Being :=
-  by
-    classical
-    exact if G.HasSelfPoleIndex w then some w.agent else none
+/-- The live self-pole index, when there is evidence that one is present.
+    This is proof-carrying rather than `Option`-valued on purpose: deciding
+    whether an arbitrary share is nonzero would import excluded middle unless
+    a concrete model supplied a decision procedure. -/
+def selfPoleIndex (w : G.Weld) (_h : G.HasSelfPoleIndex w) : G.Being := w.agent
 
 /-- Appropriation, in the thin formal sense needed downstream: a reception
     has a live self-pole index exactly when the share is nonzero. -/
@@ -244,20 +243,10 @@ theorem no_self_pole_index_of_shareZero (w : G.Weld) (h : G.share w = shareZero)
     ¬ G.HasSelfPoleIndex w :=
   fun hidx => hidx h
 
-/-- The option-valued index is absent at share-zero. -/
-theorem selfPoleIndex_none_of_shareZero (w : G.Weld) (h : G.share w = shareZero) :
-    G.selfPoleIndex w = none := by
-  classical
-  unfold selfPoleIndex HasSelfPoleIndex
-  exact if_neg (fun hne => hne h)
-
-/-- The option-valued index is the agent tag when the self-pole is live. -/
-theorem selfPoleIndex_some_of_hasSelfPoleIndex
+/-- The evidence-carried index is the agent tag when the self-pole is live. -/
+theorem selfPoleIndex_eq_agent_of_hasSelfPoleIndex
     (w : G.Weld) (h : G.HasSelfPoleIndex w) :
-    G.selfPoleIndex w = some w.agent := by
-  classical
-  unfold selfPoleIndex
-  exact if_pos h
+    G.selfPoleIndex w h = w.agent := rfl
 
 /-- At share-zero there is no appropriation. -/
 theorem no_appropriation_of_shareZero (w : G.Weld) (h : G.share w = shareZero) :
@@ -389,11 +378,11 @@ theorem responsiveTerminus_live_of_call
     G.LiveTerminus b :=
   ⟨⟨c, h.left c⟩, h.right⟩
 
-/-- At an actual share-zero weld, the self-pole index is absent. -/
+/-- At an actual share-zero weld, no live self-pole index can be supplied. -/
 theorem no_self_pole_index_of_terminus_weld
     (w : G.Weld) (_hactual : G.Actual w) (hshare : G.share w = shareZero) :
-    G.selfPoleIndex w = none :=
-  G.selfPoleIndex_none_of_shareZero w hshare
+    ¬ G.HasSelfPoleIndex w :=
+  G.no_self_pole_index_of_shareZero w hshare
 
 end Grid
 
@@ -485,15 +474,16 @@ def ReachBackFull (deed reception : G.Weld) : Prop := G.conditions deed receptio
     undrawn line is therefore not false ... but vacuous"). -/
 def ReachBackVacuous (deed reception : G.Weld) : Prop := ¬ G.conditions deed reception
 
-/-- The two are exhaustive by construction (classical logic; `Classical.em`
-    is part of Lean 4's `Init` prelude, no `import` required) — every
-    reach-back is one or the other, which is the source text's own point:
-    "confabulated ownership feels exactly like the real thing from within
-    the act" because full and vacuous are not distinguishable from inside
-    the weld, only by whether `conditions` in fact holds. -/
-theorem reachBack_full_or_vacuous (deed reception : G.Weld) :
+/-- When a concrete model gives a decision procedure for delivery, the two
+    reach-back cases are exhaustive. Abstractly, the theory keeps only the
+    predicates: asserting this disjunction for every proposition would be
+    excluded middle. -/
+theorem reachBack_full_or_vacuous (deed reception : G.Weld)
+    [hdec : Decidable (G.conditions deed reception)] :
     G.ReachBackFull deed reception ∨ G.ReachBackVacuous deed reception :=
-  Classical.em (G.conditions deed reception)
+  match hdec with
+  | isTrue h => Or.inl h
+  | isFalse h => Or.inr h
 
 /- --------------------------------------------------------------------------
    Delivery, landing, effectiveness, adaptivity
