@@ -8,7 +8,7 @@
 
 ## 0. Preliminaries
 
-**Order structure.** `Preorder` is a hand-rolled reflexive and transitive relation `≼`; no totality and no antisymmetry are assumed. `Incomparable a b` means neither `a ≼ b` nor `b ≼ a`. `OrderEq a b` means `a ≼ b` and `b ≼ a`.
+**Order structure.** `Preorder` is a hand-rolled reflexive and transitive relation `≼`; no totality and no antisymmetry are assumed. `Incomparable a b` means neither `a ≼ b` nor `b ≼ a`. `OrderEq a b` means `a ≼ b` and `b ≼ a`. `Directed a b` means `a ≼ b` and not `b ≼ a`; `not_directed_of_orderEq` and `no_direction_of_all_orderEq` record that order-equivalence, pointwise or carrier-wide, kills direction.
 
 `PreorderBot` adds a designated bottom element, written `shareZero`, with `shareZero ≼ a` for every `a`. `AtBot a` means `a ≼ shareZero`. Since `shareZero ≼ a` is always available, `AtBot a` says that `a` is order-equivalent to the designated bottom. The pole is therefore an order-class, not identity with one token.
 
@@ -20,7 +20,7 @@ The basic order lemmas are:
 - `atBot_of_eq_shareZero`: equality with the designated representative implies `AtBot`.
 - `orderEq_shareZero_of_atBot`, `atBot_of_orderEq_shareZero`, `orderEq_shareZero_iff_atBot`: `AtBot a` and `OrderEq a shareZero` are equivalent formulations.
 
-**The signature.** A `Grid Contrib` consists of three types (`Being`, `Call`, `Response`), a response function `respondsTo : Being → Call → Option Response`, a Row-2 display function `grade : Being → Call → Response → Contrib`, and a delivery relation `conditions` on welds. There is no separate two-component drive object in the signature.
+**The signature.** A `Grid Contrib` consists of three types (`Being`, `Call`, `Response`), a response function `respondsTo : Being → Call → Option Response`, a Row-2 display function `grade : Being → Call → Response → Contrib`, and a delivery relation `conditions` on welds. `Correlated w₁ w₂` is the symmetric closure `conditions w₁ w₂ ∨ conditions w₂ w₁`; `correlated_symm` swaps the disjuncts. The signature carries no asymmetry, irreflexivity, or transitivity for `conditions`; the file marks this as a decision. There is no separate two-component drive object in the signature.
 
 A weld is the triple `⟨agent, call, response⟩`. `Actual w` means `respondsTo w.agent w.call = some w.response`. `index w` is the projection `w.agent`. `share w` is `grade w.agent w.call w.response`.
 
@@ -242,6 +242,8 @@ The examples show:
 - The new `Terminus` transports across the merge, while the old equality-token predicate would not have transported.
 
 This is the formal certificate that replacing `= shareZero` with `AtBot` was a real de-operationalisation, not a naming preference.
+
+**`DirectionNegative`.** `forwardGrid` and `backwardGrid` are one-being, two-call grids identical except that `conditions` is reversed. `correlated_agrees` shows they have the same symmetric closure at every pair; `conditions_disagree` exhibits a pair where the directions differ; `no_direction_recovery_from_correlation` concludes (via `funext`/`propext`) that no function of the symmetric closure is correct on both grids. This is the formal certificate that direction is not carried by the correlational structure — the agent-recovery argument, run at the arrow.
 
 ---
 

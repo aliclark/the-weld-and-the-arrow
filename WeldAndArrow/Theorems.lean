@@ -33,6 +33,28 @@ theorem not_ge_of_incomparable {a b : α} (h : Incomparable a b) :
     ¬ b ≼ a :=
   h.right
 
+/-- Direction in a preorder: strict comparability — `a` genuinely below
+    `b`, with no return comparison. This is the shape `IsShareDrop`
+    already consumes, named once so the temporal reading can consume it
+    too: time-direction stands to an event-order exactly as arrogation
+    stands to the share-order — a strictness that appears away from the
+    pole (Theory: Karma, "the arrow retyped"). -/
+def Directed (a b : α) : Prop := a ≼ b ∧ ¬ b ≼ a
+
+/-- Order-equivalence kills direction. -/
+theorem not_directed_of_orderEq {a b : α} (h : OrderEq a b) :
+    ¬ Directed a b :=
+  fun hd => hd.right h.right
+
+/-- The equilibrium pole: where everything is order-equivalent — the
+    null ray, the heat-death carrier, `TwoBottom` — no pair is directed.
+    Direction exists exactly where strictness does; at the symmetric
+    pole the order flattens and the reading has nothing to read. -/
+theorem no_direction_of_all_orderEq
+    (h : ∀ a b : α, OrderEq a b) (a b : α) :
+    ¬ Directed a b :=
+  not_directed_of_orderEq (h a b)
+
 end Preorder
 
 namespace Grid

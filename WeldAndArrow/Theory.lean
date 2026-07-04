@@ -44,6 +44,23 @@ Design log
   it — display, not mechanism, nothing travels. And it is descriptive
   only: no comparison, domination, or prescription is defined over it.
 
+* Direction-freedom of `conditions` is a DECISION, not an omission. The
+  delivery relation carries no asymmetry, no irreflexivity, and no
+  transitivity axioms, and `ReceptionPair` asserts no ordering between its
+  two receptions. This is the formal face of the arrow's retype (Theory:
+  Karma, "The arrow retyped: direction as display"): the field carries
+  correlational structure; before/after is a reading projected into it by
+  gradient-embedded beings — the ratchet — never structure. The floor rule
+  here eats one more level, as it is licensed to ("the two truths
+  themselves are conventional"): act-time, the separate/fuse rule's own
+  pivot, is a tier WITHIN the thermodynamic convention. No circle — that
+  is precisely the convention beings live in, and why diagnosis happens
+  there; floor-fusion accordingly includes fusing before/after. Checked
+  counterparts: `Correlated` (§1) and the direction-underdetermination
+  countermodel (Invariance). Nothing in any theorem consumes physics:
+  thermodynamics enters commentary as the mechanism of the READING, never
+  as a premise.
+
 * The `Weld`/`Index` order follows the central modelling choice here:
   `Weld` is primitive (an agent, a call, a response, bundled — nothing else,
   and in particular no separate prior `Act` a
@@ -242,7 +259,13 @@ structure Grid (Contrib : Type) [PreorderBot Contrib] where
       entirely separate from `respondsTo`/`grade`, which are about
       *drive*, never about *delivery*: conflating the two is a taxonomy
       error in its own right (Theorems, Grade 1, "Delivery-question /
-      index-question"). -/
+      index-question"). Note also the axioms this field does NOT carry:
+      no asymmetry, no irreflexivity, no transitivity. The "earlier"/
+      "later" above is gloss, not structure — the relation as typed is
+      direction-free, and its symmetric closure (`Correlated`, below)
+      provably under-determines it (Invariance: the direction-
+      underdetermination witness). Like the absent `PreorderTop`, the
+      absence is a decision (Theory: Karma, "the arrow retyped"). -/
   conditions : RawWeld Being Call Response → RawWeld Being Call Response → Prop
 
 namespace Grid
@@ -532,6 +555,25 @@ def waa_ReachBackFull (deed reception : G.Weld) : Prop := G.conditions deed rece
     field-side role matters more than the reception-side appropriation. -/
 def DeliveredTo (deed reception : G.Weld) : Prop := G.conditions deed reception
 
+/-- The symmetric closure of delivery: the two welds stand on a common
+    line, direction forgotten. This is the honest field-fact once the
+    arrow's retype is taken seriously (Theory: Karma, "the arrow
+    retyped"): what the field carries is correlational structure, and
+    which end is "earlier" is a reading. The countermodel in Invariance
+    shows the reading is genuinely extra — two grids can agree on
+    `Correlated` everywhere and disagree on `conditions` — so direction
+    is not recoverable from the symmetric structure, exactly as the
+    agent is not recoverable from the field residue
+    (`no_agent_recovery_of_field_collision`). -/
+def Correlated (w₁ w₂ : G.Weld) : Prop :=
+  G.conditions w₁ w₂ ∨ G.conditions w₂ w₁
+
+/-- Symmetry, definitional to the closure: the one property the reading
+    cannot be read off. -/
+theorem correlated_symm {w₁ w₂ : G.Weld} (h : G.Correlated w₁ w₂) :
+    G.Correlated w₂ w₁ :=
+  h.elim Or.inr Or.inl
+
 /-- Non-delivery: the field draws no line from this deed to this reception.
     Deliberately unprefixed and deliberately thin — a reach-back made along
     such an undrawn line is what the source calls *vacuous*, but the
@@ -661,7 +703,12 @@ structure ActualWeld (G : Grid Contrib) where
 /-- A pair of actual receptions, kept deliberately neutral. Theory does not
     say that either reception has prudential privilege over the other; it
     only supplies the typed pair over which Theorems can formulate, test, or
-    refute such a privilege claim by countermodel. -/
+    refute such a privilege claim by countermodel. The neutrality is also
+    TEMPORAL, and is a decision: no before/after between `first` and
+    `second` is structure here. `rePitchSequence` below applies an order,
+    and that order is supplied by the caller as part of the thermodynamic
+    convention, never read off the pair (Theory: Karma, "the arrow
+    retyped"). -/
 structure ReceptionPair (G : Grid Contrib) where
   first  : ActualWeld G
   second : ActualWeld G
@@ -725,7 +772,13 @@ variable {Contrib : Type} [PreorderBot Contrib]
 
 /-- A tier at which a claim can be diagnosed: the self-emptying floor
     (atemporal, one per `Grid` — Proofs, "The verdict's tier"), or a live
-    act-time diagnosis pinned to a specific weld. -/
+    act-time diagnosis pinned to a specific weld. Act-time is itself a
+    tier WITHIN the thermodynamic convention (Theory: Karma, "the arrow
+    retyped"): the separate/fuse rule's own pivot is conventional — the
+    floor rule eating one more level, as it is licensed to ("the two
+    truths themselves are conventional"). No circle: the convention is
+    where beings live, hence where diagnosis is live. Floor-fusion
+    accordingly includes fusing before/after. -/
 inductive Tier (G : Grid Contrib)
   | floor
   | actTime (w : G.Weld)

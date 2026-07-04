@@ -319,4 +319,92 @@ example :
 
 end InvarianceNegative
 
+/- ==============================================================================
+   §N  Direction-underdetermination: the arrow's retype, witnessed
+
+   Theory: Karma ("the arrow retyped") demotes before/after from carried
+   structure to display. The checkable content is an underdetermination
+   fact in the same family as `no_agent_recovery_of_field_collision`:
+   the symmetric closure `Correlated` does not determine `conditions`.
+   The two grids below agree on `Correlated` at EVERY pair of welds and
+   disagree on `conditions` at a witness pair, so no function of the
+   symmetric structure returns the direction. Honest scope, as with the
+   agent-recovery theorem: this is not a claim about every grid, it is
+   the internal witness that symmetric delivery-structure under-
+   determines the arrow. Nothing here consumes physics; thermodynamics
+   enters the prose as the mechanism of the READING, never as a premise
+   of any theorem.
+============================================================================== -/
+
+namespace DirectionNegative
+
+/-- One being, two calls, one response: the smallest web on which a
+    direction can be drawn two ways. -/
+abbrev W := RawWeld Unit Bool Unit
+
+/-- The weld at the `false` call. -/
+def wFalse : W := ⟨(), false, ()⟩
+
+/-- The weld at the `true` call. -/
+def wTrue : W := ⟨(), true, ()⟩
+
+/-- The web read one way: the `false`-weld conditions the `true`-weld. -/
+def forwardGrid : Grid Nat where
+  Being      := Unit
+  Call       := Bool
+  Response   := Unit
+  respondsTo _ _ := some ()
+  grade _ _ _ := 0
+  conditions w₁ w₂ := w₁.call = false ∧ w₂.call = true
+
+/-- The same web read the other way: only `conditions` is reversed. -/
+def backwardGrid : Grid Nat where
+  Being      := Unit
+  Call       := Bool
+  Response   := Unit
+  respondsTo _ _ := some ()
+  grade _ _ _ := 0
+  conditions w₁ w₂ := w₁.call = true ∧ w₂.call = false
+
+/-- The two readings agree on the symmetric closure at every pair:
+    forgetting direction erases exactly the difference between them. -/
+theorem correlated_agrees (w₁ w₂ : W) :
+    forwardGrid.Correlated w₁ w₂ ↔ backwardGrid.Correlated w₁ w₂ :=
+  ⟨fun h => h.elim (fun ⟨h1, h2⟩ => Or.inr ⟨h2, h1⟩)
+                   (fun ⟨h1, h2⟩ => Or.inl ⟨h2, h1⟩),
+   fun h => h.elim (fun ⟨h1, h2⟩ => Or.inr ⟨h2, h1⟩)
+                   (fun ⟨h1, h2⟩ => Or.inl ⟨h2, h1⟩)⟩
+
+/-- And they disagree on the direction itself at the witness pair. -/
+theorem conditions_disagree :
+    forwardGrid.conditions wFalse wTrue ∧
+      ¬ backwardGrid.conditions wFalse wTrue := by
+  constructor
+  · exact ⟨rfl, rfl⟩
+  · intro h
+    cases h.left
+
+/-- No function of the symmetric structure recovers the direction: any
+    candidate correct on both grids would force their `conditions` to
+    coincide, and they do not. The direction is the reading's, never
+    the closure's — `no_agent_recovery` run at the arrow. -/
+theorem no_direction_recovery_from_correlation :
+    ¬ ∃ recover : (W → W → Prop) → (W → W → Prop),
+        recover forwardGrid.Correlated = forwardGrid.conditions ∧
+        recover backwardGrid.Correlated = backwardGrid.conditions := by
+  rintro ⟨recover, hf, hb⟩
+  have hsame : forwardGrid.Correlated = backwardGrid.Correlated := by
+    funext w₁ w₂
+    exact propext (correlated_agrees w₁ w₂)
+  have hcond : forwardGrid.conditions = backwardGrid.conditions := by
+    rw [← hf, hsame, hb]
+  exact conditions_disagree.right (hcond ▸ conditions_disagree.left)
+
+/-- The equilibrium-pole face, on the existing negative carrier: where
+    everything is order-equivalent, nothing is directed. -/
+example (a b : InvarianceNegative.TwoBottom) : ¬ Directed a b :=
+  no_direction_of_all_orderEq (fun _ _ => ⟨True.intro, True.intro⟩) a b
+
+end DirectionNegative
+
 end WAA
