@@ -186,6 +186,162 @@ theorem map_probeConstant_iff (b : G.Being) (cs : G.Call → Prop) :
     exact (f.orderEq_iff (G.grade b c₁ r₁) (G.grade b c₂ r₂)).mpr
       (h c₁ c₂ hc₁ hc₂ r₁ r₂ hr₁ hr₂)
 
+namespace DirectedConvention
+namespace BeingConvention
+namespace BeingCoarsening
+
+variable {G : Grid Contrib} {Macro : Type}
+
+/-- Transport a diagnosis-time being coarsening across a display
+    reparameterization. The fine tags are unchanged; only Row-2 display
+    values move. -/
+def displayMap (κ : BeingCoarsening G Macro)
+    (f : DisplayReparam Contrib Contrib') :
+    BeingCoarsening (G.map f) Macro where
+  proj := κ.proj
+
+theorem map_inFiber_iff (κ : BeingCoarsening G Macro)
+    (f : DisplayReparam Contrib Contrib') (b : Macro) (w : G.Weld) :
+    (displayMap κ f).InFiber b w ↔ κ.InFiber b w :=
+  Iff.rfl
+
+theorem map_sameFiber_iff
+    (κ : BeingCoarsening G Macro) (f : DisplayReparam Contrib Contrib')
+    (p q : G.Being) :
+    (displayMap κ f).SameFiber p q ↔ κ.SameFiber p q :=
+  Iff.rfl
+
+theorem map_fiberInhabited_iff
+    (κ : BeingCoarsening G Macro) (f : DisplayReparam Contrib Contrib')
+    (b : Macro) :
+    (displayMap κ f).FiberInhabited b ↔ κ.FiberInhabited b :=
+  Iff.rfl
+
+theorem map_actualFiberInhabited_iff
+    (κ : BeingCoarsening G Macro) (f : DisplayReparam Contrib Contrib')
+    (b : Macro) :
+    (displayMap κ f).ActualFiberInhabited b ↔ κ.ActualFiberInhabited b := by
+  constructor
+  · rintro ⟨w, hactual, hfiber⟩
+    exact ⟨w, (G.map_actual_iff f w).mp hactual, hfiber⟩
+  · rintro ⟨w, hactual, hfiber⟩
+    exact ⟨w, (G.map_actual_iff f w).mpr hactual, hfiber⟩
+
+theorem map_sentientTag_iff
+    (κ : BeingCoarsening G Macro) (f : DisplayReparam Contrib Contrib')
+    (b : Macro) :
+    (displayMap κ f).SentientTag b ↔ κ.SentientTag b := by
+  constructor
+  · rintro ⟨p, hp, hmounts⟩
+    exact ⟨p, hp, (G.map_mountsSomewhere_iff f p).mp hmounts⟩
+  · rintro ⟨p, hp, hmounts⟩
+    exact ⟨p, hp, (G.map_mountsSomewhere_iff f p).mpr hmounts⟩
+
+theorem map_fiberAtPole_iff
+    (κ : BeingCoarsening G Macro) (f : DisplayReparam Contrib Contrib')
+    (b : Macro) :
+    (displayMap κ f).FiberAtPole b ↔ κ.FiberAtPole b := by
+  constructor
+  · intro h w hactual hfiber
+    have hmapped : AtBot (f.toFun (G.share w)) := by
+      simpa [Grid.map_share] using
+        h w ((G.map_actual_iff f w).mpr hactual) hfiber
+    exact (f.atBot_iff (G.share w)).mp hmapped
+  · intro h w hactual hfiber
+    have horig : AtBot (G.share w) :=
+      h w ((G.map_actual_iff f w).mp hactual) hfiber
+    have hmapped : AtBot (f.toFun (G.share w)) :=
+      (f.atBot_iff (G.share w)).mpr horig
+    simpa [Grid.map_share] using hmapped
+
+theorem map_liveFiberAtPole_iff
+    (κ : BeingCoarsening G Macro) (f : DisplayReparam Contrib Contrib')
+    (b : Macro) :
+    (displayMap κ f).LiveFiberAtPole b ↔ κ.LiveFiberAtPole b := by
+  constructor
+  · intro h
+    exact ⟨(map_actualFiberInhabited_iff κ f b).mp h.left,
+      (map_fiberAtPole_iff κ f b).mp h.right⟩
+  · intro h
+    exact ⟨(map_actualFiberInhabited_iff κ f b).mpr h.left,
+      (map_fiberAtPole_iff κ f b).mpr h.right⟩
+
+theorem map_selfAptTag_iff
+    (κ : BeingCoarsening G Macro) (f : DisplayReparam Contrib Contrib')
+    (b : Macro) :
+    (displayMap κ f).SelfAptTag b ↔ κ.SelfAptTag b := by
+  constructor
+  · intro h w hactual hfiber
+    have hidx : (G.map f).HasSelfPoleIndex w :=
+      h w ((G.map_actual_iff f w).mpr hactual) hfiber
+    exact (G.map_hasSelfPoleIndex_iff f w).mp hidx
+  · intro h w hactual hfiber
+    have hidx : G.HasSelfPoleIndex w :=
+      h w ((G.map_actual_iff f w).mp hactual) hfiber
+    exact (G.map_hasSelfPoleIndex_iff f w).mpr hidx
+
+theorem map_liveSelfAptTag_iff
+    (κ : BeingCoarsening G Macro) (f : DisplayReparam Contrib Contrib')
+    (b : Macro) :
+    (displayMap κ f).LiveSelfAptTag b ↔ κ.LiveSelfAptTag b := by
+  constructor
+  · intro h
+    exact ⟨(map_actualFiberInhabited_iff κ f b).mp h.left,
+      (map_selfAptTag_iff κ f b).mp h.right⟩
+  · intro h
+    exact ⟨(map_actualFiberInhabited_iff κ f b).mpr h.left,
+      (map_selfAptTag_iff κ f b).mpr h.right⟩
+
+theorem map_patchy_iff
+    (κ : BeingCoarsening G Macro) (f : DisplayReparam Contrib Contrib')
+    (b : Macro) :
+    (displayMap κ f).Patchy b ↔ κ.Patchy b := by
+  constructor
+  · intro h
+    exact ⟨fun hpole => h.left
+        ((map_fiberAtPole_iff κ f b).mpr hpole),
+      fun hself => h.right
+        ((map_selfAptTag_iff κ f b).mpr hself)⟩
+  · intro h
+    exact ⟨fun hpole => h.left
+        ((map_fiberAtPole_iff κ f b).mp hpole),
+      fun hself => h.right
+        ((map_selfAptTag_iff κ f b).mp hself)⟩
+
+theorem map_selfConditioningTag_iff
+    (κ : BeingCoarsening G Macro) (f : DisplayReparam Contrib Contrib')
+    (b : Macro) :
+    (displayMap κ f).SelfConditioningTag b ↔ κ.SelfConditioningTag b := by
+  constructor
+  · rintro ⟨deed, reception, hdeed, hreception, hactual, hdel⟩
+    exact ⟨deed, reception, hdeed, hreception,
+      (G.map_actual_iff f reception).mp hactual,
+      (DirectedConvention.map_deliveredTo_iff G f deed reception).mp hdel⟩
+  · rintro ⟨deed, reception, hdeed, hreception, hactual, hdel⟩
+    exact ⟨deed, reception, hdeed, hreception,
+      (G.map_actual_iff f reception).mpr hactual,
+      (DirectedConvention.map_deliveredTo_iff G f deed reception).mpr hdel⟩
+
+theorem map_strongSelfConditioningTag_iff
+    (κ : BeingCoarsening G Macro) (f : DisplayReparam Contrib Contrib')
+    (b : Macro) :
+    (displayMap κ f).StrongSelfConditioningTag b ↔ κ.StrongSelfConditioningTag b := by
+  constructor
+  · intro h reception hfiber hactual
+    rcases h reception hfiber ((G.map_actual_iff f reception).mpr hactual) with
+      ⟨deed, hdeed, hdel⟩
+    exact ⟨deed, hdeed,
+      (DirectedConvention.map_deliveredTo_iff G f deed reception).mp hdel⟩
+  · intro h reception hfiber hactual
+    rcases h reception hfiber ((G.map_actual_iff f reception).mp hactual) with
+      ⟨deed, hdeed, hdel⟩
+    exact ⟨deed, hdeed,
+      (DirectedConvention.map_deliveredTo_iff G f deed reception).mpr hdel⟩
+
+end BeingCoarsening
+end BeingConvention
+end DirectedConvention
+
 theorem map_stateToolFits_iff (w : G.Weld) :
     (G.map f).StateToolFits w ↔ G.StateToolFits w := by
   constructor
@@ -286,6 +442,47 @@ namespace DirectedConvention
 theorem transpose_deliveredTo_iff (deed reception : G.Weld) :
     DeliveredTo G.transpose deed reception ↔ DeliveredTo G reception deed :=
   Iff.rfl
+
+namespace BeingConvention
+namespace BeingCoarsening
+
+variable {Macro : Type}
+
+/-- Transpose a being-coarsening across the direction-smuggling detector.
+    Fine tags are unchanged; only the direction-reading of delivery reverses. -/
+def transpose (κ : BeingCoarsening G Macro) :
+    BeingCoarsening G.transpose Macro where
+  proj := κ.proj
+
+theorem transpose_inFiber_iff
+    (κ : BeingCoarsening G Macro) (b : Macro) (w : G.Weld) :
+    κ.transpose.InFiber b w ↔ κ.InFiber b w :=
+  Iff.rfl
+
+theorem transpose_sentientTag_iff
+    (κ : BeingCoarsening G Macro) (b : Macro) :
+    κ.transpose.SentientTag b ↔ κ.SentientTag b :=
+  Iff.rfl
+
+/-- Direction-smuggling detector for the directed refinement: transposition
+    reverses the delivery line while leaving fiber membership and actuality
+    untouched. -/
+theorem transpose_selfConditioningTag
+    (κ : BeingCoarsening G Macro) (b : Macro) :
+    κ.transpose.SelfConditioningTag b ↔
+      ∃ deed reception : G.Weld,
+        κ.InFiber b deed ∧ κ.InFiber b reception ∧
+        G.Actual reception ∧ DeliveredTo G reception deed := by
+  constructor
+  · rintro ⟨deed, reception, hdeed, hreception, hactual, hdel⟩
+    exact ⟨deed, reception, hdeed, hreception, hactual,
+      (DirectedConvention.transpose_deliveredTo_iff G deed reception).mp hdel⟩
+  · rintro ⟨deed, reception, hdeed, hreception, hactual, hdel⟩
+    exact ⟨deed, reception, hdeed, hreception, hactual,
+      (DirectedConvention.transpose_deliveredTo_iff G deed reception).mpr hdel⟩
+
+end BeingCoarsening
+end BeingConvention
 
 end DirectedConvention
 
@@ -447,6 +644,76 @@ example (a b : InvarianceNegative.TwoBottom) : ¬ Directed a b :=
   no_direction_of_all_orderEq (fun _ _ => ⟨True.intro, True.intro⟩) a b
 
 end DirectionNegative
+
+/- ==============================================================================
+   §N  Being-boundary freedom: designation is not grid-carried
+
+   The witness is parallel in scope to `DirectionNegative`. A single grid has
+   two fact-identical fine tags and admits both a merge and a split coarsening.
+   They disagree on the fiber boundary at a concrete pair. This certifies
+   freedom, not failure: naming suffices, while holding one partition as floor
+   furniture claims a fact the grid's data does not carry.
+============================================================================== -/
+
+namespace BeingNegative
+
+open Grid.DirectedConvention.BeingConvention
+
+/-- Two fine tags with the same response, same grade, and symmetric delivery. -/
+def twoBeingGrid : Grid Nat where
+  Being      := Bool
+  Call       := Unit
+  Response   := Unit
+  respondsTo _ _ := some ()
+  grade _ _ _ := 0
+  conditions _ _ := True
+
+/-- Merge reading: both fine tags are one macro tag. -/
+def κmerge : BeingCoarsening twoBeingGrid Unit where
+  proj _ := ()
+
+/-- Split reading: each fine tag remains its own macro tag. -/
+def κsplit : BeingCoarsening twoBeingGrid Bool where
+  proj := id
+
+theorem merge_same_fiber : κmerge.SameFiber false true :=
+  rfl
+
+theorem split_not_same_fiber : ¬ κsplit.SameFiber false true := by
+  intro h
+  cases h
+
+/-- The grid data visible to a would-be partition-recovery function. -/
+abbrev W := RawWeld Bool Unit Unit
+
+abbrev GridData : Type :=
+  (Bool → Unit → Option Unit) × (Bool → Unit → Unit → Nat) × (W → W → Prop)
+
+def gridData : GridData :=
+  (twoBeingGrid.respondsTo, twoBeingGrid.grade, twoBeingGrid.conditions)
+
+def mergeBoundary (_p _q : Bool) : Prop := True
+
+def splitBoundary (p q : Bool) : Prop := p = q
+
+/-- No function of this grid's data recovers "the" partition: the same data
+    supports both the merge and the split readings, which disagree at
+    `false`/`true`. -/
+theorem no_partition_recovery :
+    ¬ ∃ recover : GridData → Bool → Bool → Prop,
+        recover gridData = mergeBoundary ∧
+        recover gridData = splitBoundary := by
+  rintro ⟨recover, hmerge, hsplit⟩
+  have hmerged : recover gridData false true := by
+    rw [hmerge]
+    exact True.intro
+  have hsplitNot : ¬ recover gridData false true := by
+    rw [hsplit]
+    intro h
+    cases h
+  exact hsplitNot hmerged
+
+end BeingNegative
 
 /- ==============================================================================
    Self-line witness: permitted by the signature, not forced by it

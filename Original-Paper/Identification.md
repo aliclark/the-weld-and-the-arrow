@@ -94,6 +94,11 @@ The following are conventional and my own -- original moves, each flagged agains
 32. **The retype as a fourth generator-outcome** -- a candidate objection that neither lands in a cell, nor adds one, nor is declined, but redraws a distinction's content; admitted because the taxonomy must be answerable for the redrawing of its own distinctions.
 33. **The svakarma demotion** -- *fruit ripens only in the doer's continuum* demoted from metaphysical necessity to contingent delivery-regime -- contra the Abhidharma scruple, downstream of the exhaustive decomposition of the diachronic *whose*; pariṇāmanā thereby absorbed on existing cells (Theorems).
 34. **The orthogonality rule and its price** -- function/share types, effectiveness grades, adaptivity the terminus's manner and never the ground of landing; with the domain joint's honesty-clause entered beside it; and the pole-typing corollary stated as entailed: the state-tool fits exactly where welding ceases.
+35. **The being-convention** -- the macro being demoted to a diagnosis-time coarsening convention (`BeingCoarsening`): naming suffices, sentience is fiber-level, coherence is display-grade only, and the namespace order is floor/genjō outside, then directed convention, then being convention, then grid-lens.
+36. **The two generated pilot rows** -- before/after and beings are now generated from a concrete `ClaimLanguage`; the rest of the table remains prose pending row-by-row instantiation, by design rather than pretense.
+37. **The being trichotomy** -- deleted is the collapse (*there are no beings*), derived is the freeze (one partition reified as ontology), and primitive-and-free is the convention; `Being := Unit`, sentients-only, and gerrymandered models are legal model choices, never signature law.
+38. **The hare's-horn register** -- possible/impossible-being distinctions enter at realization and use, not naming; the ātman is nameable-impossible in the same innocent sense, and the swan/name/naming-proneness split keeps named object, naming weld, and naming seed apart.
+39. **Modal Realism as the beings-row freeze** -- conventional designation promoted to ontology, *prajñapti-sat* taken as *dravya-sat* (*samāropa*); Lewis placed only as prose nearest miss, Huayan as empty plenitude, Pudgalavāda as the classical occupant candidate.
 
 ## Glossary
 
@@ -107,6 +112,9 @@ The following are conventional and my own -- original moves, each flagged agains
 - **The sower-reaps split** -- the report-face (true simpliciter, a field-fact) versus the ownership-face (done at reception, full or vacuous); never a standing relation between the two.
 - **The pole-typing corollary** -- the state-tool fits exactly where welding ceases: at share-zero no live self-pole index remains for it to miss.
 - **The soul-guard** -- the agent resists storage by being more thoroughly empty, never by being a special substance; forward-facing and retrospective bearers are both declined.
+- **The being trichotomy** -- collapse deletes beings, freeze reifies a partition, convention leaves naming primitive and free.
+- **The hare's horn** -- nameable without realizability; impossible-being is constrained at realization/use, not at the act of designation.
+- **Modal Realism** -- the beings-row freeze: plenitude moved into ontology rather than left as conventional designation.
 - **Mis-feed** -- an internal taxonomy verdict: an index-free field-answer fed to an index-requiring designation, or a separated-tier question fed to a fusion point.
 - **The disclaimers** -- the enumerated original moves, each flagged as conventional and the author's own against the canonical position it departs from or extends.
 

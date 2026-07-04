@@ -470,6 +470,119 @@ example :
 
 end ErrorGrade
 
+namespace DirectedConvention
+namespace BeingConvention
+namespace GridConvention
+
+/- The lens's own vocabulary: the innermost convention. The abstract
+   `ClaimLanguage` machinery remains at `Grid` level; this namespace supplies
+   the first concrete rows generated from it. -/
+
+/-- The nested conventions as objects the lens can diagnose claims about. -/
+inductive ConventionLayer
+  | directedTime
+  | beings
+  | gridLens
+
+/-- Claims for convention-layer rows. `conventionLive l` says the layer's
+    distinction is in force; `layerDenied l` is the deflation. -/
+inductive LayerClaim
+  | conventionLive (l : ConventionLayer)
+  | layerDenied (l : ConventionLayer)
+
+/-- Concrete claim-language for the convention-layer rows. At floor, all
+    layer-claims fuse. At live act-time, the convention is live and its denial
+    is not. At non-live act-time, neither side is asserted. -/
+def layerLanguage (G : Grid Contrib) : ClaimLanguage G where
+  Claim := LayerClaim
+  Holds
+    | .floor, _ => True
+    | .actTime w, .conventionLive _ => G.HasSelfPoleIndex w
+    | .actTime _, .layerDenied _ => False
+
+def layerRow (G : Grid Contrib) (l : ConventionLayer) : Distinction G :=
+  { language := layerLanguage G
+    sideA := .conventionLive l
+    sideB := .layerDenied l }
+
+def beforeAfterRow (G : Grid Contrib) : Distinction G :=
+  layerRow G .directedTime
+
+def beingsRow (G : Grid Contrib) : Distinction G :=
+  layerRow G .beings
+
+theorem layerRow_obeys (l : ConventionLayer) :
+    (layerRow G l).ObeysSeparateFuse := by
+  constructor
+  · intro t hLive
+    cases t with
+    | floor =>
+        cases hLive
+    | actTime w =>
+        dsimp [layerRow, layerLanguage, ClaimLanguage.TrueAt]
+        intro hiff
+        exact hiff.mp hLive
+  · intro t hNotLive
+    cases t with
+    | floor =>
+        constructor <;> intro _ <;> exact True.intro
+    | actTime w =>
+        dsimp [layerRow, layerLanguage, ClaimLanguage.TrueAt]
+        constructor
+        · intro hLive
+          exact hNotLive hLive
+        · intro hFalse
+          cases hFalse
+
+theorem beforeAfterRow_obeys :
+    (beforeAfterRow G).ObeysSeparateFuse :=
+  layerRow_obeys G .directedTime
+
+theorem beingsRow_obeys :
+    (beingsRow G).ObeysSeparateFuse :=
+  layerRow_obeys G .beings
+
+/-- The deflation can be satisfied only where diagnosis is not live. Offered
+    as a live diagnosis, "there is no time" or "there are no beings" is
+    refuted by its own tier. -/
+theorem layerDenied_holds_only_where_no_live_share
+    (l : ConventionLayer) (t : Tier G)
+    (h : (layerLanguage G).Holds t (.layerDenied l)) :
+    ¬ Tier.hasLiveShare G t := by
+  cases t with
+  | floor =>
+      intro hfloor
+      exact hfloor
+  | actTime _ =>
+      cases h
+
+theorem beforeAfterRow_not_freeze :
+    ¬ (beforeAfterRow G).Freeze :=
+  Grid.not_freeze_of_obeysSeparateFuse (beforeAfterRow_obeys G)
+
+/-- The before/after collapse is self-refuting at every tier; in particular,
+    it cannot be asserted as a live diagnosis. -/
+theorem no_time_collapse_self_refuting (t : Tier G) :
+    ¬ (beforeAfterRow G).Collapse t :=
+  Grid.not_collapse_of_obeysSeparateFuse (beforeAfterRow_obeys G) t
+
+/-- The beings row cannot freeze. The freeze cell in the prose table names the
+    position this checked obedience rules out asserting: designation reified
+    into ontology against `BeingNegative`. -/
+theorem beingsRow_not_freeze :
+    ¬ (beingsRow G).Freeze :=
+  Grid.not_freeze_of_obeysSeparateFuse (beingsRow_obeys G)
+
+/-- "There are no beings", offered as a live diagnosis, is refuted by its own
+    tier. -/
+theorem no_beings_collapse_self_refuting (t : Tier G) :
+    ¬ (beingsRow G).Collapse t :=
+  Grid.not_collapse_of_obeysSeparateFuse (beingsRow_obeys G) t
+
+end GridConvention
+end BeingConvention
+end DirectedConvention
+
 end Grid
 
 end WAA

@@ -128,6 +128,20 @@ And the positive account was in the source-text all along. Firewood abides in it
 
 One tension, written down rather than hidden, because the separate/fuse rule pivots on act-time and this retype conventionalizes time itself. There is no circle: act-time is a tier *within* the thermodynamic convention — precisely the convention beings live in, which is why diagnosis happens there — and the floor rule was always licensed to eat its own levels ("the two truths themselves are conventional"). Floor-fusion now explicitly includes fusing before/after, which makes the fox's question — *does he fall into cause and effect?* — even more literally the question the whole grid answers.
 
+### The being-convention
+
+The same demotion now applies to the macro being. A being, at this scale, is a conventional truth downstream of the words: anything nameable can be designated. The universe, its makeup evolved from a dense hot gas cloud; the stone; the buddha; the gerrymander; the hare's horn; the impossible ātman — all are legal designations as designations. Nothing licenses one as more legitimately a being. The constraint enters later, at realization and use, not at naming. Squeamishness about this is itself one of the beings-row errors: the collapse says "there are no beings"; the freeze picks one partition and mistakes it for ontology.
+
+The ordering is ontological, not chronological. The floor/genjō vocabulary sits outside all conventions. The bare signature supplies words-level tags. The directed convention reads a slope as before/after. Inside that, the being-convention reads fine tags as macro beings, and inside both sits the grid-lens that diagnoses collapse and freeze. Names track what their *reading* presupposes, not what their definition consumes: `DeliveredTo` already used this rule, since it consumes `conditions` but its name reads the arrow. Likewise the new `Grid.DirectedConvention.BeingConvention` names read a tag as a being even when their definiens is direction-free.
+
+Lean makes the demotion explicit with `BeingCoarsening`: a diagnosis-time projection from fine tags to macro tags, never a field in the signature. The fiber under a macro tag is where typing happens. `SentientTag` means some fine tag in the fiber mounts a response somewhere. There is no rival `InsentientTag`; constructively, `not_sentientTag_iff_fiber_all_stone` says non-sentience is exactly the all-stone fiber. That is also the deflated home of 無情説法: insentient preaching is not a hidden subject speaking, but the all-stone fiber read on the object-axis.
+
+The spectrum is fiber-level and per-weld. `FiberAtPole` says every actual weld in the fiber reads at the pole-class: the 84,000 pores each a responsive dharma-gate. `SelfAptTag` says every actual weld in the fiber still carries a live self-pole index: the hell-dweller's monolithic convention, where "self" is apt if it is apt anywhere. `Patchy` names the irreducible middle. No aggregate fiber-share is defined, on purpose: Row 2 is a partial ordering, not a measure, so a mixed fiber is not a middling scalar.
+
+Coherence stays a grade, not a type. Evolution's contribution is display over the run — skin-bags usually score high at coordination, an adaptive register-clock can implement stable internal registers — but no theorem may condition legitimacy on coherence. The three registers need the same care: the swan is named, the naming is enacted as a weld, and the proneness to name is a seed. Thoughts are not "just seeds"; naming is a deed when it occurs.
+
+The soul-guard survives the new vocabulary. `selfAptTag_indices_are_per_weld_only` says that even where the self-convention is apt, the live index is only the per-weld agent tag. The macro self is the image of those spent tags under a coarsening. Holding it as more is the fiber version of the old soul-freeze.
+
 #### The reception-weld: loop-closure as theorem
 
 "The same being" across sowing and reaping is loop-closure — but closure must now be earned, not helped to. Here is how it is earned.
@@ -189,6 +203,14 @@ And mark what the case never tests: neither utterance occurs at the pole. The ko
 - **The arrow** — inga's directedness: conditioning in flight, blind — no desert, no index; retyped (the fourth verdict's third exercise, Karma): the field carries correlational structure, and direction is display over it — read by gradient-embedded beings, never the field's own property.
 - **The ratchet** — cause-effect as the reading of a thermodynamic gradient as a direction-fact; humans evolved to read it, computers built to run on it (gate-logic is entropy-priced); display over delivery, never delivery's own structure.
 - **Before / after** — the retyped temporal distinction: per-weld display — pastness welded by the reach-back, futurity by the aimed call, each spent at act-time, carried by nothing (前後際断); its freeze the flowing container, its collapse the deflation ("nothing happens").
+- **The being-convention** — the macro-scale being demoted to a diagnosis-time coarsening convention inside the directed convention; naming suffices, legitimacy never waits on coherence.
+- **Coarsening** — a projection from fine tags to macro tags (`BeingCoarsening`); supplied at diagnosis-time, never stored in the grid as the partition.
+- **Tag / fiber** — a fine `Being` tag versus the macro tag's preimage under a coarsening; sentience, pole-reading, and self-aptness are fiber-level predicates.
+- **Sentient / insentient tag** — `SentientTag` means some fine tag in the fiber mounts a response; insentience is its negation, constructively equivalent to the all-stone fiber.
+- **FiberAtPole / SelfAptTag / Patchy** — the fiber spectrum: every actual weld at the pole; every actual weld self-apt; or the irreducible mixed case. No aggregate fiber-share is defined.
+- **Coherence (grade)** — an effectiveness/display grade over a coarsening, not a type and never a condition of legitimate designation.
+- **Delegation** — macro agency read through an actual fine weld in the macro fiber; the share remains the delegate weld's share.
+- **The freedom witness** — `BeingNegative`, the third under-determination witness after agent and arrow: the fine grid privileges no being-boundary, so split and merge readings are equally legal.
 - **The weld** — the act-time making of the agent-index; I-making (ahaṃkāra) as deed; token-reflexive, self-anchoring (*this act's agent* constituted by the act, not presupposed), spent at its own act-time, never stored; not a speech act.
 - **Reach-back** — the reception-weld's two-place index (upādāna): *this fruit as return of that deed, mine*; closes the karma-loop retrospectively, per reception; full or vacuous.
 - **Vacuity** — the reach-back's failure-mode: where delivery drew no line, the second place stands unfilled — an appropriating with nothing arrived to appropriate; vacuous rather than false.

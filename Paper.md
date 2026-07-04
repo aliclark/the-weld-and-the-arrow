@@ -26,6 +26,14 @@ transitivity for `conditions`. Role-asymmetry is not temporal asymmetry: the
 `deed` and `reception` slots are different roles, but the reception slot means
 "where the welding happens", not "the later one".
 
+The namespace tree now records ontological ordering. Floor/genjō and the bare
+signature sit outside the convention layers. `Grid.DirectedConvention` reads
+the arrow; `Grid.DirectedConvention.BeingConvention` reads fine tags as
+macro-scale beings; `Grid.DirectedConvention.BeingConvention.GridConvention`
+contains the concrete convention-layer claim language used by the pilot
+taxonomy rows. Names are placed by what their reading presupposes, not by what
+their definition consumes.
+
 ---
 
 ## 0. Preliminaries
@@ -61,8 +69,9 @@ The basic bottom lemmas are:
 `Response`), a response function `respondsTo`, a Row-2 display function
 `grade`, and a relation `conditions` on welds. `ConditionsEither w1 w2` is the
 symmetric closure `conditions w1 w2 ∨ conditions w2 w1`;
-`conditionsEither_symm` swaps the disjuncts. There is no separate two-component
-drive object in the signature.
+`conditionsEither_symm` swaps the disjuncts. `ConditionsEitherChain` is the
+reflexive-transitive closure of that symmetric relation. There is no separate
+two-component drive object in the signature.
 
 A weld is the triple `⟨agent, call, response⟩`. `Actual w` means the response
 really is mounted. `index w` is `w.agent`. `share w` is
@@ -85,6 +94,27 @@ uses the proof argument only for typing.
   have order-equivalent grades.
 - `ResponseInvariant b` and `ResponseVariesWithCall b` describe response-shape
   only.
+
+**BeingConvention definitions.** `BeingCoarsening G Macro` is a diagnosis-time
+projection `G.Being → Macro`; it is not stored in the signature.
+
+Under a coarsening `κ`:
+
+- `InFiber b w` means the weld's fine agent projects to macro tag `b`.
+- `SameFiber p q` is equality of projected macro tags.
+- `FiberInhabited b` and `ActualFiberInhabited b` are the non-vacuity guards.
+- `SentientTag b` means some fine tag in the fiber mounts a response somewhere.
+- `not_sentientTag_iff_fiber_all_stone` proves that non-sentience is exactly
+  the all-stone fiber; there is no separate `InsentientTag`.
+- `FiberAtPole b`, `SelfAptTag b`, and `Patchy b` are fiber-level readings.
+  `LiveFiberAtPole` and `LiveSelfAptTag` add actual-fiber inhabitation.
+- `fiberAtPole_of_fiber_termini`, `no_live_index_under_fiberAtPole`,
+  `selfAptTag_indices_are_per_weld_only`, and the live exclusivity theorems are
+  the checked fiber facts.
+- `SelfConditioningTag b` is the minimal internal delivery-line witness.
+  `StrongSelfConditioningTag b` is defined as a shelved asymptote.
+- `Delegation b` packages an actual fine weld in the macro fiber; its share is
+  definitionally the delegate weld's share.
 
 **Configurations and share-drops.** `Config` has one field,
 `tendency : Contrib`; it stores no `Being`, no `Weld`, and no owner.
@@ -186,6 +216,12 @@ nowhere, `adaptive` responds with `chime` when the listener is present,
 - Anonymous example: the concrete grid contains a stone and a non-stone
   terminus.
 
+**`registerClockGrid`.** The second concrete grid uses natural-numbered fine
+registers as beings. Each register answers the tick by handing off to the next
+register; delivery follows that hand-off. `registerClockCoarsening` merges the
+fine registers into one macro tag at diagnosis-time. The checked facts are
+`registerClock_macro_sentient` and `registerClock_macro_selfConditioning`.
+
 ---
 
 ## 2. Theorems.lean
@@ -272,6 +308,21 @@ tendencies are the two weld shares.
 `answersCall_eq_weld_call` and `fitsOfferedTier_iff_trueAt` are definitional.
 Anonymous examples confirm the two `ErrorGrade.voice` assignments.
 
+**Pilot convention-layer rows.** Under
+`Grid.DirectedConvention.BeingConvention.GridConvention`, `ConventionLayer` has
+`directedTime`, `beings`, and `gridLens`. `LayerClaim` has
+`conventionLive l` and `layerDenied l`. `layerLanguage G` interprets all layer
+claims as true at `floor`, the live convention as `HasSelfPoleIndex w` at
+`actTime w`, and denials as false at act-time.
+
+`beforeAfterRow G` and `beingsRow G` instantiate `Distinction G` from this
+language. `beforeAfterRow_obeys` and `beingsRow_obeys` prove
+`ObeysSeparateFuse` by cases on the tier. `layerDenied_holds_only_where_no_live_share`
+is the branch-sawing lemma: if a denial holds, the tier has no live share.
+`no_time_collapse_self_refuting` and `no_beings_collapse_self_refuting` rule
+out collapse for the two rows, and `beforeAfterRow_not_freeze` /
+`beingsRow_not_freeze` rule out freeze for the checked rows.
+
 ---
 
 ## 3. Identification.lean
@@ -320,6 +371,11 @@ The two facts that this unfolds to `Tier.actTime w` and has exactly the weld's
 `HasSelfPoleIndex` condition are anonymous encoding-check examples, alongside
 the placement and disclaimer examples.
 
+**Disclaimers.** `Disclaimer.number` now runs through 39. The new entries are
+`beingConvention` (35), `pilotGeneratedRows` (36), `beingTrichotomy` (37),
+`hareHornRegister` (38), and `modalRealismFreeze` (39). The checked examples
+still pin `waa_karmaIdentification = 9` and now pin `modalRealismFreeze = 39`.
+
 ---
 
 ## 4. Invariance.lean
@@ -363,6 +419,11 @@ Grade-facing transport facts:
 - `map_isShareDrop_iff`
 - `Grid.DirectedConvention.map_landsWithShareDrop_iff`
 - `Grid.DirectedConvention.map_shareDropLine_iff`
+- `BeingCoarsening.displayMap` and its `map_*_iff` lemmas for
+  `InFiber`, `SameFiber`, `FiberInhabited`, `ActualFiberInhabited`,
+  `SentientTag`, `FiberAtPole`, `LiveFiberAtPole`, `SelfAptTag`,
+  `LiveSelfAptTag`, `Patchy`, `SelfConditioningTag`, and
+  `StrongSelfConditioningTag`
 
 Together these say that all current pole, probe, tier, configuration,
 share-drop, and share-drop-line predicates are legal display predicates:
@@ -372,8 +433,11 @@ changing the carrier by a reparameterization changes notation, not truth.
 order of `conditions`. `transpose_conditionsEither_iff` proves that
 `ConditionsEither` survives the reversal.
 `Grid.DirectedConvention.transpose_deliveredTo_iff` proves that directed
-delivery reverses. This gives future delivery-facing results a quick test: if
-they claim direction, they owe model-supplied asymmetry or irreflexivity.
+delivery reverses. `BeingCoarsening.transpose_selfConditioningTag` shows the
+new directed refinement reversing exactly at the delivery line while fiber
+membership and actuality stay put. This gives future delivery-facing results a
+quick test: if they claim direction, they owe model-supplied asymmetry or
+irreflexivity.
 
 **Negative example.** `InvarianceNegative.TwoBottom` is a two-element carrier
 where every element is order-equivalent to every other element, with `chosen`
@@ -402,6 +466,13 @@ pair; `conditions_disagree` exhibits a pair where the directions differ;
 symmetric closure is correct on both grids. This is the formal certificate that
 direction is not carried by the correlational structure.
 
+**`BeingNegative`.** `twoBeingGrid` has two fine tags with identical response,
+grade, and symmetric delivery behavior. `κmerge` reads them as one macro tag;
+`κsplit` keeps them split. `merge_same_fiber` and `split_not_same_fiber` show
+the readings disagree at `false`/`true`, and `no_partition_recovery` proves no
+function of the shared grid data recovers both. This is the formal certificate
+that the being-boundary is a reading, not grid-carried structure.
+
 **Self-line witness.** `SelfLineWitness.selfLineGrid` is a minimal `Nat` grid
 with one being, one call, one response, total response, grade `1`, and
 `conditions _ _ := True`. The checked examples show:
@@ -429,10 +500,13 @@ contradictions, and short order arguments. The important non-definitional order
 arguments are the `AtBot` share-drop obstruction, `not_directed_self`, and the
 display-reparameterization transport lemmas.
 
-The conditional impossibility results are the agent-recovery theorems and the
-invariance negative example. The concrete model result is still `clockGrid`: it
-exhibits a `Stone` and a non-stone `Terminus` in one finite grid. The self-line
-witness is a permission witness, not an existence claim about any real regime.
+The conditional impossibility results are the agent-recovery theorems, the
+direction negative witness, and the being-boundary negative witness. The
+concrete model results are `clockGrid` and `registerClockGrid`: the first
+exhibits a `Stone` and a non-stone `Terminus` in one finite grid; the second
+exhibits a diagnosis-time macro coarsening over internal registers. The
+self-line witness is a permission witness, not an existence claim about any
+real regime.
 
 One structural caution remains: `Terminus` is vacuously true of every `Stone`;
 use `LiveTerminus` or `ResponsiveTerminus` when non-vacuous response-function

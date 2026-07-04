@@ -335,7 +335,8 @@ end Grid
    §5  Disclaimers
 ============================================================================== -/
 
-/-- The thirty-four original moves enumerated in `Paper/Proofs.md`. -/
+/-- The original moves plus the being-convention extension enumerated in
+    `Paper/Proofs.md`. -/
 inductive Disclaimer
   | tieringSeparateFuse
   | shoAgencyLent
@@ -371,6 +372,11 @@ inductive Disclaimer
   | retypeOutcome
   | svakarmaDemotion
   | orthogonalityPrice
+  | beingConvention
+  | pilotGeneratedRows
+  | beingTrichotomy
+  | hareHornRegister
+  | modalRealismFreeze
 
 namespace Disclaimer
 
@@ -411,12 +417,17 @@ def number : Disclaimer → Nat
   | .retypeOutcome => 32
   | .svakarmaDemotion => 33
   | .orthogonalityPrice => 34
+  | .beingConvention => 35
+  | .pilotGeneratedRows => 36
+  | .beingTrichotomy => 37
+  | .hareHornRegister => 38
+  | .modalRealismFreeze => 39
 
 example :
     number Disclaimer.waa_karmaIdentification = 9 := rfl
 
 example :
-    number Disclaimer.orthogonalityPrice = 34 := rfl
+    number Disclaimer.modalRealismFreeze = 39 := rfl
 
 end Disclaimer
 

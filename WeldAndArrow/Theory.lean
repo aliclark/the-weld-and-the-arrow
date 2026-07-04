@@ -239,7 +239,12 @@ structure Grid (Contrib : Type) [PreorderBot Contrib] where
       tag over a causally-connected run, not a first-personal owner.
       Individuation is not ownership, which is the entire content of
       disclaimer 4; `Being` is exactly as innocent as "chariot" is for
-      Siderits. -/
+      Siderits, and exactly as free: the fine structure privileges no
+      partition into beings (Invariance: `BeingNegative`). Which tags are
+      drawn is a reading, like the arrow's direction. The reading of tags
+      as beings lives in `Grid.DirectedConvention.BeingConvention`. `Being :=
+      Unit`, sentients-only, and gerrymandered tags are all legal model
+      choices; none is licensed by the signature as floor-furniture. -/
   Being      : Type
   /-- a dharma arriving at Row 2. -/
   Call       : Type
@@ -563,6 +568,16 @@ theorem conditionsEither_symm {w₁ w₂ : G.Weld} (h : G.ConditionsEither w₁ 
     G.ConditionsEither w₂ w₁ :=
   h.elim Or.inr Or.inl
 
+/-- Reflexive-transitive closure of `ConditionsEither`: hang-together along
+    the field, direction forgotten. Consumed by being-convention grades and
+    witnesses, but by nothing that types a being as legitimate. -/
+inductive ConditionsEitherChain : G.Weld → G.Weld → Prop
+  | refl (w : G.Weld) : ConditionsEitherChain w w
+  | step {w₁ w₂ w₃ : G.Weld} :
+      G.ConditionsEither w₁ w₂ →
+      ConditionsEitherChain w₂ w₃ →
+      ConditionsEitherChain w₁ w₃
+
 namespace DirectedConvention
 
 /- Directional names here are a reading, not extra structure. They are the
@@ -720,6 +735,202 @@ theorem objectAxisStanding_of_hasShareDropLanding
     (before : Config Contrib) (deed : G.Weld) (h : HasShareDropLanding G before deed) :
     ObjectAxisStanding G deed :=
   h.elim (fun reception hland => ⟨reception, hland.left.left⟩)
+
+namespace BeingConvention
+
+/- Beings are conventional truths downstream of the words and, ontologically,
+   of the arrow: selection-shaped gradient-readers. The tag `G.Being` stays at
+   the words-level; reading a tag as a macro-scale being lives here. Naming
+   suffices, so legitimacy never depends on these grades. -/
+
+/-- Re-rooted name for the function predicate under the being-convention
+    reading. The definition remains the primitive function/share interface;
+    this namespace records what the name presupposes when read as being-talk. -/
+abbrev MountsAt (b : G.Being) (c : G.Call) : Prop := G.MountsAt b c
+
+/-- Re-rooted name for mounting at some call. -/
+abbrev MountsSomewhere (b : G.Being) : Prop := G.MountsSomewhere b
+
+/-- Re-rooted name for call-entire response. -/
+abbrev RespondsToEveryCall (b : G.Being) : Prop := G.RespondsToEveryCall b
+
+/-- Re-rooted name for the stone edge of the function/share split. -/
+abbrev Stone (b : G.Being) : Prop := G.Stone b
+
+/-- Re-rooted name for the pole-class responder. -/
+abbrev Terminus (b : G.Being) : Prop := G.Terminus b
+
+/-- Re-rooted name for non-vacuous terminus response. -/
+abbrev LiveTerminus (b : G.Being) : Prop := G.LiveTerminus b
+
+/-- Re-rooted name for call-entire terminus response. -/
+abbrev ResponsiveTerminus (b : G.Being) : Prop := G.ResponsiveTerminus b
+
+/-- Re-rooted name for the two attested arrivals at the pole-class. -/
+abbrev AtPoleClass (b : G.Being) : Prop := G.AtPoleClass b
+
+/-- Re-rooted name for the probe, because the probe reads a being's
+    composition rather than adding a field to the signature. -/
+abbrev ProbeConstant (b : G.Being) (cs : G.Call → Prop) : Prop :=
+  G.ProbeConstant b cs
+
+/-- A being-coarsening reads fine-grid tags as tokens of a macro-scale tag.
+    Any projection is a legitimate designation: universe, gerrymander, stone,
+    buddha, hare's horn. What varies is grade and realization, never naming's
+    innocence. Coherence is therefore left as instance-level display, not a
+    type-forming predicate. -/
+structure BeingCoarsening (G : Grid Contrib) (Macro : Type) where
+  proj : G.Being → Macro
+
+namespace BeingCoarsening
+
+variable {G : Grid Contrib} {Macro : Type} (κ : BeingCoarsening G Macro)
+
+/-- A weld lies in a macro tag's fiber when its fine agent projects there. -/
+def InFiber (b : Macro) (w : G.Weld) : Prop := κ.proj w.agent = b
+
+/-- Two fine tags share the same macro fiber. This is the boundary reading
+    varied by `BeingNegative`. -/
+def SameFiber (p q : G.Being) : Prop := κ.proj p = κ.proj q
+
+/-- A fiber has at least one fine tag under it. -/
+def FiberInhabited (b : Macro) : Prop := ∃ p : G.Being, κ.proj p = b
+
+/-- A fiber has at least one actual weld under it. This is the live/vacuity
+    guard needed for exclusivity facts below. -/
+def ActualFiberInhabited (b : Macro) : Prop :=
+  ∃ w : G.Weld, G.Actual w ∧ κ.InFiber b w
+
+/-- Sentient tag: some fine tag in the fiber mounts a response somewhere.
+    The definiens is direction-free; the name reads the tag as a being, hence
+    its convention-internal home. -/
+def SentientTag (b : Macro) : Prop :=
+  ∃ p : G.Being, κ.proj p = b ∧ G.MountsSomewhere p
+
+/-- Insentience is not a second namespace predicate. Constructively, a tag is
+    not sentient exactly when every fine tag in its fiber is stone-typed.
+    This is where the `mujō seppō` point lives: "insentient preaching" is not
+    a rival kind of macro soul, but the all-stone reading of a fiber. -/
+theorem not_sentientTag_iff_fiber_all_stone (b : Macro) :
+    ¬ κ.SentientTag b ↔ ∀ p : G.Being, κ.proj p = b → G.Stone p := by
+  constructor
+  · intro hnot p hp c hmount
+    exact hnot ⟨p, hp, ⟨c, hmount⟩⟩
+  · intro hall hsent
+    rcases hsent with ⟨p, hp, c, hmount⟩
+    exact hall p hp c hmount
+
+/-- Fiber-at-pole: every actual weld in the fiber lies at the pole-class.
+    No aggregate fiber-share is defined; the preorder is partial, not a
+    measure, so mixed fibers stay mixtures rather than scalars. Vacuous on
+    empty/no-actual fibers; use `LiveFiberAtPole` when inhabitation matters. -/
+def FiberAtPole (b : Macro) : Prop :=
+  ∀ w : G.Weld, G.Actual w → κ.InFiber b w → AtBot (G.share w)
+
+/-- The live, non-vacuous fiber-at-pole predicate. -/
+def LiveFiberAtPole (b : Macro) : Prop :=
+  κ.ActualFiberInhabited b ∧ κ.FiberAtPole b
+
+/-- Self-apt tag: every actual weld in the fiber still carries a live
+    self-pole index. This marks where the self-convention is genuinely apt;
+    the soul-guard theorem below keeps that aptness per-weld. Vacuous on
+    empty/no-actual fibers; use `LiveSelfAptTag` when inhabitation matters. -/
+def SelfAptTag (b : Macro) : Prop :=
+  ∀ w : G.Weld, G.Actual w → κ.InFiber b w → G.HasSelfPoleIndex w
+
+/-- The live, non-vacuous self-apt predicate. -/
+def LiveSelfAptTag (b : Macro) : Prop :=
+  κ.ActualFiberInhabited b ∧ κ.SelfAptTag b
+
+/-- Patchy fiber: neither all actual welds are at the pole nor all actual
+    welds are self-apt. No middling scalar is smuggled in. -/
+def Patchy (b : Macro) : Prop := ¬ κ.FiberAtPole b ∧ ¬ κ.SelfAptTag b
+
+/-- If every fine tag in the fiber is terminus-typed, the whole actual fiber
+    reads at the pole. -/
+theorem fiberAtPole_of_fiber_termini {b : Macro}
+    (h : ∀ p : G.Being, κ.proj p = b → G.Terminus p) :
+    κ.FiberAtPole b := by
+  intro w hactual hfiber
+  exact G.atBot_of_terminus_response (h w.agent hfiber) hactual
+
+/-- Under a fiber-at-pole reading, no actual weld in the fiber has a live
+    self-pole index. -/
+theorem no_live_index_under_fiberAtPole {b : Macro}
+    (h : κ.FiberAtPole b) {w : G.Weld}
+    (hactual : G.Actual w) (hfiber : κ.InFiber b w) :
+    ¬ G.HasSelfPoleIndex w :=
+  G.no_self_pole_index_of_atBot w (h w hactual hfiber)
+
+/-- Fiber soul-guard: even where the self-convention is apt, the index is
+    only the per-weld agent tag. No macro owner is produced. -/
+theorem selfAptTag_indices_are_per_weld_only {b : Macro}
+    (h : κ.SelfAptTag b) {w : G.Weld}
+    (hactual : G.Actual w) (hfiber : κ.InFiber b w) :
+    G.selfPoleIndex w (h w hactual hfiber) = w.agent :=
+  rfl
+
+/-- The empty-fiber vacuity guard: fiber-at-pole and self-apt are exclusive
+    only once an actual weld in the fiber is supplied. -/
+theorem fiberAtPole_selfAptTag_exclusive {b : Macro}
+    (hinh : κ.ActualFiberInhabited b)
+    (hpole : κ.FiberAtPole b) (hself : κ.SelfAptTag b) :
+    False := by
+  rcases hinh with ⟨w, hactual, hfiber⟩
+  exact hself w hactual hfiber (hpole w hactual hfiber)
+
+theorem liveFiberAtPole_not_selfAptTag {b : Macro}
+    (h : κ.LiveFiberAtPole b) :
+    ¬ κ.SelfAptTag b :=
+  fun hself => κ.fiberAtPole_selfAptTag_exclusive h.left h.right hself
+
+theorem liveSelfAptTag_not_fiberAtPole {b : Macro}
+    (h : κ.LiveSelfAptTag b) :
+    ¬ κ.FiberAtPole b :=
+  fun hpole => κ.fiberAtPole_selfAptTag_exclusive h.left hpole h.right
+
+/-- Directed refinement within sentience: the fiber carries at least one
+    internal delivery line. Any persistence theorem built from this owes a
+    model-supplied asymmetry or irreflexivity hypothesis on `conditions`. -/
+def SelfConditioningTag (b : Macro) : Prop :=
+  ∃ deed reception : G.Weld,
+    κ.InFiber b deed ∧ κ.InFiber b reception ∧
+    G.Actual reception ∧ DeliveredTo G deed reception
+
+/-- A stronger asymptote: every actual reception in the fiber is internally
+    fed. It is named and shelved because treating it as the default would
+    turn internal conditioning into causal solipsism. -/
+def StrongSelfConditioningTag (b : Macro) : Prop :=
+  ∀ reception : G.Weld, κ.InFiber b reception → G.Actual reception →
+    ∃ deed : G.Weld, κ.InFiber b deed ∧ DeliveredTo G deed reception
+
+/-- Macro agency only by delegation: a macro-attributed act is an actual
+    fine weld in the macro fiber. The share remains the delegate weld's
+    share; the macro tag never enters the signature as a responder. -/
+structure Delegation (b : Macro) where
+  weld : G.Weld
+  actual : G.Actual weld
+  delegate_in_fiber : κ.InFiber b weld
+
+namespace Delegation
+
+/-- The displayed share of a delegation is exactly the delegate weld's share. -/
+def share {b : Macro} (d : κ.Delegation b) : Contrib := G.share d.weld
+
+theorem share_eq_delegate_share {b : Macro} (d : κ.Delegation b) :
+    d.share = G.share d.weld :=
+  rfl
+
+end Delegation
+
+end BeingCoarsening
+
+/- The innermost `GridConvention` namespace is opened in Theorems.lean for the
+   concrete claim-language rows. Keeping the abstract machinery at `Grid`
+   level for now avoids a churn-only migration of structure fields whose
+   eventual home may simply remain signature rather than reading. -/
+
+end BeingConvention
 
 end DirectedConvention
 
@@ -980,6 +1191,38 @@ example (L : ClaimLanguage G) (p : L.Claim) :
 
 end Grid
 
+namespace Grid
+
+namespace DirectedConvention
+namespace BeingConvention
+namespace GridConvention
+
+variable {Contrib : Type} [PreorderBot Contrib]
+
+/- The abstract separate/fuse machinery remains defined at `Grid` level for
+   compatibility; these aliases expose its innermost reading-home. -/
+
+abbrev Tier (G : Grid Contrib) := Grid.Tier G
+
+abbrev ClaimLanguage (G : Grid Contrib) := Grid.ClaimLanguage G
+
+abbrev RecordedUtterance (G : Grid Contrib) (L : Grid.ClaimLanguage G) :=
+  Grid.RecordedUtterance G L
+
+abbrev Distinction (G : Grid Contrib) := Grid.Distinction G
+
+abbrev VerdictVoice := Grid.VerdictVoice
+
+abbrev ErrorGrade := Grid.ErrorGrade
+
+abbrev GeneratorOutcome (G : Grid Contrib) := Grid.GeneratorOutcome G
+
+end GridConvention
+end BeingConvention
+end DirectedConvention
+
+end Grid
+
 /- ==============================================================================
    Preview: the two outside wrinkles
 
@@ -1115,6 +1358,43 @@ example :
     clockGrid.Terminus Clock.adaptive ∧
     ¬ clockGrid.Stone Clock.adaptive :=
   ⟨rigid_is_stone, adaptive_is_terminus, adaptive_not_stone⟩
+
+/- --------------------------------------------------------------------------
+   Second concrete display — integer registers with diagnosis-time κ
+
+   The adaptive register clock builds its fine tags as integer-like registers.
+   The macro designation is still supplied outside the signature, by a
+   `BeingCoarsening`: the model may implement stable internal registers, but
+   the standing partition is not stored as "the" being-boundary.
+-------------------------------------------------------------------------- -/
+
+/-- A register clock whose fine tags are natural-numbered registers. Each
+    register answers the tick by handing off to the next register, and
+    delivery follows that hand-off. -/
+def registerClockGrid : Grid Nat where
+  Being      := Nat
+  Call       := Unit
+  Response   := Nat
+  respondsTo n _ := some (n + 1)
+  grade n _ _ := n
+  conditions deed reception := reception.agent = deed.response
+
+/-- One innocent macro reading: all fine registers are diagnosed as one
+    macro device. Other coarsenings over the same grid would be equally
+    legitimate readings. -/
+def registerClockCoarsening :
+    Grid.DirectedConvention.BeingConvention.BeingCoarsening registerClockGrid Unit where
+  proj _ := ()
+
+theorem registerClock_macro_sentient :
+    registerClockCoarsening.SentientTag () :=
+  ⟨(0 : Nat), rfl, ⟨(), ⟨(1 : Nat), rfl⟩⟩⟩
+
+theorem registerClock_macro_selfConditioning :
+    registerClockCoarsening.SelfConditioningTag () := by
+  refine ⟨⟨(0 : Nat), (), (1 : Nat)⟩, ⟨(1 : Nat), (), (2 : Nat)⟩,
+    rfl, rfl, rfl, ?_⟩
+  rfl
 
 /- `clockGrid` is a genuine, finite, computable term of type `Grid Nat` —
     direct evidence that "a model of the theory" is a buildable Lean
