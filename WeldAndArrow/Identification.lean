@@ -77,7 +77,7 @@ theorem no_agent_recovery_from_same_call_response
   G.no_agent_recovery_from_same_field_distinct_index h₁ h₂ rfl hne
 
 /- ==============================================================================
-   §2  Sower/reaper, reach-back, and ownership-face
+   §2  Sower/reaper, reach-back, and WAA-ownership-face
 ============================================================================== -/
 
 /-- The field-side report-face of "the sower reaps": the delivery line, before
@@ -85,65 +85,65 @@ theorem no_agent_recovery_from_same_call_response
 def ReportFace (deed reception : G.Weld) : Prop :=
   G.DeliveredTo deed reception
 
-/-- The full ownership-face: delivery reaches an actual reception and that
-    reception appropriates. It is a deed at reception-time, not a standing
+/-- The full WAA-ownership-face: delivery reaches an actual reception and that
+    reception WAA-appropriates. It is a deed at reception-time, not a standing
     relation. -/
-def OwnershipFace (deed reception : G.Weld) : Prop :=
-  G.LandsAt deed reception ∧ G.Appropriates reception
+def waa_OwnershipFace (deed reception : G.Weld) : Prop :=
+  G.LandsAt deed reception ∧ G.waa_Appropriates reception
 
-/-- A vacuous ownership attempt: the reception may appropriate, but the field
+/-- A vacuous WAA-ownership attempt: the reception may WAA-appropriate, but the field
     drew no delivery-line from this deed to this reception, so it is not a full
-    ownership-face for that deed. -/
-def VacuousOwnershipFace (deed reception : G.Weld) : Prop :=
-  G.ReachBackVacuous deed reception ∧ G.Actual reception ∧ G.Appropriates reception
+    WAA-ownership-face for that deed. -/
+def waa_VacuousOwnershipFace (deed reception : G.Weld) : Prop :=
+  G.ReachBackVacuous deed reception ∧ G.Actual reception ∧ G.waa_Appropriates reception
 
-/-- The ownership-face includes the report-face. -/
-theorem reportFace_of_ownershipFace
-    {deed reception : G.Weld} (h : G.OwnershipFace deed reception) :
+/-- The WAA-ownership-face includes the report-face. -/
+theorem reportFace_of_waa_ownershipFace
+    {deed reception : G.Weld} (h : G.waa_OwnershipFace deed reception) :
     G.ReportFace deed reception :=
   h.left.left
 
-/-- The ownership-face includes actual reception. -/
-theorem actual_of_ownershipFace
-    {deed reception : G.Weld} (h : G.OwnershipFace deed reception) :
+/-- The WAA-ownership-face includes actual reception. -/
+theorem actual_of_waa_ownershipFace
+    {deed reception : G.Weld} (h : G.waa_OwnershipFace deed reception) :
     G.Actual reception :=
   h.left.right
 
-/-- The ownership-face includes appropriation at reception-time. -/
-theorem appropriation_of_ownershipFace
-    {deed reception : G.Weld} (h : G.OwnershipFace deed reception) :
-    G.Appropriates reception :=
+/-- The WAA-ownership-face includes WAA-appropriation at reception-time. -/
+theorem waa_appropriation_of_waa_ownershipFace
+    {deed reception : G.Weld} (h : G.waa_OwnershipFace deed reception) :
+    G.waa_Appropriates reception :=
   h.right
 
-/-- Full landing plus appropriation introduces the ownership-face. -/
-theorem ownershipFace_intro
+/-- Full landing plus WAA-appropriation introduces the WAA-ownership-face. -/
+theorem waa_ownershipFace_intro
     {deed reception : G.Weld}
-    (hland : G.LandsAt deed reception) (happ : G.Appropriates reception) :
-    G.OwnershipFace deed reception :=
+    (hland : G.LandsAt deed reception) (happ : G.waa_Appropriates reception) :
+    G.waa_OwnershipFace deed reception :=
   ⟨hland, happ⟩
 
-/-- A vacuous reach-back cannot at the same time be a full ownership-face for
+/-- A vacuous reach-back cannot at the same time be a full WAA-ownership-face for
     that deed and reception. -/
-theorem not_ownershipFace_of_vacuous
+theorem not_waa_ownershipFace_of_vacuous
     {deed reception : G.Weld} (hv : G.ReachBackVacuous deed reception) :
-    ¬ G.OwnershipFace deed reception :=
+    ¬ G.waa_OwnershipFace deed reception :=
   fun hown => hv hown.left.left
 
-/-- A vacuous ownership attempt is not a full ownership-face. -/
-theorem not_ownershipFace_of_vacuousOwnershipFace
-    {deed reception : G.Weld} (hv : G.VacuousOwnershipFace deed reception) :
-    ¬ G.OwnershipFace deed reception :=
-  G.not_ownershipFace_of_vacuous hv.left
+/-- A vacuous WAA-ownership attempt is not a full WAA-ownership-face. -/
+theorem not_waa_ownershipFace_of_waa_vacuousOwnershipFace
+    {deed reception : G.Weld} (hv : G.waa_VacuousOwnershipFace deed reception) :
+    ¬ G.waa_OwnershipFace deed reception :=
+  G.not_waa_ownershipFace_of_vacuous hv.left
 
 /-- The diachronic whose-question decomposes into delivery plus fresh
-    appropriation; no third cross-gap owner is part of this definition. -/
-def DiachronicWhose (deed reception : G.Weld) : Prop :=
-  G.DeliveredTo deed reception ∧ G.Appropriates reception
+    WAA-appropriation; no third cross-gap owner is part of this definition. -/
+def waa_DiachronicWhose (deed reception : G.Weld) : Prop :=
+  G.DeliveredTo deed reception ∧ G.waa_Appropriates reception
 
-theorem diachronicWhose_iff_delivery_and_appropriation
+theorem waa_diachronicWhose_iff_delivery_and_waa_appropriation
     (deed reception : G.Weld) :
-    G.DiachronicWhose deed reception ↔
-      G.DeliveredTo deed reception ∧ G.Appropriates reception :=
+    G.waa_DiachronicWhose deed reception ↔
+      G.DeliveredTo deed reception ∧ G.waa_Appropriates reception :=
   Iff.rfl
 
 /- ==============================================================================
@@ -195,14 +195,14 @@ theorem stateToolFits_of_terminus_response
     G.StateToolFits ⟨b, c, r⟩ :=
   G.no_self_pole_index_of_terminus_response hterm hresp
 
-/-- If the state-tool fits a reception, the ownership-face cannot fire there. -/
-theorem no_ownershipFace_of_stateToolFits
+/-- If the state-tool fits a reception, the WAA-ownership-face cannot fire there. -/
+theorem no_waa_ownershipFace_of_stateToolFits
     {deed reception : G.Weld} (hfits : G.StateToolFits reception) :
-    ¬ G.OwnershipFace deed reception :=
+    ¬ G.waa_OwnershipFace deed reception :=
   fun hown => hfits hown.right
 
 /-- A floor-tier diagnosis cannot be a mis-feed, since the floor carries no live
-    arrogation. -/
+    nonzero share. -/
 theorem misfeed_not_floor_claim (d : Distinction G) :
     ¬ d.Collapse (Tier.floor : Tier G) :=
   G.not_collapse_floor d
@@ -226,36 +226,36 @@ theorem verdict_separates_at_actTime
 
 end Grid
 
-/-- The offices karmic ownership holds in the paper's identity-claim. -/
-inductive OwnershipOffice
-  | cetana
-  | reception
-  | practice
-  | remorse
-  | absolution
-  | dedication
+/-- The WAA-offices karmic ownership holds in the paper's identity-claim. -/
+inductive waa_OwnershipOffice
+  | waa_cetana
+  | waa_reception
+  | waa_practice
+  | waa_remorse
+  | waa_absolution
+  | waa_dedication
 
-namespace OwnershipOffice
+namespace waa_OwnershipOffice
 
 variable {Contrib : Type} [WeakOrderBot Contrib] {G : Grid Contrib}
 
 /-- Each office is discharged at a weld's act-time tier, not by a cross-gap
     state. -/
-def dischargeTier (_office : OwnershipOffice) (w : G.Weld) : Grid.Tier G :=
+def dischargeTier (_office : waa_OwnershipOffice) (w : G.Weld) : Grid.Tier G :=
   Grid.Tier.actTime w
 
-theorem dischargeTier_actTime (office : OwnershipOffice) (w : G.Weld) :
+theorem dischargeTier_actTime (office : waa_OwnershipOffice) (w : G.Weld) :
     office.dischargeTier w = Grid.Tier.actTime w := rfl
 
-/-- Discharging an office at act-time has exactly the weld's live-arrogation
+/-- Discharging an office at act-time has exactly the weld's live nonzero-share
     condition. -/
-theorem dischargeTier_hasArrogation_iff
-    (office : OwnershipOffice) (w : G.Weld) :
-    Grid.Tier.hasArrogation G (office.dischargeTier w) ↔
+theorem dischargeTier_hasNonzeroShare_iff
+    (office : waa_OwnershipOffice) (w : G.Weld) :
+    Grid.Tier.hasNonzeroShare G (office.dischargeTier w) ↔
       G.HasSelfPoleIndex w :=
   Iff.rfl
 
-end OwnershipOffice
+end waa_OwnershipOffice
 
 /-- Contemporary positions placed by `Paper/Proofs.md`. -/
 inductive ContemporaryPosition
@@ -274,23 +274,23 @@ inductive ContemporaryPlacement
 namespace ContemporaryPosition
 
 /-- The grid placement assigned to each contemporary position in the paper. -/
-def placement : ContemporaryPosition → ContemporaryPlacement
+def waa_placement : ContemporaryPosition → ContemporaryPlacement
   | .siderits => .seriesQuestions
   | .ganeri => .nearestAlly
   | .zahavi => .retype
   | .sartre => .occupant
 
-theorem siderits_placement :
-    placement ContemporaryPosition.siderits = ContemporaryPlacement.seriesQuestions := rfl
+theorem siderits_waa_placement :
+    waa_placement ContemporaryPosition.siderits = ContemporaryPlacement.seriesQuestions := rfl
 
-theorem ganeri_placement :
-    placement ContemporaryPosition.ganeri = ContemporaryPlacement.nearestAlly := rfl
+theorem ganeri_waa_placement :
+    waa_placement ContemporaryPosition.ganeri = ContemporaryPlacement.nearestAlly := rfl
 
-theorem zahavi_placement :
-    placement ContemporaryPosition.zahavi = ContemporaryPlacement.retype := rfl
+theorem zahavi_waa_placement :
+    waa_placement ContemporaryPosition.zahavi = ContemporaryPlacement.retype := rfl
 
-theorem sartre_placement :
-    placement ContemporaryPosition.sartre = ContemporaryPlacement.occupant := rfl
+theorem sartre_waa_placement :
+    waa_placement ContemporaryPosition.sartre = ContemporaryPlacement.occupant := rfl
 
 end ContemporaryPosition
 
@@ -324,13 +324,13 @@ inductive Disclaimer
   | linjiReading
   | shoVersusSatori
   | genjoArrivals
-  | karmaIdentification
+  | waa_karmaIdentification
   | weldTokenReflexivity
   | mmk17Decomposition
   | stoneOutsideEdge
   | generatedTaxonomy
   | twoErrorGrades
-  | kenshoEvent
+  | shareDropEvent
   | theoryStatus
   | rowTwoIndexPlacement
   | shareDetermination
@@ -364,13 +364,13 @@ def number : Disclaimer → Nat
   | .linjiReading => 6
   | .shoVersusSatori => 7
   | .genjoArrivals => 8
-  | .karmaIdentification => 9
+  | .waa_karmaIdentification => 9
   | .weldTokenReflexivity => 10
   | .mmk17Decomposition => 11
   | .stoneOutsideEdge => 12
   | .generatedTaxonomy => 13
   | .twoErrorGrades => 14
-  | .kenshoEvent => 15
+  | .shareDropEvent => 15
   | .theoryStatus => 16
   | .rowTwoIndexPlacement => 17
   | .shareDetermination => 18
@@ -391,8 +391,8 @@ def number : Disclaimer → Nat
   | .svakarmaDemotion => 33
   | .orthogonalityPrice => 34
 
-theorem karmaIdentification_number :
-    number Disclaimer.karmaIdentification = 9 := rfl
+theorem waa_karmaIdentification_number :
+    number Disclaimer.waa_karmaIdentification = 9 := rfl
 
 theorem poleTyping_carried_by_orthogonalityPrice :
     number Disclaimer.orthogonalityPrice = 34 := rfl

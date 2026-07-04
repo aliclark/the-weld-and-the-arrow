@@ -82,21 +82,21 @@ theorem not_stone_of_response
     ¬ G.Stone b :=
   fun hstone => hstone c ⟨r, hresp⟩
 
-/-- A stone witnesses the stone side of the genjō pole. -/
-theorem atGenjoPole_of_stone (b : G.Being) (hstone : G.Stone b) :
-    G.AtGenjōPole b :=
+/-- A stone witnesses the stone side of the zero-share pole. -/
+theorem atZeroSharePole_of_stone (b : G.Being) (hstone : G.Stone b) :
+    G.AtZeroSharePole b :=
   Or.inl hstone
 
-/-- A terminus witnesses the terminus side of the genjō pole. -/
-theorem atGenjoPole_of_terminus (b : G.Being) (hterm : G.Terminus b) :
-    G.AtGenjōPole b :=
+/-- A terminus witnesses the terminus side of the zero-share pole. -/
+theorem atZeroSharePole_of_terminus (b : G.Being) (hterm : G.Terminus b) :
+    G.AtZeroSharePole b :=
   Or.inr hterm
 
-/-- A live terminus sits at the genjō pole and is not stone-typed. -/
-theorem atGenjoPole_and_not_stone_of_liveTerminus
+/-- A live terminus sits at the zero-share pole and is not stone-typed. -/
+theorem atZeroSharePole_and_not_stone_of_liveTerminus
     (b : G.Being) (h : G.LiveTerminus b) :
-    G.AtGenjōPole b ∧ ¬ G.Stone b :=
-  ⟨G.atGenjoPole_of_terminus b h.right, G.liveTerminus_not_stone b h⟩
+    G.AtZeroSharePole b ∧ ¬ G.Stone b :=
+  ⟨G.atZeroSharePole_of_terminus b h.right, G.liveTerminus_not_stone b h⟩
 
 /-- A responsive terminus is not stone-typed whenever the call-domain has a witness. -/
 theorem not_stone_of_responsiveTerminus_of_call
@@ -105,7 +105,7 @@ theorem not_stone_of_responsiveTerminus_of_call
   G.liveTerminus_not_stone b (G.responsiveTerminus_live_of_call b c h)
 
 /- ==============================================================================
-   Re-pitch and kenshō
+   Re-pitch and share-drops
 ============================================================================== -/
 
 /-- Re-pitching carries forward exactly the received weld's share. -/
@@ -114,25 +114,25 @@ theorem rePitch_tendency_eq_share
     (G.rePitch before received).tendency = G.share received :=
   rfl
 
-/-- Kenshō can be read as the corresponding strict drop in the re-pitched tendency. -/
-theorem isKensho_iff_rePitch_tendency_drop
+/-- A share-drop can be read as the corresponding strict drop in the re-pitched tendency. -/
+theorem isShareDrop_iff_rePitch_tendency_drop
     (before : Config Contrib) (received : G.Weld) :
-    G.IsKenshō before received ↔
+    G.IsShareDrop before received ↔
       ((G.rePitch before received).tendency ≼ before.tendency ∧
         ¬ (before.tendency ≼ (G.rePitch before received).tendency)) :=
   Iff.rfl
 
-/-- The re-pitched tendency of a kenshō event is no greater than the prior tendency. -/
-theorem rePitch_tendency_le_before_of_kensho
+/-- The re-pitched tendency of a share-drop event is no greater than the prior tendency. -/
+theorem rePitch_tendency_le_before_of_shareDrop
     {before : Config Contrib} {received : G.Weld}
-    (h : G.IsKenshō before received) :
+    (h : G.IsShareDrop before received) :
     (G.rePitch before received).tendency ≼ before.tendency :=
   h.left
 
-/-- A kenshō event is not ordered back above its prior tendency. -/
-theorem not_before_le_rePitch_tendency_of_kensho
+/-- A share-drop event is not ordered back above its prior tendency. -/
+theorem not_before_le_rePitch_tendency_of_shareDrop
     {before : Config Contrib} {received : G.Weld}
-    (h : G.IsKenshō before received) :
+    (h : G.IsShareDrop before received) :
     ¬ (before.tendency ≼ (G.rePitch before received).tendency) :=
   h.right
 
@@ -186,33 +186,33 @@ theorem actual_of_landsAt
     G.Actual reception :=
   h.right
 
-/-- A kenshō landing includes an ordinary landing. -/
-theorem landsAt_of_landsWithKensho
+/-- A share-drop landing includes an ordinary landing. -/
+theorem landsAt_of_landsWithShareDrop
     {before : Config Contrib} {deed reception : G.Weld}
-    (h : G.LandsWithKenshō before deed reception) :
+    (h : G.LandsWithShareDrop before deed reception) :
     G.LandsAt deed reception :=
   h.left
 
-/-- A kenshō landing includes the receiver-side kenshō judgement. -/
-theorem isKensho_of_landsWithKensho
+/-- A share-drop landing includes the receiver-side share-drop judgement. -/
+theorem isShareDrop_of_landsWithShareDrop
     {before : Config Contrib} {deed reception : G.Weld}
-    (h : G.LandsWithKenshō before deed reception) :
-    G.IsKenshō before reception :=
+    (h : G.LandsWithShareDrop before deed reception) :
+    G.IsShareDrop before reception :=
   h.right
 
-/-- A kenshō landing is delivered. -/
-theorem deliveredTo_of_landsWithKensho
+/-- A share-drop landing is delivered. -/
+theorem deliveredTo_of_landsWithShareDrop
     {before : Config Contrib} {deed reception : G.Weld}
-    (h : G.LandsWithKenshō before deed reception) :
+    (h : G.LandsWithShareDrop before deed reception) :
     G.DeliveredTo deed reception :=
-  G.deliveredTo_of_landsAt (G.landsAt_of_landsWithKensho h)
+  G.deliveredTo_of_landsAt (G.landsAt_of_landsWithShareDrop h)
 
-/-- A kenshō landing is received by an actual weld. -/
-theorem actual_of_landsWithKensho
+/-- A share-drop landing is received by an actual weld. -/
+theorem actual_of_landsWithShareDrop
     {before : Config Contrib} {deed reception : G.Weld}
-    (h : G.LandsWithKenshō before deed reception) :
+    (h : G.LandsWithShareDrop before deed reception) :
     G.Actual reception :=
-  G.actual_of_landsAt (G.landsAt_of_landsWithKensho h)
+  G.actual_of_landsAt (G.landsAt_of_landsWithShareDrop h)
 
 /-- Effectiveness gives an actual landing. -/
 theorem exists_landsAt_of_effectiveFor
@@ -220,7 +220,7 @@ theorem exists_landsAt_of_effectiveFor
     (h : G.EffectiveFor before deed) :
     ∃ reception, G.LandsAt deed reception :=
   h.elim (fun reception hland =>
-    ⟨reception, G.landsAt_of_landsWithKensho hland⟩)
+    ⟨reception, G.landsAt_of_landsWithShareDrop hland⟩)
 
 /-- Effectiveness gives an actual receiving weld. -/
 theorem exists_actual_reception_of_effectiveFor
@@ -228,15 +228,15 @@ theorem exists_actual_reception_of_effectiveFor
     (h : G.EffectiveFor before deed) :
     ∃ reception, G.Actual reception :=
   h.elim (fun reception hland =>
-    ⟨reception, G.actual_of_landsWithKensho hland⟩)
+    ⟨reception, G.actual_of_landsWithShareDrop hland⟩)
 
-/-- Effectiveness gives a receiver-side kenshō witness. -/
-theorem exists_kensho_reception_of_effectiveFor
+/-- Effectiveness gives a receiver-side share-drop witness. -/
+theorem exists_shareDrop_reception_of_effectiveFor
     {before : Config Contrib} {deed : G.Weld}
     (h : G.EffectiveFor before deed) :
-    ∃ reception, G.IsKenshō before reception :=
+    ∃ reception, G.IsShareDrop before reception :=
   h.elim (fun reception hland =>
-    ⟨reception, G.isKensho_of_landsWithKensho hland⟩)
+    ⟨reception, G.isShareDrop_of_landsWithShareDrop hland⟩)
 
 /-- The preorder-style effectiveness comparison preserves effectiveness. -/
 theorem effectiveFor_of_atLeastAsEffective
@@ -287,37 +287,37 @@ end ReceptionPair
    Tiers, utterances, and separate/fuse diagnostics
 ============================================================================== -/
 
-/-- The floor tier has no arrogation. -/
-theorem floor_has_no_arrogation :
-    ¬ Tier.hasArrogation G (Tier.floor : Tier G) :=
+/-- The floor tier has no nonzero share. -/
+theorem floor_has_no_nonzero_share :
+    ¬ Tier.hasNonzeroShare G (Tier.floor : Tier G) :=
   fun h => h
 
-/-- Act-time arrogation is exactly the live self-pole index predicate. -/
-theorem actTime_hasArrogation_iff_hasSelfPoleIndex (w : G.Weld) :
-    Tier.hasArrogation G (Tier.actTime w) ↔ G.HasSelfPoleIndex w :=
+/-- Act-time nonzero share is exactly the live self-pole index predicate. -/
+theorem actTime_hasNonzeroShare_iff_hasSelfPoleIndex (w : G.Weld) :
+    Tier.hasNonzeroShare G (Tier.actTime w) ↔ G.HasSelfPoleIndex w :=
   Iff.rfl
 
-/-- Share-zero act-time tiers have no arrogation. -/
-theorem not_actTime_hasArrogation_of_shareZero
+/-- Share-zero act-time tiers have no nonzero share. -/
+theorem not_actTime_hasNonzeroShare_of_shareZero
     {w : G.Weld} (h : G.share w = shareZero) :
-    ¬ Tier.hasArrogation G (Tier.actTime w) :=
+    ¬ Tier.hasNonzeroShare G (Tier.actTime w) :=
   G.no_self_pole_index_of_shareZero w h
 
 /-- Collapse is impossible at the floor. -/
 theorem not_collapse_floor (d : Distinction G) :
     ¬ d.Collapse (Tier.floor : Tier G) :=
-  fun hcollapse => G.floor_has_no_arrogation hcollapse.left
+  fun hcollapse => G.floor_has_no_nonzero_share hcollapse.left
 
-/-- Collapse carries its arrogation witness. -/
-theorem hasArrogation_of_collapse
+/-- Collapse carries its nonzero-share witness. -/
+theorem hasNonzeroShare_of_collapse
     {d : Distinction G} {t : Tier G} (h : d.Collapse t) :
-    Tier.hasArrogation G t :=
+    Tier.hasNonzeroShare G t :=
   h.left
 
-/-- Separation carries its arrogation witness. -/
-theorem hasArrogation_of_separated
+/-- Separation carries its nonzero-share witness. -/
+theorem hasNonzeroShare_of_separated
     {d : Distinction G} {t : Tier G} (h : d.Separated t) :
-    Tier.hasArrogation G t :=
+    Tier.hasNonzeroShare G t :=
   h.left
 
 /-- Separation rules out collapse at the same tier. -/
@@ -332,10 +332,10 @@ theorem fused_of_obeysSeparateFuse
     d.Fused t :=
   h.right t
 
-/-- Obeying the rule gives separation at every live-arrogation tier. -/
+/-- Obeying the rule gives separation at every live nonzero-share tier. -/
 theorem separated_of_obeysSeparateFuse
     {d : Distinction G} (h : d.ObeysSeparateFuse)
-    {t : Tier G} (ht : Tier.hasArrogation G t) :
+    {t : Tier G} (ht : Tier.hasNonzeroShare G t) :
     d.Separated t :=
   ⟨ht, h.left t ht⟩
 
@@ -343,7 +343,7 @@ theorem separated_of_obeysSeparateFuse
 theorem not_freeze_of_fused_floor
     {d : Distinction G} (h : d.Fused (Tier.floor : Tier G)) :
     ¬ d.Freeze :=
-  fun hfreeze => hfreeze (h G.floor_has_no_arrogation)
+  fun hfreeze => hfreeze (h G.floor_has_no_nonzero_share)
 
 namespace RecordedUtterance
 
@@ -363,14 +363,14 @@ end RecordedUtterance
 
 namespace ErrorGrade
 
-/-- Grammatical errors speak in the assertable voice. -/
-theorem grammatical_voice :
-    ErrorGrade.voice ErrorGrade.grammatical = VerdictVoice.assertable :=
+/-- Verdict errors speak in the assertable voice. -/
+theorem verdict_voice :
+    ErrorGrade.voice ErrorGrade.verdict = VerdictVoice.assertable :=
   rfl
 
-/-- Soteriological errors speak in the displayable voice. -/
-theorem soteriological_voice :
-    ErrorGrade.voice ErrorGrade.soteriological = VerdictVoice.displayable :=
+/-- Shortfall errors speak in the displayable voice. -/
+theorem shortfall_voice :
+    ErrorGrade.voice ErrorGrade.shortfall = VerdictVoice.displayable :=
   rfl
 
 end ErrorGrade

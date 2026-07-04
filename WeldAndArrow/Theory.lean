@@ -29,7 +29,7 @@ Design log
   visible by reading it. This is the positive-direction analogue of the
   paper's internal mis-feed discipline: the elaborator accepts the field
   residue and the stored tendency, but it is never given a stored owner.
-  `kenshō_not_held` in §2 turns this into an actual, if easy, theorem: a later
+  `share_independent_of_config` in §2 turns this into an actual, if easy, theorem: a later
   weld's share is *never* a function of any `Config`, because no such function
   exists anywhere in this signature for it to be one of.
 
@@ -100,7 +100,7 @@ def Incomparable [WeakOrder α] (a b : α) : Prop := ¬ a ≼ b ∧ ¬ b ≼ a
 
 /-- The bottom is a genuine, ATTAINED element — the terminus, share-zero
     (Theory: Attainment, "an interior pole"), comparable to everything
-    below it by fiat, exactly as a least-arrogated placement should be.
+    below it by fiat, exactly as a least self-driven placement should be.
     There is deliberately no dual `WeakOrderTop`: the solipsist is glossed
     in the source as an ASYMPTOTE ("the share tending to totality" — never
     reached, Theorems: Compound positions, "the grade's own asymptote"),
@@ -222,9 +222,9 @@ def HasSelfPoleIndex (w : G.Weld) : Prop := G.share w ≠ shareZero
     a concrete model supplied a decision procedure. -/
 def selfPoleIndex (w : G.Weld) (_h : G.HasSelfPoleIndex w) : G.Being := w.agent
 
-/-- Appropriation, in the thin formal sense needed downstream: a reception
+/-- WAA-appropriation, in the thin formal sense needed downstream: a reception
     has a live self-pole index exactly when the share is nonzero. -/
-def Appropriates (reception : G.Weld) : Prop := G.HasSelfPoleIndex reception
+def waa_Appropriates (reception : G.Weld) : Prop := G.HasSelfPoleIndex reception
 
 /-- Share-zero entails that no self-pole index is live. -/
 theorem no_self_pole_index_of_shareZero (w : G.Weld) (h : G.share w = shareZero) :
@@ -236,9 +236,9 @@ theorem selfPoleIndex_eq_agent_of_hasSelfPoleIndex
     (w : G.Weld) (h : G.HasSelfPoleIndex w) :
     G.selfPoleIndex w h = w.agent := rfl
 
-/-- At share-zero there is no appropriation. -/
-theorem no_appropriation_of_shareZero (w : G.Weld) (h : G.share w = shareZero) :
-    ¬ G.Appropriates w :=
+/-- At share-zero there is no WAA-appropriation. -/
+theorem no_waa_appropriation_of_shareZero (w : G.Weld) (h : G.share w = shareZero) :
+    ¬ G.waa_Appropriates w :=
   G.no_self_pole_index_of_shareZero w h
 
 /-- Sanity check: the determination is not secretly the probe. This holds
@@ -321,15 +321,15 @@ theorem no_self_pole_index_of_terminus_response
   G.no_self_pole_index_of_shareZero ⟨b, c, r⟩
     (G.shareZero_of_terminus_response hterm hresp)
 
-/-- A terminus response does not appropriate. -/
-theorem no_appropriation_of_terminus_response
+/-- A terminus response does not WAA-appropriate. -/
+theorem no_waa_appropriation_of_terminus_response
     {b : G.Being} {c : G.Call} {r : G.Response}
     (hterm : G.Terminus b) (hresp : G.respondsTo b c = some r) :
-    ¬ G.Appropriates ⟨b, c, r⟩ :=
-  G.no_appropriation_of_shareZero ⟨b, c, r⟩
+    ¬ G.waa_Appropriates ⟨b, c, r⟩ :=
+  G.no_waa_appropriation_of_shareZero ⟨b, c, r⟩
     (G.shareZero_of_terminus_response hterm hresp)
 
-/-- Genjō's two attested arrivals (Theory: Attainment): a being sits at the
+/-- The zero-share pole's two attested arrivals (Theory: Attainment): a being sits at the
     pole either by never mounting a response at all, or by mounting every
     response with nothing self-pole driving it. Phrased as `∨`, not as an
     iff or a case split, on purpose — the source is explicit these are
@@ -337,7 +337,7 @@ theorem no_appropriation_of_terminus_response
     forbids a third witness satisfying neither disjunct trivially (an
     ordinary partial-share agent), and nothing here forces the two
     disjuncts to be exclusive either. -/
-def AtGenjōPole (b : G.Being) : Prop := G.Stone b ∨ G.Terminus b
+def AtZeroSharePole (b : G.Being) : Prop := G.Stone b ∨ G.Terminus b
 
 /-- The function/share split is not vacuous in one easy direction: a stone
     is *vacuously* a terminus (there is nothing to check, since it never
@@ -417,33 +417,30 @@ variable {Contrib : Type} [WeakOrderBot Contrib] (G : Grid Contrib)
 def rePitch (_before : Config Contrib) (received : G.Weld) : Config Contrib :=
   { tendency := G.share received }
 
-/-- Kenshō: a per-call share-ceding event, priced as the scalar itself is
+/-- A strict share-drop event, priced as the scalar itself is
     priced — comparatively, not by how much (Theory: Attainment, "the
-    scalar priced as display"). A reception counts as kenshō against a
+    scalar priced as display"). A reception counts as a share-drop against a
     prior tendency when its share sits at or below that tendency in the
     order, and NOT at or above it — "markedly less claimed" read off `≼`
     alone, no subtraction, no measure. -/
-def IsKenshō (before : Config Contrib) (received : G.Weld) : Prop :=
+def IsShareDrop (before : Config Contrib) (received : G.Weld) : Prop :=
   G.share received ≼ before.tendency ∧ ¬ before.tendency ≼ G.share received
 
-/-- **Backsliding cannot be blocked, because nothing blocks it.** The
-    determination of a LATER weld's share never consults any `Config` —
+/-- The determination of a later weld's share never consults any `Config` —
     there is no function `Config Contrib → DriveComposition Contrib`
     anywhere in `Grid`'s signature for a later act to be constrained by.
-    In particular, `before` and `kensho` are both present as hypotheses
+    In particular, `before` and `first` are both present as hypotheses
     below and neither appears on the right-hand side of the equation: the
-    re-pitched configuration a kenshō produces plays no role in the value
+    re-pitched configuration a share-drop produces plays no role in the value
     of `G.share later`, for ANY later weld `later`, of the same being or
     otherwise. The proof is `rfl`, precisely because `share` was never
     defined in terms of `Config` to begin with; the intentionally unused
     binders are named with leading underscores for that reason. This is the
-    theorem `Theory.md` itself promises (Theory: Attainment, "Kenshō:
-    rungs on the grade" —
-    "post-kenshō backsliding ... falls out here as a theorem"): the being
-    loses no attainment because there was never a stored attainment for a
-    later act to be held to. -/
-theorem kenshō_not_held
-    (_before : Config Contrib) (_kensho later : G.Weld) :
+    theorem `Theory.md` itself promises: the later share is independent of
+    any prior configuration because the file stores no self-indexed
+    attainment for a later act to be held to. -/
+theorem share_independent_of_config
+    (_before : Config Contrib) (_first later : G.Weld) :
     G.share later = (G.driveOf later.agent later.call later.response).selfDriven :=
   rfl
 
@@ -492,16 +489,16 @@ def ObjectAxisStanding (deed : G.Weld) : Prop := ∃ reception, G.DeliveredTo de
 
 /-- A share-ceding landing, relative to the receiver's prior configuration.
     This is the local witness used by effectiveness talk; it asserts an
-    actual landing and a kenshō-typed reception, but no value. -/
-def LandsWithKenshō
+    actual landing and a share-drop reception, but no value. -/
+def LandsWithShareDrop
     (before : Config Contrib) (deed reception : G.Weld) : Prop :=
-  G.LandsAt deed reception ∧ G.IsKenshō before reception
+  G.LandsAt deed reception ∧ G.IsShareDrop before reception
 
 /-- A call/deed is effective relative to a prior receiver-configuration when
     at least one of its landings is share-ceding. This is intentionally only
     existential; no probability or measure is introduced. -/
 def EffectiveFor (before : Config Contrib) (deed : G.Weld) : Prop :=
-  ∃ reception, G.LandsWithKenshō before deed reception
+  ∃ reception, G.LandsWithShareDrop before deed reception
 
 /-- An ordinal effectiveness comparison: every share-ceding landing of the
     second deed can be matched by one of the first. This is a preorder-style
@@ -509,8 +506,8 @@ def EffectiveFor (before : Config Contrib) (deed : G.Weld) : Prop :=
 def AtLeastAsEffective
     (before : Config Contrib) (deed₁ deed₂ : G.Weld) : Prop :=
   ∀ reception₂,
-    G.LandsWithKenshō before deed₂ reception₂ →
-      ∃ reception₁, G.LandsWithKenshō before deed₁ reception₁
+    G.LandsWithShareDrop before deed₂ reception₂ →
+      ∃ reception₁, G.LandsWithShareDrop before deed₁ reception₁
 
 /-- A fixed/static responder gives the same response whenever it responds.
     This is only the response-shape; a clock that never responds to the
@@ -610,8 +607,8 @@ end Grid
    is practice" would be adding content the source explicitly declines to
    add ("its three cells are the three parts of one sentence ... not three
    agents"). The one Row-1 usage with real content is the DERIVED,
-   narrower sense — "genjō" as the grade's share-zero pole — and that one
-   already has a definition: `Grid.AtGenjōPole` in §1. Row 2 (kannō-sōe,
+   narrower sense — the grade's share-zero pole — and that one already has
+   a definition: `Grid.AtZeroSharePole` in §1. Row 2 (kannō-sōe,
    the grade) is the only row this file gives independent definitional
    content to, via `Grid.share`, which is exactly the source's own claim:
    "Row 2 still does exactly one thing, the adverb."
@@ -642,12 +639,10 @@ inductive Tier (G : Grid Contrib)
 
 variable (G : Grid Contrib)
 
-/-- Whether a tier still has arrogation for a distinction to separate over:
+/-- Whether a tier has nonzero share for a distinction to separate over:
     never at the floor (Proofs: "there is no agent and no fruit-for-anyone"
-    there), and not at an act-time tier whose weld is already share-zero
-    (Theory: Attainment, "fuse ... at genjō — the share-zero pole, no
-    arrogation left"). -/
-def Tier.hasArrogation : Tier G → Prop
+    there), and not at an act-time tier whose weld is already share-zero. -/
+def Tier.hasNonzeroShare : Tier G → Prop
   | .floor     => False
   | .actTime w => G.share w ≠ shareZero
 
@@ -706,19 +701,19 @@ structure Distinction (G : Grid Contrib) where
   sideA : language.Claim
   sideB : language.Claim
 
-/-- Fusion: at a tier with no arrogation left, the two sides of a
+/-- Fusion: at a tier with no nonzero share left, the two sides of a
     distinction are equivalent — read as the two sides becoming logically
     interchangeable rather than as either being individually false, which
     is the reading "held each at its tier, non-dual" (the fox's release,
     Theory: "One act through the grid") licenses. This is a real
     requirement, not a vacuous one: at `t = .floor` the antecedent
-    `¬ Tier.hasArrogation G .floor` is `¬ False`, i.e. always true, so `Fused .floor`
+    `¬ Tier.hasNonzeroShare G .floor` is `¬ False`, i.e. always true, so `Fused .floor`
     reduces to requiring `sideA .floor ↔ sideB .floor` unconditionally —
     exactly the non-duality the floor is supposed to make available, and
     exactly the content a genuinely doctrinal `Distinction` (not the
     trivial witness in the sanity example below) would have to earn. -/
 def Distinction.Fused {G : Grid Contrib} (d : Distinction G) (t : Tier G) : Prop :=
-  ¬ Tier.hasArrogation G t →
+  ¬ Tier.hasNonzeroShare G t →
     (d.language.TrueAt t d.sideA ↔ d.language.TrueAt t d.sideB)
 
 /-- Collapse: fusing a distinction WHERE IT SHOULD SEPARATE — asserting a
@@ -726,7 +721,7 @@ def Distinction.Fused {G : Grid Contrib} (d : Distinction G) (t : Tier G) : Prop
     The fox's shape (Theorems, "The fox: not-fall asserted conventionally
     — antinomianism"). -/
 def Distinction.Collapse {G : Grid Contrib} (d : Distinction G) (t : Tier G) : Prop :=
-  Tier.hasArrogation G t ∧
+  Tier.hasNonzeroShare G t ∧
     (d.language.TrueAt t d.sideA ↔ d.language.TrueAt t d.sideB)
 
 /-- Freeze: the rule's other violation — holding a distinction SEPARATE at
@@ -739,18 +734,18 @@ def Distinction.Freeze {G : Grid Contrib} (d : Distinction G) : Prop :=
     interchangeable. -/
 def Distinction.Separated {G : Grid Contrib} (d : Distinction G) (t : Tier G) :
     Prop :=
-  Tier.hasArrogation G t ∧
+  Tier.hasNonzeroShare G t ∧
     ¬ (d.language.TrueAt t d.sideA ↔ d.language.TrueAt t d.sideB)
 
 /-- A distinction obeys the separate/fuse rule when it separates wherever
-    arrogation is live and fuses wherever it is not. This is a property of
+    nonzero share is live and fuses wherever it is not. This is a property of
     concrete doctrinal distinctions, not an axiom imposed on every pair of
     arbitrary claims. -/
 def Distinction.ObeysSeparateFuse {G : Grid Contrib} (d : Distinction G) :
     Prop :=
-  (∀ t, Tier.hasArrogation G t →
+  (∀ t, Tier.hasNonzeroShare G t →
       ¬ (d.language.TrueAt t d.sideA ↔ d.language.TrueAt t d.sideB)) ∧
-  (∀ t, ¬ Tier.hasArrogation G t →
+  (∀ t, ¬ Tier.hasNonzeroShare G t →
       (d.language.TrueAt t d.sideA ↔ d.language.TrueAt t d.sideB))
 
 /-- The two voices of the system's diagnostics. -/
@@ -760,16 +755,16 @@ inductive VerdictVoice
 
 /-- The two grades of error described in the theorem file. -/
 inductive ErrorGrade
-  | grammatical
-  | soteriological
+  | verdict
+  | shortfall
 
 namespace ErrorGrade
 
 /-- Grade 1 verdicts are asserted inside the lens; Grade 2 verdicts are
     displayed without adding a value-command. -/
 def voice : ErrorGrade → VerdictVoice
-  | .grammatical => .assertable
-  | .soteriological => .displayable
+  | .verdict => .assertable
+  | .shortfall => .displayable
 
 end ErrorGrade
 
