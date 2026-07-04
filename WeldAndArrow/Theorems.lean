@@ -6,7 +6,7 @@
 
 This file keeps the theorem layer conservative. It imports the primitive
 signature and proves consequences that already follow from the definitions in
-`Theory.lean`: function/share facts, re-pitch facts, delivery/effectiveness
+`Theory.lean`: function/share facts, re-pitch facts, delivery/share-drop landing
 facts, actual-pair projections, and the separate/fuse diagnostics.
 -/
 
@@ -40,6 +40,13 @@ theorem not_ge_of_incomparable {a b : α} (h : Incomparable a b) :
     stands to the share-order — a strictness that appears away from the
     pole (Theory: Karma, "the arrow retyped"). -/
 def Directed (a b : α) : Prop := a ≼ b ∧ ¬ b ≼ a
+
+/-- Direction is strictness, and strictness is never reflexive: no element
+    is directed to itself. Where the system does directional work, the
+    irreflexivity falls out as a theorem rather than being posited, which is
+    why `conditions` owes no such axiom (see `Grid.DirectedConvention`). -/
+theorem not_directed_self (a : α) : ¬ Directed a a :=
+  fun h => h.right h.left
 
 /-- Order-equivalence kills direction. -/
 theorem not_directed_of_orderEq {a b : α} (h : OrderEq a b) :
@@ -105,20 +112,20 @@ theorem not_stone_of_response
   fun hstone => hstone c ⟨r, hresp⟩
 
 /-- A stone witnesses the stone side of the zero-share pole. -/
-theorem atZeroSharePole_of_stone (b : G.Being) (hstone : G.Stone b) :
-    G.AtZeroSharePole b :=
+theorem atPoleClass_of_stone (b : G.Being) (hstone : G.Stone b) :
+    G.AtPoleClass b :=
   Or.inl hstone
 
 /-- A terminus witnesses the terminus side of the zero-share pole. -/
-theorem atZeroSharePole_of_terminus (b : G.Being) (hterm : G.Terminus b) :
-    G.AtZeroSharePole b :=
+theorem atPoleClass_of_terminus (b : G.Being) (hterm : G.Terminus b) :
+    G.AtPoleClass b :=
   Or.inr hterm
 
 /-- A live terminus sits at the zero-share pole and is not stone-typed. -/
-theorem atZeroSharePole_and_not_stone_of_liveTerminus
+theorem atPoleClass_and_not_stone_of_liveTerminus
     (b : G.Being) (h : G.LiveTerminus b) :
-    G.AtZeroSharePole b ∧ ¬ G.Stone b :=
-  ⟨G.atZeroSharePole_of_terminus b h.right, G.liveTerminus_not_stone b h⟩
+    G.AtPoleClass b ∧ ¬ G.Stone b :=
+  ⟨G.atPoleClass_of_terminus b h.right, G.liveTerminus_not_stone b h⟩
 
 /-- A responsive terminus is not stone-typed whenever the call-domain has a witness. -/
 theorem not_stone_of_responsiveTerminus_of_call
@@ -169,150 +176,162 @@ theorem rePitch_tendency_atBot_of_terminus_response
    The environs lens
 ============================================================================== -/
 
-/-- A release-line is an environs-line. -/
-theorem environsLine_of_releaseLine
+namespace DirectedConvention
+
+/-- A share-drop line is an environs-line. -/
+theorem environsLine_of_shareDropLine
     {before : Config Contrib} {b : G.Being} {deed reception : G.Weld}
-    (h : G.ReleaseLine before b deed reception) :
-    G.EnvironsLine b deed reception :=
+    (h : ShareDropLine G before b deed reception) :
+    EnvironsLine G b deed reception :=
   h.left
 
-/-- A release-line's reception is share-ceding against the supplied
+/-- A share-drop line's reception is share-ceding against the supplied
     tendency. -/
-theorem isShareDrop_of_releaseLine
+theorem isShareDrop_of_shareDropLine
     {before : Config Contrib} {b : G.Being} {deed reception : G.Weld}
-    (h : G.ReleaseLine before b deed reception) :
+    (h : ShareDropLine G before b deed reception) :
     G.IsShareDrop before reception :=
   h.right
 
 /-- An environs-line is a delivery-fact. -/
 theorem deliveredTo_of_environsLine
     {b : G.Being} {deed reception : G.Weld}
-    (h : G.EnvironsLine b deed reception) :
-    G.DeliveredTo deed reception :=
+    (h : EnvironsLine G b deed reception) :
+    DeliveredTo G deed reception :=
   h.right.right
 
+end DirectedConvention
+
 /-- No reception is share-ceding against a pole-typed tendency: from
-    `before.tendency ≼ shareZero ≼ G.share received`, transitivity supplies
+    `before.tendency ≼ shareBot ≼ G.share received`, transitivity supplies
     exactly the comparison `IsShareDrop`'s second conjunct denies. -/
 theorem not_isShareDrop_of_tendency_atBot
     {before : Config Contrib} (h : AtBot before.tendency)
     (received : G.Weld) :
     ¬ G.IsShareDrop before received := by
   intro hdrop
-  exact hdrop.right (Preorder.le_trans h (shareZero_le (G.share received)))
+  exact hdrop.right (Preorder.le_trans h (shareBot_le (G.share received)))
 
 /-- Equality with the designated bottom is a thin bridge into the pole-class
     share-drop lemma. -/
-theorem not_isShareDrop_of_eq_shareZero_tendency
-    {before : Config Contrib} (h : before.tendency = shareZero)
+theorem not_isShareDrop_of_eq_shareBot_tendency
+    {before : Config Contrib} (h : before.tendency = shareBot)
     (received : G.Weld) :
     ¬ G.IsShareDrop before received :=
-  G.not_isShareDrop_of_tendency_atBot (atBot_of_eq_shareZero h) received
+  G.not_isShareDrop_of_tendency_atBot (atBot_of_eq_shareBot h) received
+
+namespace DirectedConvention
 
 /-- The lens goes quiet at the pole: an environs read against a pole-class
-    tendency contains no release-lines — nothing left to release, a
+    tendency contains no share-drop lines — nothing left to release, a
     feature of the reading, not a defect. -/
-theorem no_releaseLine_of_tendency_atBot
+theorem no_shareDropLine_of_tendency_atBot
     {before : Config Contrib} (h : AtBot before.tendency)
     (b : G.Being) (deed reception : G.Weld) :
-    ¬ G.ReleaseLine before b deed reception :=
+    ¬ ShareDropLine G before b deed reception :=
   fun hline =>
     G.not_isShareDrop_of_tendency_atBot h reception hline.right
 
 /-- Literal equality with the designated bottom gives the pole-class release
     obstruction. -/
-theorem no_releaseLine_of_eq_shareZero_tendency
-    {before : Config Contrib} (h : before.tendency = shareZero)
+theorem no_shareDropLine_of_eq_shareBot_tendency
+    {before : Config Contrib} (h : before.tendency = shareBot)
     (b : G.Being) (deed reception : G.Weld) :
-    ¬ G.ReleaseLine before b deed reception :=
-  G.no_releaseLine_of_tendency_atBot (atBot_of_eq_shareZero h) b deed reception
+    ¬ ShareDropLine G before b deed reception :=
+  no_shareDropLine_of_tendency_atBot G (atBot_of_eq_shareBot h) b deed reception
 
-/-- Bridge to effectiveness talk: a release-line whose reception is actual
-    witnesses the deed's effectiveness for that tendency. -/
-theorem effectiveFor_of_releaseLine_actual
+/-- Bridge to effectiveness talk as display: a share-drop line whose reception
+    is actual witnesses the deed's share-drop landing for that tendency. -/
+theorem hasShareDropLanding_of_shareDropLine_actual
     {before : Config Contrib} {b : G.Being} {deed reception : G.Weld}
-    (hline : G.ReleaseLine before b deed reception)
+    (hline : ShareDropLine G before b deed reception)
     (hact : G.Actual reception) :
-    G.EffectiveFor before deed :=
+    HasShareDropLanding G before deed :=
   ⟨reception, ⟨⟨hline.left.right.right, hact⟩, hline.right⟩⟩
 
+end DirectedConvention
+
 /- ==============================================================================
-   Delivery, reach-back, and effectiveness
+   Delivery, reach-back, and share-drop landing
 ============================================================================== -/
+
+namespace DirectedConvention
 
 /-- A full reach-back is the same field-side fact as delivery. -/
 theorem waa_reachBackFull_iff_deliveredTo (deed reception : G.Weld) :
-    G.waa_ReachBackFull deed reception ↔ G.DeliveredTo deed reception :=
+    waa_ReachBackFull G deed reception ↔ DeliveredTo G deed reception :=
   Iff.rfl
 
 /-- An aimed call is just delivery, stated from the sowing side. -/
 theorem waa_aimedAt_iff_deliveredTo (deed reception : G.Weld) :
-    G.waa_AimedAt deed reception ↔ G.DeliveredTo deed reception :=
+    waa_AimedAt G deed reception ↔ DeliveredTo G deed reception :=
   Iff.rfl
 
 /-- Landing includes delivery. -/
 theorem deliveredTo_of_landsAt
-    {deed reception : G.Weld} (h : G.LandsAt deed reception) :
-    G.DeliveredTo deed reception :=
+    {deed reception : G.Weld} (h : LandsAt G deed reception) :
+    DeliveredTo G deed reception :=
   h.left
 
 /-- Landing includes actuality of the reception. -/
 theorem actual_of_landsAt
-    {deed reception : G.Weld} (h : G.LandsAt deed reception) :
+    {deed reception : G.Weld} (h : LandsAt G deed reception) :
     G.Actual reception :=
   h.right
 
 /-- A share-drop landing includes an ordinary landing. -/
 theorem landsAt_of_landsWithShareDrop
     {before : Config Contrib} {deed reception : G.Weld}
-    (h : G.LandsWithShareDrop before deed reception) :
-    G.LandsAt deed reception :=
+    (h : LandsWithShareDrop G before deed reception) :
+    LandsAt G deed reception :=
   h.left
 
 /-- A share-drop landing includes the receiver-side share-drop judgement. -/
 theorem isShareDrop_of_landsWithShareDrop
     {before : Config Contrib} {deed reception : G.Weld}
-    (h : G.LandsWithShareDrop before deed reception) :
+    (h : LandsWithShareDrop G before deed reception) :
     G.IsShareDrop before reception :=
   h.right
 
 /-- A share-drop landing is delivered. -/
 theorem deliveredTo_of_landsWithShareDrop
     {before : Config Contrib} {deed reception : G.Weld}
-    (h : G.LandsWithShareDrop before deed reception) :
-    G.DeliveredTo deed reception :=
-  G.deliveredTo_of_landsAt (G.landsAt_of_landsWithShareDrop h)
+    (h : LandsWithShareDrop G before deed reception) :
+    DeliveredTo G deed reception :=
+  deliveredTo_of_landsAt G (landsAt_of_landsWithShareDrop G h)
 
 /-- A share-drop landing is received by an actual weld. -/
 theorem actual_of_landsWithShareDrop
     {before : Config Contrib} {deed reception : G.Weld}
-    (h : G.LandsWithShareDrop before deed reception) :
+    (h : LandsWithShareDrop G before deed reception) :
     G.Actual reception :=
-  G.actual_of_landsAt (G.landsAt_of_landsWithShareDrop h)
+  actual_of_landsAt G (landsAt_of_landsWithShareDrop G h)
 
-/-- Effectiveness gives an actual landing. -/
-theorem exists_landsAt_of_effectiveFor
+/-- Share-drop landing gives an actual landing. -/
+theorem exists_landsAt_of_hasShareDropLanding
     {before : Config Contrib} {deed : G.Weld}
-    (h : G.EffectiveFor before deed) :
-    ∃ reception, G.LandsAt deed reception :=
+    (h : HasShareDropLanding G before deed) :
+    ∃ reception, LandsAt G deed reception :=
   h.elim (fun reception hland =>
-    ⟨reception, G.landsAt_of_landsWithShareDrop hland⟩)
+    ⟨reception, landsAt_of_landsWithShareDrop G hland⟩)
 
-/-- Effectiveness gives an actual receiving weld. -/
-theorem exists_actual_reception_of_effectiveFor
+/-- Share-drop landing gives an actual receiving weld. -/
+theorem exists_actual_reception_of_hasShareDropLanding
     {before : Config Contrib} {deed : G.Weld}
-    (h : G.EffectiveFor before deed) :
+    (h : HasShareDropLanding G before deed) :
     ∃ reception, G.Actual reception :=
   h.elim (fun reception hland =>
-    ⟨reception, G.actual_of_landsWithShareDrop hland⟩)
+    ⟨reception, actual_of_landsWithShareDrop G hland⟩)
 
-/-- Effectiveness gives a receiver-side share-drop witness. -/
-theorem exists_shareDrop_reception_of_effectiveFor
+/-- Share-drop landing gives a receiver-side share-drop witness. -/
+theorem exists_shareDrop_reception_of_hasShareDropLanding
     {before : Config Contrib} {deed : G.Weld}
-    (h : G.EffectiveFor before deed) :
+    (h : HasShareDropLanding G before deed) :
     ∃ reception, G.IsShareDrop before reception :=
   h.elim (fun reception hland =>
-    ⟨reception, G.isShareDrop_of_landsWithShareDrop hland⟩)
+    ⟨reception, isShareDrop_of_landsWithShareDrop G hland⟩)
+
+end DirectedConvention
 
 /- ==============================================================================
    Actual pairs
@@ -334,7 +353,8 @@ theorem second_actual (p : ReceptionPair G) :
 
 /-- The pair's named relation is just delivery from first to second. -/
 theorem firstConditionsSecond_iff_deliveredTo (p : ReceptionPair G) :
-    p.FirstConditionsSecond ↔ G.DeliveredTo p.first.weld p.second.weld :=
+    p.FirstConditionsSecond ↔
+      DirectedConvention.DeliveredTo G p.first.weld p.second.weld :=
   Iff.rfl
 
 /-- The first re-pitch in a pair sequence carries the first weld's share. -/
@@ -355,44 +375,44 @@ end ReceptionPair
    Tiers, utterances, and separate/fuse diagnostics
 ============================================================================== -/
 
-/-- The floor tier has no nonzero share. -/
-theorem floor_has_no_nonzero_share :
-    ¬ Tier.hasNonzeroShare G (Tier.floor : Tier G) :=
+/-- The floor tier has no live share. -/
+theorem floor_has_no_live_share :
+    ¬ Tier.hasLiveShare G (Tier.floor : Tier G) :=
   fun h => h
 
-/-- Act-time nonzero share is exactly the live self-pole index predicate. -/
-theorem actTime_hasNonzeroShare_iff_hasSelfPoleIndex (w : G.Weld) :
-    Tier.hasNonzeroShare G (Tier.actTime w) ↔ G.HasSelfPoleIndex w :=
+/-- Act-time live share is exactly the live self-pole index predicate. -/
+theorem actTime_hasLiveShare_iff_hasSelfPoleIndex (w : G.Weld) :
+    Tier.hasLiveShare G (Tier.actTime w) ↔ G.HasSelfPoleIndex w :=
   Iff.rfl
 
-/-- Pole-class act-time tiers have no nonzero share. -/
-theorem not_actTime_hasNonzeroShare_of_atBot
+/-- Pole-class act-time tiers have no live share. -/
+theorem not_actTime_hasLiveShare_of_atBot
     {w : G.Weld} (h : AtBot (G.share w)) :
-    ¬ Tier.hasNonzeroShare G (Tier.actTime w) :=
+    ¬ Tier.hasLiveShare G (Tier.actTime w) :=
   G.no_self_pole_index_of_atBot w h
 
 /-- Equality with the designated bottom is a bridge into the pole-class
     act-time lemma. -/
-theorem not_actTime_hasNonzeroShare_of_eq_shareZero
-    {w : G.Weld} (h : G.share w = shareZero) :
-    ¬ Tier.hasNonzeroShare G (Tier.actTime w) :=
-  G.not_actTime_hasNonzeroShare_of_atBot (atBot_of_eq_shareZero h)
+theorem not_actTime_hasLiveShare_of_eq_shareBot
+    {w : G.Weld} (h : G.share w = shareBot) :
+    ¬ Tier.hasLiveShare G (Tier.actTime w) :=
+  G.not_actTime_hasLiveShare_of_atBot (atBot_of_eq_shareBot h)
 
 /-- Collapse is impossible at the floor. -/
 theorem not_collapse_floor (d : Distinction G) :
     ¬ d.Collapse (Tier.floor : Tier G) :=
-  fun hcollapse => G.floor_has_no_nonzero_share hcollapse.left
+  fun hcollapse => G.floor_has_no_live_share hcollapse.left
 
-/-- Collapse carries its nonzero-share witness. -/
-theorem hasNonzeroShare_of_collapse
+/-- Collapse carries its live-share witness. -/
+theorem hasLiveShare_of_collapse
     {d : Distinction G} {t : Tier G} (h : d.Collapse t) :
-    Tier.hasNonzeroShare G t :=
+    Tier.hasLiveShare G t :=
   h.left
 
-/-- Separation carries its nonzero-share witness. -/
-theorem hasNonzeroShare_of_separated
+/-- Separation carries its live-share witness. -/
+theorem hasLiveShare_of_separated
     {d : Distinction G} {t : Tier G} (h : d.Separated t) :
-    Tier.hasNonzeroShare G t :=
+    Tier.hasLiveShare G t :=
   h.left
 
 /-- Separation rules out collapse at the same tier. -/
@@ -407,10 +427,10 @@ theorem fused_of_obeysSeparateFuse
     d.Fused t :=
   h.right t
 
-/-- Obeying the rule gives separation at every live nonzero-share tier. -/
+/-- Obeying the rule gives separation at every live-share tier. -/
 theorem separated_of_obeysSeparateFuse
     {d : Distinction G} (h : d.ObeysSeparateFuse)
-    {t : Tier G} (ht : Tier.hasNonzeroShare G t) :
+    {t : Tier G} (ht : Tier.hasLiveShare G t) :
     d.Separated t :=
   ⟨ht, h.left t ht⟩
 
@@ -418,7 +438,7 @@ theorem separated_of_obeysSeparateFuse
 theorem not_freeze_of_fused_floor
     {d : Distinction G} (h : d.Fused (Tier.floor : Tier G)) :
     ¬ d.Freeze :=
-  fun hfreeze => hfreeze (h G.floor_has_no_nonzero_share)
+  fun hfreeze => hfreeze (h G.floor_has_no_live_share)
 
 namespace RecordedUtterance
 

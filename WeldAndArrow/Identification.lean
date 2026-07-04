@@ -80,16 +80,18 @@ theorem no_agent_recovery_from_same_call_response
    §2  Sower/reaper, reach-back, and WAA-ownership-face
 ============================================================================== -/
 
+namespace DirectedConvention
+
 /-- The field-side report-face of "the sower reaps": the delivery line, before
     any act-time ownership is added. -/
 def waa_ReportFace (deed reception : G.Weld) : Prop :=
-  G.DeliveredTo deed reception
+  DeliveredTo G deed reception
 
 /-- The full WAA-ownership-face: delivery reaches an actual reception and that
     reception WAA-appropriates. It is a deed at reception-time, not a standing
     relation. -/
 def waa_OwnershipFace (deed reception : G.Weld) : Prop :=
-  G.LandsAt deed reception ∧ G.waa_Appropriates reception
+  LandsAt G deed reception ∧ G.waa_Appropriates reception
 
 /-- The source's vacuous reach-back ("an appropriating with nothing arrived
     to appropriate — not a falsehood ... but vacuous"): an actual,
@@ -97,56 +99,58 @@ def waa_OwnershipFace (deed reception : G.Weld) : Prop :=
     vacuity is a property of this three-conjunct face; bare non-delivery
     alone is `NotDeliveredTo` and carries no appropriation. -/
 def waa_VacuousOwnershipFace (deed reception : G.Weld) : Prop :=
-  G.NotDeliveredTo deed reception ∧ G.Actual reception ∧ G.waa_Appropriates reception
+  NotDeliveredTo G deed reception ∧ G.Actual reception ∧ G.waa_Appropriates reception
 
 /-- The WAA-ownership-face includes the report-face. -/
 theorem waa_reportFace_of_waa_ownershipFace
-    {deed reception : G.Weld} (h : G.waa_OwnershipFace deed reception) :
-    G.waa_ReportFace deed reception :=
+    {deed reception : G.Weld} (h : waa_OwnershipFace G deed reception) :
+    waa_ReportFace G deed reception :=
   h.left.left
 
 /-- The WAA-ownership-face includes actual reception. -/
 theorem actual_of_waa_ownershipFace
-    {deed reception : G.Weld} (h : G.waa_OwnershipFace deed reception) :
+    {deed reception : G.Weld} (h : waa_OwnershipFace G deed reception) :
     G.Actual reception :=
   h.left.right
 
 /-- The WAA-ownership-face includes WAA-appropriation at reception-time. -/
 theorem waa_appropriation_of_waa_ownershipFace
-    {deed reception : G.Weld} (h : G.waa_OwnershipFace deed reception) :
+    {deed reception : G.Weld} (h : waa_OwnershipFace G deed reception) :
     G.waa_Appropriates reception :=
   h.right
 
 /-- Full landing plus WAA-appropriation introduces the WAA-ownership-face. -/
 theorem waa_ownershipFace_intro
     {deed reception : G.Weld}
-    (hland : G.LandsAt deed reception) (happ : G.waa_Appropriates reception) :
-    G.waa_OwnershipFace deed reception :=
+    (hland : LandsAt G deed reception) (happ : G.waa_Appropriates reception) :
+    waa_OwnershipFace G deed reception :=
   ⟨hland, happ⟩
 
 /-- Bare non-delivery cannot at the same time be a full WAA-ownership-face for
     that deed and reception. -/
 theorem not_waa_ownershipFace_of_vacuous
-    {deed reception : G.Weld} (hv : G.NotDeliveredTo deed reception) :
-    ¬ G.waa_OwnershipFace deed reception :=
+    {deed reception : G.Weld} (hv : NotDeliveredTo G deed reception) :
+    ¬ waa_OwnershipFace G deed reception :=
   fun hown => hv hown.left.left
 
 /-- A vacuous WAA-ownership attempt is not a full WAA-ownership-face. -/
 theorem not_waa_ownershipFace_of_waa_vacuousOwnershipFace
-    {deed reception : G.Weld} (hv : G.waa_VacuousOwnershipFace deed reception) :
-    ¬ G.waa_OwnershipFace deed reception :=
-  G.not_waa_ownershipFace_of_vacuous hv.left
+    {deed reception : G.Weld} (hv : waa_VacuousOwnershipFace G deed reception) :
+    ¬ waa_OwnershipFace G deed reception :=
+  not_waa_ownershipFace_of_vacuous G hv.left
 
 /-- The diachronic whose-question decomposes into delivery plus fresh
     WAA-appropriation; no third cross-gap owner is part of this definition. -/
 def waa_DiachronicWhose (deed reception : G.Weld) : Prop :=
-  G.DeliveredTo deed reception ∧ G.waa_Appropriates reception
+  DeliveredTo G deed reception ∧ G.waa_Appropriates reception
 
 theorem waa_diachronicWhose_iff_delivery_and_waa_appropriation
     (deed reception : G.Weld) :
-    G.waa_DiachronicWhose deed reception ↔
-      G.DeliveredTo deed reception ∧ G.waa_Appropriates reception :=
+    waa_DiachronicWhose G deed reception ↔
+      DeliveredTo G deed reception ∧ G.waa_Appropriates reception :=
   Iff.rfl
+
+end DirectedConvention
 
 /- ==============================================================================
    §2  Token-reflexivity
@@ -178,10 +182,10 @@ theorem stateToolFits_of_atBot
 
 /-- Literal equality with the designated bottom is a bridge into the
     pole-class pole-typing corollary. -/
-theorem stateToolFits_of_eq_shareZero
-    {w : G.Weld} (hshare : G.share w = shareZero) :
+theorem stateToolFits_of_eq_shareBot
+    {w : G.Weld} (hshare : G.share w = shareBot) :
     G.StateToolFits w :=
-  G.stateToolFits_of_atBot (atBot_of_eq_shareZero hshare)
+  G.stateToolFits_of_atBot (atBot_of_eq_shareBot hshare)
 
 /-- With decidability of the one pole-class comparison, pole-typing can be
     read as an iff: the state-tool fits just where the share is at the
@@ -207,11 +211,15 @@ theorem stateToolFits_of_terminus_response
     G.StateToolFits ⟨b, c, r⟩ :=
   G.no_self_pole_index_of_terminus_response hterm hresp
 
+namespace DirectedConvention
+
 /-- If the state-tool fits a reception, the WAA-ownership-face cannot fire there. -/
 theorem no_waa_ownershipFace_of_stateToolFits
     {deed reception : G.Weld} (hfits : G.StateToolFits reception) :
-    ¬ G.waa_OwnershipFace deed reception :=
+    ¬ waa_OwnershipFace G deed reception :=
   fun hown => hfits hown.right
+
+end DirectedConvention
 
 -- The paper's "a mis-feed at the floor is not a claim" verdict is carried
 -- by `not_collapse_floor`; no separate theorem restates it.
@@ -248,22 +256,22 @@ namespace waa_OwnershipOffice
 
 variable {Contrib : Type} [PreorderBot Contrib] {G : Grid Contrib}
 
-/-- Each office is discharged at a weld's act-time tier (the office
+/-- Each office is assigned to a weld's act-time tier (the office
     argument is unused). The paper's further claim — discharged *not by a
     cross-gap state* — is architectural, carried by what `Config` does not
-    contain and by the absence of any `Config`-consuming discharge
+    contain and by the absence of any `Config`-consuming assignment
     function; it is not this definition's proposition. -/
-def dischargeTier (_office : waa_OwnershipOffice) (w : G.Weld) : Grid.Tier G :=
+def assignedTier (_office : waa_OwnershipOffice) (w : G.Weld) : Grid.Tier G :=
   Grid.Tier.actTime w
 
-theorem dischargeTier_actTime (office : waa_OwnershipOffice) (w : G.Weld) :
-    office.dischargeTier w = Grid.Tier.actTime w := rfl
+example (office : waa_OwnershipOffice) (w : G.Weld) :
+    office.assignedTier w = Grid.Tier.actTime w := rfl
 
-/-- Discharging an office at act-time has exactly the weld's live nonzero-share
+/-- Assigning an office to act-time has exactly the weld's live-share
     condition. -/
-theorem dischargeTier_hasNonzeroShare_iff
+example
     (office : waa_OwnershipOffice) (w : G.Weld) :
-    Grid.Tier.hasNonzeroShare G (office.dischargeTier w) ↔
+    Grid.Tier.hasLiveShare G (office.assignedTier w) ↔
       G.HasSelfPoleIndex w :=
   Iff.rfl
 
