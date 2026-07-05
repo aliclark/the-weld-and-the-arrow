@@ -130,8 +130,18 @@ ladder climb without an added stability premise above the seed. The "completed
 ladder" remains an instructive absence: level quantification appears only in
 meta-theorems such as `ladder_obeys`, `no_level_final`, and the existential
 guard `no_final_level`. Concrete witnesses such as
-`shareZero_not_functionZero_witness`, `rung_not_pole_witness`, and
-`standing_does_not_determine_dated` keep the row anchors model-checked.
+`shareZero_not_functionZero_witness`, `rung_not_pole_witness`,
+`backsliding_witness`, `backsliding_rePitchSequence_witness`,
+`standing_does_not_determine_dated`, `subitism_possibility_witness`,
+`cetana_grading_tracks_weld_not_field_witness`,
+`cetana_live_share_without_object_standing_witness`, and the
+`registerClock_staticized_*` checks keep the row anchors model-checked.
+`standing_does_not_determine_dated` and `subitism_possibility_witness` share
+the same clock-grid witness deliberately: the first serves the disposition/act
+retype, while the second names the sudden/gradual possibility claim.
+`withRespondsTo` and `staticized` are the futility operation: delivery-loss is
+real (`futility_delivery_loss_real`) while object-axis standing is unchanged
+(`Grid.DirectedConvention.staticized_objectAxisStanding_iff`).
 
 C.3 Meta/Invariance.lean and Meta/InvarianceNegative.lean
 
@@ -193,13 +203,21 @@ adding probability, utility, or a command register. `ObjectiveNegative` reuses
 the merge/split being-convention pattern to show that "my drops" is not a
 function of grid data alone.
 
-`rePitch_forgets` and
+`backsliding_witness` gives the direct same-grid shape: a share-drop reception
+to the pole-class followed by a later actual live-share weld by the same
+being. `backsliding_rePitchSequence_witness` routes the same shape through
+`ReceptionPair.rePitchSequence`. `rePitch_forgets` and
 `accumulated_attainment_constant_of_same_final` restate backsliding in the form
 a maximizer needs: no accumulated attainment variable is stored in `Config`.
 `TransferNegative` records the adaptive track-record obstruction and the
-`ResponseInvariant` contrast case. `grade_independent_of_conditions` keeps the
-cetana claim at signature level: grade and share do not consume downstream
-delivery conditions. `DeliveryArrogationNegative` instantiates the
+`ResponseInvariant` contrast case. `grade_independent_of_conditions` and
+`share_independent_of_conditions` keep the cetana claim at signature level:
+grade and share do not consume downstream delivery conditions. The concrete
+cetana witnesses are `cetana_grading_tracks_weld_not_field_witness` (same
+field residue, different share) and
+`cetana_live_share_without_object_standing_witness` (live share where standing
+fails). The AN 6.63 correlation itself and the comparative no-common-event
+reading remain prose-bound. `DeliveryArrogationNegative` instantiates the
 `ClaimLanguage` machinery for a command-shaped delivery claim and checks that a
 recorded plan fails `FitsOfferedTier` where delivery is absent.
 

@@ -266,6 +266,13 @@ register; delivery follows that hand-off. `registerClockCoarsening` merges the
 fine registers into one macro tag at diagnosis-time. The checked facts are
 `registerClock_macro_sentient` and `registerClock_macro_selfConditioning`.
 
+**`backslideGrid` and `gradingCollisionGrid`.** `backslideGrid` has one being
+answering a gentle call at share `0` and a harsh call at share `5`, giving the
+concrete carrier for the same-being backsliding witnesses.
+`gradingCollisionGrid` has two actual welds with the same call-response residue
+and different shares, giving the concrete carrier for the cetana field-residue
+witness.
+
 ---
 
 ## 2. Consequences and Taxonomy (`Consequences/Basic.lean`, `Consequences/Taxonomy.lean`, `Consequences/Ladder.lean`, `Consequences/ContentRows.lean`)
@@ -291,6 +298,18 @@ re-pitched tendency for `share received`.
 `not_before_le_rePitch_tendency_of_shareDrop` project the two conjuncts of
 `IsShareDrop`. `rePitch_tendency_atBot_of_terminus_response` sends a terminus
 response into the pole-class.
+
+**Conditions and response replacement.** `withConditions` replaces only the
+delivery relation. Its `withConditions_respondsTo`, `withConditions_grade`, and
+`withConditions_share` lemmas are definitional, and
+`grade_independent_of_conditions` / `share_independent_of_conditions` state the
+cetana anchor: grade and share are blind to downstream delivery. Dually,
+`withRespondsTo` replaces only the response function; `withRespondsTo_grade`,
+`withRespondsTo_share`, and `withRespondsTo_conditions` are definitional.
+`staticized b` removes the responses of one being and leaves grade and delivery
+in place. The futility facts are `futility_delivery_loss_real`,
+`staticized_responseInvariant`, `futility_object_axis_subtraction_nil`, and
+`Grid.DirectedConvention.staticized_objectAxisStanding_iff`.
 
 **The environs lens.** The directional theorem block lives under
 `Grid.DirectedConvention`.
@@ -386,6 +405,17 @@ hypothesis-free statements; their `*_obeys` names carry the stability
 hypothesis. `tableOrder` records the full table shape as Lean data: sixteen
 schema rows, one ladder row, and six prose rows.
 
+**Concrete consequence witnesses.** The small model checks now include
+`shareZero_not_functionZero_witness`, `rung_not_pole_witness`,
+`backsliding_witness`, `backsliding_rePitchSequence_witness`,
+`standing_does_not_determine_dated`, `subitism_possibility_witness`,
+`cetana_grading_tracks_weld_not_field_witness`,
+`cetana_live_share_without_object_standing_witness`,
+`registerClock_staticized_zero_stone`,
+`registerClock_staticized_objectAxisStanding_iff`, and
+`pole_tier_buddha_inhabited`. These are witness assemblies over the concrete
+grids, mostly by unfolding and `decide`.
+
 **Content-bearing rows.** `contentLayerLanguage` uses the same `LayerClaim`
 syntax but gives content to denials: no strict direction, all beings stone, or
 no live tier anywhere. `contentBeforeAfterRow`, `contentBeingsRow`, and
@@ -454,10 +484,14 @@ that "my drops" is not a function of grid data alone.
 `rePitch_forgets` and
 `accumulated_attainment_constant_of_same_final` restate backsliding in the form
 a maximizer needs: no accumulated attainment variable is stored in `Config`.
+`backsliding_witness` and `backsliding_rePitchSequence_witness` give the
+same-grid same-being witness form directly.
 `TransferNegative` records the adaptive track-record obstruction and the
-`ResponseInvariant` contrast case. `grade_independent_of_conditions` keeps the
-cetana claim at signature level: grade and share do not consume downstream
-delivery conditions. `DeliveryArrogationNegative` instantiates the
+`ResponseInvariant` contrast case. `grade_independent_of_conditions` and
+`share_independent_of_conditions` keep the cetana claim at signature level:
+grade and share do not consume downstream delivery conditions; the two concrete
+cetana witnesses check same-field/different-share and live-share/no-standing
+cases. `DeliveryArrogationNegative` instantiates the
 `ClaimLanguage` machinery for a command-shaped delivery claim and checks that a
 recorded plan fails `FitsOfferedTier` where delivery is absent.
 
@@ -753,12 +787,11 @@ display-reparameterization transport lemmas.
 
 The conditional impossibility results are the agent-recovery theorems, the
 direction negative witness, the being-boundary negative witness, and the
-sraddha orthogonality witness. The
-concrete model results are `clockGrid` and `registerClockGrid`: the first
-exhibits a `Stone` and a non-stone `Terminus` in one finite grid; the second
-exhibits a diagnosis-time macro coarsening over internal registers. The
-self-line witness is a permission witness, not an existence claim about any
-real regime.
+sraddha orthogonality witness. The concrete model results include `clockGrid`,
+`registerClockGrid`, `backslideGrid`, and `gradingCollisionGrid`: they witness,
+respectively, function/share splitting, diagnosis-time macro coarsening,
+same-being backsliding, and same-field/different-share grading. The self-line
+witness is a permission witness, not an existence claim about any real regime.
 
 One structural caution remains: `Terminus` is vacuously true of every `Stone`;
 use `LiveTerminus` or `ResponsiveTerminus` when non-vacuous response-function

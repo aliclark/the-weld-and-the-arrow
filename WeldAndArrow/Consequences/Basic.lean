@@ -176,7 +176,8 @@ theorem withConditions_share
   rfl
 
 /-- Changing only `conditions` cannot change the grade assigned to a mounted
-    response. -/
+    response. This is the formal anchor for the cetana correlation at
+    signature level: grade is blind to downstream delivery facts. -/
 theorem grade_independent_of_conditions
     (conditions₁ conditions₂ : G.Weld -> G.Weld -> Prop)
     (b : G.Being) (c : G.Call) (r : G.Response) :
@@ -184,12 +185,100 @@ theorem grade_independent_of_conditions
       (G.withConditions conditions₂).grade b c r :=
   rfl
 
-/-- The same check at the weld/share projection. -/
+/-- The same cetana anchor at the weld/share projection: what is graded is the
+    weld's agent-call-response composition, not the later delivery relation. -/
 theorem share_independent_of_conditions
     (conditions₁ conditions₂ : G.Weld -> G.Weld -> Prop) (w : G.Weld) :
     (G.withConditions conditions₁).share w =
       (G.withConditions conditions₂).share w :=
   rfl
+
+/- ==============================================================================
+   Response-function replacement and futility
+============================================================================== -/
+
+/-- Replace only the response function of a grid. Grade and delivery data are
+    left untouched. The futility mechanism's carrier: adaptive-to-static
+    conversion is one instance. -/
+def withRespondsTo (respondsTo' : G.Being -> G.Call -> Option G.Response) :
+    Grid Contrib where
+  Being      := G.Being
+  Call       := G.Call
+  Response   := G.Response
+  respondsTo := respondsTo'
+  grade      := G.grade
+  conditions := G.conditions
+
+@[simp]
+theorem withRespondsTo_grade
+    (respondsTo' : G.Being -> G.Call -> Option G.Response)
+    (b : G.Being) (c : G.Call) (r : G.Response) :
+    (G.withRespondsTo respondsTo').grade b c r = G.grade b c r :=
+  rfl
+
+@[simp]
+theorem withRespondsTo_share
+    (respondsTo' : G.Being -> G.Call -> Option G.Response) (w : G.Weld) :
+    (G.withRespondsTo respondsTo').share w = G.share w :=
+  rfl
+
+@[simp]
+theorem withRespondsTo_conditions
+    (respondsTo' : G.Being -> G.Call -> Option G.Response) :
+    (G.withRespondsTo respondsTo').conditions = G.conditions :=
+  rfl
+
+/-- Death of one being, futility-theorem sense: its response function is
+    removed; nothing else in the grid moves. -/
+def staticized [DecidableEq G.Being] (b : G.Being) : Grid Contrib :=
+  G.withRespondsTo (fun b' c => if b' = b then none else G.respondsTo b' c)
+
+/-- Staticizing leaves other beings' response functions untouched. -/
+theorem staticized_respondsTo_of_ne
+    [DecidableEq G.Being] {b b' : G.Being} (h : b' ≠ b) (c : G.Call) :
+    (G.staticized b).respondsTo b' c = G.respondsTo b' c := by
+  simp [staticized, withRespondsTo, h]
+
+/-- Staticizing leaves all prior share assignments untouched. -/
+theorem staticized_share
+    [DecidableEq G.Being] (b : G.Being) (w : G.Weld) :
+    (G.staticized b).share w = G.share w :=
+  rfl
+
+/-- Staticizing turns the named being into a response-invariant device
+    vacuously: no call receives a response from it. -/
+theorem staticized_responseInvariant
+    [DecidableEq G.Being] (b : G.Being) :
+    (G.staticized b).ResponseInvariant b := by
+  intro c₁ _c₂ r₁ _r₂ h₁ _h₂
+  simp [staticized, withRespondsTo] at h₁
+
+/-- Futility, delivery-loss face: after staticization, the named being mounts
+    no response. -/
+theorem futility_delivery_loss_real
+    [DecidableEq G.Being] (b : G.Being) :
+    (G.staticized b).Stone b := by
+  intro c hmount
+  rcases hmount with ⟨r, hr⟩
+  simp [staticized, withRespondsTo] at hr
+
+/-- Futility, object-axis face: staticization does not alter the delivery
+    relation. -/
+theorem futility_object_axis_subtraction_nil
+    [DecidableEq G.Being] (b : G.Being) :
+    (G.staticized b).conditions = G.conditions :=
+  rfl
+
+namespace DirectedConvention
+
+/-- Object-axis standing is unchanged by staticization, because it reads only
+    the delivery relation. -/
+theorem staticized_objectAxisStanding_iff
+    [DecidableEq G.Being] (b : G.Being) (deed : G.Weld) :
+    ObjectAxisStanding (G.staticized b) deed ↔ ObjectAxisStanding G deed :=
+  Iff.rfl
+
+end DirectedConvention
 
 /- ==============================================================================
    Accumulation: `rePitch` has no history register

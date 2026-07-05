@@ -102,6 +102,57 @@ theorem registerClock_macro_selfConditioning :
     rfl, rfl, rfl, ?_⟩
   rfl
 
+/- --------------------------------------------------------------------------
+   Third concrete display — backsliding in one grid
+
+   A single being answers both calls. The gentle call drops to the pole-class;
+   the harsh call later carries live share again. Nothing in the grid stores
+   the prior drop as an attainment.
+-------------------------------------------------------------------------- -/
+
+inductive Cue
+  | gentle
+  | harsh
+
+def backslideGrid : Grid Nat where
+  Being      := Unit
+  Call       := Cue
+  Response   := Unit
+  respondsTo _ _ := some ()
+  grade _ c _ :=
+    match c with
+    | .gentle => 0
+    | .harsh => 5
+  conditions _ _ := True
+
+/- --------------------------------------------------------------------------
+   Fourth concrete display — grading is weld-side, not field-residue side
+
+   The two actual welds share the same call-response residue while receiving
+   different shares. The event residue alone therefore cannot carry the grade.
+-------------------------------------------------------------------------- -/
+
+inductive GradingCollisionBeing
+  | left
+  | right
+
+def gradingCollisionGrid : Grid Nat where
+  Being      := GradingCollisionBeing
+  Call       := Unit
+  Response   := Unit
+  respondsTo _ _ := some ()
+  grade b _ _ :=
+    match b with
+    | .left => 5
+    | .right => 0
+  conditions _ _ := True
+
+def gradingCollisionLeft : gradingCollisionGrid.Weld :=
+  ⟨GradingCollisionBeing.left, (), ()⟩
+
+def gradingCollisionRight : gradingCollisionGrid.Weld :=
+  ⟨GradingCollisionBeing.right, (), ()⟩
+
 /- `clockGrid` is a genuine, finite, computable term of type `Grid Nat` —
     direct evidence that "a model of the theory" is a buildable Lean
     object, and that facts about a concrete instance are provable at
