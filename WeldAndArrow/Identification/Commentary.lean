@@ -29,7 +29,8 @@ tier-placement vocabulary. `Grid.DirectedConvention` marks vocabulary that
 consumes the directional reading of `conditions`; the primitive signature itself
 does not add asymmetry, irreflexivity, or transitivity axioms to `conditions`.
 
-C.1 Signature/Order.lean, Signature/Grid.lean, Signature/Claims.lean
+C.1 Signature/Order.lean, Signature/Grid.lean, Signature/BeingConvention.lean,
+    Signature/Models.lean, Signature/Claims.lean
 
 `Config` is the formal place where "nothing self-indexed is stored" is enforced:
 it carries only a `Contrib`-valued tendency and no owner, being, or weld field.
@@ -73,22 +74,25 @@ on a prior configuration, even though the current simple implementation depends
 only on the received weld. `IsShareDrop` is the strict order comparison
 `Strict (G.share received) before.tendency`.
 
-The `BeingConvention` namespace records the reading in which fine tags may be
+`Signature/BeingConvention.lean` records the reading in which fine tags may be
 diagnosed as macro beings. Its examples accommodate the paper's sentient,
 hare's-horn, buddha, and generated-boundary cases without adding a privileged
-partition to `Grid`.
+partition to `Grid`. `Signature/Models.lean` holds the concrete clock and
+register-clock witnesses consumed by later taxonomy checks.
 
 The separate/fuse interface (`ClaimLanguage`, `Distinction`,
 `RecordedUtterance`, `Tier`) is the small formal surface needed for the fox,
 Baizhang, shō/shu, genjō, and verdict-tier discussions. The formal module keeps
 only the abstract interface; this commentary retains the textual motivation.
 
-C.2 Consequences/Basic.lean and Consequences/Taxonomy.lean
+C.2 Consequences/Basic.lean, Consequences/Taxonomy.lean,
+    Consequences/Ladder.lean, and Consequences/ContentRows.lean
 
 The consequence layer proves neutral facts about the definitions: function/share
 facts, share-drop obstruction at the pole, delivery and landing projections, and
-tier diagnostics. The generated table rows live in `Consequences/Taxonomy.lean`
-because their statements consume the neutral separate/fuse interface. The paper's
+tier diagnostics. The generated table rows live in `Consequences/Taxonomy.lean`;
+the re-emptying machinery lives in `Consequences/Ladder.lean`; and the
+content-bearing layer rows live in `Consequences/ContentRows.lean`. The paper's
 readings of these facts live here as commentary only; the theorem statements
 consume only the neutral definitions.
 
@@ -129,7 +133,7 @@ guard `no_final_level`. Concrete witnesses such as
 `shareZero_not_functionZero_witness`, `rung_not_pole_witness`, and
 `standing_does_not_determine_dated` keep the row anchors model-checked.
 
-C.3 Meta/Invariance.lean
+C.3 Meta/Invariance.lean and Meta/InvarianceNegative.lean
 
 `DisplayReparam` is the admission criterion for predicates that mention the
 contribution carrier: they must transport across order-preserving and
@@ -137,9 +141,14 @@ pole-preserving changes of display convention. This is the formal counterpart
 of treating contribution values as display conventions rather than operational
 tokens.
 
-The `InvarianceNegative` example explains why equality with the chosen bottom
-is not the system predicate: equality-to-bottom fails to transport, while
-`AtBot` and `Terminus` do.
+The condition-transpose operation and its being-coarsening companion now live in
+the signature layer, beside the `conditions`, `DeliveredTo`, and
+`BeingCoarsening` vocabulary they transport. `Meta/Invariance.lean` remains the
+central home for `DisplayReparam` and all `map_*` transport lemmas.
+
+`Meta/InvarianceNegative.lean` holds the countermodels. `InvarianceNegative`
+explains why equality with the chosen bottom is not the system predicate:
+equality-to-bottom fails to transport, while `AtBot` and `Terminus` do.
 
 `DirectionNegative` is the countermodel behind Theory: Karma, "the arrow
 retyped": two grids agree on `ConditionsEither` and disagree on `conditions`, so
@@ -155,7 +164,8 @@ content rows: an all-stone/no-live grid and the two-bottom direction-void
 carrier make the relevant denials true at non-live act-time, so fusion fails
 there.
 
-C.4 Doctrines/FourTruths.lean and Doctrines/Sraddha.lean
+C.4 Doctrines/FourTruths.lean, Doctrines/Sraddha.lean, and
+    Doctrines/SraddhaNegative.lean
 
 `WaaMismatchGrade` is definitionally `share`; this is the formal honesty clause
 for dukkha-talk as covariation rather than a second measure. `WaaMismatchLive`
@@ -170,10 +180,10 @@ typing and universal shortfall closure for delivered deeds. The physician
 simile belongs exactly there: the grid can prove `waaPathOught_conditional`,
 but the antecedents are faith-shaped and are never discharged by field facts.
 
-The negative witnesses keep that conditional honest. `SraddhaNegative` shows that
-dropping faith or dropping the live-aversion antecedent loses the landing, and
-`OrthogonalityNegative` shows that a responsive terminus need not be
-`WaaFullyEnlightened`.
+`Doctrines/SraddhaNegative.lean` keeps that conditional honest.
+`SraddhaNegative` shows that dropping faith or dropping the live-aversion
+antecedent loses the landing, and `OrthogonalityNegative` shows that a
+responsive terminus need not be `WaaFullyEnlightened`.
 
 C.5 Doctrines/Deliberation.lean
 

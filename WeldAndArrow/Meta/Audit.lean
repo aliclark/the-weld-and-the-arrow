@@ -1,4 +1,6 @@
 import WeldAndArrow.Meta.Invariance
+import WeldAndArrow.Meta.InvarianceNegative
+import WeldAndArrow.Doctrines.SraddhaNegative
 import WeldAndArrow.Doctrines.Deliberation
 
 namespace WAA

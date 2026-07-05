@@ -1,7 +1,7 @@
 # A Plain-English Reading of the Lean Theorems
 
 **Scope.** This document states, in plain English, what the Lean declarations in
-`Signature/*`, `Consequences/{Basic,Taxonomy}.lean`, `Doctrines/*`,
+`Signature/*`, `Consequences/{Basic,Taxonomy,Ladder,ContentRows}.lean`, `Doctrines/*`,
 `Identification/*`, and `Meta/*` assert. It reads the checked Lean surface:
 definitions, theorem statements, and proof status where that matters.
 Interpretive prose remains secondary to the formal statements.
@@ -48,8 +48,9 @@ signature sit outside the convention layers. `Grid.DirectedConvention` reads
 the arrow; `Grid.DirectedConvention.BeingConvention` reads fine tags as
 macro-scale beings; `Grid.DirectedConvention.BeingConvention.GridConvention`
 contains the pole-affirming row schema, the content-layer companion language,
-and the generated table-order data. Names are placed by what their reading
-presupposes, not by what their definition consumes.
+the ladder API, and the generated table-order data across the `Consequences`
+files. Names are placed by what their reading presupposes, not by what their
+definition consumes.
 
 ---
 
@@ -267,7 +268,7 @@ fine registers into one macro tag at diagnosis-time. The checked facts are
 
 ---
 
-## 2. Consequences and Taxonomy (`Consequences/Basic.lean`, `Consequences/Taxonomy.lean`)
+## 2. Consequences and Taxonomy (`Consequences/Basic.lean`, `Consequences/Taxonomy.lean`, `Consequences/Ladder.lean`, `Consequences/ContentRows.lean`)
 
 **Function/share and poles.** `share_eq_grade` is definitional. The response
 facts `mountsAt_of_actual`, `mountsSomewhere_of_actual`,
@@ -416,7 +417,7 @@ is the content instance under the non-stone aptness hypothesis.
 
 ---
 
-## 3. Doctrines (`Doctrines/FourTruths.lean`, `Doctrines/Sraddha.lean`, `Doctrines/Deliberation.lean`)
+## 3. Doctrines (`Doctrines/FourTruths.lean`, `Doctrines/Sraddha.lean`, `Doctrines/SraddhaNegative.lean`, `Doctrines/Deliberation.lean`)
 
 `waaMismatchGrade_eq_share` is definitional. `waaMismatchGrade_le_of_share_le` is the
 ordinal covariation theorem: any share comparison is the corresponding
@@ -436,8 +437,8 @@ implication type, and `waaPathOught_conditional` proves it.
 
 `no_waa_path_at_pole` proves that no share-drop landing can be constructed
 from an `AtBot` prior tendency. `no_waa_aversion_context_at_pole` shows the
-live-aversion antecedent fails there. `SraddhaNegative` supplies concrete
-countermodels for dropping faith or dropping aversion.
+live-aversion antecedent fails there. `Doctrines/SraddhaNegative.lean` supplies
+concrete countermodels for dropping faith or dropping aversion.
 
 `OrthogonalityNegative` reuses the `SraddhaNegative` zero-effectiveness grid:
 a responsive terminus can fail `WaaFullyEnlightened` because the delivered
@@ -545,7 +546,7 @@ Sraddha entries, while `generatedTableStructure_number`,
 
 ---
 
-## 5. Meta/Invariance.lean
+## 5. Meta/Invariance.lean and Meta/InvarianceNegative.lean
 
 **Admission criterion.** Any future predicate over `grade` owes a transport
 lemma here, or it counts as operational residue. The file proves that the
@@ -605,17 +606,19 @@ Together these say that all current pole, probe, tier, configuration,
 share-drop, and share-drop-line predicates are legal display predicates:
 changing the carrier by a reparameterization changes notation, not truth.
 
-**Direction-smuggling detector.** `Grid.transpose` reverses only the argument
-order of `conditions`. `transpose_conditionsEither_iff` proves that
-`ConditionsEither` survives the reversal.
+**Direction-smuggling detector.** The transpose operation now lives in the
+signature layer, beside the vocabulary it transports. `Grid.transpose` reverses
+only the argument order of `conditions`. `transpose_conditionsEither_iff`
+proves that `ConditionsEither` survives the reversal.
 `Grid.DirectedConvention.transpose_deliveredTo_iff` proves that directed
 delivery reverses. `BeingCoarsening.transpose_selfConditioningTag` shows the
-new directed refinement reversing exactly at the delivery line while fiber
+directed refinement reversing exactly at the delivery line while fiber
 membership and actuality stay put. This gives future delivery-facing results a
 quick test: if they claim direction, they owe model-supplied asymmetry or
 irreflexivity.
 
-**Negative example.** `InvarianceNegative.TwoBottom` is a two-element carrier
+**Negative examples.** `Meta/InvarianceNegative.lean` holds these countermodels.
+`InvarianceNegative.TwoBottom` is a two-element carrier
 where every element is order-equivalent to every other element, with `chosen`
 as the designated `shareBot`. `mergeToUnit` maps both elements to the single
 unit value and is a `DisplayReparam`. `twoBottomGrid` has one being, one call,
@@ -652,7 +655,7 @@ all stone-typed and whose act-time tiers have no live share. It proves
 `contentBeforeAfterRow_not_obeys_twoBottom` shows the directed-time content row
 also needs its strict-direction aptness hypothesis.
 
-**`MisFeedNegative`.** `IndexSeekingForm` is the type of candidate
+**`MisFeedNegative` in `Identification/Residues.lean`.** `IndexSeekingForm` is the type of candidate
 answer-functions for the index-seeking question-shape: one designation per
 field residue (`Call × Response`), each purporting to name the residue's
 self-pole index. `AnswersCorrectly` is the success condition for the form:
@@ -697,7 +700,8 @@ that the being-boundary is a reading, not grid-carried structure.
 
 ## 6. Meta/Audit.lean
 
-`Meta/Audit.lean` imports `Meta/Invariance.lean` and
+`Meta/Audit.lean` imports `Meta/Invariance.lean`,
+`Meta/InvarianceNegative.lean`, `Doctrines/SraddhaNegative.lean`, and
 `Doctrines/Deliberation.lean`, then pins selected `#print axioms` outputs with
 `#guard_msgs`.
 

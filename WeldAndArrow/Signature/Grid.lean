@@ -244,6 +244,31 @@ inductive ConditionsEitherChain : G.Weld → G.Weld → Prop
       ConditionsEitherChain w₂ w₃ →
       ConditionsEitherChain w₁ w₃
 
+/- --------------------------------------------------------------------------
+   Direction-smuggling detector: reverse only `conditions`
+-------------------------------------------------------------------------- -/
+
+/-- Reverse the argument order of `conditions`, leaving every other part of the
+    grid untouched. Direction-neutral facts should transport across this;
+    delivery-facing facts should either reverse or declare the model-side
+    asymmetry hypothesis they need. -/
+def transpose (G : Grid Contrib) : Grid Contrib where
+  Being      := G.Being
+  Call       := G.Call
+  Response   := G.Response
+  respondsTo := G.respondsTo
+  grade      := G.grade
+  conditions := fun w₁ w₂ => G.conditions w₂ w₁
+
+theorem transpose_conditions (w₁ w₂ : G.Weld) :
+    G.transpose.conditions w₁ w₂ = G.conditions w₂ w₁ :=
+  rfl
+
+theorem transpose_conditionsEither_iff (w₁ w₂ : G.Weld) :
+    G.transpose.ConditionsEither w₁ w₂ ↔ G.ConditionsEither w₁ w₂ :=
+  ⟨fun h => h.elim Or.inr Or.inl,
+   fun h => h.elim Or.inr Or.inl⟩
+
 namespace DirectedConvention
 
 /-- The strictness relation, exposed under the name used by this namespace. -/
@@ -271,6 +296,10 @@ def WaaReachBackFull (deed reception : G.Weld) : Prop := G.conditions deed recep
     `WaaReachBackFull`; the different name is for theorem statements where the
     field-side role matters more than the reception-side appropriation. -/
 def DeliveredTo (deed reception : G.Weld) : Prop := G.conditions deed reception
+
+theorem transpose_deliveredTo_iff (deed reception : G.Weld) :
+    DeliveredTo G.transpose deed reception ↔ DeliveredTo G reception deed :=
+  Iff.rfl
 
 /-- Non-delivery: the relation does not hold from this deed to this reception. -/
 def NotDeliveredTo (deed reception : G.Weld) : Prop := ¬ G.conditions deed reception
@@ -362,181 +391,6 @@ theorem objectAxisStanding_of_hasShareDropLanding
     ObjectAxisStanding G deed :=
   h.elim (fun reception hland => ⟨reception, hland.left.left⟩)
 
-namespace BeingConvention
-
-/- Reading and motivation: Identification/Commentary.lean, C.1. -/
-
-/- Reading and motivation: Identification/Commentary.lean, C.1. -/
-abbrev MountsAt (b : G.Being) (c : G.Call) : Prop := G.MountsAt b c
-
-/-- Re-rooted name for mounting at some call. -/
-abbrev MountsSomewhere (b : G.Being) : Prop := G.MountsSomewhere b
-
-/-- Re-rooted name for call-entire response. -/
-abbrev RespondsToEveryCall (b : G.Being) : Prop := G.RespondsToEveryCall b
-
-/- Reading and motivation: Identification/Commentary.lean, C.1. -/
-abbrev Stone (b : G.Being) : Prop := G.Stone b
-
-/-- Re-rooted name for the pole-class responder. -/
-abbrev Terminus (b : G.Being) : Prop := G.Terminus b
-
-/-- Re-rooted name for non-vacuous terminus response. -/
-abbrev LiveTerminus (b : G.Being) : Prop := G.LiveTerminus b
-
-/-- Re-rooted name for call-entire terminus response. -/
-abbrev ResponsiveTerminus (b : G.Being) : Prop := G.ResponsiveTerminus b
-
-/-- Re-rooted name for the two attested arrivals at the pole-class. -/
-abbrev AtPoleClass (b : G.Being) : Prop := G.AtPoleClass b
-
-/-- Re-rooted name for the probe, because the probe reads a being's
-    composition rather than adding a field to the signature. -/
-abbrev ProbeConstant (b : G.Being) (cs : G.Call → Prop) : Prop :=
-  G.ProbeConstant b cs
-
-/- Reading and motivation: Identification/Commentary.lean, C.1. -/
-structure BeingCoarsening (G : Grid Contrib) (Macro : Type) where
-  proj : G.Being → Macro
-
-namespace BeingCoarsening
-
-variable {G : Grid Contrib} {Macro : Type} (κ : BeingCoarsening G Macro)
-
-/-- A weld lies in a macro tag's fiber when its fine agent projects there. -/
-def InFiber (b : Macro) (w : G.Weld) : Prop := κ.proj w.agent = b
-
-/- Reading and motivation: Identification/Commentary.lean, C.1. -/
-def SameFiber (p q : G.Being) : Prop := κ.proj p = κ.proj q
-
-/-- A fiber has at least one fine tag under it. -/
-def FiberInhabited (b : Macro) : Prop := ∃ p : G.Being, κ.proj p = b
-
-/-- A fiber has at least one actual weld under it. This is the live/vacuity
-    guard needed for exclusivity facts below. -/
-def ActualFiberInhabited (b : Macro) : Prop :=
-  ∃ w : G.Weld, G.Actual w ∧ κ.InFiber b w
-
-/-- Some fine tag in the fiber mounts a response somewhere. -/
-def SentientTag (b : Macro) : Prop :=
-  ∃ p : G.Being, κ.proj p = b ∧ G.MountsSomewhere p
-
-/-- A tag is not sentient exactly when every fine tag in its fiber is stone-typed. -/
-theorem not_sentientTag_iff_fiber_all_stone (b : Macro) :
-    ¬ κ.SentientTag b ↔ ∀ p : G.Being, κ.proj p = b → G.Stone p := by
-  constructor
-  · intro hnot p hp c hmount
-    exact hnot ⟨p, hp, ⟨c, hmount⟩⟩
-  · intro hall hsent
-    rcases hsent with ⟨p, hp, c, hmount⟩
-    exact hall p hp c hmount
-
-/- Reading and motivation: Identification/Commentary.lean, C.1. -/
-def FiberAtPole (b : Macro) : Prop :=
-  ∀ w : G.Weld, G.Actual w → κ.InFiber b w → AtBot (G.share w)
-
-/-- The live, non-vacuous fiber-at-pole predicate. -/
-def LiveFiberAtPole (b : Macro) : Prop :=
-  κ.ActualFiberInhabited b ∧ κ.FiberAtPole b
-
-/-- Every actual weld in the fiber carries a live self-pole index.
-    Vacuous on empty or no-actual fibers; use `LiveSelfAptTag` when
-    inhabitation matters. -/
-def SelfAptTag (b : Macro) : Prop :=
-  ∀ w : G.Weld, G.Actual w → κ.InFiber b w → G.HasSelfPoleIndex w
-
-/-- The live, non-vacuous self-apt predicate. -/
-def LiveSelfAptTag (b : Macro) : Prop :=
-  κ.ActualFiberInhabited b ∧ κ.SelfAptTag b
-
-/-- Patchy fiber: neither all actual welds are at the pole nor all actual
-    welds are self-apt. No middling scalar is smuggled in. -/
-def Patchy (b : Macro) : Prop := ¬ κ.FiberAtPole b ∧ ¬ κ.SelfAptTag b
-
-/-- If every fine tag in the fiber is terminus-typed, the whole actual fiber
-    reads at the pole. -/
-theorem fiberAtPole_of_fiber_termini {b : Macro}
-    (h : ∀ p : G.Being, κ.proj p = b → G.Terminus p) :
-    κ.FiberAtPole b := by
-  intro w hactual hfiber
-  exact G.atBot_of_terminus_response (h w.agent hfiber) hactual
-
-/-- Under a fiber-at-pole reading, no actual weld in the fiber has a live
-    self-pole index. -/
-theorem no_live_index_under_fiberAtPole {b : Macro}
-    (h : κ.FiberAtPole b) {w : G.Weld}
-    (hactual : G.Actual w) (hfiber : κ.InFiber b w) :
-    ¬ G.HasSelfPoleIndex w :=
-  G.no_self_pole_index_of_atBot w (h w hactual hfiber)
-
-/-- Fiber soul-guard: even where the self-convention is apt, the index is
-    only the per-weld agent tag. No macro owner is produced. -/
-theorem selfAptTag_indices_are_per_weld_only {b : Macro}
-    (h : κ.SelfAptTag b) {w : G.Weld}
-    (hactual : G.Actual w) (hfiber : κ.InFiber b w) :
-    G.selfPoleIndex w (h w hactual hfiber) = w.agent :=
-  rfl
-
-/-- The empty-fiber vacuity guard: fiber-at-pole and self-apt are exclusive
-    only once an actual weld in the fiber is supplied. -/
-theorem fiberAtPole_selfAptTag_exclusive {b : Macro}
-    (hinh : κ.ActualFiberInhabited b)
-    (hpole : κ.FiberAtPole b) (hself : κ.SelfAptTag b) :
-    False := by
-  rcases hinh with ⟨w, hactual, hfiber⟩
-  exact hself w hactual hfiber (hpole w hactual hfiber)
-
-theorem liveFiberAtPole_not_selfAptTag {b : Macro}
-    (h : κ.LiveFiberAtPole b) :
-    ¬ κ.SelfAptTag b :=
-  fun hself => κ.fiberAtPole_selfAptTag_exclusive h.left h.right hself
-
-theorem liveSelfAptTag_not_fiberAtPole {b : Macro}
-    (h : κ.LiveSelfAptTag b) :
-    ¬ κ.FiberAtPole b :=
-  fun hpole => κ.fiberAtPole_selfAptTag_exclusive h.left hpole h.right
-
-/-- Internal refinement within sentience: the fiber carries at least one
-    internal delivery line. Any persistence theorem built from this owes a
-    model-supplied asymmetry or irreflexivity hypothesis on `conditions`. -/
-def SelfConditioningTag (b : Macro) : Prop :=
-  ∃ deed reception : G.Weld,
-    κ.InFiber b deed ∧ κ.InFiber b reception ∧
-    G.Actual reception ∧ DeliveredTo G deed reception
-
-/-- A stronger asymptote: every actual reception in the fiber is internally
-    fed. It is named and shelved because treating it as the default would
-    turn internal conditioning into causal solipsism. -/
-def StrongSelfConditioningTag (b : Macro) : Prop :=
-  ∀ reception : G.Weld, κ.InFiber b reception → G.Actual reception →
-    ∃ deed : G.Weld, κ.InFiber b deed ∧ DeliveredTo G deed reception
-
-/- Reading and motivation: Identification/Commentary.lean, C.1. -/
-structure Delegation (b : Macro) where
-  weld : G.Weld
-  actual : G.Actual weld
-  delegate_in_fiber : κ.InFiber b weld
-
-namespace Delegation
-
-/- Reading and motivation: Identification/Commentary.lean, C.1. -/
-def share {b : Macro} (d : κ.Delegation b) : Contrib := G.share d.weld
-
-@[simp]
-theorem share_eq_delegate_share {b : Macro} (d : κ.Delegation b) :
-    d.share = G.share d.weld :=
-  rfl
-
-end Delegation
-
-end BeingCoarsening
-
-/- The innermost `GridConvention` namespace is opened in Consequences/Taxonomy.lean for the
-   concrete claim-language rows. Keeping the abstract machinery at `Grid`
-   level for now avoids a churn-only migration of structure fields whose
-   eventual home may simply remain signature rather than reading. -/
-
-end BeingConvention
 
 end DirectedConvention
 
@@ -620,109 +474,6 @@ theorem no_agent_recovery_of_field_collision
   fun hex =>
     hne (hex.elim (fun _recover hrec =>
       (hrec ⟨a₁, c, r⟩ h1).symm.trans (hrec ⟨a₂, c, r⟩ h2)))
-
-/- Reading and motivation: Identification/Commentary.lean, C.1. -/
-
-/-- Two devices, differing only in whether their chime is a function of
-    who is listening. -/
-inductive Clock
-  | rigid
-  | adaptive
-
-/-- The one call in play: whether a listener is actually present to hear
-    the chime. -/
-inductive Listener
-  | present
-  | absent
-
-/-- The chime itself; its content is immaterial, only whether it occurs
-    and what drove it matters. -/
-inductive Chime
-  | chime
-
-instance : PreorderBot Nat where
-  le       := Nat.le
-  le_refl  := Nat.le_refl
-  le_trans := fun h1 h2 => Nat.le_trans h1 h2
-  bot      := 0
-  bot_le   := Nat.zero_le
-
-/- Reading and motivation: Identification/Commentary.lean, C.1. -/
-def clockGrid : Grid Nat where
-  Being      := Clock
-  Call       := Listener
-  Response   := Chime
-  respondsTo b c :=
-    match b, c with
-    | .rigid,    _        => none
-    | .adaptive, .present => some .chime
-    | .adaptive, .absent  => none
-  grade _ _ _ := 0
-  conditions _ _ := False
-
-theorem rigid_is_stone : clockGrid.Stone Clock.rigid :=
-  fun _c ⟨_r, hr⟩ => by cases hr
-
-theorem adaptive_is_terminus : clockGrid.Terminus Clock.adaptive :=
-  fun _c _r _h => Nat.le_refl 0
-
-theorem adaptive_not_stone : ¬ clockGrid.Stone Clock.adaptive :=
-  fun h => h Listener.present ⟨Chime.chime, rfl⟩
-
-/- Reading and motivation: Identification/Commentary.lean, C.1. -/
-theorem clockGrid_function_share_split_witness :
-    clockGrid.Stone Clock.rigid ∧
-    clockGrid.Terminus Clock.adaptive ∧
-    ¬ clockGrid.Stone Clock.adaptive :=
-  ⟨rigid_is_stone, adaptive_is_terminus, adaptive_not_stone⟩
-
-/- --------------------------------------------------------------------------
-   Second concrete display — integer registers with diagnosis-time κ
-
-   The adaptive register clock builds its fine tags as integer-like registers.
-   The macro designation is still supplied outside the signature, by a
-   `BeingCoarsening`: the model may implement stable internal registers, but
-   the standing partition is not stored as "the" being-boundary.
--------------------------------------------------------------------------- -/
-
-/-- A register clock whose fine tags are natural-numbered registers. Each
-    register answers the tick by handing off to the next register, and
-    delivery follows that hand-off. -/
-def registerClockGrid : Grid Nat where
-  Being      := Nat
-  Call       := Unit
-  Response   := Nat
-  respondsTo n _ := some (n + 1)
-  grade n _ _ := n
-  conditions deed reception := reception.agent = deed.response
-
-/-- A macro coarsening that sends all fine registers to one macro tag. -/
-def registerClockCoarsening :
-    Grid.DirectedConvention.BeingConvention.BeingCoarsening registerClockGrid Unit where
-  proj _ := ()
-
-theorem registerClock_macro_sentient :
-    registerClockCoarsening.SentientTag () :=
-  ⟨(0 : Nat), rfl, ⟨(), ⟨(1 : Nat), rfl⟩⟩⟩
-
-theorem registerClock_macro_selfConditioning :
-    registerClockCoarsening.SelfConditioningTag () := by
-  refine ⟨⟨(0 : Nat), (), (1 : Nat)⟩, ⟨(1 : Nat), (), (2 : Nat)⟩,
-    rfl, rfl, rfl, ?_⟩
-  rfl
-
-/- `clockGrid` is a genuine, finite, computable term of type `Grid Nat` —
-    direct evidence that "a model of the theory" is a buildable Lean
-    object, and that facts about a concrete instance are provable at
-    `rfl`-level once the instance is fixed. That is the tool a later
-    independence result needs: fix a small `Grid`, choose an actual
-    `ReceptionPair`, run the relevant `Config`/`rePitch` steps, phrase
-    whatever "privilege" would have to assert as a further `Prop` over that
-    data, and show it fails in the instance. That construction is not
-    carried out here — deciding how to phrase "privilege" formally is itself
-    a nontrivial choice belonging to whoever proves the theorem, not to the
-    scaffolding. What this section checks is only that the scaffolding does
-    not get in the way. -/
 
 end Preview
 

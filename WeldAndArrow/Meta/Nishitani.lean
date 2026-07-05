@@ -2,7 +2,7 @@
 ================================================================================
   WeldAndArrow.Meta.Nishitani
   Śūnyatā on the re-emptying ladder — the Nishitani/Jizang layer as a
-  consumer of the checked ladder in WeldAndArrow.Consequences.Taxonomy
+  consumer of the checked ladder in WeldAndArrow.Consequences.ContentRows
 ================================================================================
 
 This file is a *consumer* of the re-emptying ladder: it defines philosophical
@@ -12,7 +12,7 @@ and proves nothing the ladder does not already license.
 
 On placement: metaphysically upstream, import-graph downstream. The file sits
 in `Meta/` because it is the metaphysical reading of the whole development,
-but it *imports* `WeldAndArrow.Consequences.Taxonomy`, since every theorem here is a
+but it *imports* `WeldAndArrow.Consequences.ContentRows`, since every theorem here is a
 one-liner over the ladder. That the direction of `import` runs opposite to
 the direction of philosophical priority is itself a conventional designation,
 and the file is content to let it fuse at the floor.
@@ -88,7 +88,7 @@ explicitly — go through unchanged: `Tier` is per-grid (`Tier G`) and
 `actTime` is indexed by `G.Weld`, exactly as assumed.
 -/
 
-import WeldAndArrow.Consequences.Taxonomy
+import WeldAndArrow.Consequences.ContentRows
 
 namespace WAA
 

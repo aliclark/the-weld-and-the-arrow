@@ -1,0 +1,326 @@
+/-
+================================================================================
+  WeldAndArrow.Meta.InvarianceNegative
+  Countermodels for invariance and recovery claims
+================================================================================
+
+Reading and motivation: Identification/Commentary.lean, C.3.
+-/
+
+import WeldAndArrow.Meta.Invariance
+
+namespace WAA
+/- ==============================================================================
+   Negative example: equality-at-bottom does not transport
+============================================================================== -/
+
+namespace InvarianceNegative
+
+inductive TwoBottom
+  | chosen
+  | other
+
+instance : PreorderBot TwoBottom where
+  le       := fun _ _ => True
+  le_refl  := fun _ => True.intro
+  le_trans := fun _ _ => True.intro
+  bot      := TwoBottom.chosen
+  bot_le   := fun _ => True.intro
+
+instance : PreorderBot Unit where
+  le       := fun _ _ => True
+  le_refl  := fun _ => True.intro
+  le_trans := fun _ _ => True.intro
+  bot      := ()
+  bot_le   := fun _ => True.intro
+
+def mergeToUnit : DisplayReparam TwoBottom Unit where
+  toFun _ := ()
+  le_iff _ _ := ⟨fun _ => True.intro, fun _ => True.intro⟩
+  atBot_bot := True.intro
+
+def twoBottomGrid : Grid TwoBottom where
+  Being      := Unit
+  Call       := Unit
+  Response   := Unit
+  respondsTo _ _ := some ()
+  grade _ _ _ := TwoBottom.other
+  conditions _ _ := False
+
+/-- The old, equality-token version of terminus, kept only for this
+    counterexample. It is not the system predicate. -/
+def OldEqTerminus {Contrib : Type} [PreorderBot Contrib]
+    (G : Grid Contrib) (b : G.Being) : Prop :=
+  ∀ c r, G.respondsTo b c = some r → G.grade b c r = shareBot
+
+theorem twoBottomGrid_terminus : twoBottomGrid.Terminus () :=
+  fun _ _ _ => True.intro
+
+theorem not_oldEqTerminus_twoBottomGrid : ¬ OldEqTerminus twoBottomGrid () := by
+  intro h
+  have hbad : TwoBottom.other = TwoBottom.chosen := h () () rfl
+  cases hbad
+
+theorem oldEqTerminus_map_mergeToUnit : OldEqTerminus (twoBottomGrid.map mergeToUnit) () :=
+  fun _ _ _ => rfl
+
+/-- The new predicate transports across the merge, while the old equality-token
+    predicate would hold after the merge and fail before it. -/
+theorem oldEqTerminus_not_invariant :
+    ((twoBottomGrid.map mergeToUnit).Terminus () ↔ twoBottomGrid.Terminus ()) ∧
+      OldEqTerminus (twoBottomGrid.map mergeToUnit) () ∧
+      ¬ OldEqTerminus twoBottomGrid () :=
+  ⟨twoBottomGrid.map_terminus_iff mergeToUnit (),
+    fun _ _ _ => rfl,
+    by
+      intro h
+      have hbad : TwoBottom.other = TwoBottom.chosen := h () () rfl
+      cases hbad⟩
+
+end InvarianceNegative
+
+/- Reading and motivation: Identification/Commentary.lean, C.3. -/
+
+namespace DirectionNegative
+
+/-- One being, two calls, one response: a small carrier with two orientations. -/
+abbrev W := RawWeld Unit Bool Unit
+
+/-- The weld at the `false` call. -/
+def wFalse : W := ⟨(), false, ()⟩
+
+/-- The weld at the `true` call. -/
+def wTrue : W := ⟨(), true, ()⟩
+
+/-- The web read one way: the `false`-weld conditions the `true`-weld. -/
+def forwardGrid : Grid Nat where
+  Being      := Unit
+  Call       := Bool
+  Response   := Unit
+  respondsTo _ _ := some ()
+  grade _ _ _ := 0
+  conditions w₁ w₂ := w₁.call = false ∧ w₂.call = true
+
+/-- The same web read the other way: only `conditions` is reversed. -/
+def backwardGrid : Grid Nat where
+  Being      := Unit
+  Call       := Bool
+  Response   := Unit
+  respondsTo _ _ := some ()
+  grade _ _ _ := 0
+  conditions w₁ w₂ := w₁.call = true ∧ w₂.call = false
+
+/-- The two orientations agree on the symmetric closure at every pair. -/
+theorem conditionsEither_agrees (w₁ w₂ : W) :
+    forwardGrid.ConditionsEither w₁ w₂ ↔ backwardGrid.ConditionsEither w₁ w₂ :=
+  ⟨fun h => h.elim (fun ⟨h1, h2⟩ => Or.inr ⟨h2, h1⟩)
+                   (fun ⟨h1, h2⟩ => Or.inl ⟨h2, h1⟩),
+   fun h => h.elim (fun ⟨h1, h2⟩ => Or.inr ⟨h2, h1⟩)
+                   (fun ⟨h1, h2⟩ => Or.inl ⟨h2, h1⟩)⟩
+
+/-- They disagree on `conditions` at the witness pair. -/
+theorem conditions_disagree :
+    forwardGrid.conditions wFalse wTrue ∧
+      ¬ backwardGrid.conditions wFalse wTrue := by
+  constructor
+  · exact ⟨rfl, rfl⟩
+  · intro h
+    cases h.left
+
+/- Reading and motivation: Identification/Commentary.lean, C.3. -/
+theorem no_direction_recovery_from_conditionsEither :
+    ¬ ∃ recover : (W → W → Prop) → (W → W → Prop),
+        recover forwardGrid.ConditionsEither = forwardGrid.conditions ∧
+        recover backwardGrid.ConditionsEither = backwardGrid.conditions := by
+  rintro ⟨recover, hf, hb⟩
+  have hsame : forwardGrid.ConditionsEither = backwardGrid.ConditionsEither := by
+    funext w₁ w₂
+    exact propext (conditionsEither_agrees w₁ w₂)
+  have hcond : forwardGrid.conditions = backwardGrid.conditions := by
+    rw [← hf, hsame, hb]
+  exact conditions_disagree.right (hcond ▸ conditions_disagree.left)
+
+/-- The equilibrium-pole face, on the existing negative carrier: where
+    everything is order-equivalent, nothing is strict. -/
+theorem not_strict_twoBottom (a b : InvarianceNegative.TwoBottom) : ¬ Strict a b :=
+  no_strict_of_all_orderEq (fun _ _ => ⟨True.intro, True.intro⟩) a b
+
+end DirectionNegative
+
+/- ==============================================================================
+   Content-row countermodels
+============================================================================== -/
+
+namespace ContentNegative
+
+open Grid.DirectedConvention.BeingConvention.GridConvention
+
+def allStoneGrid : Grid InvarianceNegative.TwoBottom where
+  Being      := Unit
+  Call       := Unit
+  Response   := Unit
+  respondsTo _ _ := none
+  grade _ _ _ := InvarianceNegative.TwoBottom.chosen
+  conditions _ _ := False
+
+def allStoneWeld : allStoneGrid.Weld :=
+  ⟨(), (), ()⟩
+
+theorem allStoneGrid_allStone : allStoneGrid.AllStone := by
+  intro _b _c hmount
+  rcases hmount with ⟨_r, hr⟩
+  cases hr
+
+theorem allStoneGrid_no_liveTier (t : Grid.Tier allStoneGrid) :
+    ¬ Grid.Tier.hasLiveShare allStoneGrid t := by
+  cases t with
+  | floor =>
+      intro h
+      exact h
+  | actTime _ =>
+      intro hidx
+      exact hidx True.intro
+
+theorem allStoneWeld_no_live_share :
+    ¬ Grid.Tier.hasLiveShare allStoneGrid (Grid.Tier.actTime allStoneWeld) :=
+  allStoneGrid_no_liveTier (Grid.Tier.actTime allStoneWeld)
+
+theorem contentBeingsRow_not_fused_allStone :
+    ¬ (contentBeingsRow allStoneGrid).Fused (Grid.Tier.actTime allStoneWeld) := by
+  intro hfused
+  have hiff := hfused allStoneWeld_no_live_share
+  have hdenial :
+      (contentLayerLanguage allStoneGrid).TrueAt
+        (Grid.Tier.actTime allStoneWeld) (.layerDenied .beings) := by
+    dsimp [contentLayerLanguage, Grid.ClaimLanguage.TrueAt]
+    exact allStoneGrid_allStone
+  exact allStoneWeld_no_live_share (hiff.mpr hdenial)
+
+theorem contentBeingsRow_not_obeys_allStone :
+    ¬ (contentBeingsRow allStoneGrid).ObeysSeparateFuse := by
+  intro h
+  exact contentBeingsRow_not_fused_allStone
+    (allStoneGrid.fused_of_obeysSeparateFuse h (Grid.Tier.actTime allStoneWeld))
+
+theorem contentGridLensRow_not_fused_noLive :
+    ¬ (contentGridLensRow allStoneGrid).Fused (Grid.Tier.actTime allStoneWeld) := by
+  intro hfused
+  have hiff := hfused allStoneWeld_no_live_share
+  have hdenial :
+      (contentLayerLanguage allStoneGrid).TrueAt
+        (Grid.Tier.actTime allStoneWeld) (.layerDenied .gridLens) := by
+    dsimp [contentLayerLanguage, Grid.ClaimLanguage.TrueAt]
+    exact allStoneGrid_no_liveTier
+  exact allStoneWeld_no_live_share (hiff.mpr hdenial)
+
+theorem contentGridLensRow_not_obeys_noLive :
+    ¬ (contentGridLensRow allStoneGrid).ObeysSeparateFuse := by
+  intro h
+  exact contentGridLensRow_not_fused_noLive
+    (allStoneGrid.fused_of_obeysSeparateFuse h (Grid.Tier.actTime allStoneWeld))
+
+def twoBottomWeld : InvarianceNegative.twoBottomGrid.Weld :=
+  ⟨(), (), ()⟩
+
+theorem twoBottomGrid_directionVoid :
+    DirectionVoid InvarianceNegative.TwoBottom :=
+  DirectionNegative.not_strict_twoBottom
+
+theorem twoBottomWeld_no_live_share :
+    ¬ Grid.Tier.hasLiveShare InvarianceNegative.twoBottomGrid
+        (Grid.Tier.actTime twoBottomWeld) := by
+  intro hidx
+  exact hidx True.intro
+
+theorem contentBeforeAfterRow_not_fused_twoBottom :
+    ¬ (contentBeforeAfterRow InvarianceNegative.twoBottomGrid).Fused
+        (Grid.Tier.actTime twoBottomWeld) := by
+  intro hfused
+  have hiff := hfused twoBottomWeld_no_live_share
+  have hdenial :
+      (contentLayerLanguage InvarianceNegative.twoBottomGrid).TrueAt
+        (Grid.Tier.actTime twoBottomWeld) (.layerDenied .directedTime) := by
+    dsimp [contentLayerLanguage, Grid.ClaimLanguage.TrueAt]
+    exact twoBottomGrid_directionVoid
+  exact twoBottomWeld_no_live_share (hiff.mpr hdenial)
+
+theorem contentBeforeAfterRow_not_obeys_twoBottom :
+    ¬ (contentBeforeAfterRow InvarianceNegative.twoBottomGrid).ObeysSeparateFuse := by
+  intro h
+  exact contentBeforeAfterRow_not_fused_twoBottom
+    (InvarianceNegative.twoBottomGrid.fused_of_obeysSeparateFuse h
+      (Grid.Tier.actTime twoBottomWeld))
+
+end ContentNegative
+
+/- ==============================================================================
+   §N  Being-boundary freedom: designation is not grid-carried
+
+   The witness is parallel in scope to `DirectionNegative`. A single grid has
+   two fact-identical fine tags and admits both a merge and a split coarsening.
+   They disagree on the fiber boundary at a concrete pair. This certifies
+   freedom, not failure: naming suffices, while holding one partition as floor
+   furniture claims a fact the grid's data does not carry.
+============================================================================== -/
+
+namespace BeingNegative
+
+open Grid.DirectedConvention.BeingConvention
+
+/-- Two fine tags with the same response, same grade, and symmetric delivery. -/
+def twoBeingGrid : Grid Nat where
+  Being      := Bool
+  Call       := Unit
+  Response   := Unit
+  respondsTo _ _ := some ()
+  grade _ _ _ := 0
+  conditions _ _ := True
+
+/-- Merge coarsening: both fine tags are one macro tag. -/
+def κmerge : BeingCoarsening twoBeingGrid Unit where
+  proj _ := ()
+
+/-- Split coarsening: each fine tag remains its own macro tag. -/
+def κsplit : BeingCoarsening twoBeingGrid Bool where
+  proj := id
+
+theorem merge_same_fiber : κmerge.SameFiber false true :=
+  rfl
+
+theorem split_not_same_fiber : ¬ κsplit.SameFiber false true := by
+  intro h
+  cases h
+
+/-- The grid data visible to a would-be partition-recovery function. -/
+abbrev W := RawWeld Bool Unit Unit
+
+abbrev GridData : Type :=
+  (Bool → Unit → Option Unit) × (Bool → Unit → Unit → Nat) × (W → W → Prop)
+
+def gridData : GridData :=
+  (twoBeingGrid.respondsTo, twoBeingGrid.grade, twoBeingGrid.conditions)
+
+def mergeBoundary (_p _q : Bool) : Prop := True
+
+def splitBoundary (p q : Bool) : Prop := p = q
+
+/-- No function of this grid's data recovers a unique partition: the same data
+    supports both the merge and the split coarsenings, which disagree at
+    `false` and `true`. -/
+theorem no_partition_recovery :
+    ¬ ∃ recover : GridData → Bool → Bool → Prop,
+        recover gridData = mergeBoundary ∧
+        recover gridData = splitBoundary := by
+  rintro ⟨recover, hmerge, hsplit⟩
+  have hmerged : recover gridData false true := by
+    rw [hmerge]
+    exact True.intro
+  have hsplitNot : ¬ recover gridData false true := by
+    rw [hsplit]
+    intro h
+    cases h
+  exact hsplitNot hmerged
+
+end BeingNegative
+
+end WAA
