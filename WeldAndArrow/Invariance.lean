@@ -79,6 +79,39 @@ theorem orderEq_iff (a b : Contrib) :
   · intro h
     exact ⟨(f.le_iff a b).mp h.left, (f.le_iff b a).mp h.right⟩
 
+theorem strict_iff (a b : Contrib) :
+    Strict (f.toFun a) (f.toFun b) ↔ Strict a b := by
+  constructor
+  · intro h
+    exact ⟨(f.le_iff a b).mpr h.left,
+      fun hle => h.right ((f.le_iff b a).mp hle)⟩
+  · intro h
+    exact ⟨(f.le_iff a b).mp h.left,
+      fun hle => h.right ((f.le_iff b a).mpr hle)⟩
+
+theorem directionVoid_reflect (f : DisplayReparam Contrib Contrib')
+    (h : DirectionVoid Contrib') :
+    DirectionVoid Contrib :=
+  fun a b hstrict =>
+    h (f.toFun a) (f.toFun b) ((f.strict_iff a b).mpr hstrict)
+
+/-- Full preservation of carrier-wide direction-voidness needs the target
+    display to be covered by the reparameterization. -/
+theorem directionVoid_of_surjective
+    (hsurj : ∀ b : Contrib', ∃ a : Contrib, f.toFun a = b)
+    (h : DirectionVoid Contrib) :
+    DirectionVoid Contrib' := by
+  intro a' b' hstrict
+  rcases hsurj a' with ⟨a, rfl⟩
+  rcases hsurj b' with ⟨b, rfl⟩
+  exact h a b ((f.strict_iff a b).mp hstrict)
+
+theorem exists_strict_map (f : DisplayReparam Contrib Contrib')
+    (h : ∃ a b : Contrib, Strict a b) :
+    ∃ a' b' : Contrib', Strict a' b' := by
+  rcases h with ⟨a, b, hstrict⟩
+  exact ⟨f.toFun a, f.toFun b, (f.strict_iff a b).mpr hstrict⟩
+
 end DisplayReparam
 
 namespace Config
@@ -145,6 +178,14 @@ theorem map_respondsToEveryCall_iff (b : G.Being) :
 theorem map_stone_iff (b : G.Being) :
     (G.map f).Stone b ↔ G.Stone b :=
   Iff.rfl
+
+theorem map_allStone_iff :
+    (G.map f).AllStone ↔ G.AllStone := by
+  constructor
+  · intro h b
+    exact (G.map_stone_iff f b).mp (h b)
+  · intro h b
+    exact (G.map_stone_iff f b).mpr (h b)
 
 namespace DirectedConvention
 
@@ -402,6 +443,19 @@ theorem map_tier_hasLiveShare_iff :
   | .floor => Iff.rfl
   | .actTime w => G.map_hasSelfPoleIndex_iff f w
 
+theorem map_exists_liveTier_iff :
+    (∃ t : Tier (G.map f), Tier.hasLiveShare (G.map f) t) ↔
+      ∃ t : Tier G, Tier.hasLiveShare G t := by
+  constructor
+  · rintro ⟨t, ht⟩
+    cases t with
+    | floor =>
+        cases ht
+    | actTime w =>
+        exact ⟨Tier.actTime w, (G.map_hasSelfPoleIndex_iff f w).mp ht⟩
+  · rintro ⟨t, ht⟩
+    exact ⟨Tier.map f t, (G.map_tier_hasLiveShare_iff f t).mpr ht⟩
+
 theorem map_rePitch (before : Config Contrib) (received : G.Weld) :
     (G.map f).rePitch (before.map f) received =
       (G.rePitch before received).map f :=
@@ -445,6 +499,40 @@ theorem map_shareDropLine_iff
     exact ⟨(map_environsLine_iff G f b deed reception).mpr h.left,
       (G.map_isShareDrop_iff f before reception).mpr h.right⟩
 
+end DirectedConvention
+
+namespace DirectedConvention
+namespace BeingConvention
+namespace GridConvention
+
+theorem map_layerRow_obeys (l : ConventionLayer) :
+    (layerRow (G.map f) l).ObeysSeparateFuse :=
+  layerRow_obeys (G.map f) l
+
+theorem map_contentBeforeAfterRow_obeys_of_direction
+    (h : ∃ a b : Contrib, Strict a b) :
+    (contentBeforeAfterRow (G.map f)).ObeysSeparateFuse :=
+  contentBeforeAfterRow_obeys_of_direction (G.map f) (f.exists_strict_map h)
+
+theorem map_contentBeingsRow_obeys_of_being
+    (h : ∃ b : G.Being, ¬ G.Stone b) :
+    (contentBeingsRow (G.map f)).ObeysSeparateFuse := by
+  apply contentBeingsRow_obeys_of_being
+  rcases h with ⟨b, hnotStone⟩
+  exact ⟨b, fun hstone => hnotStone ((G.map_stone_iff f b).mp hstone)⟩
+
+theorem map_contentGridLensRow_obeys_of_liveTier
+    (h : ∃ t : Tier G, Tier.hasLiveShare G t) :
+    (contentGridLensRow (G.map f)).ObeysSeparateFuse :=
+  contentGridLensRow_obeys_of_liveTier (G.map f)
+    ((G.map_exists_liveTier_iff f).mpr h)
+
+theorem map_beingsLadder_obeys :
+    ∀ n, (beingsLadder (G.map f) n).ObeysSeparateFuse :=
+  beingsLadder_obeys (G.map f)
+
+end GridConvention
+end BeingConvention
 end DirectedConvention
 
 /- --------------------------------------------------------------------------
@@ -659,6 +747,112 @@ theorem not_strict_twoBottom (a b : InvarianceNegative.TwoBottom) : ¬ Strict a 
   no_strict_of_all_orderEq (fun _ _ => ⟨True.intro, True.intro⟩) a b
 
 end DirectionNegative
+
+/- ==============================================================================
+   Content-row countermodels
+============================================================================== -/
+
+namespace ContentNegative
+
+open Grid.DirectedConvention.BeingConvention.GridConvention
+
+def allStoneGrid : Grid InvarianceNegative.TwoBottom where
+  Being      := Unit
+  Call       := Unit
+  Response   := Unit
+  respondsTo _ _ := none
+  grade _ _ _ := InvarianceNegative.TwoBottom.chosen
+  conditions _ _ := False
+
+def allStoneWeld : allStoneGrid.Weld :=
+  ⟨(), (), ()⟩
+
+theorem allStoneGrid_allStone : allStoneGrid.AllStone := by
+  intro _b _c hmount
+  rcases hmount with ⟨_r, hr⟩
+  cases hr
+
+theorem allStoneGrid_no_liveTier (t : Grid.Tier allStoneGrid) :
+    ¬ Grid.Tier.hasLiveShare allStoneGrid t := by
+  cases t with
+  | floor =>
+      intro h
+      exact h
+  | actTime _ =>
+      intro hidx
+      exact hidx True.intro
+
+theorem allStoneWeld_no_live_share :
+    ¬ Grid.Tier.hasLiveShare allStoneGrid (Grid.Tier.actTime allStoneWeld) :=
+  allStoneGrid_no_liveTier (Grid.Tier.actTime allStoneWeld)
+
+theorem contentBeingsRow_not_fused_allStone :
+    ¬ (contentBeingsRow allStoneGrid).Fused (Grid.Tier.actTime allStoneWeld) := by
+  intro hfused
+  have hiff := hfused allStoneWeld_no_live_share
+  have hdenial :
+      (contentLayerLanguage allStoneGrid).TrueAt
+        (Grid.Tier.actTime allStoneWeld) (.layerDenied .beings) := by
+    dsimp [contentLayerLanguage, Grid.ClaimLanguage.TrueAt]
+    exact allStoneGrid_allStone
+  exact allStoneWeld_no_live_share (hiff.mpr hdenial)
+
+theorem contentBeingsRow_not_obeys_allStone :
+    ¬ (contentBeingsRow allStoneGrid).ObeysSeparateFuse := by
+  intro h
+  exact contentBeingsRow_not_fused_allStone
+    (allStoneGrid.fused_of_obeysSeparateFuse h (Grid.Tier.actTime allStoneWeld))
+
+theorem contentGridLensRow_not_fused_noLive :
+    ¬ (contentGridLensRow allStoneGrid).Fused (Grid.Tier.actTime allStoneWeld) := by
+  intro hfused
+  have hiff := hfused allStoneWeld_no_live_share
+  have hdenial :
+      (contentLayerLanguage allStoneGrid).TrueAt
+        (Grid.Tier.actTime allStoneWeld) (.layerDenied .gridLens) := by
+    dsimp [contentLayerLanguage, Grid.ClaimLanguage.TrueAt]
+    exact allStoneGrid_no_liveTier
+  exact allStoneWeld_no_live_share (hiff.mpr hdenial)
+
+theorem contentGridLensRow_not_obeys_noLive :
+    ¬ (contentGridLensRow allStoneGrid).ObeysSeparateFuse := by
+  intro h
+  exact contentGridLensRow_not_fused_noLive
+    (allStoneGrid.fused_of_obeysSeparateFuse h (Grid.Tier.actTime allStoneWeld))
+
+def twoBottomWeld : InvarianceNegative.twoBottomGrid.Weld :=
+  ⟨(), (), ()⟩
+
+theorem twoBottomGrid_directionVoid :
+    DirectionVoid InvarianceNegative.TwoBottom :=
+  DirectionNegative.not_strict_twoBottom
+
+theorem twoBottomWeld_no_live_share :
+    ¬ Grid.Tier.hasLiveShare InvarianceNegative.twoBottomGrid
+        (Grid.Tier.actTime twoBottomWeld) := by
+  intro hidx
+  exact hidx True.intro
+
+theorem contentBeforeAfterRow_not_fused_twoBottom :
+    ¬ (contentBeforeAfterRow InvarianceNegative.twoBottomGrid).Fused
+        (Grid.Tier.actTime twoBottomWeld) := by
+  intro hfused
+  have hiff := hfused twoBottomWeld_no_live_share
+  have hdenial :
+      (contentLayerLanguage InvarianceNegative.twoBottomGrid).TrueAt
+        (Grid.Tier.actTime twoBottomWeld) (.layerDenied .directedTime) := by
+    dsimp [contentLayerLanguage, Grid.ClaimLanguage.TrueAt]
+    exact twoBottomGrid_directionVoid
+  exact twoBottomWeld_no_live_share (hiff.mpr hdenial)
+
+theorem contentBeforeAfterRow_not_obeys_twoBottom :
+    ¬ (contentBeforeAfterRow InvarianceNegative.twoBottomGrid).ObeysSeparateFuse := by
+  intro h
+  exact contentBeforeAfterRow_not_fused_twoBottom
+    (InvarianceNegative.twoBottomGrid.fused_of_obeysSeparateFuse h
+      (Grid.Tier.actTime twoBottomWeld))
+
+end ContentNegative
 
 /- ==============================================================================
    §N  Being-boundary freedom: designation is not grid-carried

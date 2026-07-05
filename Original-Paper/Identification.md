@@ -95,10 +95,11 @@ The following are conventional and my own -- original moves, each flagged agains
 33. **The svakarma demotion** -- *fruit ripens only in the doer's continuum* demoted from metaphysical necessity to contingent delivery-regime -- contra the Abhidharma scruple, downstream of the exhaustive decomposition of the diachronic *whose*; pariṇāmanā thereby absorbed on existing cells (Theorems).
 34. **The orthogonality rule and its price** -- function/share types, effectiveness grades, adaptivity the terminus's manner and never the ground of landing; with the domain joint's honesty-clause entered beside it; and the pole-typing corollary stated as entailed: the state-tool fits exactly where welding ceases.
 35. **The being-convention** -- the macro being demoted to a diagnosis-time coarsening convention (`BeingCoarsening`): naming suffices, sentience is fiber-level, coherence is display-grade only, and the namespace order is floor/genjō outside, then directed convention, then being convention, then grid-lens.
-36. **The two generated pilot rows** -- before/after and beings are now generated from a concrete `ClaimLanguage`; the rest of the table remains prose pending row-by-row instantiation, by design rather than pretense.
+36. **The generated pilot rows** -- before/after, beings, and the grid-lens are now generated from a concrete `ClaimLanguage`; the rest of the table remains prose pending row-by-row instantiation, by design rather than pretense.
 37. **The being trichotomy** -- deleted is the collapse (*there are no beings*), derived is the freeze (one partition reified as ontology), and primitive-and-free is the convention; `Being := Unit`, sentients-only, and gerrymandered models are legal model choices, never signature law.
 38. **The hare's-horn register** -- possible/impossible-being distinctions enter at realization and use, not naming; the ātman is nameable-impossible in the same innocent sense, and the swan/name/naming-proneness split keeps named object, naming weld, and naming seed apart.
 39. **Modal Realism as the beings-row freeze** -- conventional designation promoted to ontology, *prajñapti-sat* taken as *dravya-sat* (*samāropa*); Lewis placed only as prose nearest miss, Huayan as empty plenitude, Pudgalavāda as the classical occupant candidate.
+40. **Aptness-conditional content rows** -- content-bearing denials obey separate/fuse only in grids where the relevant convention is apt; all-stone, direction-void, and no-live-tier countermodels show the hypotheses are necessary rather than cosmetic.
 
 ## Glossary
 

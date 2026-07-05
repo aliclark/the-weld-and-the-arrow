@@ -174,6 +174,13 @@ converted to `AtBot (share w)`, then the previous theorem applies.
 `selfPoleIndex_eq_agent_of_hasSelfPoleIndex`: the evidence-carried index is
 `w.agent`. Definitional (`rfl`).
 
+`strict_shareBot_of_hasSelfPoleIndex`: a live self-pole index gives
+`Strict shareBot (share w)`. The proof packages `shareBot_le` with the
+definition `HasSelfPoleIndex w := ¬ AtBot (share w)`.
+
+`strict_shareBot_iff_not_atBot`: being strictly above the designated bottom is
+equivalent to not being in the bottom order-class.
+
 `not_waaAppropriates_of_atBot` and `not_waaAppropriates_of_eq_shareBot`: the
 same no-index facts under the definitional name `WaaAppropriates`.
 
@@ -189,6 +196,9 @@ self-pole index and does not WAA-appropriate.
 
 `stone_is_terminus_vacuously`: every `Stone` is a `Terminus`. This is vacuous: the
 response hypothesis in `Terminus` can never be satisfied for a stone.
+
+`AllStone` says every being in the grid is stone-typed. `DirectionVoid` says
+the contribution carrier has no strict comparisons anywhere.
 
 `not_stone_of_mountsSomewhere`, `liveTerminus_not_stone`, and
 `responsiveTerminus_live_of_call` are witness/projection facts over response
@@ -330,13 +340,37 @@ tendencies are the two weld shares.
 claims as true at `floor`, the live convention as `HasSelfPoleIndex w` at
 `actTime w`, and denials as false at act-time.
 
-`beforeAfterRow G` and `beingsRow G` instantiate `Distinction G` from this
-language. `beforeAfterRow_obeys` and `beingsRow_obeys` prove
-`ObeysSeparateFuse` by cases on the tier. `layerDenied_holds_only_where_no_live_share`
-is the branch-sawing lemma: if a denial holds, the tier has no live share.
-`no_time_collapse_self_refuting` and `no_beings_collapse_self_refuting` rule
-out collapse for the two rows, and `beforeAfterRow_not_freeze` /
-`beingsRow_not_freeze` rule out freeze for the checked rows.
+`beforeAfterRow G`, `beingsRow G`, and `gridLensRow G` instantiate
+`Distinction G` from this language. `beforeAfterRow_obeys`,
+`beingsRow_obeys`, and `gridLensRow_obeys` prove `ObeysSeparateFuse` by cases
+on the tier. `layerDenied_holds_only_where_no_live_share` is the branch-sawing
+lemma: if a denial holds, the tier has no live share.
+`no_time_collapse_self_refuting`, `no_beings_collapse_self_refuting`, and
+`lens_denial_collapse_self_refuting` rule out collapse for the checked rows;
+the corresponding `*_not_freeze` facts rule out freeze.
+
+**Content-bearing rows.** `contentLayerLanguage` uses the same `LayerClaim`
+syntax but gives content to denials: no strict direction, all beings stone, or
+no live tier anywhere. `contentBeforeAfterRow`, `contentBeingsRow`, and
+`contentGridLensRow` are the three content rows. Their obedience theorems are
+conditional: `contentBeforeAfterRow_obeys_of_direction`,
+`contentBeingsRow_obeys_of_being`, and
+`contentGridLensRow_obeys_of_liveTier` require exactly the witness that makes
+the denial false at non-live act-time.
+
+`beings_denial_fits_only_floor` and
+`time_denial_unfit_for_appropriating_utterer` are utterance-level
+self-refutation results. The beings theorem uses the `RecordedUtterance`
+actuality field to get a non-stone utterer; the time theorem uses the live
+share as a strict direction witness.
+
+**Re-emptying ladder.** `LadderSide`, `reEmptied`, and `ladder` generate the
+next distinction from the previous one. `reEmptied_obeysSeparateFuse` proves
+that obedience propagates, `ladder_obeys` iterates that proof, and
+`no_level_final` / `ladder_collapse_self_refuting` rule out freeze and collapse
+at every generated level. `beingsLadder` is the unconditional fiat instance;
+`contentBeingsLadder` is the content instance under the non-stone aptness
+hypothesis.
 
 ---
 
@@ -391,11 +425,13 @@ below.
 The contemporary placement checks are `siderits_waaPlacement`,
 `ganeri_waaPlacement`, `zahavi_waaPlacement`, and `sartre_waaPlacement`.
 
-**Disclaimers.** `Disclaimer.number` now runs through 39. The new entries are
+**Disclaimers.** `Disclaimer.number` now runs through 40. The new entries are
 `beingConvention` (35), `pilotGeneratedRows` (36), `beingTrichotomy` (37),
-`hareHornRegister` (38), and `modalRealismFreeze` (39).
+`hareHornRegister` (38), `modalRealismFreeze` (39), and
+`aptnessConditionality` (40).
 `waaKarmaIdentification_number` pins `waaKarmaIdentification = 9`, and
 `modalRealismFreeze_number` pins `modalRealismFreeze = 39`.
+`aptnessConditionality_number` pins `aptnessConditionality = 40`.
 
 ---
 
@@ -491,6 +527,14 @@ symmetric closure is correct on both grids. This is the formal certificate that
 direction is not carried by the correlational structure.
 `not_strict_twoBottom` records the carrier-wide strictness failure on the
 two-bottom negative carrier.
+
+**`ContentNegative`.** `allStoneGrid` is a no-response grid whose beings are
+all stone-typed and whose act-time tiers have no live share. It proves
+`contentBeingsRow_not_obeys_allStone` and
+`contentGridLensRow_not_obeys_noLive`. The existing two-bottom carrier gives
+`twoBottomGrid_directionVoid`, and
+`contentBeforeAfterRow_not_obeys_twoBottom` shows the directed-time content row
+also needs its strict-direction aptness hypothesis.
 
 **`BeingNegative`.** `twoBeingGrid` has two fine tags with identical response,
 grade, and symmetric delivery behavior. `κmerge` reads them as one macro tag;

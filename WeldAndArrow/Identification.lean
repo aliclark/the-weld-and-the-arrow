@@ -93,10 +93,26 @@ neutral definitions.
 The strictness facts are now in `Theory.lean` as `Strict`, `strict_irrefl`,
 `not_strict_of_orderEq`, and `no_strict_of_all_orderEq`. The arrow-of-time gloss
 uses `Grid.DirectedConvention.TimeDirection`, an abbreviation of `Strict`.
+`strict_shareBot_of_hasSelfPoleIndex` and its re-rooted
+`timeDirection_of_hasSelfPoleIndex` reading make a live share itself the
+direction witness against bottom. `DirectionVoid` names the absence of any
+strict comparison, while `AllStone` names the grid-wide absence of response
+function.
 
-The `beforeAfterRow` and `beingsRow` results are the formal checks behind the
-paper's collapse/freeze table: the rows obey separate/fuse, and their live-tier
-denials are self-refuting as diagnoses.
+The `beforeAfterRow`, `beingsRow`, and `gridLensRow` results are the formal
+checks behind the paper's collapse/freeze table: the rows obey separate/fuse,
+and their live-tier denials are self-refuting as diagnoses.
+
+The `contentLayerLanguage` keeps the convention-live side as the live-share
+condition and gives row-specific content to the denial side. Its obedience
+theorems are aptness-conditional by design: where the denial is simply true,
+the convention row should not be held. `RecordedUtterance` supplies the
+actuality needed for the utterance-level self-refutation facts.
+
+The `reEmptied` transformer and `ladder` iterate the separate/fuse rule without
+adding a claim that quantifies over all levels. The "completed ladder" is an
+instructive absence: level quantification appears only in meta-theorems such as
+`ladder_obeys` and `no_level_final`.
 
 C.3 Invariance.lean
 
@@ -118,6 +134,11 @@ thermodynamics language motivates the reading, but no theorem depends on it.
 `BeingNegative` is the parallel countermodel for designation: one fine grid
 admits both merge and split macro readings, so a unique being-boundary is not
 recoverable from the grid data alone.
+
+`ContentNegative` supplies the countermodels for the aptness hypotheses on
+content rows: an all-stone/no-live grid and the two-bottom direction-void
+carrier make the relevant denials true at non-live act-time, so fusion fails
+there.
 
 `SelfLineWitness` records that self-lines are permitted by the signature. The
 paper's shushō-ittō discussion is a reading of that permission, not an axiom.
@@ -482,6 +503,7 @@ inductive Disclaimer
   | beingTrichotomy
   | hareHornRegister
   | modalRealismFreeze
+  | aptnessConditionality
 
 namespace Disclaimer
 
@@ -527,12 +549,16 @@ def number : Disclaimer → Nat
   | .beingTrichotomy => 37
   | .hareHornRegister => 38
   | .modalRealismFreeze => 39
+  | .aptnessConditionality => 40
 
 theorem waaKarmaIdentification_number :
     number Disclaimer.waaKarmaIdentification = 9 := rfl
 
 theorem modalRealismFreeze_number :
     number Disclaimer.modalRealismFreeze = 39 := rfl
+
+theorem aptnessConditionality_number :
+    number Disclaimer.aptnessConditionality = 40 := rfl
 
 end Disclaimer
 

@@ -66,6 +66,9 @@ theorem no_strict_of_all_orderEq [Preorder α]
   not_strict_of_orderEq (h a b)
 
 /- Reading and motivation: Identification.lean, Commentary C.1. -/
+def DirectionVoid (α : Type) [Preorder α] : Prop := ∀ a b : α, ¬ Strict a b
+
+/- Reading and motivation: Identification.lean, Commentary C.1. -/
 class PreorderBot (α : Type) extends Preorder α where
   bot    : α
   bot_le : ∀ a, le bot a
@@ -102,6 +105,14 @@ theorem atBot_of_orderEq_shareBot [PreorderBot α] {a : α}
 theorem orderEq_shareBot_iff_atBot [PreorderBot α] (a : α) :
     OrderEq a shareBot ↔ AtBot a :=
   ⟨atBot_of_orderEq_shareBot, orderEq_shareBot_of_atBot⟩
+
+theorem strict_shareBot_iff_not_atBot [PreorderBot α] (a : α) :
+    Strict (shareBot : α) a ↔ ¬ AtBot a := by
+  constructor
+  · intro h
+    exact h.right
+  · intro h
+    exact ⟨shareBot_le a, h⟩
 
 /- Reading and motivation: Identification.lean, Commentary C.1. -/
 
@@ -161,6 +172,13 @@ def HasSelfPoleIndex (w : G.Weld) : Prop := ¬ AtBot (G.share w)
 
 /- Reading and motivation: Identification.lean, Commentary C.1. -/
 def selfPoleIndex (w : G.Weld) (_h : G.HasSelfPoleIndex w) : G.Being := w.agent
+
+/-- A live self-pole index gives a strict contribution witness above the
+    designated bottom. -/
+theorem strict_shareBot_of_hasSelfPoleIndex (w : G.Weld)
+    (h : G.HasSelfPoleIndex w) :
+    Strict (shareBot : Contrib) (G.share w) :=
+  ⟨shareBot_le (G.share w), h⟩
 
 /- Reading and motivation: Identification.lean, Commentary C.1. -/
 def WaaAppropriates (reception : G.Weld) : Prop := G.HasSelfPoleIndex reception
@@ -223,6 +241,9 @@ def RespondsToEveryCall (b : G.Being) : Prop := ∀ c, G.MountsAt b c
 
 /- Reading and motivation: Identification.lean, Commentary C.1. -/
 def Stone (b : G.Being) : Prop := ∀ c, ¬ G.MountsAt b c
+
+/- Reading and motivation: Identification.lean, Commentary C.1. -/
+def AllStone : Prop := ∀ b : G.Being, G.Stone b
 
 /- Reading and motivation: Identification.lean, Commentary C.1. -/
 def Terminus (b : G.Being) : Prop :=
@@ -332,6 +353,12 @@ namespace DirectedConvention
 
 /-- The strictness relation, exposed under the name used by this namespace. -/
 abbrev TimeDirection {α : Type} [Preorder α] (a b : α) : Prop := Strict a b
+
+/-- Re-rooted arrow reading of the neutral bottom-to-live-share witness. -/
+theorem timeDirection_of_hasSelfPoleIndex
+    (w : G.Weld) (h : G.HasSelfPoleIndex w) :
+    TimeDirection (shareBot : Contrib) (G.share w) :=
+  G.strict_shareBot_of_hasSelfPoleIndex w h
 
 /- Reading and motivation: Identification.lean, Commentary C.1. -/
 
