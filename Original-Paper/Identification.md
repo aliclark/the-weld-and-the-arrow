@@ -10,7 +10,7 @@ The abstract states the thesis once:
 
 The architectural fact under that sentence is the same one the Lean `Config` makes public: **nothing self-indexed is stored**. The field carries series, seeds, dispositions, delivery, and the re-pitched configuration the next deed reads. It does not carry a mineness. What is indexed is welded at act-time, spent at act-time, and then available only as a field-describable occurrence-fact. So the field vocabulary lacks the index by construction, not by defeat of a rival vocabulary.
 
-This is why the taxonomy can name internal **mis-feeds** cheaply. Feeding an index-free field-answer to an index-requiring designation -- *did I earn this?*, or the avyākata's search for the Tathāgata's self-pole after death -- is not a hard unanswered field-question. It is the wrong feed for that designation inside the grid. The point is grammatical and internal: the delivery-question belongs to inga; the index-question is enacted in the weld.
+This is why the taxonomy can name internal **mis-feeds** cheaply. Feeding an index-free field-answer to an index-requiring designation -- *did I earn this?*, or the avyākata's search for the Tathāgata's self-pole after death -- is not a hard unanswered field-question. It is the wrong feed for that designation inside the grid. The point is grammatical and internal: the delivery-question belongs to inga; the index-question is enacted in the weld. The joint is now fenced and gated in Lean: `MisFeedNegative` proves schematically that no answer-function for the index-seeking question-form can be correct under a witnessed field collision, and answers the delivery-typed twin in the same model. What remains prose is the third layer -- that the modeled designation-universe is adequate to the avyākata's actual questions -- flagged as a modeling claim, not a theorem.
 
 ## The offices-spine
 
@@ -106,6 +106,7 @@ The following are conventional and my own -- original moves, each flagged agains
 44. **Pole-affirming semantics** -- all schema rows share one tier-semantics: conventional force never lapses, denial holds at genjō by truth, and stability is paid only by the `*_obeys` family; content rows remain diagnostic because their global denials answer a different question.
 45. **Prose rows** -- being/non-being, ladder/terminus, genjō/shō, shō/satori, Row 2/Row 3, and description/injunction remain prose by stated reasons, with nearby theorem anchors rather than generated cell content.
 46. **Error-free reading** -- 破邪顕正 is checked as the `rowOf_obeys_iff_errorFree` biconditional on the primary language, and `ladder_obeys_of_errorFree` is the cumulative strengthening that vindicates the implemented ladder operator.
+47. **The mis-feed fence** -- the avyākata verdict's boundary formalized as an original move: the index-seeking question-form fenced by a schematic non-derivability theorem over a modeled designation-universe (`MisFeedNegative`), with a concrete collision witness and an answered delivery twin in the same model; the universe's adequacy to the canonical avyākata owned as a modeling claim. The tradition sets the questions aside; the fence-and-gate pair, and the claim that one grammatical joint sorts them, are mine.
 
 ## Glossary
 
@@ -122,7 +123,7 @@ The following are conventional and my own -- original moves, each flagged agains
 - **The being trichotomy** -- collapse deletes beings, freeze reifies a partition, convention leaves naming primitive and free.
 - **The hare's horn** -- nameable without realizability; impossible-being is constrained at realization/use, not at the act of designation.
 - **Modal Realism** -- the beings-row freeze: plenitude moved into ontology rather than left as conventional designation.
-- **Mis-feed** -- an internal taxonomy verdict: an index-free field-answer fed to an index-requiring designation, or a separated-tier question fed to a fusion point.
+- **Mis-feed** -- an internal taxonomy verdict: an index-free field-answer fed to an index-requiring designation, or a separated-tier question fed to a fusion point; licensed only through an exhaustive decomposition of the question's honest content, never by bare declaration; its one joint fenced schematically and gated by the delivery twin in `MisFeedNegative`.
 - **The disclaimers** -- the enumerated original moves, each flagged as conventional and the author's own against the canonical position it departs from or extends.
 
 ---

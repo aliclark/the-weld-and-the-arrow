@@ -489,20 +489,21 @@ below.
 The contemporary placement checks are `siderits_waaPlacement`,
 `ganeri_waaPlacement`, `zahavi_waaPlacement`, and `sartre_waaPlacement`.
 
-**Disclaimers.** `Disclaimer.number` now runs through 46. The recent entries are
+**Disclaimers.** `Disclaimer.number` now runs through 47. The recent entries are
 `beingConvention` (35), `pilotGeneratedRows` (36), `beingTrichotomy` (37),
 `hareHornRegister` (38), `modalRealismFreeze` (39), and
 `aptnessConditionality` (40), `sraddhaConditional` (41), and
 `faithBothConjuncts` (42). The table-generation entries append after those
 existing pins: `generatedTableStructure` (43), `poleAffirmingSemantics` (44),
-`proseRows` (45), and `errorFreeReading` (46).
+`proseRows` (45), and `errorFreeReading` (46). `misFeedFence` (47) records the
+avyākata fence-and-gate pair.
 `waaKarmaIdentification_number` pins `waaKarmaIdentification = 9`, and
 `modalRealismFreeze_number` pins `modalRealismFreeze = 39`.
 `aptnessConditionality_number` pins `aptnessConditionality = 40`;
 `sraddhaConditional_number` and `faithBothConjuncts_number` pin the two new
 Sraddha entries, while `generatedTableStructure_number`,
-`poleAffirmingSemantics_number`, and `errorFreeReading_number` pin the table
-entries.
+`poleAffirmingSemantics_number`, `errorFreeReading_number`, and
+`misFeedFence_number` pin the table and mis-feed entries.
 
 ---
 
@@ -613,6 +614,40 @@ all stone-typed and whose act-time tiers have no live share. It proves
 `contentBeforeAfterRow_not_obeys_twoBottom` shows the directed-time content row
 also needs its strict-direction aptness hypothesis.
 
+**`MisFeedNegative`.** `IndexSeekingForm` is the type of candidate
+answer-functions for the index-seeking question-shape: one designation per
+field residue (`Call × Response`), each purporting to name the residue's
+self-pole index. `AnswersCorrectly` is the success condition for the form:
+correctness at every actual weld. `FieldCollision` packages the hypothesis:
+two actual welds with the same field residue and distinct agents.
+
+`no_indexSeeking_success_of_collision` is the fence: under a collision, no
+answer-function for the form succeeds. The quantifier ranges over every
+candidate answer-function, so the non-derivability is a property of the
+question-shape, not of one failing instance. It is the same internal route as
+the wrinkle-1 recovery theorems (`CorrectFieldRecovery`,
+`no_agent_recovery_from_same_call_response`), specialized to the
+designation-universe the avyākata reading needs.
+
+`collisionGrid` is the non-vacuity witness: a concrete grid in which two beings
+actually produce the same call-response pair, so the fence's hypothesis is
+exhibited rather than assumed, the same duty `clockGrid` discharges for the
+function/share split.
+
+`deliveryTwinAnswers` is the gate: in the same concrete model, the
+delivery-typed twin question has a checked answer-function. The claim is
+model-local by design: it shows the fence does not enclose delivery-questions,
+and asserts nothing about their answerability in general, which the standing
+no-verdicts deny.
+
+Three layers are stated in order of decreasing formality: the question-shape is
+fenced schematically over the modeled designation-universe; the collision
+hypothesis is witnessed concretely; and the adequacy of that universe to the
+avyākata's natural-language questions is a modeling claim, argued in prose and
+owned as such. The third layer cannot be discharged in Lean, and the paper does
+not pretend otherwise; it is an aptness claim of the same standing as the
+content-row hypotheses beside `ContentNegative`.
+
 **`OrthogonalityNegative`.** Reuses the `SradNegative` zero-effectiveness grid:
 a responsive terminus can fail `SradFullyEnlightened` because the delivered
 deed has no share-drop landing for the receiver's live prior tendency.
@@ -658,6 +693,7 @@ The audited declarations are:
 - `Grid.DirectedConvention.sradPathOught_conditional`
 - `Grid.DirectedConvention.no_srad_path_at_pole`
 - `Grid.DirectedConvention.map_sradAversionContext_iff`
+- `MisFeedNegative.fence_and_gate`
 - `OrthogonalityNegative.sradFullyEnlightened_stronger_than_terminus`
 
 The pinned result is: no audited theorem depends on `sorry` or

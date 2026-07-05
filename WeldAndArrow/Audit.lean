@@ -110,4 +110,10 @@ info: 'WAA.OrthogonalityNegative.sradFullyEnlightened_stronger_than_terminus' do
 #guard_msgs in
 #print axioms OrthogonalityNegative.sradFullyEnlightened_stronger_than_terminus
 
+/--
+info: 'WAA.MisFeedNegative.fence_and_gate' does not depend on any axioms
+-/
+#guard_msgs in
+#print axioms MisFeedNegative.fence_and_gate
+
 end WAA

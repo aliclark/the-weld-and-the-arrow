@@ -553,6 +553,7 @@ inductive Disclaimer
   | poleAffirmingSemantics
   | proseRows
   | errorFreeReading
+  | misFeedFence
 
 namespace Disclaimer
 
@@ -605,6 +606,7 @@ def number : Disclaimer → Nat
   | .poleAffirmingSemantics => 44
   | .proseRows => 45
   | .errorFreeReading => 46
+  | .misFeedFence => 47
 
 theorem waaKarmaIdentification_number :
     number Disclaimer.waaKarmaIdentification = 9 := rfl
@@ -629,6 +631,9 @@ theorem poleAffirmingSemantics_number :
 
 theorem errorFreeReading_number :
     number Disclaimer.errorFreeReading = 46 := rfl
+
+theorem misFeedFence_number :
+    number Disclaimer.misFeedFence = 47 := rfl
 
 end Disclaimer
 
