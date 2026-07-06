@@ -120,21 +120,7 @@ The following are conventional and my own -- original moves, each flagged agains
 
 ## Glossary
 
-*Supplements the Theory and Theorems glossaries; terms defined there are not repeated.*
-
-- **The identification claim** -- karma names the loop in which the field carries everything diachronic and the weld enacts every index at act-time.
-- **State-designation vs. act-fixing** -- the chariot is had over a standing base at a time; karmic ownership is made at act-time, so there is no indexed base for a state-tool to range over.
-- **The offices-spine** -- the identity-claim argued from the object's usage: every office karmic ownership holds in the tradition (cetanā, reception, practice, remorse and absolution, dedication) discharges at act-time; the diachronic bookkeeping is where the tradition deflates itself.
-- **Thin for-me-ness** -- Zahavi's pre-reflective givenness, explicitly non-appropriative; recognized as what the weld's token-reflexivity itself needs -- the deed lit as this-deed-for-this-doer -- pared of one predicate: standing.
-- **The Sartrean occupant** -- what fills the clench-as-structure cell after the Zahavi retype: anguish as the very form of consciousness.
-- **The sower-reaps split** -- the report-face (true simpliciter, a field-fact) versus the ownership-face (done at reception, full or vacuous); never a standing relation between the two.
-- **The pole-typing corollary** -- the state-tool fits exactly where welding ceases: at share-zero no live self-pole index remains for it to miss.
-- **The soul-guard** -- the agent resists storage by being more thoroughly empty, never by being a special substance; forward-facing and retrospective bearers are both declined.
-- **The being trichotomy** -- collapse deletes beings, freeze reifies a partition, convention leaves naming primitive and free.
-- **The hare's horn** -- nameable without realizability; impossible-being is constrained at realization/use, not at the act of designation.
-- **Modal Realism** -- the beings-row freeze: plenitude moved into ontology rather than left as conventional designation.
-- **Mis-feed** -- an internal taxonomy verdict: an index-free field-answer fed to an index-requiring designation, or a separated-tier question fed to a fusion point; licensed only through an exhaustive decomposition of the question's honest content, never by bare declaration; its one joint fenced schematically and gated by the delivery twin in `MisFeedNegative`.
-- **The disclaimers** -- the enumerated original moves, each flagged as conventional and the author's own against the canonical position it departs from or extends.
+See [Glossary.md](Glossary.md). The canonical source is `WeldAndArrow/Meta/Glossary.lean`; regenerate with `lake exe glossary_gen > Original-Paper/Glossary.md`.
 
 ---
 

@@ -43,7 +43,7 @@ transitivity for `conditions`. Role-asymmetry is not temporal asymmetry: the
 
 `Grid.DirectedConvention.TimeDirection` is an abbreviation of `Strict`; all
 strictness theorems apply to it transparently. The formal modules keep their
-comments mathematical and point to `Identification/Commentary.lean` C.1-C.9 for
+comments mathematical and point to `Identification/Commentary.lean` C.1-C.12 for
 the paper-facing readings.
 
 The namespace tree now records ontological ordering. Floor/genjō and the bare
@@ -970,6 +970,14 @@ name `DirectionNegative`, the transposition pair, the fox theorem, and
 `MisFeedNegative.fence_and_gate`. The checkable half of the falsifier is
 `misFeed_entries_carry_decomposition`; the rate-trend half remains prose.
 
+**Glossary.** `Meta/Glossary.lean` is the canonical source for glossary data.
+Each `GlossaryEntry` records a term, provenance kind, newcomer-facing gloss,
+checked Lean anchors, and backward-only `seeAlso` references. Lean checks the
+table length, term uniqueness, `seeAlso` resolution to earlier rows, and anchor
+resolvability through `#verify_glossary_anchors`. The glosses' accuracy and
+canonical caveats remain prose; the Disclaimers carry expert-facing departures.
+`GlossaryGen.lean` renders the table to `Original-Paper/Glossary.md`.
+
 ---
 
 ## 6. Meta/Audit.lean
@@ -1021,8 +1029,8 @@ on exactly `[propext, Quot.sound]`, and
 `Grid.DirectedConvention.map_waaFaithPrinciple_reflect`, which depend on
 `[propext]`.
 
-The Lake build now targets the library `WeldAndArrow`; there is no `lean_exe`
-target and no `Main.lean`.
+The Lake build targets the library `WeldAndArrow` by default and also defines
+the non-default `lean_exe` target `glossary_gen`; there is no `Main.lean`.
 
 ---
 

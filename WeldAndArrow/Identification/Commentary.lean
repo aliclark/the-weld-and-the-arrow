@@ -573,4 +573,18 @@ falsifier: entries tagged as requiring a mis-feed decomposition carry one. The
 rate-trend clause and the claims that the retypes were forced, timely, and
 historically prior remain prose, because they quantify over the history rather
 than over the current record.
+
+C.12 Meta/Glossary.lean
+
+`Meta/Glossary.lean` is the canonical glossary source. The three markdown
+glossaries are retired in favor of generated output from `GlossaryGen.lean`;
+the paper-facing table lives at `Original-Paper/Glossary.md`.
+
+The module checks office discipline, not exposition itself. `glossary.length`
+pins the curated table size, the term strings are `Nodup`, every `seeAlso`
+target resolves to an earlier row, and `#verify_glossary_anchors` checks that
+all named Lean anchors exist in the environment. Empty anchors are allowed for
+terms whose public gloss is prose-only. Gloss accuracy, canonical nuance, and
+the adequacy of each gloss for newcomers remain prose obligations; expert
+caveats live in the Disclaimers.
 -/

@@ -4,3 +4,7 @@ defaultTargets = ["WeldAndArrow"]
 
 [[lean_lib]]
 name = "WeldAndArrow"
+
+[[lean_exe]]
+name = "glossary_gen"
+root = "GlossaryGen"
