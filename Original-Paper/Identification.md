@@ -70,7 +70,7 @@ The following are conventional and my own -- original moves, each flagged agains
 8. **Genjō as a single manifestation-floor with two attested arrivals** (the never-scaffolded stone and the scaffold-dissolved buddha; a third left open), practice-run-scaffold-free a proper subset.
 9. **The identification of karma with the field/weld loop** -- everything diachronic belongs to the field; every index is enacted and nothing indexed is stored; the naming is earned by the native act-time discharge of karmic ownership's offices.
 10. **The token-reflexivity of the weld-index** -- the index is made by the act that carries it: *this act's agent*, constituted by the deed rather than presupposed behind it.
-11. **The decomposition of MMK 17's two worries.**
+11. **The decomposition of MMK 17's two worries** -- condition-half (`WaaReportFace`), mineness-half (`WaaDiachronicWhose`, `no_diachronicWhose_from_series_alone`, `rePitch_forgets`), mis-feed half (`MisFeedNegative.fence_and_gate`), and reception-deed (`WaaOwnershipFace`).
 12. **The stone as the resonance scale's outside edge** -- the predicate typed over responses-to-calls, undefined where none is mounted.
 13. **The error-taxonomy as generated**, not listed -- collapse and freeze as the two violations of the separate/fuse rule, one pair per distinction, non-linear by construction.
 14. **The two grades of error** -- grammatical verdicts the system asserts (within the lens), soteriological shortfalls it can only display -- with the bodhisattva located structurally by that split, room and shape without pull, and no added axiom.

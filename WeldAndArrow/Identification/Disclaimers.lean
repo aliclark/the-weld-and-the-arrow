@@ -141,6 +141,9 @@ def number : Disclaimer → Nat
 theorem waaKarmaIdentification_number :
     number Disclaimer.waaKarmaIdentification = 9 := rfl
 
+theorem mmk17Decomposition_number :
+    number Disclaimer.mmk17Decomposition = 11 := rfl
+
 theorem modalRealismFreeze_number :
     number Disclaimer.modalRealismFreeze = 39 := rfl
 
