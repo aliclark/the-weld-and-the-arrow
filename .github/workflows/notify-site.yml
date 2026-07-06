@@ -7,10 +7,13 @@ on:
 jobs:
   notify:
     runs-on: ubuntu-latest
+    env:
+      SITE_DISPATCH_TOKEN: ${{ secrets.SITE_DISPATCH_TOKEN }}
     steps:
       - name: Dispatch site rebuild
+        if: ${{ env.SITE_DISPATCH_TOKEN != '' }}
         env:
-          GH_TOKEN: ${{ secrets.SITE_DISPATCH_TOKEN }}
+          GH_TOKEN: ${{ env.SITE_DISPATCH_TOKEN }}
           SITE_REPO: ${{ github.repository_owner }}/website
           SOURCE_SHA: ${{ github.sha }}
         run: |
@@ -18,3 +21,7 @@ jobs:
             --method POST \
             --field event_type=source-push \
             --raw-field client_payload="{\"sha\":\"${SOURCE_SHA}\"}"
+
+      - name: Skip dispatch without token
+        if: ${{ env.SITE_DISPATCH_TOKEN == '' }}
+        run: echo "::warning::SITE_DISPATCH_TOKEN is not configured; site redeploy dispatch was skipped."
