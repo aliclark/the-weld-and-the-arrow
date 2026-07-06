@@ -11,7 +11,7 @@ import WeldAndArrow.Identification.Ownership
 
 namespace WAA
 
-/-- Contemporary positions placed by `Paper/Proofs.md`. -/
+/-- Contemporary positions placed by `Exposition/Identification.md`. -/
 inductive ContemporaryPosition
   | siderits
   | ganeri

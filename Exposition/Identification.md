@@ -120,7 +120,7 @@ The following are conventional and my own -- original moves, each flagged agains
 
 ## Glossary
 
-See [Glossary.md](Glossary.md). The canonical source is `WeldAndArrow/Meta/Glossary.lean`; regenerate with `lake exe glossary_gen > Original-Paper/Glossary.md`.
+See [Glossary.md](Glossary.md). The canonical source is `WeldAndArrow/Meta/Glossary.lean`; regenerate with `lake exe glossary_gen > Exposition/Glossary.md`.
 
 ---
 

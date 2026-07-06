@@ -994,7 +994,7 @@ checked Lean anchors, and backward-only `seeAlso` references. Lean checks the
 table length, term uniqueness, `seeAlso` resolution to earlier rows, and anchor
 resolvability through `#verify_glossary_anchors`. The glosses' accuracy and
 canonical caveats remain prose; the Disclaimers carry expert-facing departures.
-`GlossaryGen.lean` renders the table to `Original-Paper/Glossary.md`.
+`GlossaryGen.lean` renders the table to `Exposition/Glossary.md`.
 
 ---
 
