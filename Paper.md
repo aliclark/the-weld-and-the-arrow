@@ -706,6 +706,17 @@ contradictions with non-delivery, or definitional biconditionals:
 - `not_waaOwnershipFace_of_waaVacuousOwnershipFace`
 - `waaDiachronicWhose_iff_delivery_and_waaAppropriates`
 
+The concrete memory display is
+`Grid.DirectedConvention.MemoryWitness.memory_witness` over
+`registerClockGrid`. It names the registers `pastDeed`, `recall`, and
+`confabulatedDeed`; the delivered side is checked by `trace_delivered`,
+`recall_waaOwnershipFace`, and `recall_waaDiachronicWhose`; the false-memory
+side is checked by `confabulated_not_delivered` and
+`falseMemory_waaVacuousOwnershipFace`. `vacuity_not_inner_mark` projects the
+same recall-side WAA-appropriation from both faces while closing the
+non-delivered contrast, and `recall_spent` is the `rePitch_forgets` instance
+that makes the recall weld spent at recall-time.
+
 **Token reflexivity.** `selfAnchored`: `index w = w.agent`. Definitional
 (`rfl`).
 

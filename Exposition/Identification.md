@@ -28,7 +28,7 @@ Diachronic bookkeeping is exactly where the tradition deflates itself: *na ca so
 
 The grid's supplement to the old formula is a split, not a replacement. "The sower reaps" has a report-face and an ownership-face. The report-face is true simpliciter: this deed conditioned this reception, a delivery-fact the field carries. The ownership-face is done: at reception, the reach-back appropriates what arrived as *mine*, and the doing is spent at that same act-time.
 
-If delivery drew no line, the reach-back's second place stands unfilled. That failure-mode is vacuity, not falsity: an appropriating with nothing arrived to appropriate. False memory is the psychological dress of the same typing. The field owns the conditions in the deflated sense -- it settles whether anything arrived to weld -- while the weld answers only the index-question over what arrives.
+If delivery drew no line, the reach-back's second place stands unfilled. That failure-mode is vacuity, not falsity: an appropriating with nothing arrived to appropriate. False memory is the psychological dress of the same typing (`WaaVacuousOwnershipFace`, checked concretely by `MemoryWitness.falseMemory_waaVacuousOwnershipFace`). The field owns the conditions in the deflated sense -- it settles whether anything arrived to weld -- while the weld answers only the index-question over what arrives.
 
 The diachronic *whose* therefore decomposes into delivery plus fresh appropriation. There is no third cross-gap ownership-fact to store or consult, and no standing backward relation hiding under the reach-back. Held that way, it would be the retrospective soul; the soul-guard is still needed precisely because the index must not be read as stored.
 

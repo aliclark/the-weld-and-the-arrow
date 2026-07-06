@@ -447,10 +447,15 @@ def glossary : List GlossaryEntry := [
   { term := "memory theorem"
     kind := .coinage .theorems
     gloss := "The memory theorem reads a trace as a seed and remembering as a fresh reception. Felt mineness is predicted at recall-time without being stored before recall."
+    anchors := [``Grid.DirectedConvention.MemoryWitness.memory_witness,
+      ``Grid.DirectedConvention.WaaVacuousOwnershipFace,
+      ``Grid.DirectedConvention.WaaDiachronicWhose]
     seeAlso := ["seed", "reach-back"] },
   { term := "retrospective soul"
     kind := .coinage .theorems
     gloss := "The retrospective soul is the error of freezing reach-back into a standing backward owner. It is the psychological version of treating fresh mineness as stored mineness."
+    anchors := [``Grid.DirectedConvention.BeingConvention.GridConvention.sowingReapingRow_not_freeze,
+      ``no_agent_recovery_of_field_collision]
     seeAlso := ["memory theorem", "reach-back", "standing/dated"] },
   { term := "prudence theorem"
     kind := .coinage .theorems

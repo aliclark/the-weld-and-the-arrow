@@ -166,6 +166,13 @@ retype, while the second names the sudden/gradual possibility claim.
 actuality, `waaGradualArrival_witness` gives the register-clock staged form,
 and `rate_invisible_to_config` deliberately reuses `rePitch_forgets` as the
 rate-invariance anchor.
+`MemoryWitness.memory_witness` uses the same register-clock shape to display
+recall as reception: `recall_waaOwnershipFace` names the delivered trace,
+`falseMemory_waaVacuousOwnershipFace` names the unfilled second place, and
+`recall_spent` names the `rePitch_forgets` spentness. The memory names stay
+separate even where their concrete welds coincide with the prudence witness, so
+the two pressure-tests can cite the same registers without depending on each
+other.
 `withRespondsTo` and `staticized` are the futility operation: delivery-loss is
 real (`futility_delivery_loss_real`) while object-axis standing is unchanged
 (`Grid.DirectedConvention.staticized_objectAxisStanding_iff`).

@@ -101,6 +101,103 @@ theorem no_diachronicWhose_from_series_alone
     deed reception).mp hwhose).right
 
 /- ==============================================================================
+   §2  Memory witness
+============================================================================== -/
+
+namespace MemoryWitness
+
+/-- The trace-source deed in the checked recall witness. It deliberately repeats
+    the prudence witness's concrete registers under fresh names: memory and
+    prudence share the same display grid without coupling their namespaces. -/
+def pastDeed : registerClockGrid.Weld :=
+  ⟨(1 : Nat), (), (2 : Nat)⟩
+
+/-- The later reception at which the trace is received and appropriated. -/
+def recall : registerClockGrid.Weld :=
+  ⟨(2 : Nat), (), (3 : Nat)⟩
+
+/-- A claimed deed whose delivery line does not reach `recall`. -/
+def confabulatedDeed : registerClockGrid.Weld :=
+  ⟨(0 : Nat), (), (1 : Nat)⟩
+
+/-- The trace-source deed is delivered to the later recall reception. -/
+theorem trace_delivered :
+    DeliveredTo registerClockGrid pastDeed recall :=
+  rfl
+
+theorem recall_waaAppropriates :
+    registerClockGrid.WaaAppropriates recall := by
+  dsimp [Grid.WaaAppropriates, Grid.HasSelfPoleIndex, Grid.share,
+    registerClockGrid, recall, AtBot, shareBot]
+  change ¬ (2 : Nat) ≤ 0
+  exact Nat.not_succ_le_zero 1
+
+/-- Genuine recall has the full ownership face: the trace lands at an actual
+    later reception, and that reception freshly appropriates. -/
+theorem recall_waaOwnershipFace :
+    WaaOwnershipFace registerClockGrid pastDeed recall :=
+  ⟨⟨trace_delivered, rfl⟩, recall_waaAppropriates⟩
+
+/-- The diachronic whose-question for recall is delivery plus fresh
+    reception-time appropriation. -/
+theorem recall_waaDiachronicWhose :
+    WaaDiachronicWhose registerClockGrid pastDeed recall :=
+  ⟨trace_delivered, recall_waaAppropriates⟩
+
+/-- The confabulated deed is not delivered to the recall reception. -/
+theorem confabulated_not_delivered :
+    NotDeliveredTo registerClockGrid confabulatedDeed recall := by
+  dsimp [NotDeliveredTo, registerClockGrid, confabulatedDeed, recall]
+  decide
+
+/-- False memory has the vacuous ownership face: the reception is actual and
+    appropriating, but the claimed deed did not arrive there. -/
+theorem falseMemory_waaVacuousOwnershipFace :
+    WaaVacuousOwnershipFace registerClockGrid confabulatedDeed recall :=
+  ⟨confabulated_not_delivered, ⟨rfl, recall_waaAppropriates⟩⟩
+
+/-- The appropriating conjunct projected from the full recall face. -/
+theorem fullFace_recall_waaAppropriates :
+    registerClockGrid.WaaAppropriates recall :=
+  waaAppropriates_of_waaOwnershipFace registerClockGrid recall_waaOwnershipFace
+
+/-- The appropriating conjunct projected from the vacuous false-memory face. -/
+theorem vacuousFace_recall_waaAppropriates :
+    registerClockGrid.WaaAppropriates recall :=
+  falseMemory_waaVacuousOwnershipFace.right.right
+
+/-- Full recall and false memory share the same reception-side appropriation
+    mark; the contrast is only whether delivery filled the second place. -/
+theorem vacuity_not_inner_mark :
+    registerClockGrid.WaaAppropriates recall ∧
+      registerClockGrid.WaaAppropriates recall ∧
+        ¬ WaaOwnershipFace registerClockGrid confabulatedDeed recall :=
+  ⟨fullFace_recall_waaAppropriates,
+    vacuousFace_recall_waaAppropriates,
+    not_waaOwnershipFace_of_waaVacuousOwnershipFace registerClockGrid
+      falseMemory_waaVacuousOwnershipFace⟩
+
+/-- Re-pitching into recall forgets every prior configuration: the mineness is
+    made and spent at the recall weld, not stored in the trace. -/
+theorem recall_spent
+    (before1 before2 : Config Nat) :
+    registerClockGrid.rePitch before1 recall =
+      registerClockGrid.rePitch before2 recall :=
+  registerClockGrid.rePitch_forgets before1 before2 recall
+
+/-- The checked memory package: full recall, vacuous false memory, and
+    recall-time spentness in one register-clock display. -/
+theorem memory_witness :
+    WaaOwnershipFace registerClockGrid pastDeed recall ∧
+      WaaVacuousOwnershipFace registerClockGrid confabulatedDeed recall ∧
+        (∀ before1 before2 : Config Nat,
+          registerClockGrid.rePitch before1 recall =
+            registerClockGrid.rePitch before2 recall) :=
+  ⟨recall_waaOwnershipFace, falseMemory_waaVacuousOwnershipFace, recall_spent⟩
+
+end MemoryWitness
+
+/- ==============================================================================
    §2  Prudential privilege negative
 ============================================================================== -/
 
