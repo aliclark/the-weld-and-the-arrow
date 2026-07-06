@@ -11,6 +11,7 @@ accuracy and aptness of the glosses remain prose obligations.
 -/
 
 import Lean
+import WeldAndArrow.Consequences.Compounds
 import WeldAndArrow.Doctrines
 import WeldAndArrow.Identification
 import WeldAndArrow.Meta.VerdictLedger
@@ -617,6 +618,14 @@ def glossary : List GlossaryEntry := [
   { term := "pariṇāmanā / dedication"
     kind := .canonical
     gloss := "Pariṇāmanā means dedication or turning over merit. In this system it is sowing-side share-cession whose routing is left to delivery rather than commanded by the act."
+    anchors := [``Grid.DirectedConvention.BeingConvention.GridConvention.CompoundPosition.ledgerPicture,
+      ``Grid.DirectedConvention.BeingConvention.GridConvention.CompoundPosition.ledgerPicture_decomposition,
+      ``Grid.DirectedConvention.BeingConvention.GridConvention.CompoundPosition.ledgerPicture_contains_legal_causalSkeleton,
+      ``Grid.DirectedConvention.SameAgentDelivery,
+      ``Grid.DirectedConvention.CrossAgentDelivery,
+      ``Grid.DirectedConvention.reception_typing_ignores_sower,
+      ``OtherPowerNegative.regime_does_not_determine_share,
+      ``OtherPowerNegative.share_does_not_determine_regime]
     seeAlso := ["share", "delivery-regime", "aimed call"] },
   { term := "instructive absences"
     kind := .coinage .theorems

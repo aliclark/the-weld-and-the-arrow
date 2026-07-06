@@ -790,8 +790,9 @@ total-rectangle cut and three-rung ladder, and
 ethics-code tail. `verdictRecordData` (56) records the generator's
 episode-grained verdict history as Lean data, including the retype entries in
 `generatorRecord` (`Meta/VerdictLedger.lean`), and `compoundCellStacks` (57)
-records the compound-position decompositions over existing `TableRow`s, with
-facets, roles, voices, and core-cell counts in `Consequences/Compounds.lean`.
+records the five compound-position decompositions over existing `TableRow`s,
+with facets, roles, voices, legal elements, and core-cell counts in
+`Consequences/Compounds.lean`.
 `waaKarmaIdentification_number` pins `waaKarmaIdentification = 9`, and
 `modalRealismFreeze_number` pins `modalRealismFreeze = 39`.
 `aptnessConditionality_number` pins `aptnessConditionality = 40`;

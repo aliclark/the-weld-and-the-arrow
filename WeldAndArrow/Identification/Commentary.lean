@@ -126,6 +126,12 @@ already carry their own refutations. The type-level guard is that components
 can cite only `TableRow`s already in the Grade-1 table; facets mark distinct
 prose faces of repeated rows, roles separate stacked cells from Grade-1 cells
 riding alongside, and legal elements carry no verdict voice.
+`CompoundPosition.ledgerPicture` is the fifth entry: possession-freeze and
+transposed-as-mechanism are stacked cells, command-style delivery-arrogation is
+the conditional `.alongside` cell, and the causal skeleton is carried as a
+legal element. The `.command` facet is row-neutral like the others; it only
+keeps the command face from collapsing into the exit-premise's plain
+delivery-index citation.
 
 The `contentLayerLanguage` keeps the convention-live side as the live-share
 condition and gives row-specific content to the denial side. Its obedience
@@ -524,7 +530,9 @@ The module deliberately declines polemic. `OtherPowerNegative` gives the two
 freedom witnesses: `regime_does_not_determine_share` shows that same-agent and
 cross-agent lines each allow live and pole-class receptions, while
 `share_does_not_determine_regime` shows that equal reception share does not
-recover the regime.
+recover the regime. That is enough for the svakarma demotion: restricting
+delivery to same-agent lines is a regime wall, not a change in reception
+typing.
 
 C.10 Doctrines/Gradeability.lean
 

@@ -39,10 +39,12 @@ inductive Facet
   | structure
   | direction
   | domain
+  | command
 
 /-- Elements the prose explicitly marks grid-legal rather than erroneous. -/
 inductive LegalElement
   | valueCreation
+  | causalSkeleton
 
 /-- One element of a compound position's decomposition.
 
@@ -89,6 +91,7 @@ inductive CompoundPosition
   | solipsism
   | exitPremise
   | existentialism
+  | ledgerPicture
 
 namespace CompoundPosition
 
@@ -111,6 +114,11 @@ def decomposition : CompoundPosition -> List CompoundComponent
       .cell (.generated .standingDated) .freeze .structure .core,
       .cell (.generated .karmaInga) .freeze .plain .core,
       .legal .valueCreation ]
+  | ledgerPicture => [
+      .cell (.generated .deliveryIndex) .freeze .plain .core,
+      .cell (.generated .selfPoleTransposed) .freeze .plain .core,
+      .cell (.generated .deliveryIndex) .collapse .command .alongside,
+      .legal .causalSkeleton ]
 
 theorem skepticism_decomposition :
     decomposition skepticism =
@@ -141,6 +149,14 @@ theorem existentialism_decomposition :
         .legal .valueCreation ] :=
   rfl
 
+theorem ledgerPicture_decomposition :
+    decomposition ledgerPicture =
+      [ .cell (.generated .deliveryIndex) .freeze .plain .core,
+        .cell (.generated .selfPoleTransposed) .freeze .plain .core,
+        .cell (.generated .deliveryIndex) .collapse .command .alongside,
+        .legal .causalSkeleton ] :=
+  rfl
+
 theorem skepticism_core_cell_count :
     CompoundComponent.countCoreCells (decomposition skepticism) = 1 :=
   rfl
@@ -165,6 +181,18 @@ theorem existentialism_legal_count :
     CompoundComponent.countLegal (decomposition existentialism) = 1 :=
   rfl
 
+theorem ledgerPicture_core_cell_count :
+    CompoundComponent.countCoreCells (decomposition ledgerPicture) = 2 :=
+  rfl
+
+theorem ledgerPicture_alongside_cell_count :
+    CompoundComponent.countAlongsideCells (decomposition ledgerPicture) = 1 :=
+  rfl
+
+theorem ledgerPicture_legal_count :
+    CompoundComponent.countLegal (decomposition ledgerPicture) = 1 :=
+  rfl
+
 theorem exitPremise_voices :
     (decomposition exitPremise).map CompoundComponent.voice =
       [ some VerdictVoice.assertable, some VerdictVoice.assertable,
@@ -175,6 +203,12 @@ theorem existentialism_voices :
     (decomposition existentialism).map CompoundComponent.voice =
       [ some VerdictVoice.assertable, some VerdictVoice.assertable,
         some VerdictVoice.assertable, some VerdictVoice.assertable, none ] :=
+  rfl
+
+theorem ledgerPicture_voices :
+    (decomposition ledgerPicture).map CompoundComponent.voice =
+      [ some VerdictVoice.assertable, some VerdictVoice.assertable,
+        some VerdictVoice.assertable, none ] :=
   rfl
 
 theorem skepticism_contains_epistemic_nihilism :
@@ -207,6 +241,27 @@ theorem existentialism_contains_sartrean_structure :
 
 theorem existentialism_contains_legal_valueCreation :
     CompoundComponent.legal .valueCreation ∈ decomposition existentialism := by
+  simp [decomposition]
+
+theorem ledgerPicture_contains_possession_freeze :
+    CompoundComponent.cell (.generated .deliveryIndex) .freeze .plain .core ∈
+      decomposition ledgerPicture := by
+  simp [decomposition]
+
+theorem ledgerPicture_contains_transposed_mechanism :
+    CompoundComponent.cell (.generated .selfPoleTransposed) .freeze .plain
+        .core ∈
+      decomposition ledgerPicture := by
+  simp [decomposition]
+
+theorem ledgerPicture_contains_delivery_arrogation :
+    CompoundComponent.cell (.generated .deliveryIndex) .collapse .command
+        .alongside ∈
+      decomposition ledgerPicture := by
+  simp [decomposition]
+
+theorem ledgerPicture_contains_legal_causalSkeleton :
+    CompoundComponent.legal .causalSkeleton ∈ decomposition ledgerPicture := by
   simp [decomposition]
 
 variable {Contrib : Type} [PreorderBot Contrib]
@@ -247,6 +302,18 @@ theorem existentialism_standingDated_row_not_freeze :
 theorem existentialism_karmaInga_row_not_freeze :
     ¬ (karmaIngaRow G).Freeze :=
   karmaIngaRow_not_freeze G
+
+theorem ledgerPicture_deliveryIndex_row_not_freeze :
+    ¬ (deliveryIndexRow G).Freeze :=
+  deliveryIndexRow_not_freeze G
+
+theorem ledgerPicture_deliveryIndex_collapse_self_refuting (t : Tier G) :
+    ¬ (deliveryIndexRow G).Collapse t :=
+  misfed_register_collapse_self_refuting G t
+
+theorem ledgerPicture_selfPoleTransposed_row_not_freeze :
+    ¬ (selfPoleTransposedRow G).Freeze :=
+  selfPoleTransposedRow_not_freeze G
 
 end CompoundPosition
 
