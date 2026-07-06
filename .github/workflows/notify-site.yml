@@ -1,0 +1,20 @@
+name: Notify site
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch site rebuild
+        env:
+          GH_TOKEN: ${{ secrets.SITE_DISPATCH_TOKEN }}
+          SITE_REPO: ${{ github.repository_owner }}/weld-and-arrow-site
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          gh api "repos/${SITE_REPO}/dispatches" \
+            --method POST \
+            --field event_type=source-push \
+            --raw-field client_payload="{\"sha\":\"${SOURCE_SHA}\"}"
