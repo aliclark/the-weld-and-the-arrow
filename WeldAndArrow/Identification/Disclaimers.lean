@@ -15,8 +15,7 @@ namespace WAA
    §5  Disclaimers
 ============================================================================== -/
 
-/-- The original moves plus the being-convention extension enumerated in
-    `Paper/Proofs.md`. -/
+/-- The paper-facing disclaimer entries enumerated in the disclaimer list. -/
 inductive Disclaimer
   | tieringSeparateFuse
   | shoAgencyLent
@@ -73,6 +72,8 @@ inductive Disclaimer
   | enlightenmentLadder
   | ethicsBundledConditionalCode
   | codeHonestyClauses
+  | verdictRecordData
+  | compoundCellStacks
 
 namespace Disclaimer
 
@@ -134,6 +135,8 @@ def number : Disclaimer → Nat
   | .enlightenmentLadder => 53
   | .ethicsBundledConditionalCode => 54
   | .codeHonestyClauses => 55
+  | .verdictRecordData => 56
+  | .compoundCellStacks => 57
 
 theorem waaKarmaIdentification_number :
     number Disclaimer.waaKarmaIdentification = 9 := rfl
@@ -155,6 +158,9 @@ theorem generatedTableStructure_number :
 
 theorem poleAffirmingSemantics_number :
     number Disclaimer.poleAffirmingSemantics = 44 := rfl
+
+theorem proseRows_number :
+    number Disclaimer.proseRows = 45 := rfl
 
 theorem errorFreeReading_number :
     number Disclaimer.errorFreeReading = 46 := rfl
@@ -185,6 +191,12 @@ theorem ethicsBundledConditionalCode_number :
 
 theorem codeHonestyClauses_number :
     number Disclaimer.codeHonestyClauses = 55 := rfl
+
+theorem verdictRecordData_number :
+    number Disclaimer.verdictRecordData = 56 := rfl
+
+theorem compoundCellStacks_number :
+    number Disclaimer.compoundCellStacks = 57 := rfl
 
 end Disclaimer
 

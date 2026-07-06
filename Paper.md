@@ -774,7 +774,7 @@ regime fact to be supplied by a model, not a structural axiom.
 The contemporary placement checks are `siderits_waaPlacement`,
 `ganeri_waaPlacement`, `zahavi_waaPlacement`, and `sartre_waaPlacement`.
 
-**Disclaimers.** `Disclaimer.number` now runs through 55. The recent entries are
+**Disclaimers.** `Disclaimer.number` now runs through 57. The recent entries are
 `beingConvention` (35), `pilotGeneratedRows` (36), `beingTrichotomy` (37),
 `hareHornRegister` (38), `modalRealismFreeze` (39), and
 `aptnessConditionality` (40), `sraddhaConditional` (41), and
@@ -787,18 +787,24 @@ avyākata fence-and-gate pair. The correlation entries are `tenBullsTyped` (48),
 call/tag fetter lattice, `enlightenmentLadder` (53) records the neutral
 total-rectangle cut and three-rung ladder, and
 `ethicsBundledConditionalCode` (54) with `codeHonestyClauses` (55) records the
-ethics-code tail.
+ethics-code tail. `verdictRecordData` (56) records the generator's
+episode-grained verdict history as Lean data, including the retype entries in
+`generatorRecord` (`Meta/VerdictLedger.lean`), and `compoundCellStacks` (57)
+records the compound-position decompositions over existing `TableRow`s, with
+facets, roles, voices, and core-cell counts in `Consequences/Compounds.lean`.
 `waaKarmaIdentification_number` pins `waaKarmaIdentification = 9`, and
 `modalRealismFreeze_number` pins `modalRealismFreeze = 39`.
 `aptnessConditionality_number` pins `aptnessConditionality = 40`;
 `sraddhaConditional_number` and `faithBothConjuncts_number` pin the two new
 Sraddha entries, while `generatedTableStructure_number`,
-`poleAffirmingSemantics_number`, `errorFreeReading_number`, and
+`poleAffirmingSemantics_number`, `proseRows_number`,
+`errorFreeReading_number`, and
 `misFeedFence_number` pin the table and mis-feed entries; the newer
 correlation and disclaimer pins are `tenBullsTyped_number`, `fiveRanksRetype_number`,
 `stageSchemeCoarsening_number`, `fetterCutTyping_number`,
 `twoAxisFetterLattice_number`, `enlightenmentLadder_number`,
-`ethicsBundledConditionalCode_number`, and `codeHonestyClauses_number`.
+`ethicsBundledConditionalCode_number`, `codeHonestyClauses_number`,
+`verdictRecordData_number`, and `compoundCellStacks_number`.
 
 ---
 
