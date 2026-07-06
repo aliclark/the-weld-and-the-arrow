@@ -70,6 +70,9 @@ inductive Disclaimer
   | stageSchemeCoarsening
   | fetterCutTyping
   | twoAxisFetterLattice
+  | enlightenmentLadder
+  | ethicsBundledConditionalCode
+  | codeHonestyClauses
 
 namespace Disclaimer
 
@@ -128,6 +131,9 @@ def number : Disclaimer → Nat
   | .stageSchemeCoarsening => 50
   | .fetterCutTyping => 51
   | .twoAxisFetterLattice => 52
+  | .enlightenmentLadder => 53
+  | .ethicsBundledConditionalCode => 54
+  | .codeHonestyClauses => 55
 
 theorem waaKarmaIdentification_number :
     number Disclaimer.waaKarmaIdentification = 9 := rfl
@@ -170,6 +176,15 @@ theorem fetterCutTyping_number :
 
 theorem twoAxisFetterLattice_number :
     number Disclaimer.twoAxisFetterLattice = 52 := rfl
+
+theorem enlightenmentLadder_number :
+    number Disclaimer.enlightenmentLadder = 53 := rfl
+
+theorem ethicsBundledConditionalCode_number :
+    number Disclaimer.ethicsBundledConditionalCode = 54 := rfl
+
+theorem codeHonestyClauses_number :
+    number Disclaimer.codeHonestyClauses = 55 := rfl
 
 end Disclaimer
 

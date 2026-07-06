@@ -208,7 +208,7 @@ And mark what the case never tests: neither utterance occurs at the pole. The ko
 - **Tag / fiber** — a fine `Being` tag versus the macro tag's preimage under a coarsening; sentience, pole-reading, and self-aptness are fiber-level predicates.
 - **Tag-region / soma-reading** — model-supplied fine-tag class dualizing the provocation class; never grid-recoverable.
 - **Within-cut** — quietness on a (call-class × tag-class) rectangle; cessation of enactment there, monotone in both coordinates.
-- **Vāsanā** — clench still enacted in the uncut tag-region after the call-axis closes; the arhat/buddha residue, an existing-cell reading.
+- **Vāsanā** — clench still enacted in the uncut tag-region after the call-axis closes; complement-region residue, an existing-cell reading.
 - **Sentient / insentient tag** — `SentientTag` means some fine tag in the fiber mounts a response; insentience is its negation, constructively equivalent to the all-stone fiber.
 - **FiberAtPole / SelfAptTag / Patchy** — the fiber spectrum: every actual weld at the pole; every actual weld self-apt; or the irreducible mixed case. No aggregate fiber-share is defined.
 - **Coherence (grade)** — an effectiveness/display grade over a coarsening, not a type and never a condition of legitimate designation.

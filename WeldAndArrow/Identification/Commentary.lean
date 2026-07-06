@@ -28,7 +28,7 @@ Unprefixed names remain the neutral delivery, order, token-projection, and
 tier-placement vocabulary, including `SameAgentDelivery` and
 `CrossAgentDelivery`. `Grid.DirectedConvention` marks vocabulary that consumes
 the directional reading of `conditions`; the primitive signature itself does
-not add asymmetry, irreflexivity, or transitivity axioms to `conditions`.
+not add asymmetry, irreflexivity, or transitivity premises to `conditions`.
 
 C.1 Signature/Order.lean, Signature/Grid.lean, Signature/BeingConvention.lean,
     Signature/Models.lean, Signature/Claims.lean
@@ -173,7 +173,7 @@ the symmetric field structure does not recover direction. The physics and
 thermodynamics language motivates the reading, but no theorem depends on it.
 
 `BeingNegative` is the parallel countermodel for designation: one fine grid
-admits both merge and split macro readings, so a unique being-boundary is not
+allows both merge and split macro readings, so a unique being-boundary is not
 recoverable from the grid data alone.
 
 `ContentNegative` supplies the countermodels for the aptness hypotheses on
@@ -196,6 +196,11 @@ possession. `WaaFullyEnlightened` deliberately has two conjuncts: terminus
 typing and universal shortfall closure for delivered deeds. The physician
 simile belongs exactly there: the grid can prove `waaPathOught_conditional`,
 but the antecedents are faith-shaped and are never discharged by field facts.
+The faith-object therefore cannot be replaced by anything the fetter lattice
+names: the total-rectangle cut lacks function by
+`FettersNegative.total_cut_carries_no_function`, and even the live fiber reading
+lacks effectiveness by
+`FettersNegative.total_cut_with_function_not_waaFullyEnlightened`.
 
 `WaaFaithPrinciple` abstracts the sraddha antecedent to testimony: faith in
 enlightenment transmits truth to recorded utterances, with
@@ -217,6 +222,10 @@ to the faith-object.
 `SraddhaNegative` shows that dropping faith or dropping the live-aversion
 antecedent loses the landing, and `OrthogonalityNegative` shows that a
 responsive terminus need not be `WaaFullyEnlightened`.
+The opposite regime face is checked by
+`waaFullyEnlightened_of_responsiveTerminus_of_undelivered`: with no delivered
+own deeds, the closure conjunct holds vacuously. Teaching and non-teaching are
+delivery facts around a terminus, not two being-natures stored in it.
 
 C.5 Doctrines/Deliberation.lean
 
@@ -366,13 +375,36 @@ The path scheme is nested class quietness. `Path.cutClasses` gives the stream,
 once-return, non-return, and arhat call-classes; once-return adds no new cut
 class, matching the prose weakening clause. `arhatPathQuiet_iff_fiberAtPole`
 says the arhat class is total, so arhat path-quietness is ordinary
-`FiberAtPole`. The within-family adds the tag cut: arhat-typing is
-`PathQuietWithin` at `SomaReading.speechThoughtTag`, while buddha-typing is the
-total-tag point, theorem-identical to ordinary `FiberAtPole` by
-`arhatWithin_univTags_iff_fiberAtPole`. The buddha enters this fetter model as
-a theorem about the lattice's total point, not as a fresh definition; vāsanā is
-residual clench enacted in the complement region after the call-axis closes, an
-existing-cell reading. The older arhat anchors remain and have region duals:
+`FiberAtPole`. The within-family adds the tag cut. Sravaka-arhat is
+`PathQuietWithin` at `SomaReading.speechThoughtTag`; the total calls/total tags
+point is neutral, theorem-identical to ordinary `FiberAtPole` by
+`arhatWithin_univTags_iff_fiberAtPole`. Vasana remains residual clench enacted
+in the complement region after the call-axis closes, an existing-cell reading.
+
+The buddha reading enters only as a three-rung ladder above that neutral point.
+Rung 1 is the total-rectangle cut, the share axis alone; the all-stone witness
+`FettersNegative.total_cut_carries_no_function` shows that it has no function
+conjunct. Rung 2 is the live terminus reading, `LiveFiberAtPole`, with
+`sentientTag_iff_actualFiberInhabited` as the bridge from response-function to
+actual fiber inhabitation. `FettersNegative.total_cut_with_function_not_waaFullyEnlightened`
+checks that rung 2 still lacks effectiveness. Rung 3 is
+`WaaFullyEnlightened`, rung 2's quietness plus universal shortfall closure, and
+it enters the faith and ethics files only as hypothesis.
+
+Pratyekabuddha is typed at rung 2 as a regime fact with two faces, not as a
+second attainment. Face A is uncooperative delivery: a deed is delivered but no
+share drop lands, so `OrthogonalityNegative.waaFullyEnlightened_stronger_than_terminus`
+shows failure of `WaaFullyEnlightened`. Face B is sealed delivery:
+`waaFullyEnlightened_of_responsiveTerminus_of_undelivered` makes full
+enlightenment hold vacuously when no own deed is delivered at all. The
+samyaksambuddha reading is rung 3, the faith-object. The guard clause is
+therefore strict: the model hosts a non-teaching terminus as a regime fact,
+never as a being who opts out of being read. This is the taxonomy-freeze cell
+for "the private buddha declining his own occurrence at others' Row 2" read
+without the freeze: non-teaching is the field declining to deliver, never the
+being withdrawing object-axis standing.
+
+The older arhat anchors remain and have region duals:
 `identityView_excluded_at_arhatFiber`, `conceit_excluded_at_arhatFiber`,
 `arhatFiber_of_termini`, `identityView_excluded_at_speechThoughtRegion`,
 `conceit_excluded_within`, and `regionFiber_of_termini`.

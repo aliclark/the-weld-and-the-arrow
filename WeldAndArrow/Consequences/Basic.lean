@@ -418,6 +418,19 @@ theorem shortfallClosedAt_of_waaFullyEnlightened
     ShortfallClosedAt G before deed reception :=
   h.right before deed reception hdeed
 
+/-- If a responsive terminus has no delivered own deeds in the current regime,
+    the universal shortfall-closure conjunct is satisfied vacuously. This is
+    the sealed-regime face: teaching/non-teaching is not stored in the being,
+    but in the delivery relation around it. -/
+theorem waaFullyEnlightened_of_responsiveTerminus_of_undelivered
+    {b : G.Being} (hterm : G.ResponsiveTerminus b)
+    (hundelivered : ∀ (deed reception : G.Weld),
+      deed.agent = b → ¬ DeliveredTo G deed reception) :
+    WaaFullyEnlightened G b := by
+  refine ⟨hterm, ?_⟩
+  intro _before deed reception hdeed _hlive hdel
+  exact False.elim ((hundelivered deed reception hdeed) hdel)
+
 end DirectedConvention
 
 /- Reading and motivation: Identification/Commentary.lean, C.2. -/

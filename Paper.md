@@ -480,6 +480,9 @@ concrete countermodels for dropping faith or dropping aversion.
 a responsive terminus can fail `WaaFullyEnlightened` because the delivered
 deed has no share-drop landing for the receiver's live prior tendency.
 `waaFullyEnlightened_stronger_than_terminus` proves the strictness.
+`waaFullyEnlightened_of_responsiveTerminus_of_undelivered` gives the sealed
+regime face: if no own deed is delivered, the shortfall-closure conjunct holds
+vacuously for any responsive terminus.
 
 **Faith.** `WaaPathClaim` packages the local claim that a prior configuration,
 deed, and reception satisfy `ShortfallClosedAt`; `waaPathClaimLanguage` makes
@@ -628,7 +631,17 @@ provocation classes, `SomaReading` supplies model-side tag-regions, and
 the supplied tag-class. `Path.cutClasses` gives the nested path profiles;
 `PathQuietWithin`, `arhatPathQuietWithin_iff_fiberAtPoleWithin`, and
 `arhatWithin_univTags_iff_fiberAtPole` close the two-axis lattice back to
-ordinary `FiberAtPole` at total calls and total tags. The checked anchors are
+ordinary `FiberAtPole` at total calls and total tags. That top point is the
+total-rectangle cut, not the buddha reading by itself. The layered reading has
+three checked rungs: rung 1 is share-only and stone-inclusive
+(`FettersNegative.total_cut_carries_no_function`); rung 2 is the live terminus
+reading, with `sentientTag_iff_actualFiberInhabited` bridging function to
+actual fiber inhabitation; rung 3 is `WaaFullyEnlightened`, and
+`FettersNegative.total_cut_with_function_not_waaFullyEnlightened` checks that
+rung 2 still lacks effectiveness. The regime-relational face is two-sided:
+zero-effect delivery can make full enlightenment fail, while
+`waaFullyEnlightened_of_responsiveTerminus_of_undelivered` makes it hold
+vacuously under sealed delivery. The checked anchors are
 `classQuiet_no_clench_in_class`, `identityView_excluded_at_arhatFiber`,
 `conceit_excluded_at_arhatFiber`, `arhatFiber_of_termini`,
 `identityView_excluded_at_speechThoughtRegion`, `conceit_excluded_within`,
@@ -718,7 +731,7 @@ regime fact to be supplied by a model, not a structural axiom.
 The contemporary placement checks are `siderits_waaPlacement`,
 `ganeri_waaPlacement`, `zahavi_waaPlacement`, and `sartre_waaPlacement`.
 
-**Disclaimers.** `Disclaimer.number` now runs through 52. The recent entries are
+**Disclaimers.** `Disclaimer.number` now runs through 55. The recent entries are
 `beingConvention` (35), `pilotGeneratedRows` (36), `beingTrichotomy` (37),
 `hareHornRegister` (38), `modalRealismFreeze` (39), and
 `aptnessConditionality` (40), `sraddhaConditional` (41), and
@@ -728,17 +741,21 @@ existing pins: `generatedTableStructure` (43), `poleAffirmingSemantics` (44),
 avyākata fence-and-gate pair. The correlation entries are `tenBullsTyped` (48),
 `fiveRanksRetype` (49), `stageSchemeCoarsening` (50), and
 `fetterCutTyping` (51). `twoAxisFetterLattice` (52) records the product
-call/tag fetter lattice.
+call/tag fetter lattice, `enlightenmentLadder` (53) records the neutral
+total-rectangle cut and three-rung ladder, and
+`ethicsBundledConditionalCode` (54) with `codeHonestyClauses` (55) records the
+ethics-code tail.
 `waaKarmaIdentification_number` pins `waaKarmaIdentification = 9`, and
 `modalRealismFreeze_number` pins `modalRealismFreeze = 39`.
 `aptnessConditionality_number` pins `aptnessConditionality = 40`;
 `sraddhaConditional_number` and `faithBothConjuncts_number` pin the two new
 Sraddha entries, while `generatedTableStructure_number`,
 `poleAffirmingSemantics_number`, `errorFreeReading_number`, and
-`misFeedFence_number` pin the table and mis-feed entries; the four new
-correlation pins are `tenBullsTyped_number`, `fiveRanksRetype_number`,
-`stageSchemeCoarsening_number`, `fetterCutTyping_number`, and
-`twoAxisFetterLattice_number`.
+`misFeedFence_number` pin the table and mis-feed entries; the newer
+correlation and disclaimer pins are `tenBullsTyped_number`, `fiveRanksRetype_number`,
+`stageSchemeCoarsening_number`, `fetterCutTyping_number`,
+`twoAxisFetterLattice_number`, `enlightenmentLadder_number`,
+`ethicsBundledConditionalCode_number`, and `codeHonestyClauses_number`.
 
 ---
 

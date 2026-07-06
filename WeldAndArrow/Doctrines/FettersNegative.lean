@@ -6,12 +6,138 @@
 -/
 
 import WeldAndArrow.Doctrines.Fetters
+import WeldAndArrow.Doctrines.SraddhaNegative
 
 namespace WAA
 
 namespace FettersNegative
 
+open Grid.DirectedConvention
 open Grid.DirectedConvention.BeingConvention
+
+/- ==============================================================================
+   The total-rectangle cut carries no function conjunct
+============================================================================== -/
+
+/-- A one-tag all-stone grid: no being mounts any response at any call. -/
+def stoneGrid : Grid Nat where
+  Being      := Unit
+  Call       := Unit
+  Response   := Unit
+  respondsTo _ _ := none
+  grade _ _ _ := 0
+  conditions _ _ := False
+
+def stoneCoarsening : BeingCoarsening stoneGrid Unit where
+  proj _ := ()
+
+theorem stone_fiber_total_cut :
+    stoneCoarsening.FiberAtPoleOnWithin ()
+      (fun _ => True) (fun _ => True) := by
+  intro w hactual _hfiber _hclass _htag
+  cases w with
+  | mk agent call response =>
+      cases agent
+      cases call
+      cases response
+      change (none : Option Unit) = some () at hactual
+      cases hactual
+
+theorem stone_fiber_all_stone :
+    ∀ p : stoneGrid.Being, stoneCoarsening.proj p = () → stoneGrid.Stone p := by
+  intro p _hp c hmount
+  rcases hmount with ⟨r, hresp⟩
+  cases p
+  cases c
+  cases r
+  change (none : Option Unit) = some () at hresp
+  cases hresp
+
+theorem stone_fiber_not_sentient :
+    ¬ stoneCoarsening.SentientTag () :=
+  (stoneCoarsening.not_sentientTag_iff_fiber_all_stone ()).mpr
+    stone_fiber_all_stone
+
+theorem stone_fiber_atPole :
+    stoneCoarsening.FiberAtPole () :=
+  (stoneCoarsening.fiberAtPoleOnWithin_univ_univ_iff ()).mp
+    stone_fiber_total_cut
+
+theorem stone_fiber_not_live :
+    ¬ stoneCoarsening.LiveFiberAtPole () := by
+  intro hlive
+  exact stone_fiber_not_sentient
+    ((stoneCoarsening.sentientTag_iff_actualFiberInhabited ()).mpr hlive.left)
+
+/-- The lattice's top point is share-only. In this all-stone witness the total
+    calls/total tags cut holds vacuously, but `SentientTag` and hence
+    `LiveFiberAtPole` fail by `sentientTag_iff_actualFiberInhabited`. This is
+    the buddha/stone convergence blocked by the function/share split. -/
+theorem total_cut_carries_no_function :
+    stoneCoarsening.FiberAtPoleOnWithin ()
+      (fun _ => True) (fun _ => True) ∧
+      ¬ stoneCoarsening.SentientTag () ∧
+        stoneCoarsening.FiberAtPole () ∧
+          ¬ stoneCoarsening.LiveFiberAtPole () :=
+  ⟨stone_fiber_total_cut, stone_fiber_not_sentient,
+    stone_fiber_atPole, stone_fiber_not_live⟩
+
+/- ==============================================================================
+   Function still does not close the effectiveness gap
+============================================================================== -/
+
+def sraddhaEffectCoarsening :
+    BeingCoarsening SraddhaNegative.zeroEffectGrid SraddhaNegative.Being where
+  proj := id
+
+theorem sraddha_fiber_total_cut :
+    sraddhaEffectCoarsening.FiberAtPoleOnWithin
+      SraddhaNegative.Being.sraddha (fun _ => True) (fun _ => True) := by
+  intro w _hactual hfiber _hclass _htag
+  cases w with
+  | mk agent c r =>
+      cases agent with
+      | sraddha =>
+          dsimp [Grid.share, SraddhaNegative.zeroEffectGrid, AtBot, shareBot]
+          exact Nat.le_refl 0
+      | receiver =>
+          dsimp [sraddhaEffectCoarsening,
+            Grid.DirectedConvention.BeingConvention.BeingCoarsening.InFiber] at hfiber
+          cases hfiber
+
+theorem sraddha_fiber_sentient :
+    sraddhaEffectCoarsening.SentientTag SraddhaNegative.Being.sraddha := by
+  refine ⟨SraddhaNegative.Being.sraddha, rfl, ?_⟩
+  exact ⟨SraddhaNegative.Call.call,
+    ⟨SraddhaNegative.Response.response, rfl⟩⟩
+
+theorem sraddha_liveFiberAtPole :
+    sraddhaEffectCoarsening.LiveFiberAtPole SraddhaNegative.Being.sraddha := by
+  have hpole :
+      sraddhaEffectCoarsening.FiberAtPole SraddhaNegative.Being.sraddha :=
+    (sraddhaEffectCoarsening.fiberAtPoleOnWithin_univ_univ_iff
+      SraddhaNegative.Being.sraddha).mp sraddha_fiber_total_cut
+  have hinh :
+      sraddhaEffectCoarsening.ActualFiberInhabited
+        SraddhaNegative.Being.sraddha :=
+    (sraddhaEffectCoarsening.sentientTag_iff_actualFiberInhabited
+      SraddhaNegative.Being.sraddha).mp sraddha_fiber_sentient
+  exact ⟨hinh, hpole⟩
+
+/-- Rung 2 to rung 3 is strict. Dressing the zero-effect sraddha countermodel
+    with the identity fiber gives total calls and total tags plus function
+    (`LiveFiberAtPole`), while `WaaFullyEnlightened` still fails: quiet-and-
+    functioning is not regime effectiveness. This is the tag-axis sibling of
+    `OrthogonalityNegative.waaFullyEnlightened_stronger_than_terminus`. -/
+theorem total_cut_with_function_not_waaFullyEnlightened :
+    sraddhaEffectCoarsening.FiberAtPoleOnWithin
+      SraddhaNegative.Being.sraddha (fun _ => True) (fun _ => True) ∧
+      sraddhaEffectCoarsening.SentientTag SraddhaNegative.Being.sraddha ∧
+        sraddhaEffectCoarsening.LiveFiberAtPole SraddhaNegative.Being.sraddha ∧
+          ¬ WaaFullyEnlightened SraddhaNegative.zeroEffectGrid
+            SraddhaNegative.Being.sraddha :=
+  ⟨sraddha_fiber_total_cut, sraddha_fiber_sentient,
+    sraddha_liveFiberAtPole, SraddhaNegative.not_waaFullyEnlightened⟩
 
 inductive Being
   | practitioner

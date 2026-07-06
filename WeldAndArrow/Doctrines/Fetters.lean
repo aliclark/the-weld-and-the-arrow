@@ -354,11 +354,16 @@ theorem arhatPathQuietWithin_iff_fiberAtPoleWithin
     κ.FiberAtPoleWithin Path.arhatship ts
   exact κ.fiberAtPoleOnWithin_univCalls_iff Path.arhatship ts
 
-/-- The arhat-typing at the total tag-class is ordinary fiber-at-pole: the
-    lattice's top point adds no new predicate. Arhat reading is
-    `PathQuietWithin` at a supplied `SomaReading.speechThoughtTag`; the
-    all-tag point is the old fiber predicate, leaving residual clench in the
-    complement as an existing-cell reading. -/
+/-- At total calls and total tags, the two-axis path lattice closes back to
+    ordinary `FiberAtPole`: the top point adds no new predicate. The word
+    "buddha" belongs only to the layered reading above this neutral cut:
+    `FettersNegative.total_cut_carries_no_function` shows that the top point
+    alone carries no function conjunct, while
+    `FettersNegative.total_cut_with_function_not_waaFullyEnlightened` and
+    `waaFullyEnlightened_of_responsiveTerminus_of_undelivered` keep
+    effectiveness regime-relational. Arhat reading remains `PathQuietWithin`
+    at a supplied `SomaReading.speechThoughtTag`; vasana is residual clench in
+    the complement region after the call-axis closes. -/
 theorem arhatWithin_univTags_iff_fiberAtPole
     {κ : G.PathScheme} (fr : G.FetterReading) :
     G.PathQuietWithin κ Path.arhatship fr Path.arhatship (fun _ => True) ↔

@@ -111,9 +111,10 @@ The following are conventional and my own -- original moves, each flagged agains
 49. **Five Ranks retyped** -- ranks read as utterance-diagnosis and index-placement, with 到 checked by the Bull 10 shape rather than treated as a stage attained and stored.
 50. **Stage-schemes as coarsenings** -- the 52 stages, Bulls, and Ranks are legal as diagnosis-time `BeingCoarsening`s; the freeze warning attaches uniformly to holding any scheme as grid-carried structure.
 51. **Fetter-cut typing** -- fetter cutting read as class-restricted fiber-at-pole typing (`FiberAtPoleOn`), with provocation classes model-supplied; whole-fiber irreversibility is definitional, finite-run diagnosis is underdetermined, and the practical forward guarantee remains conditional.
-52. **Two-axis fetter lattice** -- fetter cutting extended to the (call-class × tag-class) product; arhat and buddha typed as two cut-points of one predicate family, the buddha as the univ-point identical to `FiberAtPole` by theorem; region boundary shown underdetermined.
-53. **Ethics as a bundled conditional code** -- faith-transmitted truth times the receiver's own live aversion, held as one hypothesis-free implication theorem; the detached injunction remains outside the assertable voice.
-54. **The code's three honesty clauses** -- empty at the pole, unsatisfiable over false testimony, relative to the faith-object.
+52. **Two-axis fetter lattice** -- fetter cutting extended to the (call-class × tag-class) product; sravaka-arhat typed as the regional cut, and the total calls/total tags univ-point kept neutral and identical to `FiberAtPole` by theorem; region boundary shown underdetermined.
+53. **Enlightenment ladder** -- the total-rectangle cut re-glossed as rung 1 of a three-rung ladder rather than as the buddha point itself; `FettersNegative.total_cut_carries_no_function` checks the stone-vacuity/function gap, `FettersNegative.total_cut_with_function_not_waaFullyEnlightened` checks the effectiveness gap, and `WaaFullyEnlightened` remains regime-relational in both directions: `OrthogonalityNegative.waaFullyEnlightened_stronger_than_terminus` gives zero-effect failure, while `waaFullyEnlightened_of_responsiveTerminus_of_undelivered` gives sealed-delivery vacuity.
+54. **Ethics as a bundled conditional code** -- faith-transmitted truth times the receiver's own live aversion, held as one hypothesis-free implication theorem; the detached injunction remains outside the assertable voice.
+55. **The code's three honesty clauses** -- empty at the pole, unsatisfiable over false testimony, relative to the faith-object.
 
 ## Glossary
 

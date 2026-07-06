@@ -86,6 +86,17 @@ theorem not_sentientTag_iff_fiber_all_stone (b : Macro) :
     rcases hsent with ⟨p, hp, c, hmount⟩
     exact hall p hp c hmount
 
+/-- A sentient macro tag is exactly a fiber with an actual weld. The forward
+    direction turns mounted response-function into the corresponding weld; the
+    reverse direction reads function from an actual weld's response equation. -/
+theorem sentientTag_iff_actualFiberInhabited (b : Macro) :
+    κ.SentientTag b ↔ κ.ActualFiberInhabited b := by
+  constructor
+  · rintro ⟨p, hp, c, r, hresp⟩
+    exact ⟨⟨p, c, r⟩, hresp, hp⟩
+  · rintro ⟨w, hactual, hfiber⟩
+    exact ⟨w.agent, hfiber, ⟨w.call, ⟨w.response, hactual⟩⟩⟩
+
 /- Reading and motivation: Identification/Commentary.lean, C.1. -/
 def FiberAtPole (b : Macro) : Prop :=
   ∀ w : G.Weld, G.Actual w → κ.InFiber b w → AtBot (G.share w)
