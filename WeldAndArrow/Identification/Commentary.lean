@@ -737,8 +737,9 @@ than over the current record.
 C.12 Meta/Glossary.lean
 
 `Meta/Glossary.lean` is the canonical glossary source. The three markdown
-glossaries are retired in favor of generated output from `GlossaryGen.lean`;
-the paper-facing table lives at `Exposition/Glossary.md`.
+glossaries are retired in favor of generated output from
+`WeldAndArrow/Gen/Glossary.lean`; the paper-facing table lives at
+`Exposition/Glossary.md`.
 
 The module checks office discipline, not exposition itself. `glossary.length`
 pins the curated table size, the term strings are `Nodup`, every `seeAlso`

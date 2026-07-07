@@ -67,6 +67,3 @@ def renderAssumptions : String :=
   AssumptionsGen.renderAssumptions
 
 end WAA
-
-def main : IO Unit := do
-  IO.print WAA.renderAssumptions

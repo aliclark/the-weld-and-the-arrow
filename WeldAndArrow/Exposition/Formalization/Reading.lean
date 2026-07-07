@@ -1183,7 +1183,7 @@ checked Lean anchors, and backward-only `seeAlso` references. Lean checks the
 table length, term uniqueness, `seeAlso` resolution to earlier rows, and anchor
 resolvability through `#verify_glossary_anchors`. The glosses' accuracy and
 canonical caveats remain prose; the Disclaimers carry expert-facing departures.
-`GlossaryGen.lean` renders the table to `Exposition/Glossary.md`.
+`WeldAndArrow/Gen/Glossary.lean` renders the table to `Exposition/Glossary.md`.
 
 ---
 
@@ -1286,7 +1286,8 @@ census theorems `Grid.ConsequentialistConvention.dropCountInFiber_le_dropCount`,
 `[propext]`.
 
 The Lake build targets the library `WeldAndArrow` by default and also defines
-the non-default `lean_exe` targets `exposition_gen` and `glossary_gen`; there is no `Main.lean`.
+the non-default `lean_exe` targets `exposition_gen`, `glossary_gen`, and
+`exposition_generation_test`; there is no `Main.lean`.
 
 ---
 

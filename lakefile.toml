@@ -7,12 +7,16 @@ name = "WeldAndArrow"
 
 [[lean_exe]]
 name = "glossary_gen"
-root = "GlossaryGen"
+root = "WeldAndArrow.Gen.Glossary"
 
 [[lean_exe]]
 name = "assumptions_gen"
-root = "AssumptionsGen"
+root = "WeldAndArrow.Gen.Assumptions"
 
 [[lean_exe]]
 name = "exposition_gen"
-root = "ExpositionGen"
+root = "WeldAndArrow.Gen.Exposition"
+
+[[lean_exe]]
+name = "exposition_generation_test"
+root = "WeldAndArrow.Gen.TestExpositionGeneration"

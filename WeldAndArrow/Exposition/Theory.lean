@@ -185,7 +185,7 @@ And mark what the case never tests: neither utterance occurs at the pole. The ko
 
 ## Glossary
 
-See [Glossary.md](Glossary.md). The canonical source is `WeldAndArrow/Meta/Glossary.lean`, rendered through `WeldAndArrow/Exposition/Glossary.lean`; regenerate all prose with `lake exe exposition_gen` and check it with `lake exe exposition_gen --check`.
+See [Glossary.md](Glossary.md). The canonical source is `WeldAndArrow/Meta/Glossary.lean`, rendered through `WeldAndArrow/Exposition/Glossary.lean`; exercise the full generated prose surface with `lake exe exposition_generation_test`.
 "#
 
 def theoryDoc : Doc :=
