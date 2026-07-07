@@ -33,7 +33,7 @@ def glossaryDoc : Exposition.Doc :=
     title := "Glossary"
     output := "Exposition/Glossary.md"
     source := "WeldAndArrow/Exposition/Glossary.lean"
-    summary := "A generated glossary."
+    summary := "Generated glossary table: terms, provenance kinds, newcomer glosses, checked anchors, and backward-only see-also references."
     blocks := [.raw glossaryBody] }
 
 def renderGlossary : String :=
