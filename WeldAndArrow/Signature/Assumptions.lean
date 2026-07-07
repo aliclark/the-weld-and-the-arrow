@@ -6,86 +6,14 @@ import WeldAndArrow.Signature.Models
 import WeldAndArrow.Signature.Claims
 
 /-!
-Canonical assumption list for the `Signature` layer.
+Input-side assumption pins for the `Signature` layer.
 
-This file states the inputs of the system. `Paper.md` reads the theorem outputs,
-and `Identification/Commentary.lean` C.1 gives paper-facing motivation. The
-anchors below are deliberately close to the declarations they name, so a rename
-or type drift in the Signature surface turns into a build failure.
-
-## A. What Is Asserted
-
-1. No prior agent. A weld is the primitive occurrence. `Grid.index` and
-   `Grid.share` are projections from a completed `RawWeld`, not fields recovered
-   from a separate performer or act. `no_agent_recovery_of_field_collision`
-   records the internal obstruction: the same call-response field residue can
-   be produced by distinct actual agents.
-
-2. Nothing self-indexed is stored. `Config` stores only `tendency : Contrib`.
-   It has no owner, being, weld, or field-residue slot. `rePitch` uses the
-   received weld's share and ignores the prior configuration value.
-
-3. The self-pole index is just live share. `HasSelfPoleIndex w` is
-   `not AtBot (share w)`, and when the predicate is live the carried
-   `selfPoleIndex` is the weld's agent tag.
-
-4. Stone and terminus split function from share. A `Stone` mounts no response.
-   A `Terminus` may mount responses, but every mounted response is at the
-   pole-class. `AtPoleClass` intentionally includes the vacuous stone case.
-
-5. Self-lines are permitted, not built in. The bare signature does not impose
-   irreflexivity on `conditions`; a model may supply reflexive delivery, and
-   then the directed vocabulary can read a self-line.
-
-## B. What Is Deliberately Declined
-
-1. No arrow in `conditions`. The signature assumes no asymmetry,
-   irreflexivity, or transitivity for `conditions`. `ConditionsEither` is the
-   symmetric field fact; direction enters only in `Grid.DirectedConvention`.
-   The downstream `DirectionNegative` witness elaborates this as
-   non-recovery from symmetric closure.
-
-2. No `PreorderTop`. The signature supplies only `PreorderBot`. The
-   share-zero pole is an attained bottom order-class (`AtBot`); the
-   total-share or solipsist pole is an asymptote, not an element of the
-   interface. `StrongSelfConditioningTag` is named and shelved in the being
-   convention for the same reason.
-
-3. No privileged person-partition. A being boundary is supplied by a
-   diagnosis-time `BeingCoarsening`, not stored as a field of `Grid`. The
-   signature already admits both identity and total coarsenings for any grid;
-   the downstream `BeingNegative` witness elaborates this as non-recovery of a
-   unique partition from grid data.
-
-4. Direction resolution is display, not signature furniture. A clock's finite
-   delivery-axis resolution is supplied by a diagnosis-time
-   `DirectionCoarsening`, not by a `Grid` field and not by any pole or
-   legitimacy predicate.
-
-5. Contribution values are display, not operational tokens. The Signature
-   layer itself uses only order and pole vocabulary around `share`. The
-   downstream `DisplayReparam` / `InvarianceNegative` modules give the full
-   transport discipline: order- and pole-preserving display changes preserve
-   the legal predicates, while equality to the chosen bottom does not.
-
-## C. Conveniences And Stand-Ins
-
-1. `Preorder` and `PreorderBot` are hand-rolled to keep assumptions visible and
-   dependency-free. They play the local role Mathlib order classes would play,
-   without importing Mathlib.
-
-2. `rePitch` keeps a `_before` slot because the operation is conceptually a
-   re-pitch from a prior configuration. The current implementation ignores that
-   slot; the proof anchor below is a tripwire for the day that changes.
-
-3. The scalar is display over a partial order. `WaaMismatchGrade` lives in
-   `Doctrines`, so this Signature module does not import it; the Signature-side
-   checked fact is that `share` is the only contribution value exported by a
-   weld.
-
-4. `Models.lean` witnesses are illustrative. The clock and register-clock
-   models anchor possibility checks and taxonomy examples; they are not
-   uniqueness claims.
+This file is the compile-time tripwire for the system's input surface: the
+`#check` pins and definitional examples below keep existence and type shape close
+to the declarations they name, so rename or type drift becomes a build failure.
+The canonical prose and anchor metadata live in
+`WeldAndArrow/Meta/AssumptionLedger.lean`, rendered for readers at
+`Exposition/Assumptions.md`.
 -/
 
 namespace WAA
@@ -302,9 +230,7 @@ example (w : G.Weld) (h : G.HasSelfPoleIndex w) :
 #check Grid.DirectedConvention.DeliveredTo -- proof
 #check Grid.DirectedConvention.LandsAt -- proof
 #check AssumptionLocalWitnesses.signature_self_line_permitted -- witness
--- TODO(assumptions): `SelfLineWitness` is currently downstream in
--- `Identification.Ownership`; keep this Signature-local witness unless that
--- witness is moved into the Signature layer.
+-- Downstream elaboration recorded in `Meta.AssumptionLedger` (entry A.5).
 
 /- B.1 No arrow in conditions. -/
 #check Grid.ConditionsEither -- proof
@@ -316,9 +242,7 @@ example (w : G.Weld) (h : G.HasSelfPoleIndex w) :
 #check RawWeld.transposeCR -- witness
 #check AssumptionLocalWitnesses.no_direction_recovery_from_conditionsEither -- witness
 #check InteriorDirectionNegative.no_interior_direction_recovery -- witness
--- TODO(assumptions): The fuller named witness is
--- `DirectionNegative.no_direction_recovery_from_conditionsEither` downstream in
--- `Meta.InvarianceNegative`; importing it here would violate the layer DAG.
+-- Downstream elaboration recorded in `Meta.AssumptionLedger` (entry B.1).
 
 /- B.2 No PreorderTop. -/
 #check PreorderBot -- proof
@@ -335,9 +259,7 @@ example (w : G.Weld) (h : G.HasSelfPoleIndex w) :
 #check Grid.DirectedConvention.BeingConvention.BeingCoarsening.total_sameFiber -- witness
 #check Grid.DirectedConvention.BeingConvention.BeingCoarsening.id_not_sameFiber_of_ne -- witness
 #check AssumptionLocalWitnesses.partition_merge_split_disagree -- witness
--- The fuller non-recovery certificate remains
--- `BeingNegative.no_partition_recovery` downstream in `Meta.InvarianceNegative`;
--- importing it here would violate the layer DAG.
+-- Downstream elaboration recorded in `Meta.AssumptionLedger` (entry B.3).
 
 /- B.4 Direction resolution is display, not signature furniture. -/
 #check Grid.DirectedConvention.DirectionCoarsening -- proof
@@ -346,18 +268,14 @@ example (w : G.Weld) (h : G.HasSelfPoleIndex w) :
 #check Grid.DirectedConvention.DirectionCoarsening.no_timeDirection_within_tick -- proof
 #check Grid.DirectedConvention.DirectionCoarsening.no_timeDirection_of_resolutionBounded_subsingleton -- proof
 #check Grid.DirectedConvention.DirectionCoarsening.transpose_subTickDelivery -- witness
--- TODO(assumptions): The register-clock direction-coarsening witnesses live
--- downstream in `Meta.InvarianceNegative.DirectionCoarseningWitness`; importing
--- them here would violate the layer DAG.
+-- Downstream elaboration recorded in `Meta.AssumptionLedger` (entry B.4).
 
 /- B.5 Contribution values are display, not operational tokens. -/
 #check Grid.share_eq_grade_check -- proof
 #check AtBot -- proof
 #check OrderEq -- proof
 #check Grid.Terminus -- proof
--- TODO(assumptions): `DisplayReparam`, `DisplayReparam.atBot_iff`, and
--- `InvarianceNegative.oldEqTerminus_not_invariant` live downstream in `Meta`.
--- This Signature module anchors only the order/pole vocabulary they transport.
+-- Downstream elaboration recorded in `Meta.AssumptionLedger` (entry B.5).
 
 /- C.1 Hand-rolled order classes. -/
 #check Preorder -- proof
@@ -373,8 +291,7 @@ example (before before' : Config Contrib) (received : G.Weld) :
 /- C.3 Scalar display over partial order. -/
 #check Grid.share -- proof
 #check Grid.share_eq_grade_check -- proof
--- TODO(assumptions): `WaaMismatchGrade` lives in `Doctrines.FourTruths`; this
--- file cannot import it while remaining in the Signature layer.
+-- Downstream elaboration recorded in `Meta.AssumptionLedger` (entry C.3).
 
 /- C.4 Model witnesses are illustrative. -/
 #check clockGrid -- witness

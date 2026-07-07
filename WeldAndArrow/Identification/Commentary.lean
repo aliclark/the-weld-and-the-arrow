@@ -58,8 +58,10 @@ is the internal recovery obstruction corresponding to that gloss.
 
 `SelfLineWitness` records that self-lines are permitted by the signature and
 can satisfy the ownership-face vocabulary when the model supplies reflexive
-delivery. The paper's shushō-ittō discussion is a reading of that permission,
-not a premise.
+delivery. The compile-checked pins for the input-side assumptions live in
+`Signature/Assumptions.lean`; their canonical prose and downstream anchor
+metadata live in `Meta/AssumptionLedger.lean`. The paper's shushō-ittō
+discussion is a reading of that permission, not a premise.
 
 The hand-rolled `Preorder` is used for dependency-freedom and to keep the exact
 assumptions visible. Mathlib has the counterparts `Preorder`, `OrderBot`, and

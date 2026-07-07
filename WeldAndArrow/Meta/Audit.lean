@@ -1,5 +1,6 @@
 import WeldAndArrow.Meta.Invariance
 import WeldAndArrow.Meta.InvarianceNegative
+import WeldAndArrow.Meta.AssumptionLedger
 import WeldAndArrow.Meta.ReflexivityWitness
 import WeldAndArrow.Meta.VerdictLedger
 import WeldAndArrow.Doctrines.SraddhaNegative

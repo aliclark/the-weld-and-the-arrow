@@ -11,7 +11,8 @@ definitions, theorem statements, and proof status where that matters.
 Interpretive prose is generated from `WeldAndArrow/Exposition/*` and remains secondary to the formal statements.
 
 For the canonical input-side assumption list, see
-`WeldAndArrow/Signature/Assumptions.lean`; this document reads theorem outputs.
+[Assumptions.md](Assumptions.md); the compile-checked pins live in
+`WeldAndArrow/Signature/Assumptions.lean`.
 
 The project is pinned to `leanprover/lean4:v4.31.0` in `lean-toolchain`.
 

@@ -10,5 +10,9 @@ name = "glossary_gen"
 root = "GlossaryGen"
 
 [[lean_exe]]
+name = "assumptions_gen"
+root = "AssumptionsGen"
+
+[[lean_exe]]
 name = "exposition_gen"
 root = "ExpositionGen"
