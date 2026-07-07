@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata from this file."
+title: "Weld and Arrow"
+authors:
+  - family-names: Clark
+    given-names: Ali
+repository-code: "https://github.com/weld-and-arrow/weld-and-arrow"
+license: "0BSD"
