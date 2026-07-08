@@ -156,8 +156,8 @@ The generator-discipline check is the same one that motivated `weldRow`: a
 generated row should name the convention whose collapse/freeze it diagnoses.
 `intraWeldArrow` names the face-order convention; `doerDeed` names the
 doer/deed ordering, with the `RawWeld` being component as its concrete anchor
-but without promoting priority to a field. The labels "coming-to" and
-"going-from" are display names for transposed readings of the two weld faces,
+but without promoting priority to a field. The labels "coming-from" and
+"going-to" are display names for transposed readings of the two weld faces,
 not new tier names.
 
 `ReflexivityWitness.ladderRungGrid` is deliberately only one legal grid: it
