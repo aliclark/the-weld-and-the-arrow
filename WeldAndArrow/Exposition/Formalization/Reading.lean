@@ -915,9 +915,9 @@ correlation and disclaimer pins are `tenBullsTyped_number`, `fiveRanksRetype_num
 
 ---
 
-## 5. Meta/Nishitani.lean, Meta/ReflexivityWitness.lean, Meta/Invariance.lean, and Meta/InvarianceNegative.lean
+## 5. Meta/Metaphysics.lean, Meta/ReflexivityWitness.lean, Meta/Invariance.lean, and Meta/InvarianceNegative.lean
 
-**Śūnyatā wrappers.** `Meta/Nishitani.lean` defines `Sunyata d` as the absence
+**Śūnyatā wrappers.** `Meta/Metaphysics.lean` defines `Sunyata d` as the absence
 of any frozen level in `ladder d`. The new row instantiations
 `intraWeldArrow_sunyata` and `doerDeed_sunyata` join the existing beings,
 time, weld, and content-beings instantiations as direct consumers of the

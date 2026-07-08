@@ -10,7 +10,7 @@ This is a single legal grid instantiating the opaque `Being` parameter with
 boundary-freedom witnessed by `BeingNegative`.
 -/
 
-import WeldAndArrow.Meta.Nishitani
+import WeldAndArrow.Meta.Metaphysics
 
 namespace WAA
 

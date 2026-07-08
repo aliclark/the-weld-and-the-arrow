@@ -15,7 +15,7 @@ import WeldAndArrow.Consequences.Compounds
 import WeldAndArrow.Doctrines
 import WeldAndArrow.Identification
 import WeldAndArrow.Meta.InvarianceNegative
-import WeldAndArrow.Meta.Nishitani
+import WeldAndArrow.Meta.Metaphysics
 import WeldAndArrow.Meta.ReflexivityWitness
 import WeldAndArrow.Meta.VerdictLedger
 

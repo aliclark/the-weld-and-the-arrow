@@ -1,6 +1,6 @@
 /-
 ================================================================================
-  WeldAndArrow.Meta.Nishitani
+  WeldAndArrow.Meta.Metaphysics
   Śūnyatā on the re-emptying ladder — the Nishitani/Jizang layer as a
   consumer of the checked ladder in WeldAndArrow.Consequences.ContentRows
 ================================================================================

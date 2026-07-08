@@ -1,4 +1,4 @@
-import WeldAndArrow.Meta.Nishitani
+import WeldAndArrow.Meta.Metaphysics
 import WeldAndArrow.Meta.ReflexivityWitness
 import WeldAndArrow.Meta.Invariance
 import WeldAndArrow.Meta.InvarianceNegative
