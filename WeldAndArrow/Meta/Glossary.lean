@@ -328,6 +328,12 @@ def glossary : List GlossaryEntry := [
     gloss := "A mis-feed is an internal diagnostic where the wrong register is fed to a question. The checked fence covers index-free field answers being used where an index-bearing designation is required."
     anchors := [``MisFeedNegative.fence_and_gate]
     seeAlso := ["index-question", "field"] },
+  { term := "upāya/provisional reading"
+    kind := .canonical
+    gloss := "Upāya names an apt conventional call at the tier a being occupies. In this system a provisional reading keeps that conventional function while the floor re-empties its absolutization."
+    anchors := [``Grid.DirectedConvention.BeingConvention.GridConvention.Nishitani.provisional_preserved,
+      ``Grid.DirectedConvention.waaPathOught_conditional]
+    seeAlso := ["tier", "separate/fuse rule", "assert/display"] },
   { term := "dukkha"
     kind := .canonical
     gloss := "Dukkha ordinarily names suffering or unsatisfactoriness. In this system it is the mismatch of a live self-maintaining response with delivery that answers to no self."
@@ -477,7 +483,7 @@ def glossary : List GlossaryEntry := [
     kind := .coinage .theorems
     gloss := "The prudence theorem says special authority for self-concern is not recoverable from the grid. The standing cross-gap whose that prudence would need is exactly what the typing declines."
     anchors := [``Grid.DirectedConvention.PrudentialPrivilegeNegative.not_prudentialPrivilege]
-    seeAlso := ["index-question", "standing/dated"] },
+    seeAlso := ["index-question", "standing/dated", "upāya/provisional reading"] },
   { term := "deliberator theorem"
     kind := .coinage .theorems
     gloss := "The deliberator theorem blocks a maximizer at three joints: supplied being-convention, absent accumulator, and failed command over delivery. It is a check on consequentialist reuse of the grid."
@@ -784,6 +790,22 @@ def glossary : List GlossaryEntry := [
       ``Grid.DirectedConvention.WaaOwnershipFace,
       ``Grid.DirectedConvention.WaaVacuousOwnershipFace]
     seeAlso := ["delivery", "reach-back"] },
+  { term := "personal-karma convention"
+    kind := .coinage .identification
+    gloss := "A personal-karma convention restricts delivery to same-agent lines as a legal overlay. The restriction is floor-optional: it leaves reception typing neutral and becomes a freeze only when held as necessary."
+    anchors := [``Grid.DirectedConvention.reception_typing_ignores_sower,
+      ``OtherPowerNegative.regime_does_not_determine_share,
+      ``OtherPowerNegative.share_does_not_determine_regime]
+    seeAlso := ["delivery-regime", "sower-reaps split"] },
+  { term := "svakarma demotion"
+    kind := .coinage .theorems
+    gloss := "The svakarma demotion lowers the claim that fruit ripens only in the doer's continuum from metaphysical necessity to contingent delivery-regime. It permits a personal-karma overlay without making that overlay signature law."
+    anchors := [``Grid.DirectedConvention.SameAgentDelivery,
+      ``Grid.DirectedConvention.CrossAgentDelivery,
+      ``Grid.DirectedConvention.reception_typing_ignores_sower,
+      ``OtherPowerNegative.regime_does_not_determine_share,
+      ``OtherPowerNegative.share_does_not_determine_regime]
+    seeAlso := ["pariṇāmanā / dedication", "personal-karma convention"] },
   { term := "pole-typing corollary"
     kind := .coinage .identification
     gloss := "The pole-typing corollary says the state-tool fits exactly where live welding ceases. At share-zero there is no live self-pole index for the tool to miss."
@@ -835,7 +857,7 @@ def seeAlsoTargetsEarlierFrom (seen : List String) :
 def seeAlsoTargetsEarlier : Bool :=
   seeAlsoTargetsEarlierFrom [] glossary
 
-example : glossary.length = 142 := rfl
+example : glossary.length = 145 := rfl
 
 example : glossaryTerms.Nodup := by
   native_decide
