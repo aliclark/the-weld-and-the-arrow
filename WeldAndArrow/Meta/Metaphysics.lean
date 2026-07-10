@@ -338,6 +338,8 @@ end Metaphysics
 ladder is already prepared to treat this file's own conclusions as the
 `finalBelow` of a level it has not yet built. It was built to climb through
 this file too — and, this time, that is a theorem about *its* ladder rather
-than mine. -/
+than mine. The ladder and consistency results show coherence, not that WAA is
+the sole coherent reconstruction of karma; rival axiomatizations are neither
+ruled in nor out. -/
 
 end WAA

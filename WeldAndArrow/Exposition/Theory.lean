@@ -4,15 +4,19 @@ namespace WAA.Exposition
 
 def theoryBody : String := r#"# Weld and Arrow — I. Theory
 
-*An ontology-under-erasure act-grammar for Zen. First of three files: **Theory** (this file), **Theorems**, **Identification**. Cross-references to the companion files are marked (Theorems) and (Identification).*
+*An axiomatic reconstruction of Zen sayings in an ontology-under-erasure act-grammar. First of three files: **Theory** (this file), **Theorems**, **Identification**. Cross-references to the companion files are marked (Theorems) and (Identification).*
 
 ## Abstract
 
-*Weld and Arrow* (hereafter *WAA*) is a soteriological metaphysics with no substrate and no value, developed in Lean and exposited in prose: take one emptiness posit and follow what it forces for karma, action, suffering, and awakening. The apparatus is a deliberately small grid — a field that carries every diachronic connection without carrying an owner, and welds, single occurrences of answering a call, at which every index is made, spent, and never stored. The claim, made precise across these files, is this: **Everything diachronic belongs to the field; every index is enacted and nothing indexed is stored; karma names this loop, and the naming is earned by fit** — the tradition's uses of karmic ownership (cetanā, reception, remorse, absolution, dedication) discharge natively at act-time.
+*Weld and Arrow* (*WAA*) is an **axiomatic reconstruction** of the Zen masters' sayings about karma, action, suffering, and awakening. A small signature of primitives — a field that carries every diachronic connection without an owner, and welds, single occurrences of answering a call, at which every index is made, spent, and never stored — is fixed in the Signature layer, and the tradition's sayings are recovered as its consequences. The development is Lean-first and exposited in prose, under one governing posit: **everything diachronic belongs to the field; every index is enacted and nothing indexed is stored; karma names this loop.**
 
-Three registers keep the books — the field carries, the weld makes and spends, the grade states — and the grade's statements are index-placements in a third-personal register, held by no one, since a statement holds nothing. One rule, separate under act-time diagnosis and fuse at the floor, generates the entire error-taxonomy as collapse/freeze pairs, one per distinction, curated under a discipline — and the generator keeps a ledger on itself, its retypes, declines, and falsifier on record. From the rules alone fall backsliding (kenshō cannot be held), memory and prudence met as theorems, dukkha derived as the mismatch a nonzero self-share enacts against a delivery-register no act commands, and the terminus transposed rather than declined. On existing discourses' own ground, the grid decomposes MMK 17's two worries, takes the three killings as an experimentum crucis for weld-grading across maximal event-divergence, and types other-power, pariṇāmanā, the Ten Bulls, the Five Ranks, and the stage-schemes as checked correlations — coarsenings legal to read and illegal to hold.
+From the fixed generator — one rule, separate under act-time diagnosis and fuse at the floor — the error-taxonomy falls out as collapse/freeze pairs. The *catalogue* of positions the generator is run against is curated in the Consequences layer and grows as new targets are identified; the generating rule in the Signature does not move. The doctrinal cases — the fox koan, the three killings, other-power, pariṇāmanā, the Ten Bulls, the Five Ranks — are **tests the reconstruction must pass**, not premises it is built from.
 
-The development is Lean-first: a layered library (Signature → Consequences → Doctrines → Identification → Meta → Exposition) in which the storage claim is enforced at type level, every reading is gated by a sibling countermodel, the taxonomy's rows and the verdict history are inspectable data. Throughout, what the system asserts is grammar; what it can only display is worth — no value appears in its own voice, the valence its vocabulary carries being the object's, reported. This is a fresh theory, not an exegesis of Abhidharma nor a reconstruction of Dōgen; the lens is minimalist by design, and other doctrines can and do hold too.
+What Lean establishes is **internal consistency and derivability**, not exclusivity: given the primitives the consequences follow, each reading is gated by a sibling countermodel, and no theorem depends on an added axiom. It is not shown — and Lean cannot show — that this is the only coherent reconstruction of karma. WAA is one definition among many; the signature deliberately declines to privilege its own choices (no top pole, no privileged person-partition, scalar and direction as display), and other doctrines can and do hold too.
+
+The scope is bounded and the boundary is marked as data. The *grammar* of ownerless continuation is in scope and derived — continuity without a transmigrating bearer, the flame passed without a self to carry it. The *cosmology* of rebirth — persistence across biological death, the realms, the mechanism — is ceded as a world-fact, downstream of where the domain of mounted responses ends, which is the consciousness question the system brackets by construction (*domain, not phenomenality*). Throughout, what the system asserts is grammar; what it can only display is worth — no value appears in its own voice. This is a fresh reconstruction, not an exegesis of Abhidharma nor of Dōgen; the lens is minimalist by design.
+
+The layered library — Signature → Consequences → Doctrines → Identification → Meta → Exposition — keeps the Signature as axioms and the later layers as consequences and tests; its storage claim is enforced at type level, every reading is gated by a sibling countermodel, and the taxonomy's rows and verdict history are inspectable data.
 
 ## The rules, each preceded by what motivated it
 
@@ -195,7 +199,7 @@ def theoryDoc : Doc :=
     title := "Theory"
     output := "Exposition/Theory.md"
     source := "WeldAndArrow/Exposition/Theory.lean"
-    summary := "The theory and worked fox example."
+    summary := "An axiomatic reconstruction of Zen sayings and the worked fox test."
     blocks := [.raw theoryBody] }
 
 end WAA.Exposition

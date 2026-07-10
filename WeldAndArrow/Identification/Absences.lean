@@ -78,6 +78,16 @@ inductive InstructiveAbsence where
       buddha" verdict. The diagnostic work is the refusal to type foreclosure as
       a stored kind; defiance is a seed, not a rank. -/
   | icchantikaDeclined
+  /-- The cosmology of rebirth — persistence across biological death, the
+      realms, and the mechanism — is ceded as a world-fact. The grammar of
+      ownerless continuation (continuity without a carried bearer; the flame
+      passed without a self) remains in scope, derived from
+      `nothing_selfIndexed_carried` and the field/re-pitch machinery. What is
+      ceded lies downstream of where the Row-2 domain of mounted responses ends:
+      the consciousness question the grid brackets as domain, not phenomenality.
+      The diagnostic work is to mark this boundary rather than manufacture a
+      theorem across it. -/
+  | rebirthCosmology
 
 namespace InstructiveAbsence
 
@@ -99,12 +109,14 @@ def number : InstructiveAbsence → Nat
   | .prudentialPrivilege => 8
   | .noMeasure => 9
   | .icchantikaDeclined => 10
+  | .rebirthCosmology => 11
 
 /-- Current world-facing status of each paper entry. Constructors remain the
     section 3 ledger; this function records retirement. -/
 def status : InstructiveAbsence → AbsenceStatus
   | .thirdArrival => .retiredAsCheck
   | .icchantikaDeclined => .standing
+  | .rebirthCosmology => .standing
   | _ => .standing
 
 theorem emptyCells_number :
@@ -137,6 +149,9 @@ theorem noMeasure_number :
 theorem icchantikaDeclined_number :
     number InstructiveAbsence.icchantikaDeclined = 10 := rfl
 
+theorem rebirthCosmology_number :
+    number InstructiveAbsence.rebirthCosmology = 11 := rfl
+
 theorem emptyCells_standing :
     status InstructiveAbsence.emptyCells = AbsenceStatus.standing := rfl
 
@@ -166,6 +181,9 @@ theorem noMeasure_standing :
 
 theorem icchantikaDeclined_standing :
     status InstructiveAbsence.icchantikaDeclined = AbsenceStatus.standing := rfl
+
+theorem rebirthCosmology_standing :
+    status InstructiveAbsence.rebirthCosmology = AbsenceStatus.standing := rfl
 
 /- ------------------------------------------------------------------------------
    Anchors
@@ -294,6 +312,13 @@ theorem icchantikaDeclined_nonforeclosure_anchor :
                 IcchantikaCase.grid.IsShareDrop before reception ∧
                   HasShareDropLanding IcchantikaCase.grid before deed :=
   icchantika_release_not_foreclosed
+
+/-- The rebirth/cosmology boundary is deliberately only a standing ledger pin:
+    it introduces no theorem about persistence, realms, or consciousness beyond
+    the mounted-response domain. -/
+theorem rebirthCosmology_anchor :
+    status InstructiveAbsence.rebirthCosmology = AbsenceStatus.standing :=
+  rebirthCosmology_standing
 
 end InstructiveAbsence
 

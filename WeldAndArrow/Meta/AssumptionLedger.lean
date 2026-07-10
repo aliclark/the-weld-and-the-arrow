@@ -7,6 +7,15 @@
 The Signature layer keeps the compile-time tripwire for input-side declarations.
 This ledger is the canonical source for the reader-facing assumption prose and
 for the checked anchor metadata rendered to `Exposition/Assumptions.md`.
+
+Lean here buys internal consistency and derivability, not exclusivity or truth:
+given the primitives the consequences follow without contradiction; it is not
+shown that no other reconstruction would. The ledger and its axiom audit make
+the “no added axioms” part concrete through `assumptionAxiomAudit` and the
+`#print axioms` pins. Its declined entries — no `PreorderTop`, no privileged
+person-partition, and direction/scalar as display — record the signature's
+active refusal to privilege its own choices rather than a proof that rivals are
+impossible.
 -/
 
 import Lean
@@ -346,5 +355,10 @@ unsafe def evalAssumptionAxiomAudit : Term.TermElabM (List Lean.Name) := do
     throwError m!"missing assumption anchors:{details}"
 
 #verify_assumption_anchors
+
+/- The rebirth/cosmology absence is intentionally a downstream, pin-level
+   boundary rather than a Signature assumption or a positive theorem. -/
+#check InstructiveAbsence.rebirthCosmology_standing
+#check InstructiveAbsence.rebirthCosmology_anchor
 
 end WAA

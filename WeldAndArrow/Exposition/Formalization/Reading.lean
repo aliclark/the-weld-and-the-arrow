@@ -38,6 +38,17 @@ and the `Consequences` layer is titled **Theorems**, matching the paper's part
 titles. The Lean module names state the role; the prose names state the
 correspondence.
 
+**Reconstruction framing.** The `Signature` layer is the fixed axiom set: its
+generator rule, `Grid.Distinction.ObeysSeparateFuse`, together with `Collapse`
+and `Freeze`, is not revised by any case. The `Consequences` layer holds the
+curated catalogue of positions against which that fixed generator is run — the
+taxonomy rows, `CompoundPosition`, and the content rows — and that catalogue may
+grow when a new collapse/freeze target is identified. Thus the standing/dated
+redraw and the Zahavi retype are tests with teeth: each changed which target a
+Consequences taxonomy cell names while leaving the Signature generator intact.
+The later doctrinal cases test the reconstruction; they do not construct its
+axioms.
+
 `Grid.DirectedConvention` is the second marking. It contains vocabulary that
 reads direction into the direction-free relation `conditions`: delivery,
 landing, environs lines, share-drop lines, aiming, and the ownership-face
@@ -838,13 +849,14 @@ facts are not carried in the stored field register.
 
 **Instructive absences.** `InstructiveAbsence` records the current section 3
 list as Lean data, with `InstructiveAbsence.number` pinning the paper order
-1-10. `AbsenceStatus` states the membership rule explicitly: constructors track
+1-11. `AbsenceStatus` states the membership rule explicitly: constructors track
 the section 3 list, while `InstructiveAbsence.status` tracks whether the world
 has retired an entry. The status pins are `emptyCells_standing`,
 `declinedCase_standing`, `foxNeverTestsPole_standing`, `thirdArrival_retired`,
 `whyCallsLand_standing`, `fourthTruthWithheld_standing`,
 `noSafeStage_standing`, `prudentialPrivilege_standing`, and
-`noMeasure_standing`.
+`noMeasure_standing`, `icchantikaDeclined_standing`, and
+`rebirthCosmology_standing`.
 
 The anchors are intentionally thin: `emptyCells_anchor`,
 `foxNeverTestsPole_anchor`, `foxNeverTestsPole_recordedUtterance_not_atBot`,
@@ -854,9 +866,10 @@ The anchors are intentionally thin: `emptyCells_anchor`,
 `fourthTruthWithheld_conditional`, `fourthTruthWithheld_detached_voice`,
 `noSafeStage_anchor`, `prudentialPrivilege_underivable_anchor`,
 `icchantikaDeclined_agent_anchor`, `icchantikaDeclined_receiver_anchor`, and
-`icchantikaDeclined_nonforeclosure_anchor`. The declined deaf-blind case,
-why-calls-land, and no-measure absences are pin-level data only; no theorem is
-manufactured for what the paper leaves ceded.
+`icchantikaDeclined_nonforeclosure_anchor`, and `rebirthCosmology_anchor`.
+The declined deaf-blind case, why-calls-land, no-measure, and rebirth-cosmology
+absences are pin-level data only; no theorem is manufactured for what the paper
+leaves ceded.
 
 **Self-line witness.** `SelfLineWitness.selfLineGrid` is a minimal `Nat` grid
 with one being, one call, one response, total response, grade `1`, and

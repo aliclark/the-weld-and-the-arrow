@@ -83,6 +83,11 @@ def glossary : List GlossaryEntry := [
     gloss := "A grid is a deliberately small model of who responds to what and how those responses are connected. It supplies the apparatus for welds, grades, delivery, and diagnostics without pretending to be the whole doctrine."
     anchors := [``Grid]
     seeAlso := ["floor"] },
+  { term := "axiomatic reconstruction"
+    kind := .coinage .theory
+    gloss := "The project's method: a fixed Signature layer supplies the primitives and generator, Zen sayings are recovered as consequences, and doctrinal cases test the resulting reconstruction rather than supplying its premises."
+    anchors := [``Grid, ``Grid.Distinction.ObeysSeparateFuse]
+    seeAlso := ["grid"] },
   { term := "act-grammar"
     kind := .coinage .theory
     gloss := "An act-grammar is a way to parse an occurrence into roles. In this system it is the three-row pattern that lets the grid discuss dependence, manifestation, resonance, practice, and causal carrying without storing a self."
@@ -531,6 +536,16 @@ def glossary : List GlossaryEntry := [
     anchors := [``Grid.GeneratorOutcome,
       ``Grid.DirectedConvention.BeingConvention.GridConvention.tableOrder]
     seeAlso := ["collapse/freeze"] },
+  { term := "curated catalogue"
+    kind := .coinage .theorems
+    gloss := "The curated catalogue is the Consequences-layer list of taxonomy targets — rows, compound positions, and content rows — against which the fixed Signature generator is run. It may grow as new collapse/freeze targets are identified without changing the axioms."
+    anchors := [``Grid.Distinction.ObeysSeparateFuse,
+      ``Grid.DirectedConvention.BeingConvention.GridConvention.CompoundPosition]
+    seeAlso := ["generator"] },
+  { term := "consistency vs exclusivity"
+    kind := .coinage .theorems
+    gloss := "Lean establishes internal consistency and derivability relative to the fixed primitives, not truth or uniqueness. Countermodel-gated consequences show that this reconstruction coheres; they do not show that no rival reconstruction can cohere."
+    seeAlso := ["axiomatic reconstruction", "curated catalogue"] },
   { term := "four verdicts"
     kind := .coinage .theorems
     gloss := "The four verdicts are existing-cell, new-cell, declined, and retype. They are the public outcomes available when the generator meets a candidate error."
@@ -761,6 +776,12 @@ def glossary : List GlossaryEntry := [
     anchors := [``InstructiveAbsence, ``InstructiveAbsence.status,
       ``InstructiveAbsence.number]
     seeAlso := ["declined case", "generator"] },
+  { term := "ceded cosmology"
+    kind := .coinage .theorems
+    gloss := "Ceded cosmology marks the rebirth boundary: the grammar of ownerless continuation is derived, but persistence across biological death, the realms, and their mechanism remain world-facts downstream of the mounted-response domain. The boundary is recorded as data, not crossed by a theorem."
+    anchors := [``InstructiveAbsence.rebirthCosmology,
+      ``InstructiveAbsence.rebirthCosmology_anchor]
+    seeAlso := ["instructive absences"] },
   { term := "identification claim"
     kind := .coinage .identification
     gloss := "The identification claim says karma names the loop where the field carries diachronic relations and the weld enacts every index. It is a decomposition claim, not a stored-self claim."
@@ -857,7 +878,7 @@ def seeAlsoTargetsEarlierFrom (seen : List String) :
 def seeAlsoTargetsEarlier : Bool :=
   seeAlsoTargetsEarlierFrom [] glossary
 
-example : glossary.length = 145 := rfl
+example : glossary.length = 149 := rfl
 
 example : glossaryTerms.Nodup := by
   native_decide
