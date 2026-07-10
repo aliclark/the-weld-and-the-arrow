@@ -305,16 +305,22 @@ nowhere, `adaptive` responds with `chime` when the listener is present,
 
 **`registerClockGrid`.** The second concrete grid uses natural-numbered fine
 registers as beings. Each register answers the tick by handing off to the next
-register; delivery follows that hand-off. `registerClockCoarsening` merges the
-fine registers into one macro tag at diagnosis-time. The checked facts are
-`registerClock_macro_sentient` and `registerClock_macro_selfConditioning`.
+register; delivery follows that hand-off, and `grade n _ _ := n` makes a
+re-pitched tendency coincide extensionally with the acting register tag.
+`registerClockCoarsening` merges the fine registers into one macro tag at
+diagnosis-time. The checked facts are `registerClock_macro_sentient` and
+`registerClock_macro_selfConditioning`; the coincidence is recorded by
+`ConfigLeakWitness.registerClock_config_recovers_agent` as the countermodel to
+blanket information-flow noninterference.
 
-**`backslideGrid` and `gradingCollisionGrid`.** `backslideGrid` has one being
+**`backslideGrid`, `gradingCollisionGrid`, and `shareCollisionGrid`.**
+`backslideGrid` has one being
 answering a gentle call at share `0` and a harsh call at share `5`, giving the
 concrete carrier for the same-being backsliding witnesses.
 `gradingCollisionGrid` has two actual welds with the same call-response residue
 and different shares, giving the concrete carrier for the cetana field-residue
-witness.
+witness. `shareCollisionGrid` has two distinct agents with the same live share,
+so their re-pitched configurations coincide.
 
 ---
 
@@ -963,6 +969,18 @@ reparameterizations, with `comp_toFun` as its definitional projection lemma.
 `Config.map` sends a tendency through `toFun`; `Config.map_tendency` is
 definitional.
 
+`AgentReparam Being Being'` supplies a fine-agent bijection through `toFun`,
+`invFun`, and their inverse laws. `RawWeld.mapAgent` transports the weld tag;
+`Grid.relabel` transports the agent-facing signature fields through the inverse.
+`Config.relabel_fixed` records the trivial action on configurations.
+
+The Being-side transport facts are `relabel_actual_iff`, `relabel_share`,
+`relabel_hasSelfPoleIndex_iff`, `relabel_deliveredTo_iff`, and
+`relabel_sameAgentDelivery_iff`. `relabel_index` states deliberate co-variance
+of the weld register. `relabel_rePitch` states that re-pitching commutes with
+agent relabelling, and `no_natural_agent_recovery_from_config` rules out a
+relabelling-equivariant family that recovers an agent from a configuration.
+
 `Grid.map` leaves `Being`, `Call`, `Response`, `respondsTo`, and `conditions`
 unchanged, and maps `grade` through `toFun`.
 
@@ -1066,6 +1084,14 @@ The named checks show:
 
 This is the formal certificate that replacing equality with `AtBot` was a real
 de-operationalisation, not a naming preference.
+
+**`ConfigLeakWitness`.** `registerClock_config_recovers_agent` exhibits the
+honest failure of blanket information-flow noninterference: a concrete model's
+grade may coincide with its agent tag. The checked storage claim is instead
+typing plus relabelling equivariance.
+`no_agent_recovery_from_config_of_share_collision` supplies the complementary
+collision fact: two distinct actual agents can re-pitch to one configuration,
+so no configuration-only recovery function is correct for every actual weld.
 
 **`DirectionNegative`.** `forwardGrid` and `backwardGrid` are one-being,
 two-call grids identical except that `conditions` is reversed.
@@ -1221,6 +1247,10 @@ new correlations, fetters, and factors negative modules, then pins selected
 The audited declarations are:
 
 - `no_agent_recovery_of_field_collision`
+- `Grid.relabel_rePitch`
+- `Grid.no_natural_agent_recovery_from_config`
+- `ConfigLeakWitness.registerClock_config_recovers_agent`
+- `ConfigLeakWitness.no_agent_recovery_from_config_of_share_collision`
 - `DirectionNegative.no_direction_recovery_from_conditionsEither`
 - `CoverageNegative.directionVoid_needs_coverage`
 - `CoverageNegative.waaFullyEnlightened_needs_coverage`
@@ -1333,15 +1363,17 @@ being-boundary negative witness, the weld-boundary negative witness, the
 sraddha orthogonality witness, the severed-transcript gradeability negative,
 and the other-power regime/share negative. The concrete model and carrier
 results include `clockGrid`, `registerClockGrid`, `backslideGrid`,
-`gradingCollisionGrid`, `WeldNegative.twoWeldGrid`, `FoxCase.foxGrid`, and
-`TarikiCase.tarikiGrid`, plus the `InteriorDirectionNegative` two-face raw
+`gradingCollisionGrid`, `shareCollisionGrid`, `WeldNegative.twoWeldGrid`,
+`FoxCase.foxGrid`, and `TarikiCase.tarikiGrid`, plus the
+`InteriorDirectionNegative` two-face raw
 weld carrier: they witness, respectively, function/share splitting,
 diagnosis-time macro coarsening, same-being backsliding plus
 severed-transcript grade underdetermination, same-field/different-share
-grading, weld-boundary underdetermination, the fox run-through with no
-pole-arrival, fixed-call landing without a second act grammar, and intra-weld
-orientation underdetermination. The self-line witness is a permission witness,
-not an existence claim about any real regime.
+grading, same-share/different-agent configuration collision, weld-boundary
+underdetermination, the fox run-through with no pole-arrival, fixed-call landing
+without a second act grammar, and intra-weld orientation underdetermination.
+The self-line witness is a permission witness, not an existence claim about any
+real regime.
 
 One structural caution remains: `Terminus` is vacuously true of every `Stone`;
 use `LiveTerminus` or `ResponsiveTerminus` when non-vacuous response-function

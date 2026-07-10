@@ -119,11 +119,16 @@ def assumptionLedger : List AssumptionEntry := [
   { «section» := .asserted
     number := 2
     title := "Nothing self-indexed is stored"
-    statement := "`Config` stores only `tendency : Contrib`. It has no owner, being, weld, or field-residue slot. `rePitch` uses the received weld's share and ignores the prior configuration value."
+    statement := "`Config` stores only `tendency : Contrib`. It has no owner, being, weld, or field-residue slot. `rePitch` uses the received weld's share and ignores the prior configuration value. The checked claim is architectural and definability-level: the record has no `Being`-typed slot, relabelling agents acts trivially on configurations and commutes with `rePitch`, and no relabelling-equivariant recovery of an agent from a configuration exists. It is not an information-flow claim; see the declined entry below."
     anchors := [
       sigProof ``Config,
       sigProof ``Config.tendency,
-      sigProof ``Grid.rePitch
+      sigProof ``Grid.rePitch,
+      sigProof ``RawWeld.mapAgent,
+      downProof ``Config.relabel_fixed,
+      downProof ``Grid.relabel_rePitch,
+      downWitness ``Grid.no_natural_agent_recovery_from_config,
+      downWitness ``ConfigLeakWitness.no_agent_recovery_from_config_of_share_collision
     ] },
   { «section» := .asserted
     number := 3
@@ -239,6 +244,18 @@ def assumptionLedger : List AssumptionEntry := [
       downProof ``Grid.DirectedConvention.BeingConvention.GridConvention.waa_enlightened_occurrence_voice_assertable,
       downProof ``Grid.DirectedConvention.BeingConvention.GridConvention.waa_standing_enlightenment_voice_displayable
     ] },
+  { «section» := .declined
+    number := 7
+    title := "No blanket noninterference for the contribution carrier"
+    statement := "Grading may depend on the agent — `gradingCollisionGrid` grades by being deliberately (cetanā) — so a model's stored tendency may extensionally coincide with an agent tag; `registerClockGrid` witnesses the coincidence. The signature therefore declines the information-flow reading of non-storage. `Grid.rePitch_forgets` bounds the coincidence to a single reception's footprint: nothing accumulates into a diachronic bearer, and the configuration is fibered over no being. The asserted claim is typing plus relabelling equivariance."
+    anchors := [
+      sigWitness ``gradingCollisionGrid,
+      sigWitness ``registerClockGrid,
+      downWitness ``ConfigLeakWitness.registerClock_config_recovers_agent,
+      downProof ``Config.relabel_fixed,
+      downProof ``Grid.relabel_rePitch,
+      downProof ``Grid.rePitch_forgets
+    ] },
   { «section» := .convenience
     number := 1
     title := "Hand-rolled order classes"
@@ -303,7 +320,7 @@ def assumptionNumberingContiguous (sec : AssumptionSection) : Bool :=
     (List.range entries.length).map (fun n => n + 1)
 
 example : (assumptionSectionEntries .asserted).length = 5 := rfl
-example : (assumptionSectionEntries .declined).length = 6 := rfl
+example : (assumptionSectionEntries .declined).length = 7 := rfl
 example : (assumptionSectionEntries .convenience).length = 4 := rfl
 
 example : assumptionNumberingContiguous .asserted = true := by

@@ -81,8 +81,11 @@ def carried : Register → Bool
   | _ => false
 
 /-- Disclaimer 5's refined premise: nothing self-indexed is stored. The type-level
-    enforcement is architectural (`Config` has no owner field); this is the
-    paper-facing enumeration of the same claim. -/
+    enforcement is architectural (`Config` has no owner field) and
+    definability-level (`Grid.relabel_rePitch`,
+    `Grid.no_natural_agent_recovery_from_config`); the information-flow reading
+    is declined — see `ConfigLeakWitness`. This is the paper-facing enumeration
+    of the same claim. -/
 theorem nothing_selfIndexed_carried :
     ∀ f : SortedFact, selfIndexed f = true → carried f.register = false := by
   intro f h

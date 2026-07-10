@@ -79,6 +79,45 @@ theorem oldEqTerminus_not_invariant :
 
 end InvarianceNegative
 
+/- ==============================================================================
+   Configuration leak witnesses: honest limits of non-storage
+============================================================================== -/
+
+namespace ConfigLeakWitness
+
+/-- The blanket noninterference reading of "nothing indexed is stored" is
+    false: in the register clock, the re-pitched tendency extensionally
+    recovers the received weld's agent tag. This is deliberate — grading may
+    depend on the agent — and is why the checked non-storage claim is typing
+    plus equivariance, never information flow. -/
+theorem registerClock_config_recovers_agent :
+    ∀ (before : Config Nat) (w : registerClockGrid.Weld),
+      (registerClockGrid.rePitch before w).tendency = w.agent := by
+  intro _ _
+  rfl
+
+/-- Under a share collision, no function from configurations correctly
+    recovers the acting agent for every actual weld: the two receptions
+    re-pitch to the same configuration. -/
+theorem no_agent_recovery_from_config_of_share_collision :
+    ¬ ∃ recover : Config Nat → shareCollisionGrid.Being,
+        ∀ (before : Config Nat) (w : shareCollisionGrid.Weld),
+          shareCollisionGrid.Actual w →
+            recover (shareCollisionGrid.rePitch before w) = w.agent := by
+  rintro ⟨recover, correct⟩
+  let before : Config Nat := { tendency := 0 }
+  let leftWeld : shareCollisionGrid.Weld :=
+    ⟨ShareCollisionBeing.left, (), ()⟩
+  let rightWeld : shareCollisionGrid.Weld :=
+    ⟨ShareCollisionBeing.right, (), ()⟩
+  have hleft := correct before leftWeld (by rfl)
+  have hright := correct before rightWeld (by rfl)
+  have hagents : ShareCollisionBeing.left = ShareCollisionBeing.right := by
+    exact hleft.symm.trans hright
+  cases hagents
+
+end ConfigLeakWitness
+
 /- Reading and motivation: Identification/Commentary.lean, C.3. -/
 
 namespace DirectionNegative

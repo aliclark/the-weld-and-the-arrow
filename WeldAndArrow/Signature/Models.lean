@@ -78,7 +78,13 @@ theorem clockGrid_function_share_split_witness :
 
 /-- A register clock whose fine tags are natural-numbered registers. Each
     register answers the tick by handing off to the next register, and
-    delivery follows that hand-off. -/
+    delivery follows that hand-off.
+
+    The grade equation `grade n _ _ := n` makes a re-pitched tendency
+    extensionally equal to the acting register's tag. This coincidence is kept
+    deliberately: it is the recorded countermodel to the information-flow
+    reading of non-storage (`ConfigLeakWitness.registerClock_config_recovers_agent`),
+    and the ladder witnesses depend on these grades. -/
 def registerClockGrid : Grid Nat where
   Being      := Nat
   Call       := Unit
@@ -152,6 +158,25 @@ def gradingCollisionLeft : gradingCollisionGrid.Weld :=
 
 def gradingCollisionRight : gradingCollisionGrid.Weld :=
   ⟨GradingCollisionBeing.right, (), ()⟩
+
+/- --------------------------------------------------------------------------
+   Fifth concrete display — share collision across agents
+
+   Two distinct agents receive the same live share, so their re-pitched
+   configurations coincide and under-determine who acted.
+-------------------------------------------------------------------------- -/
+
+inductive ShareCollisionBeing
+  | left
+  | right
+
+def shareCollisionGrid : Grid Nat where
+  Being      := ShareCollisionBeing
+  Call       := Unit
+  Response   := Unit
+  respondsTo _ _ := some ()
+  grade _ _ _ := 3
+  conditions _ _ := True
 
 /- `clockGrid` is a genuine, finite, computable term of type `Grid Nat` —
     direct evidence that "a model of the theory" is a buildable Lean

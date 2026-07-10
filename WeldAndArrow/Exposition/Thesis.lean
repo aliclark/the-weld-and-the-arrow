@@ -1,6 +1,7 @@
 import WeldAndArrow.Exposition.Basic
 import WeldAndArrow.Signature
 import WeldAndArrow.Identification.Ownership
+import WeldAndArrow.Meta.Invariance
 
 namespace WAA.Exposition
 
@@ -19,7 +20,8 @@ def thesisClauses : List ThesisClause := [
   { id := "indexEnactedNotStored"
     text := "every index is enacted and nothing indexed is stored"
     status := .checked
-    anchors := [``Grid.index, ``Grid.rePitch_forgets] },
+    anchors := [``Grid.index, ``Grid.rePitch_forgets,
+      ``Grid.relabel_rePitch, ``Grid.no_natural_agent_recovery_from_config] },
   { id := "karmaNamesLoop"
     text := "karma names this loop"
     status := .checked

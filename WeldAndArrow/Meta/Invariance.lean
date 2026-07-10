@@ -1,11 +1,12 @@
 /-
 ================================================================================
   WeldAndArrow.Meta.Invariance
-  Display reparameterization and transport lemmas
+  Display reparameterization, agent relabelling, and transport lemmas
 ================================================================================
 
 This module transports grid predicates across display reparameterizations and
-keeps transport lemmas centralized so missing invariance facts are conspicuous.
+agent relabellings, and keeps transport lemmas centralized so missing
+invariance facts are conspicuous.
 
 Reading and motivation: Identification/Commentary.lean, C.3.
 -/
@@ -127,9 +128,41 @@ theorem exists_strict_map (f : DisplayReparam Contrib Contrib')
 
 end DisplayReparam
 
+/-- An agent relabelling: a bijection of the fine-tag carrier. The
+    equivariance theorems below are the formal content of "nothing uniform in
+    the signature reads an agent out of a configuration". -/
+structure AgentReparam (Being Being' : Type) where
+  toFun     : Being → Being'
+  invFun    : Being' → Being
+  left_inv  : ∀ b, invFun (toFun b) = b
+  right_inv : ∀ b', toFun (invFun b') = b'
+
+namespace AgentReparam
+
+variable {Being Being' : Type} (σ : AgentReparam Being Being')
+
+theorem toFun_injective {a b : Being} (h : σ.toFun a = σ.toFun b) : a = b := by
+  rw [← σ.left_inv a, ← σ.left_inv b, h]
+
+end AgentReparam
+
 namespace Config
 
-variable {Contrib Contrib' : Type} [PreorderBot Contrib] [PreorderBot Contrib']
+variable {Contrib : Type}
+
+/-- Agent relabelling acts trivially on a configuration because `Config`
+    contains no `Being`-typed material. -/
+def relabel {Being Being' : Type} (cfg : Config Contrib)
+    (_σ : AgentReparam Being Being') : Config Contrib :=
+  cfg
+
+/-- `Config` never mentions `Being`, so its agent-relabelling action is fixed.
+    The definitional triviality is the point. -/
+theorem relabel_fixed {Being Being' : Type} (cfg : Config Contrib)
+    (σ : AgentReparam Being Being') : cfg.relabel σ = cfg :=
+  rfl
+
+variable {Contrib' : Type} [PreorderBot Contrib] [PreorderBot Contrib']
 
 /-- Transport a stored display tendency along a display reparameterization. -/
 def map (before : Config Contrib) (f : DisplayReparam Contrib Contrib') :
@@ -147,6 +180,121 @@ end Config
 namespace Grid
 
 variable {Contrib Contrib' : Type} [PreorderBot Contrib] [PreorderBot Contrib']
+
+/-- Relabel only the fine agent carrier, transporting every agent-sensitive
+    signature field through the inverse bijection. -/
+def relabel (G : Grid Contrib) {Being' : Type}
+    (σ : AgentReparam G.Being Being') : Grid Contrib where
+  Being      := Being'
+  Call       := G.Call
+  Response   := G.Response
+  respondsTo := fun b' c => G.respondsTo (σ.invFun b') c
+  grade      := fun b' c r => G.grade (σ.invFun b') c r
+  conditions := fun w₁ w₂ =>
+    G.conditions (w₁.mapAgent σ.invFun) (w₂.mapAgent σ.invFun)
+
+variable (G : Grid Contrib) {Being' : Type}
+variable (σ : AgentReparam G.Being Being')
+
+theorem relabel_actual_iff (w : G.Weld) :
+    (G.relabel σ).Actual (w.mapAgent σ.toFun) ↔ G.Actual w := by
+  simp [Grid.Actual, Grid.relabel, σ.left_inv]
+
+theorem relabel_share (w : G.Weld) :
+    (G.relabel σ).share (w.mapAgent σ.toFun) = G.share w := by
+  change G.grade (σ.invFun (σ.toFun w.agent)) w.call w.response =
+    G.grade w.agent w.call w.response
+  rw [σ.left_inv]
+
+theorem relabel_hasSelfPoleIndex_iff (w : G.Weld) :
+    (G.relabel σ).HasSelfPoleIndex (w.mapAgent σ.toFun) ↔
+      G.HasSelfPoleIndex w := by
+  unfold Grid.HasSelfPoleIndex
+  rw [G.relabel_share σ w]
+
+theorem relabel_deliveredTo_iff (deed reception : G.Weld) :
+    DirectedConvention.DeliveredTo (G.relabel σ)
+        (deed.mapAgent σ.toFun) (reception.mapAgent σ.toFun) ↔
+      DirectedConvention.DeliveredTo G deed reception := by
+  have hdeed : (deed.mapAgent σ.toFun).mapAgent σ.invFun = deed := by
+    apply RawWeld.ext <;> simp [σ.left_inv]
+  have hreception :
+      (reception.mapAgent σ.toFun).mapAgent σ.invFun = reception := by
+    apply RawWeld.ext <;> simp [σ.left_inv]
+  change G.conditions ((deed.mapAgent σ.toFun).mapAgent σ.invFun)
+      ((reception.mapAgent σ.toFun).mapAgent σ.invFun) ↔
+    G.conditions deed reception
+  rw [hdeed, hreception]
+
+/-- Same-agent delivery is agent-sensitive but relabelling-invariant: it
+    depends on the equality pattern of tags, not on which tags name it. -/
+theorem relabel_sameAgentDelivery_iff (deed reception : G.Weld) :
+    DirectedConvention.SameAgentDelivery (G.relabel σ)
+        (deed.mapAgent σ.toFun) (reception.mapAgent σ.toFun) ↔
+      DirectedConvention.SameAgentDelivery G deed reception := by
+  constructor
+  · rintro ⟨hdelivered, hagent⟩
+    exact ⟨(G.relabel_deliveredTo_iff σ deed reception).mp hdelivered,
+      σ.toFun_injective hagent⟩
+  · rintro ⟨hdelivered, hagent⟩
+    exact ⟨(G.relabel_deliveredTo_iff σ deed reception).mpr hdelivered,
+      congrArg σ.toFun hagent⟩
+
+/-- The weld register co-varies with the relabelling; unlike `Config`, its
+    index is not fixed. -/
+theorem relabel_index (w : G.Weld) :
+    (G.relabel σ).index (w.mapAgent σ.toFun) = σ.toFun (G.index w) :=
+  rfl
+
+/-- Re-pitching commutes with agent relabelling: the configuration handed
+    forward is identical whether the run uses the original or relabelled fine
+    tags. The definitional triviality is the point: `Config` offers no agent
+    material on which relabelling could act. -/
+theorem relabel_rePitch (before : Config Contrib) (w : G.Weld) :
+    (G.relabel σ).rePitch before (w.mapAgent σ.toFun) = G.rePitch before w := by
+  apply Config.ext
+  exact G.relabel_share σ w
+
+namespace AgentRelabellingWitness
+
+/-- A symmetric two-agent grid used only to refute natural recovery. -/
+def symmetricGrid : Grid Contrib where
+  Being      := Bool
+  Call       := Unit
+  Response   := Unit
+  respondsTo _ _ := some ()
+  grade _ _ _ := shareBot
+  conditions _ _ := True
+
+/-- The fixed-point-free swap of the symmetric grid's two fine tags. -/
+def swap : AgentReparam Bool Bool where
+  toFun := Bool.not
+  invFun := Bool.not
+  left_inv := by intro b; cases b <;> rfl
+  right_inv := by intro b; cases b <;> rfl
+
+theorem ne_not_self (b : Bool) : b ≠ Bool.not b := by
+  cases b <;> intro h <;> cases h
+
+end AgentRelabellingWitness
+
+/-- No relabelling-equivariant family of functions reads an agent out of a
+    configuration. Honest scope: this refutes uniform (natural) recovery; a
+    particular model's stored value may extensionally coincide with an agent
+    tag, as `ConfigLeakWitness` records in `Meta/InvarianceNegative.lean`. -/
+theorem no_natural_agent_recovery_from_config :
+    ¬ ∃ recover : (G : Grid Contrib) → Config Contrib → G.Being,
+        ∀ (G : Grid Contrib) {Being' : Type}
+          (σ : AgentReparam G.Being Being') (cfg : Config Contrib),
+            recover (G.relabel σ) cfg = σ.toFun (recover G cfg) := by
+  rintro ⟨recover, natural⟩
+  let cfg : Config Contrib := { tendency := shareBot }
+  have h := natural AgentRelabellingWitness.symmetricGrid
+    AgentRelabellingWitness.swap cfg
+  change recover AgentRelabellingWitness.symmetricGrid cfg =
+    Bool.not (recover AgentRelabellingWitness.symmetricGrid cfg) at h
+  exact AgentRelabellingWitness.ne_not_self
+    (recover AgentRelabellingWitness.symmetricGrid cfg) h
 
 /-- Transport a grid by reparameterizing only its Row-2 display carrier. -/
 def map (G : Grid Contrib) (f : DisplayReparam Contrib Contrib') :

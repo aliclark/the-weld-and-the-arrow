@@ -20,6 +20,30 @@ structure RawWeld (Being Call Response : Type) where
 
 namespace RawWeld
 
+/-- Transport a weld along an agent relabelling. -/
+def mapAgent {Being Being' Call Response : Type}
+    (σ : Being → Being') (w : RawWeld Being Call Response) :
+    RawWeld Being' Call Response :=
+  ⟨σ w.agent, w.call, w.response⟩
+
+@[simp]
+theorem mapAgent_agent {Being Being' Call Response : Type}
+    (σ : Being → Being') (w : RawWeld Being Call Response) :
+    (w.mapAgent σ).agent = σ w.agent :=
+  rfl
+
+@[simp]
+theorem mapAgent_call {Being Being' Call Response : Type}
+    (σ : Being → Being') (w : RawWeld Being Call Response) :
+    (w.mapAgent σ).call = w.call :=
+  rfl
+
+@[simp]
+theorem mapAgent_response {Being Being' Call Response : Type}
+    (σ : Being → Being') (w : RawWeld Being Call Response) :
+    (w.mapAgent σ).response = w.response :=
+  rfl
+
 /-- Swap the call and response faces of a weld when they use the same carrier.
     This changes no signature fields; it is a display-side involution for
     checking whether an interior call→response arrow has been smuggled in. -/

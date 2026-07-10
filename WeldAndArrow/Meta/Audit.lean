@@ -20,6 +20,30 @@ info: 'WAA.no_agent_recovery_of_field_collision' does not depend on any axioms
 #print axioms no_agent_recovery_of_field_collision
 
 /--
+info: 'WAA.Grid.relabel_rePitch' does not depend on any axioms
+-/
+#guard_msgs in
+#print axioms Grid.relabel_rePitch
+
+/--
+info: 'WAA.Grid.no_natural_agent_recovery_from_config' does not depend on any axioms
+-/
+#guard_msgs in
+#print axioms Grid.no_natural_agent_recovery_from_config
+
+/--
+info: 'WAA.ConfigLeakWitness.registerClock_config_recovers_agent' does not depend on any axioms
+-/
+#guard_msgs in
+#print axioms ConfigLeakWitness.registerClock_config_recovers_agent
+
+/--
+info: 'WAA.ConfigLeakWitness.no_agent_recovery_from_config_of_share_collision' does not depend on any axioms
+-/
+#guard_msgs in
+#print axioms ConfigLeakWitness.no_agent_recovery_from_config_of_share_collision
+
+/--
 info: 'WAA.strict_asymm' does not depend on any axioms
 -/
 #guard_msgs in

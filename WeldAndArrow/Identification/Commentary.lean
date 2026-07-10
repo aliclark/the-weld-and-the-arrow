@@ -40,6 +40,11 @@ motivation around those inputs.
 `Config` is the formal place where "nothing self-indexed is stored" is enforced:
 it carries only a `Contrib`-valued tendency and no owner, being, or weld field.
 This is the type-level version of the paper's internal mis-feed discipline.
+Its exact scope is architectural and definability-level:
+`Config.relabel_fixed`, `Grid.relabel_rePitch`, and
+`Grid.no_natural_agent_recovery_from_config` check the uniform claim. The
+information-flow reading is declined by Assumption Ledger B.7, with
+`ConfigLeakWitness.registerClock_config_recovers_agent` recording why.
 `Identification/Registers.lean` records the register table for the same sorting:
 field facts are carried, weld facts are spent, and grade statements are stated.
 
@@ -255,6 +260,15 @@ contribution carrier: they must transport across order-preserving and
 pole-preserving changes of display convention. This is the formal counterpart
 of treating contribution values as display conventions rather than operational
 tokens.
+
+`AgentReparam` and `Grid.relabel` are the Being-side twin of that discipline.
+A predicate mentioning fine agent tags owes a `relabel_*` transport lemma or an
+explicit co-variance statement such as `relabel_index`, marking it as weld-
+register vocabulary. `relabel_sameAgentDelivery_iff` makes the important case
+explicit: same-agent delivery remains agent-sensitive while depending only on
+the tag pattern, not the tag names. This change records the admission rule and
+satisfies it for the relabelling lemma set introduced here; it does not impose a
+retroactive transport obligation across every existing Being-facing predicate.
 
 The condition-transpose operation and its being-coarsening companion now live in
 the signature layer, beside the `conditions`, `DeliveredTo`, and
