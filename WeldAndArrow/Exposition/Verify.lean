@@ -1,6 +1,6 @@
 import Lean
-import WeldAndArrow.Exposition.Docs
-import WeldAndArrow.Meta.Glossary
+import WeldAndArrow.Exposition.Registry
+import WeldAndArrow.Exposition.Glossary
 
 namespace WAA.Exposition
 
@@ -42,6 +42,13 @@ def structuralFailures (docs : List Doc) (terms : List String) : List String :=
     xrefFailures docIds doc ++
     termFailures terms doc)
 
+def residueFailures (docIds : List DocId) (entries : List ResidueEntry) : List String :=
+  entries.filterMap (fun entry =>
+    if docIds.contains entry.locus then
+      none
+    else
+      some (entry.id ++ ": unknown residue locus " ++ entry.locus))
+
 open Lean Elab Command Meta
 
 syntax (name := verifyExpositionAnchors) "#verify_exposition_anchors" : command
@@ -57,6 +64,8 @@ unsafe def evalAllDocs : Term.TermElabM (List Doc) := do
   let env <- getEnv
   let mut failures : Array String := #[]
   for failure in structuralFailures docs WAA.glossaryTerms do
+    failures := failures.push failure
+  for failure in residueFailures registryIds residueLedger do
     failures := failures.push failure
   for doc in docs do
     for anchor in doc.anchors do

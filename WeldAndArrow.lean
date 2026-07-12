@@ -16,7 +16,7 @@ Layers:
   disclaimers, commentary, and placement-gating results.
 * `Meta`: invariance discipline, sibling countermodels, verdict ledger, and
   audit.
-* `Exposition`: generated prose data, rendering, and prose-surface checks.
+* `Exposition`: prose-facing office data, rendering, and prose-surface checks.
 
 Placement rules:
 1. Place a declaration by the vocabulary its statement consumes.

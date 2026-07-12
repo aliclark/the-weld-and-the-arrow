@@ -1,14 +1,10 @@
-import WeldAndArrow.Exposition.Basic
-
-namespace WAA.Exposition
-
-def formalizationBody : String := r#"# A Plain-English Reading of the Lean Theorems
+# A Plain-English Reading of the Lean Theorems
 
 **Scope.** This document states, in plain English, what the Lean declarations in
 `Signature/*`, `Consequences/{Basic,Taxonomy,Ladder,ContentRows}.lean`, `Doctrines/*`,
 `Identification/*`, and `Meta/*` assert. It reads the checked Lean surface:
 definitions, theorem statements, and proof status where that matters.
-Interpretive prose is generated from `WeldAndArrow/Exposition/*` and remains secondary to the formal statements.
+Interpretive prose is maintained as Markdown under `Exposition/` and remains secondary to the formal statements.
 
 For the canonical input-side assumption list, see
 [Assumptions.md](Assumptions.md); the compile-checked pins live in
@@ -1224,7 +1220,7 @@ name `DirectionNegative`, `InteriorDirectionNegative`, the transposition pair,
 the fox theorem, and `MisFeedNegative.fence_and_gate`. The checkable half of the falsifier is
 `misFeed_entries_carry_decomposition`; the rate-trend half remains prose.
 
-**Glossary.** `Meta/Glossary.lean` is the canonical source for glossary data.
+**Glossary.** `Exposition/Glossary.lean` is the canonical source for glossary data.
 Each `GlossaryEntry` records a term, provenance kind, newcomer-facing gloss,
 checked Lean anchors, and backward-only `seeAlso` references. Lean checks the
 table length, term uniqueness, `seeAlso` resolution to earlier rows, and anchor
@@ -1337,8 +1333,8 @@ census theorems `Grid.ConsequentialistConvention.dropCountInFiber_le_dropCount`,
 `[propext]`.
 
 The Lake build targets the library `WeldAndArrow` by default and also defines
-the non-default `lean_exe` targets `exposition_gen`, `glossary_gen`, and
-`exposition_generation_test`; there is no `Main.lean`.
+the non-default `lean_exe` targets `exposition_gen`, `glossary_gen`,
+`assumptions_gen`, and `exposition_generation_full`; there is no `Main.lean`.
 
 ---
 
@@ -1378,14 +1374,3 @@ real regime.
 One structural caution remains: `Terminus` is vacuously true of every `Stone`;
 use `LiveTerminus` or `ResponsiveTerminus` when non-vacuous response-function
 matters.
-"#
-
-def formalizationDoc : Doc :=
-  { id := "formalization"
-    title := "Formalization"
-    output := "Exposition/Formalization.md"
-    source := "WeldAndArrow/Exposition/Formalization/Reading.lean"
-    summary := "Plain-English reading of the Lean formalization."
-    blocks := [.raw formalizationBody] }
-
-end WAA.Exposition

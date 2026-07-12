@@ -761,9 +761,9 @@ rate-trend clause and the claims that the retypes were forced, timely, and
 historically prior remain prose, because they quantify over the history rather
 than over the current record.
 
-C.12 Meta/Glossary.lean
+C.12 Exposition/Glossary.lean
 
-`Meta/Glossary.lean` is the canonical glossary source. The three markdown
+`Exposition/Glossary.lean` is the canonical glossary source. The three markdown
 glossaries are retired in favor of generated output from
 `WeldAndArrow/Gen/Glossary.lean`; the paper-facing table lives at
 `Exposition/Glossary.md`.

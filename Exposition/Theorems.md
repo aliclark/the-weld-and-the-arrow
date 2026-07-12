@@ -1,8 +1,4 @@
-import WeldAndArrow.Exposition.Basic
-
-namespace WAA.Exposition
-
-def theoremsBody : String := r#"# Weld and Arrow — II. Theorems
+# Weld and Arrow — II. Theorems
 
 *Second of three files. Nothing in this file is posited: everything is derived from the rules stated in Theory. §1 collects what falls out of the typing directly; §2 the derivations that meet existing discourses on their own ground; §3 gathers the instructive absences in both. Cross-references to the companion files are marked (Theory) and (Identification).*
 
@@ -281,14 +277,3 @@ Absences the system generates deliberately, in both of the categories above — 
 - **Prudential privilege underivable.** The special rational authority of self-concern is an absence owned as theorem, not cost — in Śāntideva's company, with the bodhisattva's impartiality falling out as its display-face.
 - **No measure over the grade.** Row 2 states a partial ordering only; the scalar is display. The absent metric is priced deliberately — the soteriology consumes only the ordering, so no measure is owed. (And none over delivery either: effectiveness enters as an ordering within a regime, never as a probability apparatus — the standing declines, §1.)
 - **Rebirth cosmology ceded.** The grammar of ownerless continuation is already given in a limited sense: the field carries conditioning without a bearer, and the fox's returns are welds rather than a transmigrating self — the flame passed with no self to carry it. What is ceded is the cosmology of rebirth: persistence across biological death, the realms, and the mechanism, downstream of where the domain of mounted responses ends. The boundary is marked as an absence, not bridged by a manufactured theorem.
-"#
-
-def theoremsDoc : Doc :=
-  { id := "theorems"
-    title := "Theorems"
-    output := "Exposition/Theorems.md"
-    source := "WeldAndArrow/Exposition/Theorems.lean"
-    summary := "Consequences and doctrinal tests of the axiomatic reconstruction."
-    blocks := [.raw theoremsBody] }
-
-end WAA.Exposition

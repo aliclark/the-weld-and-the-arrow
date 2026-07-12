@@ -1,8 +1,4 @@
-import WeldAndArrow.Exposition.Basic
-
-namespace WAA.Exposition
-
-def identificationBody : String := r#"# Weld and Arrow — III. The Identification and Placements
+# Weld and Arrow — III. The Identification and Placements
 
 *Third of three files: the identification claim, the act-time placements that earn the name karma, the contemporary placements, the pole-typing corollary, and the disclaimers, enumerated. Cross-references to the companion files are marked (Theory) and (Theorems).*
 
@@ -126,14 +122,3 @@ The following are conventional and my own -- original moves, each flagged agains
 ---
 
 *With thanks to Claude (Anthropic) -- sparring partner and midwife to a more resonant theory, and ChatGPT (OpenAI) for the Lean proofs and for systematic refactorings.*
-"#
-
-def identificationDoc : Doc :=
-  { id := "identification"
-    title := "Identification and Placements"
-    output := "Exposition/Identification.md"
-    source := "WeldAndArrow/Exposition/Identification.lean"
-    summary := "The identification claim, placements, and disclaimers."
-    blocks := [.raw identificationBody] }
-
-end WAA.Exposition

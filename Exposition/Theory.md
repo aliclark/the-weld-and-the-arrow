@@ -1,8 +1,4 @@
-import WeldAndArrow.Exposition.Basic
-
-namespace WAA.Exposition
-
-def theoryBody : String := r#"# Weld and Arrow — I. Theory
+# Weld and Arrow — I. Theory
 
 *An axiomatic reconstruction of Zen sayings in an ontology-under-erasure act-grammar. First of three files: **Theory** (this file), **Theorems**, **Identification**. Cross-references to the companion files are marked (Theorems) and (Identification).*
 
@@ -192,14 +188,3 @@ The system has so far been stated as type-discipline; here is one case run throu
 Every load-bearing piece appears once: call, arrogation, weld, arrow, seed, return, reach-back, re-pitch, rung. The loop closes at reception, retrospectively, each time — nowhere else, and nowhere is it stored. *(checked: `foxSeriesCoarsening`, `foxSeries_macro_sentient`, `foxSeries_macro_selfConditioning`, `fox_consecutive_lives_distinct`)*
 
 And mark what the case never tests: neither utterance occurs at the pole. The koan's own question concerns 大修行底人 — a person of great practice, not a buddha; the old man answers from a defended rank, and the release is a rung with the mountain still ahead. So the fox exercises the loop entire — sowing, arrow, reception, re-pitch — without once asking what the loop is at share-zero. That question is the transposition (Theorems: the terminus). *(checked: `fox_never_tests_pole`)*
-"#
-
-def theoryDoc : Doc :=
-  { id := "theory"
-    title := "Theory"
-    output := "Exposition/Theory.md"
-    source := "WeldAndArrow/Exposition/Theory.lean"
-    summary := "An axiomatic reconstruction of Zen sayings and the worked fox test."
-    blocks := [.raw theoryBody] }
-
-end WAA.Exposition

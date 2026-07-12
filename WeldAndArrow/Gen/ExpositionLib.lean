@@ -1,4 +1,5 @@
-import WeldAndArrow.Exposition.Docs
+import WeldAndArrow.Exposition.Index
+import WeldAndArrow.Exposition.Glossary
 
 namespace WAA.Exposition
 
@@ -9,8 +10,19 @@ structure Options where
 def outputPath (outputRoot path : String) : String :=
   if outputRoot == "" then path else outputRoot ++ "/" ++ path
 
+def generatedDocs : List Doc := [indexDoc, WAA.glossaryDoc]
+
 def renderedDocs (outputRoot : String := "") : List (String × String) :=
-  allDocs.map (fun doc => (outputPath outputRoot doc.output, renderDoc doc))
+  generatedDocs.map (fun doc => (outputPath outputRoot doc.output, renderDoc doc))
+
+def checkSourceDocs : IO Unit := do
+  for ref in registry do
+    match ref.provenance with
+    | .source =>
+        let content <- IO.FS.readFile ref.output
+        if content.isEmpty then
+          throw (IO.userError s!"registered exposition source is empty: {ref.output}")
+    | .generated _ => pure ()
 
 def ensureOutputDirs (outputRoot : String) : IO Unit := do
   IO.FS.createDirAll (outputPath outputRoot "Exposition")
@@ -21,6 +33,7 @@ def writeDocs (outputRoot : String := "") : IO Unit := do
     IO.FS.writeFile path content
 
 def checkDocs (outputRoot : String := "") : IO Unit := do
+  checkSourceDocs
   let mut mismatches : Array String := #[]
   for (path, expected) in renderedDocs outputRoot do
     let current <- IO.FS.readFile path
