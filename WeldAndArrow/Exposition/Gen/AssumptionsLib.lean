@@ -1,4 +1,4 @@
-import WeldAndArrow.Exposition.Basic
+import WeldAndArrow.Exposition.Registry
 import WeldAndArrow.Meta.AssumptionLedger
 
 namespace WAA
@@ -48,12 +48,10 @@ def renderAxiomAudit : String :=
   "## Axiom audit\n\n" ++
     String.intercalate "\n" (assumptionAxiomAudit.map renderAxiomAuditEntry)
 
-def renderAssumptions : String :=
-  "<!-- GENERATED from WeldAndArrow/Meta/AssumptionLedger.lean by " ++
-    "`lake exe assumptions_gen` - do not edit -->\n\n" ++
-    "# Assumptions\n\n" ++
+def assumptionsBody : String :=
+  "# Assumptions\n\n" ++
     "Generated from `WeldAndArrow/Meta/AssumptionLedger.lean` by " ++
-    "`lake exe assumptions_gen`. `WeldAndArrow/Signature/Assumptions.lean` " ++
+    "`lake exe exposition_gen`. `WeldAndArrow/Signature/Assumptions.lean` " ++
     "holds the compile-checked anchor pins; statement prose is canonical here.\n\n" ++
     String.intercalate "\n\n"
       [ renderSection .asserted,
@@ -63,7 +61,15 @@ def renderAssumptions : String :=
 
 end AssumptionsGen
 
+def assumptionsDoc : Exposition.Doc :=
+  { id := Exposition.assumptionsRef.id
+    title := Exposition.assumptionsRef.title
+    output := Exposition.assumptionsRef.output
+    source := "WeldAndArrow/Meta/AssumptionLedger.lean"
+    summary := Exposition.assumptionsRef.summary
+    blocks := [.raw AssumptionsGen.assumptionsBody] }
+
 def renderAssumptions : String :=
-  AssumptionsGen.renderAssumptions
+  Exposition.renderDoc assumptionsDoc
 
 end WAA

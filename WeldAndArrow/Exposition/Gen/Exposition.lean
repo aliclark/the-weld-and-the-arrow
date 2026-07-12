@@ -1,4 +1,4 @@
-import WeldAndArrow.Gen.ExpositionLib
+import WeldAndArrow.Exposition.Gen.ExpositionLib
 
 def main (args : List String) : IO Unit := do
   match WAA.Exposition.parseArgs args with

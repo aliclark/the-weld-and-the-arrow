@@ -1,5 +1,6 @@
 import WeldAndArrow.Exposition.Index
 import WeldAndArrow.Exposition.Glossary
+import WeldAndArrow.Exposition.Gen.AssumptionsLib
 
 namespace WAA.Exposition
 
@@ -10,7 +11,7 @@ structure Options where
 def outputPath (outputRoot path : String) : String :=
   if outputRoot == "" then path else outputRoot ++ "/" ++ path
 
-def generatedDocs : List Doc := [indexDoc, WAA.glossaryDoc]
+def generatedDocs : List Doc := [indexDoc, WAA.assumptionsDoc, WAA.glossaryDoc]
 
 def renderedDocs (outputRoot : String := "") : List (String × String) :=
   generatedDocs.map (fun doc => (outputPath outputRoot doc.output, renderDoc doc))

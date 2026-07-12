@@ -44,10 +44,10 @@ def identificationRef : DocRef :=
     provenance := .source
     summary := "the karma identification, the offices-spine that earns the name, the sower/reaper split, the contemporary placements, the pole-typing corollary, the taxonomy's internal mis-feeds, and the disclaimers, enumerated" }
 
-def formalizationRef : DocRef :=
-  { id := "formalization"
-    title := "Formalization"
-    output := "Exposition/Formalization.md"
+def readingRef : DocRef :=
+  { id := "reading"
+    title := "Reading"
+    output := "Exposition/Reading.md"
     provenance := .source
     summary := "a plain-English reading of the checked Lean surface: the reading conventions (the `Waa` system-POV marking, the directed-convention namespace layers as ontological ordering, rfl-transparency notes), the preorder and pole-class preliminaries, the signature and its convention layers, the layer-by-layer readings of `Consequences`, `Doctrines`, `Identification`, and `Meta` with the numbered pins, the śūnyatā wrappers and reflexivity witness, the invariance discipline and its sibling countermodels, the verdict ledger, and the axiom audit; with what remains prose-bound flagged throughout" }
 
@@ -55,7 +55,7 @@ def assumptionsRef : DocRef :=
   { id := "assumptions"
     title := "Assumptions"
     output := "Exposition/Assumptions.md"
-    provenance := .generated "lake exe assumptions_gen"
+    provenance := .generated "lake exe exposition_gen"
     summary := "the input side, enumerated: what the Signature asserts, what it deliberately declines, and its stand-ins; with checked anchors and the axiom audit" }
 
 def glossaryRef : DocRef :=
@@ -73,7 +73,7 @@ def registry : List DocRef := [
   identificationRef,
   assumptionsRef,
   glossaryRef,
-  formalizationRef
+  readingRef
 ]
 
 def registryIds : List DocId := registry.map (fun ref => ref.id)

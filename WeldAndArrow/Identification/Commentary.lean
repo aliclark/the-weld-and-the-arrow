@@ -765,7 +765,7 @@ C.12 Exposition/Glossary.lean
 
 `Exposition/Glossary.lean` is the canonical glossary source. The three markdown
 glossaries are retired in favor of generated output from
-`WeldAndArrow/Gen/Glossary.lean`; the paper-facing table lives at
+`WeldAndArrow/Exposition/Gen/Glossary.lean`; the paper-facing table lives at
 `Exposition/Glossary.md`.
 
 The module checks office discipline, not exposition itself. `glossary.length`

@@ -1,18 +1,11 @@
-import WeldAndArrow.Gen.AssumptionsLib
-import WeldAndArrow.Gen.ExpositionLib
+import WeldAndArrow.Exposition.Gen.ExpositionLib
 
-namespace WAA.Gen.FullExpositionGeneration
+namespace WAA.Exposition.Gen.FullExpositionGeneration
 
 def outputRoot : String := ".lake/exposition-full"
 
-def expositionDir : String := outputRoot ++ "/Exposition"
-
-def writeAssumptions : IO Unit := do
-  IO.FS.createDirAll expositionDir
-  IO.FS.writeFile (expositionDir ++ "/Assumptions.md") WAA.renderAssumptions
-
 def copyStaticDocs : IO Unit := do
-  IO.FS.createDirAll expositionDir
+  IO.FS.createDirAll (outputRoot ++ "/Exposition")
   for ref in WAA.Exposition.registry do
     match ref.provenance with
     | .source =>
@@ -29,11 +22,10 @@ def checkNonempty (ref : WAA.Exposition.DocRef) : IO Unit := do
 def run : IO Unit := do
   copyStaticDocs
   WAA.Exposition.writeDocs outputRoot
-  writeAssumptions
   for ref in WAA.Exposition.registry do
     checkNonempty ref
 
-end WAA.Gen.FullExpositionGeneration
+end WAA.Exposition.Gen.FullExpositionGeneration
 
 def main : IO Unit := do
-  WAA.Gen.FullExpositionGeneration.run
+  WAA.Exposition.Gen.FullExpositionGeneration.run
