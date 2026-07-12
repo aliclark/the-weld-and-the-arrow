@@ -248,7 +248,8 @@ theorem nihilist_refuted_at_every_rung {d : Distinction G}
 /-! ## Instantiations at the concrete rows -/
 
 /-- 有無 — śūnyatā of the beings distinction: no level of its re-emptying
-    ladder freezes. Nishitani's central claim, at the schema's native row. -/
+    ladder freezes. 有無 emptied: Nishitani's 'Not Nothing' at the seed,
+    carried up the ladder in Jizang's form -/
 theorem beings_sunyata (G : Grid Contrib) : Sunyata (beingsRow G) :=
   fun ⟨n, hf⟩ => beingsLadder_no_level_final G n hf
 
@@ -299,7 +300,7 @@ Position ladder; it is retained here as the frame-level companion to the
 ladder-level relocation above. Placed at `WAA.Metaphysics` rather than under
 the grid lens because, per the naming discipline, it presupposes nothing of
 the grid: worlds and concreta only. The correspondence:
-`MetaphysicalNihilism`'s frame-relativity (`Frame → Prop`) is the external
+`PrivativeVoid`'s frame-relativity (`Frame → Prop`) is the external
 face of what `nihilist_thesis_is_something` shows internally — the thesis
 cannot be had without the field it was meant to escape. -/
 
@@ -316,19 +317,19 @@ def IsEmptyWorld (M : Frame) (w : M.World) : Prop :=
 
 /-- Metaphysical nihilism, as statable: some world is empty. Note the type
     `Frame → Prop` — no frame-free formulation exists to assert. -/
-def MetaphysicalNihilism (M : Frame) : Prop :=
+def PrivativeVoid (M : Frame) : Prop :=
   ∃ w : M.World, IsEmptyWorld M w
 
 /-- Asserting the possibility of Nothing is an existence proof of Something:
     the thesis's truth requires a witness, and a possibility is a something. -/
 theorem nihilism_is_an_existence_proof (M : Frame)
-    (h : MetaphysicalNihilism M) : Nonempty M.World :=
+    (h : PrivativeVoid M) : Nonempty M.World :=
   h.elim fun w _ => ⟨w⟩
 
 /-- The absolute reading — nothing at all, not even the possibility — is
     unassertible: with no worlds, the thesis is unavailable, not true. -/
 theorem no_worlds_no_thesis (M : Frame) (h : ¬ Nonempty M.World) :
-    ¬ MetaphysicalNihilism M :=
+    ¬ PrivativeVoid M :=
   fun hn => h (nihilism_is_an_existence_proof M hn)
 
 end Metaphysics
