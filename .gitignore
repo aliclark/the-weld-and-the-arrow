@@ -1,4 +1,5 @@
 .vscode/
 .lake/
+docbuild/.lake/
 .agents/
 Plans/

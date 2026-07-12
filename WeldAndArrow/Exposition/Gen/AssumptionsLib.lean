@@ -40,19 +40,26 @@ def renderSection (sec : AssumptionSection) : String :=
     String.intercalate "\n\n"
       ((assumptionSectionEntries sec).map renderEntry)
 
-def renderAxiomAuditEntry (name : Lean.Name) : String :=
-  "- `" ++ name.toString ++ "` -- pinned by `#guard_msgs` in " ++
-    "`WeldAndArrow/Signature/Assumptions.lean` to depend on no axioms."
+def renderAxiomNames (names : List Lean.Name) : String :=
+  match names with
+  | [] => "None"
+  | names => Exposition.joinComma (names.map (fun name => "`" ++ name.toString ++ "`"))
+
+def renderAxiomAuditEntry (entry : AxiomAuditEntry) : String :=
+  "| `" ++ entry.name.toString ++ "` | " ++ renderAxiomNames entry.allowed ++ " |"
 
 def renderAxiomAudit : String :=
   "## Axiom audit\n\n" ++
-    String.intercalate "\n" (assumptionAxiomAudit.map renderAxiomAuditEntry)
+    "`#verify_axiom_audit` compares each declaration's collected axiom set " ++
+    "with this allowlist during every build.\n\n" ++
+    "| Declaration | Allowed axioms |\n|---|---|\n" ++
+    String.intercalate "\n" (axiomAuditLedger.map renderAxiomAuditEntry)
 
 def assumptionsBody : String :=
   "# Assumptions\n\n" ++
     "Generated from `WeldAndArrow/Meta/AssumptionLedger.lean` by " ++
-    "`lake exe exposition_gen`. `WeldAndArrow/Signature/Assumptions.lean` " ++
-    "holds the compile-checked anchor pins; statement prose is canonical here.\n\n" ++
+    "`lake exe exposition_gen`. `WeldAndArrow/Meta/AxiomAudit.lean` holds the " ++
+    "compile-checked axiom ledger; statement prose is canonical here.\n\n" ++
     String.intercalate "\n\n"
       [ renderSection .asserted,
         renderSection .declined,

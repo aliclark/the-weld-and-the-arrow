@@ -9,6 +9,8 @@ Reading and motivation: Identification/Commentary.lean, C.1.
 
 namespace WAA
 
+variable {α : Type}
+
 /- ==============================================================================
    §0  Dependency-free preorder infrastructure
 ============================================================================== -/

@@ -1230,15 +1230,19 @@ canonical caveats remain prose; the Disclaimers carry expert-facing departures.
 
 ---
 
-## 6. Meta/Audit.lean
+## 6. Meta/AxiomAudit.lean
 
-`Meta/Audit.lean` imports `Meta/Invariance.lean`,
+`Meta/AxiomAudit.lean` imports `Meta/Invariance.lean`,
 `Meta/InvarianceNegative.lean`, `Meta/ReflexivityWitness.lean`,
 `Meta/VerdictLedger.lean`,
 `Doctrines/SraddhaNegative.lean`,
 `Doctrines/FaithNegative.lean`, and `Doctrines/Deliberation.lean`, plus the
-new correlations, fetters, and factors negative modules, then pins selected
-`#print axioms` outputs with `#guard_msgs`.
+new correlations, fetters, and factors negative modules. Its typed
+`axiomAuditLedger` records every declaration and its exact allowed axiom set;
+`#verify_axiom_audit` uses `Lean.collectAxioms` to compare sets during the build
+and reports all missing declarations and set differences together. The
+generated table in `Assumptions.md` is the complete source-of-truth view;
+`Meta/Audit.lean` remains a compatibility import.
 
 The audited declarations are:
 
@@ -1318,7 +1322,7 @@ The audited declarations are:
   `Grid.ConsequentialistConvention.map_dropCountInFiberSum`
 - `ObjectiveNegative.split_dropCount_sum_eq_mergedDropCount`
 
-The pinned result is: no audited theorem depends on `sorry` or
+The verified result is: no audited theorem depends on `sorry` or
 `Classical.choice`. All audited declarations are axiom-free except
 `DirectionNegative.no_direction_recovery_from_conditionsEither`, which depends
 on exactly `[propext, Quot.sound]`, and
@@ -1329,8 +1333,9 @@ on exactly `[propext, Quot.sound]`, and
 `Grid.DirectedConvention.map_waaFaithPrinciple_reflect`, plus the three
 census theorems `Grid.ConsequentialistConvention.dropCountInFiber_le_dropCount`,
 `Grid.ConsequentialistConvention.dropCount_eq_sum_dropCountInFiber`, and
-`Grid.ConsequentialistConvention.map_dropCountInFiberSum`, which depend on
-`[propext]`.
+`Grid.ConsequentialistConvention.map_dropCountInFiberSum`, and the two ledger
+case theorems `LedgerCase.decree_engineers_calls_not_receptions` and
+`LedgerCase.purge_loop_runs_on`, which depend on `[propext]`.
 
 The Lake build targets the library `WeldAndArrow` by default and also defines
 the non-default `lean_exe` targets `exposition_gen`, `glossary_gen`,

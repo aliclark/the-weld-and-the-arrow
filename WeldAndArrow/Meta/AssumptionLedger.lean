@@ -4,15 +4,16 @@
   Canonical assumption prose, checked anchors, and structural checks
 ================================================================================
 
-The Signature layer keeps the compile-time tripwire for input-side declarations.
-This ledger is the canonical source for the reader-facing assumption prose and
-for the checked anchor metadata rendered to `Exposition/Assumptions.md`.
+The axiom-audit ledger keeps the compile-time tripwire for input-side
+declarations. This ledger is the canonical source for the reader-facing
+assumption prose and for the checked anchor metadata rendered to
+`Exposition/Assumptions.md`.
 
 Lean here buys internal consistency and derivability, not exclusivity or truth:
 given the primitives the consequences follow without contradiction; it is not
 shown that no other reconstruction would. The ledger and its axiom audit make
-the “no added axioms” part concrete through `assumptionAxiomAudit` and the
-`#print axioms` pins. Its declined entries — no `PreorderTop`, no privileged
+the “no added axioms” part concrete through `assumptionAxiomAudit` and
+`#verify_axiom_audit`. Its declined entries — no `PreorderTop`, no privileged
 person-partition, and direction/scalar as display — record the signature's
 active refusal to privilege its own choices rather than a proof that rivals are
 impossible.
@@ -20,6 +21,7 @@ impossible.
 
 import Lean
 import WeldAndArrow.Signature.Assumptions
+import WeldAndArrow.Meta.AxiomAudit
 import WeldAndArrow.Meta.InvarianceNegative
 import WeldAndArrow.Identification.Ownership
 import WeldAndArrow.Doctrines.FourTruths
@@ -296,12 +298,10 @@ def assumptionLedger : List AssumptionEntry := [
     ] }
 ]
 
-/-- Declarations whose no-axiom status is pinned in `Signature.Assumptions`. -/
-def assumptionAxiomAudit : List Lean.Name := [
-  ``no_agent_recovery_of_field_collision,
-  ``Grid.DirectedConvention.DirectionCoarsening.no_timeDirection_within_tick,
-  ``Grid.DirectedConvention.DirectionCoarsening.no_timeDirection_of_resolutionBounded_subsingleton
-]
+/-- Audited declarations that are required to remain entirely axiom-free. -/
+def assumptionAxiomAudit : List Lean.Name :=
+  (axiomAuditLedger.filter (fun entry => entry.allowed.isEmpty)).map
+    (fun entry => entry.name)
 
 /- ==============================================================================
    Structural checks
@@ -324,16 +324,16 @@ example : (assumptionSectionEntries .declined).length = 7 := rfl
 example : (assumptionSectionEntries .convenience).length = 4 := rfl
 
 example : assumptionNumberingContiguous .asserted = true := by
-  native_decide
+  decide
 
 example : assumptionNumberingContiguous .declined = true := by
-  native_decide
+  decide
 
 example : assumptionNumberingContiguous .convenience = true := by
-  native_decide
+  decide
 
 example : assumptionTitles.Nodup := by
-  native_decide
+  decide
 
 /- ==============================================================================
    Anchor verifier

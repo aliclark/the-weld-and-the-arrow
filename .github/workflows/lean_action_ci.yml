@@ -2,8 +2,14 @@ name: Lean Action CI
 
 on:
   push:
+    branches: [main]
+    tags: ['*']
   pull_request:
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -12,5 +18,9 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: leanprover/lean-action@v1
+        with:
+          build-args: "--wfail"
       - name: Test exposition generation
         run: lake exe exposition_generation_full
+      - name: Check committed exposition is current
+        run: lake exe exposition_gen --check

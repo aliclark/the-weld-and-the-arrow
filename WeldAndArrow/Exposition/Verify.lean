@@ -4,7 +4,7 @@ import WeldAndArrow.Exposition.Glossary
 
 namespace WAA.Exposition
 
-def isEmptyList : List α -> Bool
+def isEmptyList {α : Type} : List α -> Bool
   | [] => true
   | _ => false
 

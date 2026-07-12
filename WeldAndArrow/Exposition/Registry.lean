@@ -91,13 +91,14 @@ def allDocs : List Doc := registry.map DocRef.toDoc
 
 example : registry.length = 7 := rfl
 
-example : registryIds.Nodup := by
-  native_decide
+theorem registry_ids_nodup : registryIds.Nodup := by
+  decide
 
-example : registryOutputs.Nodup := by
-  native_decide
+theorem registry_outputs_nodup : registryOutputs.Nodup := by
+  decide
 
-example : residueLedger.all (fun entry => registryIds.contains entry.locus) = true := by
-  native_decide
+theorem residue_loci_registered :
+    residueLedger.all (fun entry => registryIds.contains entry.locus) = true := by
+  decide
 
 end WAA.Exposition

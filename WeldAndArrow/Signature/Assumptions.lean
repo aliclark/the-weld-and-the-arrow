@@ -300,24 +300,6 @@ example (before before' : Config Contrib) (received : G.Weld) :
 #check registerClock_macro_sentient -- witness
 #check registerClock_macro_selfConditioning -- witness
 
-/--
-info: 'WAA.no_agent_recovery_of_field_collision' does not depend on any axioms
--/
-#guard_msgs in
-#print axioms no_agent_recovery_of_field_collision
-
-/--
-info: 'WAA.Grid.DirectedConvention.DirectionCoarsening.no_timeDirection_within_tick' does not depend on any axioms
--/
-#guard_msgs in
-#print axioms Grid.DirectedConvention.DirectionCoarsening.no_timeDirection_within_tick
-
-/--
-info: 'WAA.Grid.DirectedConvention.DirectionCoarsening.no_timeDirection_of_resolutionBounded_subsingleton' does not depend on any axioms
--/
-#guard_msgs in
-#print axioms Grid.DirectedConvention.DirectionCoarsening.no_timeDirection_of_resolutionBounded_subsingleton
-
 end AssumptionAnchors
 
 end WAA

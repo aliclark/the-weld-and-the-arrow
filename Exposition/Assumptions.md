@@ -2,7 +2,7 @@
 
 # Assumptions
 
-Generated from `WeldAndArrow/Meta/AssumptionLedger.lean` by `lake exe exposition_gen`. `WeldAndArrow/Signature/Assumptions.lean` holds the compile-checked anchor pins; statement prose is canonical here.
+Generated from `WeldAndArrow/Meta/AssumptionLedger.lean` by `lake exe exposition_gen`. `WeldAndArrow/Meta/AxiomAudit.lean` holds the compile-checked axiom ledger; statement prose is canonical here.
 
 ## A. What Is Asserted
 
@@ -128,6 +128,133 @@ The clock and register-clock models anchor possibility checks and taxonomy examp
 
 ## Axiom audit
 
-- `WAA.no_agent_recovery_of_field_collision` -- pinned by `#guard_msgs` in `WeldAndArrow/Signature/Assumptions.lean` to depend on no axioms.
-- `WAA.Grid.DirectedConvention.DirectionCoarsening.no_timeDirection_within_tick` -- pinned by `#guard_msgs` in `WeldAndArrow/Signature/Assumptions.lean` to depend on no axioms.
-- `WAA.Grid.DirectedConvention.DirectionCoarsening.no_timeDirection_of_resolutionBounded_subsingleton` -- pinned by `#guard_msgs` in `WeldAndArrow/Signature/Assumptions.lean` to depend on no axioms.
+`#verify_axiom_audit` compares each declaration's collected axiom set with this allowlist during every build.
+
+| Declaration | Allowed axioms |
+|---|---|
+| `WAA.no_agent_recovery_of_field_collision` | None |
+| `WAA.Grid.DirectedConvention.DirectionCoarsening.no_timeDirection_within_tick` | None |
+| `WAA.Grid.DirectedConvention.DirectionCoarsening.no_timeDirection_of_resolutionBounded_subsingleton` | None |
+| `WAA.Grid.relabel_rePitch` | None |
+| `WAA.Grid.no_natural_agent_recovery_from_config` | None |
+| `WAA.ConfigLeakWitness.registerClock_config_recovers_agent` | None |
+| `WAA.ConfigLeakWitness.no_agent_recovery_from_config_of_share_collision` | None |
+| `WAA.strict_asymm` | None |
+| `WAA.strict_trans` | None |
+| `WAA.Grid.transpose_transpose` | None |
+| `WAA.DirectionNegative.no_direction_recovery_from_conditionsEither` | `propext`, `Quot.sound` |
+| `WAA.CoverageNegative.directionVoid_needs_coverage` | None |
+| `WAA.CoverageNegative.waaFullyEnlightened_needs_coverage` | None |
+| `WAA.Grid.stateToolFits_iff_atBot` | None |
+| `WAA.Grid.map_actual_iff` | None |
+| `WAA.Grid.map_isShareDrop_iff` | None |
+| `WAA.Grid.map_transpose` | None |
+| `WAA.Grid.staticized_transpose` | None |
+| `WAA.Grid.map_staticized` | None |
+| `WAA.Grid.DirectedConvention.DirectionCoarsening.mapDir_resolutionBounded_iff` | None |
+| `WAA.DirectionCoarseningWitness.registerClock_unitTick_not_resolutionBounded` | None |
+| `WAA.DirectionCoarseningWitness.unit_directionVoid_via_mergeToUnit` | None |
+| `WAA.DirectionCoarseningWitness.fullyCoarseRegisterClock_no_timeDirection` | None |
+| `WAA.DirectionCoarseningWitness.registerClock_directionCoarsening_independence` | None |
+| `WAA.Grid.DirectedConvention.map_landsWithShareDrop_iff` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.BeingCoarsening.map_selfConditioningTag_iff` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.BeingCoarsening.map_fiberAtPoleOn_iff` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.BeingCoarsening.total_sameFiber` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.BeingCoarsening.id_not_sameFiber_of_ne` | None |
+| `WAA.Grid.map_waaBullSeven_iff` | None |
+| `WAA.Grid.map_waaBullTen_iff` | None |
+| `WAA.Grid.bullSeven_not_bullEight` | None |
+| `WAA.Grid.bullTen_to_bullNine` | None |
+| `WAA.CorrelationsNegative.pratyekabuddha_countermodel` | None |
+| `WAA.CorrelationsNegative.no_stage_boundary_recovery` | None |
+| `WAA.Grid.classQuiet_no_clench_in_class` | None |
+| `WAA.Fetter.kind_lower_iff_cut_by_nonReturn` | None |
+| `WAA.Grid.arhatPathQuiet_iff_fiberAtPole` | None |
+| `WAA.Grid.all_fetters_cut_at_arhatFiber` | None |
+| `WAA.Grid.identityView_excluded_at_arhatFiber` | None |
+| `WAA.Grid.conceit_excluded_at_arhatFiber` | None |
+| `WAA.Grid.waaIrreversibleRegime_conditional` | None |
+| `WAA.Grid.lower_fetters_covered_by_rites_view_resolve` | None |
+| `WAA.Grid.waaStreamWinner_iff_streamEntry_cutClasses` | None |
+| `WAA.Grid.waaNonReturner_iff_nonReturn_cut` | None |
+| `WAA.Grid.waaSerialFactorRegime_conditional` | None |
+| `WAA.Grid.waaOnceReturner_attenuation_witness` | `propext` |
+| `WAA.FactorsNegative.no_hold_conceit_boundary_recovery` | None |
+| `WAA.FactorsNegative.seen_run_underdetermines_factorOrder` | `propext` |
+| `WAA.FactorsNegative.lineage_underdetermined_by_seen_run` | None |
+| `WAA.FettersNegative.seen_run_underdetermines_fetterCut` | `propext` |
+| `WAA.Grid.DirectedConvention.waaPathOught_conditional` | None |
+| `WAA.Grid.DirectedConvention.waaFaithOught_conditional` | None |
+| `WAA.Grid.DirectedConvention.map_waaFaithPrinciple_reflect` | `propext` |
+| `WAA.FaithNegative.waaFaithPrinciple_id_fails` | None |
+| `WAA.Grid.DirectedConvention.no_waa_path_at_pole` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.rowOf_obeys` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.pole_validates_all_claims` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.denied_misfits_live_offer` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.rowOf_obeys_iff_errorFree` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.reEmptied_obeys_of_errorFree` | None |
+| `WAA.rung_not_pole_witness` | None |
+| `WAA.standing_does_not_determine_dated` | None |
+| `WAA.Grid.DirectedConvention.map_waaAversionContext_iff` | None |
+| `WAA.OrthogonalityNegative.waaFullyEnlightened_stronger_than_terminus` | None |
+| `WAA.MisFeedNegative.fence_and_gate` | None |
+| `WAA.misFeed_entries_carry_decomposition` | None |
+| `WAA.Grid.grade_independent_of_conditions` | None |
+| `WAA.Grid.rePitch_forgets` | None |
+| `WAA.Grid.stone_of_no_call` | None |
+| `WAA.Grid.respondsToEveryCall_of_no_call` | None |
+| `WAA.Grid.allStone_of_no_being` | None |
+| `WAA.ContentNegative.emptyCallGrid_false_stone_and_respondsToEveryCall` | None |
+| `WAA.ContentNegative.emptyBeingGrid_no_liveTier` | None |
+| `WAA.ContentNegative.contentBeingsRow_obeys_emptyBeing` | None |
+| `WAA.Grid.DirectedConvention.PrudentialPrivilegeNegative.prudentialPrivilege_failure_modes` | None |
+| `WAA.Grid.ConsequentialistConvention.dropCountInFiber_le_dropCount` | `propext` |
+| `WAA.Grid.ConsequentialistConvention.dropCount_eq_sum_dropCountInFiber` | `propext` |
+| `WAA.Grid.ConsequentialistConvention.map_dropCountInFiberSum` | `propext` |
+| `WAA.ObjectiveNegative.split_dropCount_sum_eq_mergedDropCount` | None |
+| `WAA.ObjectiveNegative.no_grid_data_objective_for_my_drops` | None |
+| `WAA.TransferNegative.adaptive_track_record_underdetermines_new_effect` | None |
+| `WAA.Grid.DirectedConvention.not_enacted_of_undelivered` | None |
+| `WAA.FullEnlightenmentNegative.no_fullEnlightenment_recovery_from_run` | None |
+| `WAA.DeliveryArrogationNegative.command_utterance_not_fits` | None |
+| `WAA.Grid.DirectedConvention.landing_call_in_modality` | None |
+| `WAA.LedgerCase.decree_engineers_calls_not_receptions` | `propext` |
+| `WAA.LedgerCase.purge_loop_runs_on` | `propext` |
+| `WAA.InteriorDirectionNegative.transposeCR_involutive` | None |
+| `WAA.InteriorDirectionNegative.unorderedCRContent_transpose_invariant` | `propext` |
+| `WAA.InteriorDirectionNegative.transpose_swaps_readings` | None |
+| `WAA.DoerDeedNegative.priority_readings_disagree` | None |
+| `WAA.DoerDeedNegative.no_priority_recovery` | None |
+| `WAA.ContentNegative.constantResponseGrid_no_variation` | None |
+| `WAA.ContentNegative.constantResponseWeld_no_live_share` | None |
+| `WAA.ContentNegative.contentIntraWeldArrowRow_not_fused_constantResponse` | None |
+| `WAA.ContentNegative.contentIntraWeldArrowRow_not_obeys_constantResponse` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.intraWeldArrowRow_obeys` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.intraWeldArrowRow_not_freeze` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.no_order_collapse_self_refuting` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.doerDeedRow_obeys` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.doerDeedRow_not_freeze` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.no_prior_doer_collapse_self_refuting` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.contentLayerRow_obeys_of_variation` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.contentIntraWeldArrowRow_obeys_of_variation` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.interior_order_denial_unfit_for_live_utterer` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.intraWeldArrowLadder_obeys` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.intraWeldArrowLadder_obeys_succ` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.intraWeldArrowLadder_no_level_final` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.doerDeedLadder_obeys` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.doerDeedLadder_obeys_succ` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.doerDeedLadder_no_level_final` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.Metaphysics.intraWeldArrow_sunyata` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.Metaphysics.doerDeed_sunyata` | None |
+| `WAA.Grid.map_responseVariesWithCall_iff` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.map_intraWeldArrowRow_obeys` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.map_doerDeedRow_obeys` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.map_contentIntraWeldArrowRow_obeys_of_variation` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.map_intraWeldArrowLadder_obeys` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.map_intraWeldArrowLadder_obeys_succ` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.map_intraWeldArrowLadder_no_level_final` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.map_doerDeedLadder_obeys` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.map_doerDeedLadder_obeys_succ` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.map_doerDeedLadder_no_level_final` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.ladderRungGrid_beings_sunyata` | None |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.ladderRungGrid_no_level_final` | None |

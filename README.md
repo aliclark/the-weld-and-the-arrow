@@ -1,10 +1,44 @@
+[![Lean Action CI](https://github.com/weld-and-arrow/weld-and-arrow/actions/workflows/lean_action_ci.yml/badge.svg)](https://github.com/weld-and-arrow/weld-and-arrow/actions/workflows/lean_action_ci.yml)
 [![DOI](https://zenodo.org/badge/1285260842.svg)](https://zenodo.org/badge/latestdoi/1285260842)
+
+[API documentation](https://weld-and-arrow.github.io/weld-and-arrow/) ·
+[Reading order](Exposition/index.md)
 
 ## Abstract
 
 *Weld and Arrow* (*WAA*) is an **axiomatic reconstruction** of Zen sayings about karma, action, suffering, and awakening. Its fixed Signature layer supplies a small set of primitives: a field carrying every diachronic connection without an owner, and welds, single occurrences of answering a call, at which every index is made, spent, and never stored. The sayings are recovered as consequences; doctrinal cases are tests the reconstruction must pass, not its premises.
 
 Lean here buys internal consistency and derivability, not exclusivity or truth: given the primitives the consequences follow without contradiction; it is not shown that no other reconstruction would. The grammar of ownerless continuation is in scope — the flame passed without a carried self — while rebirth cosmology is marked as ceded downstream of the mounted-response domain.
+
+The checked thesis is: **Everything diachronic belongs to the field; every
+index is enacted and nothing indexed is stored; karma names this loop, and the
+naming is earned by fit.**
+
+## Quickstart
+
+Install [elan](https://github.com/leanprover/elan), then run:
+
+```console
+lake build
+```
+
+The repository pins Lean 4.31.0. A green build elaborates the complete library
+with automatic implicit binders disabled, reduces the structural proof checks
+in the kernel, resolves the `#verify_*` anchor tripwires, and compares every
+audited declaration against its exact axiom allowlist. CI additionally
+regenerates the exposition and checks that the committed generated Markdown has
+not drifted from its Lean sources.
+
+The dependency direction is deliberately linear:
+
+```text
+Signature → Consequences → Doctrines → Identification → Meta → Exposition
+```
+
+The Signature fixes the primitives and generator; later layers derive neutral
+consequences, test doctrinal cases, identify the reconstruction, audit its
+metatheory, and render the reader-facing surface. Start with
+[`Exposition/index.md`](Exposition/index.md) for the intended reading order.
 
 ## Exposition
 

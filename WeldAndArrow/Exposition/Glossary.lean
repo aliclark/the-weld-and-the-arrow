@@ -881,11 +881,12 @@ def seeAlsoTargetsEarlier : Bool :=
 
 example : glossary.length = 149 := rfl
 
-example : glossaryTerms.Nodup := by
-  native_decide
+set_option maxRecDepth 100000 in
+theorem glossary_terms_nodup : glossaryTerms.Nodup := by
+  decide
 
-example : seeAlsoTargetsEarlier = true := by
-  native_decide
+theorem seeAlso_targets_earlier : seeAlsoTargetsEarlier = true := by
+  decide
 
 /- ==============================================================================
    Anchor verifier

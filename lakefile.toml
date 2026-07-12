@@ -2,6 +2,10 @@ name = "WeldAndArrow"
 version = "0.1.1-dev"
 defaultTargets = ["WeldAndArrow"]
 
+[leanOptions]
+autoImplicit = false
+relaxedAutoImplicit = false
+
 [[lean_lib]]
 name = "WeldAndArrow"
 
