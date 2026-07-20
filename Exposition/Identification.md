@@ -125,4 +125,4 @@ The following are conventional and my own -- original moves, each flagged agains
 
 ---
 
-*With thanks to Claude (Anthropic) -- sparring partner and midwife to a more resonant theory, and OpenAI Codex—beginning with GPT‑5.5 xhigh’s initial Lean formalization of the Exposition—for continued assistance with proofs, plan-guided development, and systematic refactoring.*
+*With thanks to Claude (Anthropic) — Opus 4.8 in the early discussions and first Exposition, Fable 5 for the greater part of the theory since — sparring partner and midwife to a more resonant theory, in both directions, and OpenAI Codex—beginning with GPT‑5.5 xhigh’s initial Lean formalization of the Exposition—for continued assistance with proofs, plan-guided development, and systematic refactoring.*
