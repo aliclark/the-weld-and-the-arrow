@@ -587,9 +587,15 @@ by silence and structurally unproduced. Jinshin inga instructs: the fitting
 instruction is an actual speech production, and a terminus producer would put
 that weld at pole without arrogation. `oldMan_defiledFalsehood` and
 `jinshinInga_floor_voicing_defiled` converge on the same schema for the old
-answer and the counterfactual floor voicing. These checks narrow but do not
-discharge the historical contra: whether the unproduced floor face may be held
-remains prose interpretation. The dukkha-facing name
+answer and the counterfactual floor voicing. These checks narrow the historical
+contra and type its remainder. `daishugyo_floor_face_unproduced` is the formal
+face of an observational equivalence: a register-foreclosing and an
+ontologically foreclosing reading of the late Dōgen agree on every production,
+because any production separating them would instantiate the defiled-falsehood
+schema the checks convict. Whether the floor face may be held therefore remains
+prose interpretation — now typed as undischargeable by any find that keeps the
+fascicles' own discipline, rather than merely undischarged. The module adds no
+holding predicate and returns no verdict. The dukkha-facing name
 `fox_dukkha_per_life` lives one layer down in `Doctrines/FoxCase.lean` because
 it consumes `WaaMismatchGrade` from `FourTruths`.
 

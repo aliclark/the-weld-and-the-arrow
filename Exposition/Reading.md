@@ -678,7 +678,8 @@ series individuated. The Dōgen gloss is typed by
 `jinshinInga_instruction_fits`, `jinshinInga_floor_voicing_would_misfit`, and
 `dogen_doubling`. The floor face is error-free by silence rather than
 positively true; these checks cover only the grid-internal speech-act gloss,
-not the historical contra.
+not the historical contra, whose remainder `daishugyo_floor_face_unproduced`
+types as living in the unproduced, outside every check's reach.
 `Doctrines/FoxCase.lean` adds `fox_dukkha_per_life`, because that theorem
 consumes the Four Truths mismatch vocabulary.
 

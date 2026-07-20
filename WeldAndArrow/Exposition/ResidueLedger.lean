@@ -29,7 +29,7 @@ def residueLedger : List ResidueEntry := [
     reason := "The exact Kuòān verse locus for the Ten Bulls guard should be verified across translations." },
   { id := "historical-contra-dogen"
     locus := "theory"
-    reason := "The Daishugyō/Jinshin inga contra has narrowed: both fascicles' core verdicts are checked with the same production and defiled-falsehood vocabulary, but whether the structurally unproduced floor face may be held remains historical interpretation, not a Lean result."
+    reason := "The Daishugyō/Jinshin inga contra has narrowed and its remainder is typed: both fascicles' core verdicts are checked in one production and defiled-falsehood vocabulary, and the residual question — whether the structurally unproduced floor face may be held — is production-equivalent: register-foreclosure and ontological foreclosure leave identical corpora, since separating them would take a production instantiating the schema both fascicles convict. The entry stands as interpretation the production record cannot discharge while that discipline holds; the system asserts the equivalence and no verdict. Eihei kōroku 7.40 anchors the register-bounded reading in prose, unformalized."
     anchors := [``FoxCase.daishugyo_floor_face_unproduced,
       ``FoxCase.oldMan_defiledFalsehood,
       ``FoxCase.jinshinInga_floor_voicing_defiled] },
