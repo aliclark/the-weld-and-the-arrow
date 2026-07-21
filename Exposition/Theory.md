@@ -22,7 +22,7 @@ Per Nishitani — absolute non-being is not a privative void, but beyond being/n
 
 ### Śūnyatā
 
-Why not leave it at Nishitani? It would be a mistake of analysis: "beyond being/non-being" is itself a designation, and analysis, wherever applied, finds no own-being in its designatum — the ultimate included. Per Nāgārjuna — whatever is dependently originated is emptiness, and that, being a dependent designation, is itself the middle path (*MMK* 24.18). And emptiness is not exempt from the analysis that produced it: śūnyatā, analysed, is empty (空空). Every stated ultimate is a prajñapti — a finding, not a caution.
+Why not leave it at Nishitani? It would be a mistake of analysis: "beyond being/non-being" is itself a designation, and analysis, wherever applied, finds no own-being in its designatum — the ultimate included. Both of these findings are the Buddha's: the world empty of self (SN 35.85), and the middle between "it is" and "it is not" (SN 12.15). Per Nāgārjuna — deepening the emptiness from self to own-being, widening it to every dharma — whatever is dependently originated is emptiness, and that, being a dependent designation, is itself the middle path (*MMK* 24.18). And emptiness is not exempt from the analysis that produced it: śūnyatā, analysed, is empty (空空). Every stated ultimate is a prajñapti — a finding, not a caution.
 
 ### Provisionally-designated middle
 
