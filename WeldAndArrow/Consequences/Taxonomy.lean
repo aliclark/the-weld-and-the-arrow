@@ -107,6 +107,18 @@ theorem fitting_offer_is_actTime
   | actTime w =>
       exact ⟨w, rfl⟩
 
+/-- Ordinary conventional speech fits its offer: an `inForce` claim offered
+    at any act-time tier is true there. The taxonomy's default verdict on
+    ordinary speech is decline. -/
+theorem inForce_fits_actTime_offer
+    (u : RecordedUtterance G (rowLanguage G)) (r : RowTag)
+    (hcontent : u.content = .inForce r)
+    (w : G.Weld) (hoff : u.offeredAt = Tier.actTime w) :
+    u.FitsOfferedTier := by
+  change (rowLanguage G).TrueAt u.offeredAt u.content
+  rw [hoff, hcontent]
+  exact True.intro
+
 /-- A floor offer is error-free by silence: it asserts nothing, so nothing
     convicts it. This is not a positive truth judgement at the floor. -/
 theorem not_misfits_of_floor_offer
@@ -635,6 +647,24 @@ inductive TableRow
   | generated (r : RowTag)
   | ladderSchema
   | prose (p : ProseRow)
+
+/- Scope note, against over-diagnosis. The table grades offers, not
+   sentences: the generator's unit is `RecordedUtterance` — content carried
+   with its call and its offered tier — and a sentence-shape alone is not in
+   the domain (the gradeability discipline's limit case; compare
+   `severed_transcript_ungradeable`). Ordinary conventional speech is the
+   validated default, not the suspect case: the row language makes each
+   row's conventional side hold wherever an act is under way — validity by
+   stipulation, not an achievement of the sentence (`rowLanguage`,
+   `inForce_fits_actTime_offer`) — so narration that merely exercises the
+   being, doer/deed, before/after, and weld-grain conventions, "a man
+   walked into a bar", violates none of them, and the generator's standing
+   verdict on it is decline. Errors enter with the offer, never with the
+   words: the same words carried by a different offer are a different
+   recorded utterance — held out as floor-furniture they stack freezes per
+   distinction touched; their denial, offered as live diagnosis, stacks
+   collapses. A diagnosis that convicts the sentence itself is the
+   over-generation the decline verdict fences. -/
 
 def tableOrder : List TableRow := [
   .prose .beingNonBeing,
