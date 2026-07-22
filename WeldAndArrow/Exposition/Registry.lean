@@ -16,6 +16,13 @@ structure DocRef where
   summary : String
 deriving Repr
 
+def preambleRef : DocRef :=
+  { id := "preamble"
+    title := "Preamble"
+    output := "Exposition/Preamble.md"
+    provenance := .source
+    summary := "Jingqing's peck-and-tap exchange from the Blue Cliff Record, rendered from the Chinese" }
+
 def indexRef : DocRef :=
   { id := "index"
     title := "Contents"
@@ -67,6 +74,7 @@ def glossaryRef : DocRef :=
 
 /-- Reading order. List position is the Contents number. -/
 def registry : List DocRef := [
+  preambleRef,
   indexRef,
   theoryRef,
   theoremsRef,
@@ -89,7 +97,7 @@ def DocRef.toDoc (ref : DocRef) : Doc :=
 
 def allDocs : List Doc := registry.map DocRef.toDoc
 
-example : registry.length = 7 := rfl
+example : registry.length = 8 := rfl
 
 theorem registry_ids_nodup : registryIds.Nodup := by
   decide
