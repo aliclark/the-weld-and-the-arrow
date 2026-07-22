@@ -26,7 +26,7 @@ def preambleRef : DocRef :=
 def indexRef : DocRef :=
   { id := "index"
     title := "Contents"
-    output := "Exposition/index.md"
+    output := "Exposition/Contents.md"
     provenance := .generated "lake exe exposition_gen"
     summary := "this table of contents, generated from the exposition registry; its reading order, numbering, links, and document inventory follow the registered document set" }
 
