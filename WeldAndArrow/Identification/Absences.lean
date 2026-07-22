@@ -304,12 +304,14 @@ theorem foxNeverTestsPole_oldMan_misfit_anchor :
     FoxCase.oldManUtterance.MisfitsOfferedTier :=
   FoxCase.oldMan_utterance_misfits
 
-/-- The delivered third arrival is on the scale at the pole and marked
-    sentient only by the supplied clock reading. -/
-theorem thirdArrival_sentient_at_pole :
-    clockGrid.TerminusAct clockSentienceReading
+/-- The delivered third arrival is on the scale at the pole and unmarked under
+    the reading named here.  The marked reading is the other half of
+    `clock_pole_readings_split`. -/
+theorem thirdArrival_stone_at_pole :
+    clockGrid.StoneAct
+      (Grid.SentienceReading.allInsentient clockGrid)
       ⟨Clock.adaptive, Listener.present, Chime.chime⟩ :=
-  sentient_pole_act_witness
+  clock_pole_readings_split.left
 
 /-- The retired absence is kept as the dukkha-free-by-construction check:
     a terminus response has no live mismatch. -/

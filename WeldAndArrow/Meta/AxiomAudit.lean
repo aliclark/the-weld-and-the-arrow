@@ -3,6 +3,7 @@ import WeldAndArrow.Meta.Invariance
 import WeldAndArrow.Meta.InvarianceNegative
 import WeldAndArrow.Meta.ReflexivityWitness
 import WeldAndArrow.Meta.VerdictLedger
+import WeldAndArrow.Consequences.ModelWitnesses
 import WeldAndArrow.Doctrines.SraddhaNegative
 import WeldAndArrow.Doctrines.FaithNegative
 import WeldAndArrow.Doctrines.Deliberation

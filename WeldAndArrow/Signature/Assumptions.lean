@@ -309,7 +309,11 @@ example (before before' : Config Contrib) (received : G.Weld) :
 /- C.4 Model witnesses are illustrative. -/
 #check clockGrid -- witness
 #check registerClockGrid -- witness
-#check registerClock_macro_sentient -- witness
+#check registerClock_insentient_proficient -- witness
+#check clock_pole_readings_split -- witness
+#check registerClock_rung_readings_split -- witness
+#check rigid_terminus_vacuous -- witness
+#check adaptive_liveTerminus -- witness
 #check sentience_share_square_inhabited -- witness
 #check registerClock_macro_selfConditioning -- witness
 

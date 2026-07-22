@@ -13,6 +13,7 @@ accuracy and aptness of the glosses remain prose obligations.
 import Lean
 import WeldAndArrow.Exposition.Registry
 import WeldAndArrow.Consequences.Compounds
+import WeldAndArrow.Consequences.ModelWitnesses
 import WeldAndArrow.Doctrines
 import WeldAndArrow.Identification
 import WeldAndArrow.Meta.InvarianceNegative
@@ -447,11 +448,14 @@ def glossary : List GlossaryEntry := [
     seeAlso := ["three doors", "vāsanā"] },
   { term := "sentient/insentient tag"
     kind := .coinage .theory
-    gloss := "Sentience is marked per actual weld under a supplied `SentienceReading`; it is never recovered from grid behavior. `SentientTag`, `StoneTag`, and `Intermittent` are convention-relative quantified displays over a macro fiber, not standing natures or scalar degrees."
+    gloss := "Sentience is marked per actual weld under a supplied `SentienceReading`; it is never recovered from grid behavior. `SentientTag`, `StoneTag`, and `Intermittent` are convention-relative quantified displays over a macro fiber, not standing natures or scalar degrees. The insentient register clock is neither sentient-tagged nor stone-tagged and is instead patchy."
     anchors := [``Grid.DirectedConvention.BeingConvention.BeingCoarsening.SentientTag,
       ``Grid.DirectedConvention.BeingConvention.BeingCoarsening.StoneTag,
       ``Grid.DirectedConvention.BeingConvention.BeingCoarsening.Intermittent,
-      ``Grid.no_sentience_recovery]
+      ``Grid.no_sentience_recovery,
+      ``registerClock_macro_not_sentientTag_insentient,
+      ``registerClock_macro_not_stoneTag_insentient,
+      ``registerClock_macro_patchy]
     seeAlso := ["tag/fiber", "stone"] },
   { term := "FiberAtPole / SelfAptTag / Patchy"
     kind := .leanConvention

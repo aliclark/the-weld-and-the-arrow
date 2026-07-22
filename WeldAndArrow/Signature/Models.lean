@@ -54,10 +54,41 @@ def clockGrid : Grid Nat where
 theorem adaptive_is_terminus : clockGrid.Terminus Clock.adaptive :=
   fun _c _r _h => Nat.le_refl 0
 
-/-- A supplied reading for examples involving the adaptive clock.  This does
-    not follow from the clock's response table. -/
-def clockSentienceReading : clockGrid.SentienceReading where
-  sentient w := w.agent = Clock.adaptive
+/-- The rigid clock is terminus-typed only vacuously: it has no actual welds. -/
+theorem rigid_terminus_vacuous :
+    clockGrid.Terminus Clock.rigid ∧
+      ¬ clockGrid.ActualAgentInhabited Clock.rigid := by
+  constructor
+  · intro c r hresponse
+    cases c <;> cases hresponse
+  · rintro ⟨⟨agent, call, response⟩, hactual, hagent⟩
+    change agent = Clock.rigid at hagent
+    subst agent
+    cases call <;> cases hactual
+
+/-- The adaptive clock is a non-vacuous terminus: its present-listener chime
+    is an actual pole response. -/
+theorem adaptive_liveTerminus : clockGrid.LiveTerminus Clock.adaptive :=
+  ⟨⟨⟨Clock.adaptive, Listener.present, Chime.chime⟩, rfl, rfl⟩,
+    adaptive_is_terminus⟩
+
+/-- The adaptive clock's pole weld occupies opposite sentience cells under
+    the two extremal supplied readings.  Its share status is grid data; the
+    mark is not. -/
+theorem clock_pole_readings_split :
+    clockGrid.StoneAct
+        (Grid.SentienceReading.allInsentient clockGrid)
+        ⟨Clock.adaptive, Listener.present, Chime.chime⟩ ∧
+      clockGrid.TerminusAct
+        (Grid.SentienceReading.allSentient clockGrid)
+        ⟨Clock.adaptive, Listener.present, Chime.chime⟩ := by
+  have hsplit := clockGrid.actual_weld_readings_split
+    ⟨Clock.adaptive, Listener.present, Chime.chime⟩ rfl
+  have hbot : AtBot
+      (clockGrid.share
+        ⟨Clock.adaptive, Listener.present, Chime.chime⟩) :=
+    clockGrid.atBot_of_terminus_response adaptive_is_terminus rfl
+  exact ⟨⟨hsplit.right, hbot⟩, ⟨hsplit.left, hbot⟩⟩
 
 /- --------------------------------------------------------------------------
    The inhabited sentience/share square
@@ -158,20 +189,156 @@ def registerClockCoarsening :
     Grid.DirectedConvention.BeingConvention.BeingCoarsening registerClockGrid Unit where
   proj _ := ()
 
-def registerClockSentienceReading : registerClockGrid.SentienceReading :=
-  Grid.SentienceReading.allSentient registerClockGrid
+/-- The macro register-clock fiber has an actual weld, independently of any
+    supplied sentience reading. -/
+theorem registerClock_macro_actualFiberInhabited :
+    registerClockCoarsening.ActualFiberInhabited () :=
+  ⟨⟨(0 : Nat), (), (1 : Nat)⟩, rfl, rfl⟩
 
-theorem registerClock_macro_sentient :
-    registerClockCoarsening.SentientTag registerClockSentienceReading () :=
-  ⟨⟨(0 : Nat), (), (1 : Nat)⟩, ⟨rfl, by
-    change True
-    exact True.intro⟩, rfl⟩
+/-- Under the all-insentient reading, the macro register-clock fiber has no
+    marked actual weld. -/
+theorem registerClock_macro_not_sentientTag_insentient :
+    ¬ registerClockCoarsening.SentientTag
+        (Grid.SentienceReading.allInsentient registerClockGrid) () :=
+  registerClockCoarsening.allInsentient_not_sentientTag ()
+
+/-- The all-insentient register clock is not a `StoneTag`: register `2` has
+    an actual weld with live share. -/
+theorem registerClock_macro_not_stoneTag_insentient :
+    ¬ registerClockCoarsening.StoneTag
+        (Grid.SentienceReading.allInsentient registerClockGrid) () := by
+  intro hstone
+  have hbot := (hstone.right ⟨(2 : Nat), (), (3 : Nat)⟩ rfl rfl).right
+  dsimp [Grid.share, registerClockGrid, AtBot, shareBot] at hbot
+  exact (by decide : ¬ (2 : Nat) ≤ 0) hbot
+
+/-- The macro register-clock fiber is patchy: register `2` is live, while
+    register `0` is at the pole and hence is not self-apt. -/
+theorem registerClock_macro_patchy :
+    registerClockCoarsening.Patchy () := by
+  constructor
+  · intro hpole
+    have hbot := hpole ⟨(2 : Nat), (), (3 : Nat)⟩ rfl rfl
+    dsimp [Grid.share, registerClockGrid, AtBot, shareBot] at hbot
+    exact (by decide : ¬ (2 : Nat) ≤ 0) hbot
+  · intro hselfApt
+    have hlive := hselfApt ⟨(0 : Nat), (), (1 : Nat)⟩ rfl rfl
+    dsimp [Grid.HasSelfPoleIndex, Grid.share, registerClockGrid,
+      AtBot, shareBot] at hlive
+    exact hlive (Nat.le_refl 0)
 
 theorem registerClock_macro_selfConditioning :
     registerClockCoarsening.SelfConditioningTag () := by
   refine ⟨⟨(0 : Nat), (), (1 : Nat)⟩, ⟨(1 : Nat), (), (2 : Nat)⟩,
     rfl, rfl, rfl, ?_⟩
   rfl
+
+/-- An insentient register clock can still be a proficient dharma-agent
+    display: its macro fiber is actual, internally self-conditioning under
+    `registerClockCoarsening`, and patchy.  The staged reception-side share
+    descent is supplied separately by `waaGradualArrival_witness`; it is the
+    receiving `Config` that descends, not a stored clock-self. -/
+theorem registerClock_insentient_proficient :
+    ¬ registerClockCoarsening.SentientTag
+        (Grid.SentienceReading.allInsentient registerClockGrid) () ∧
+      registerClockCoarsening.ActualFiberInhabited () ∧
+      registerClockCoarsening.SelfConditioningTag () ∧
+      registerClockCoarsening.Patchy () :=
+  ⟨registerClock_macro_not_sentientTag_insentient,
+    registerClock_macro_actualFiberInhabited,
+    registerClock_macro_selfConditioning,
+    registerClock_macro_patchy⟩
+
+/-- The same live register-clock weld is an insentient appropriation or an
+    ordinary act according only to the supplied extremal reading. -/
+theorem registerClock_rung_readings_split :
+    registerClockGrid.InsentientAppropriation
+        (Grid.SentienceReading.allInsentient registerClockGrid)
+        ⟨(2 : Nat), (), (3 : Nat)⟩ ∧
+      registerClockGrid.OrdinaryAct
+        (Grid.SentienceReading.allSentient registerClockGrid)
+        ⟨(2 : Nat), (), (3 : Nat)⟩ := by
+  have hsplit := registerClockGrid.actual_weld_readings_split
+    ⟨(2 : Nat), (), (3 : Nat)⟩ rfl
+  have hlive : registerClockGrid.HasSelfPoleIndex
+      ⟨(2 : Nat), (), (3 : Nat)⟩ := by
+    dsimp [Grid.HasSelfPoleIndex, Grid.share, registerClockGrid,
+      AtBot, shareBot]
+    exact Nat.not_succ_le_zero 1
+  exact ⟨⟨hsplit.right, hlive⟩, ⟨hsplit.left, hlive⟩⟩
+
+/- --------------------------------------------------------------------------
+   Insentient source landing in a marked receiver fiber
+
+   Both sides of the mark are supplied by `sourceReceiverReading`, and the
+   identity coarsening makes the fiber separation explicit rather than
+   recovering it from grid data.
+-------------------------------------------------------------------------- -/
+
+inductive SourceReceiver
+  | clock
+  | receiver
+
+def sourceReceiverGrid : Grid Nat where
+  Being := SourceReceiver
+  Call := Unit
+  Response := Unit
+  respondsTo _ _ := some ()
+  grade b _ _ :=
+    match b with
+    | .clock => 0
+    | .receiver => 1
+  conditions deed reception :=
+    deed.agent = SourceReceiver.clock ∧
+      reception.agent = SourceReceiver.receiver
+
+/-- The identity coarsening names the clock and receiver as separate fibers. -/
+def sourceReceiverCoarsening :
+    Grid.DirectedConvention.BeingConvention.BeingCoarsening
+      sourceReceiverGrid SourceReceiver :=
+  Grid.DirectedConvention.BeingConvention.BeingCoarsening.id sourceReceiverGrid
+
+/-- A legal supplied reading: clock-source welds are unmarked and receiver
+    welds are marked.  Neither classification is recovered from the grid. -/
+def sourceReceiverReading : sourceReceiverGrid.SentienceReading where
+  sentient w := w.agent = SourceReceiver.receiver
+
+def sourceReceiverDeed : sourceReceiverGrid.Weld :=
+  ⟨SourceReceiver.clock, (), ()⟩
+
+def sourceReceiverReception : sourceReceiverGrid.Weld :=
+  ⟨SourceReceiver.receiver, (), ()⟩
+
+def sourceReceiverBefore : Config Nat :=
+  { tendency := 5 }
+
+/-- Under the named reading and identity coarsening, an unmarked clock-source
+    deed lands at a marked receiver's actual weld and drops the receiver-side
+    carried tendency from `5` to the live share `1`. -/
+theorem insentient_source_shareDropLanding :
+    ¬ sourceReceiverCoarsening.SentientTag sourceReceiverReading
+        SourceReceiver.clock ∧
+      sourceReceiverCoarsening.SentientTag sourceReceiverReading
+        SourceReceiver.receiver ∧
+      Grid.DirectedConvention.LandsWithShareDrop sourceReceiverGrid
+        sourceReceiverBefore sourceReceiverDeed sourceReceiverReception := by
+  constructor
+  · rintro ⟨w, ⟨_hactual, hmarked⟩, hfiber⟩
+    change w.agent = SourceReceiver.receiver at hmarked
+    change w.agent = SourceReceiver.clock at hfiber
+    rw [hfiber] at hmarked
+    cases hmarked
+  · constructor
+    · exact ⟨sourceReceiverReception, ⟨rfl, rfl⟩, rfl⟩
+    · constructor
+      · exact ⟨⟨rfl, rfl⟩, rfl⟩
+      · dsimp [Grid.IsShareDrop, Grid.share, sourceReceiverGrid,
+          sourceReceiverBefore, sourceReceiverReception]
+        constructor
+        · show (1 : Nat) ≤ 5
+          decide
+        · show ¬ (5 : Nat) ≤ 1
+          decide
 
 /- --------------------------------------------------------------------------
    Third concrete display — backsliding in one grid

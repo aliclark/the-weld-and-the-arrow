@@ -384,11 +384,15 @@ def assumptionLedger : List AssumptionEntry := [
   { «section» := .convenience
     number := 4
     title := "`Models.lean` witnesses are illustrative"
-    statement := "The clock and register-clock models anchor possibility checks and taxonomy examples; they are not uniqueness claims."
+    statement := "The clock and register-clock models anchor possibility checks and mark-invariance witnesses; they are not uniqueness claims."
     anchors := [
       sigWitness ``clockGrid,
       sigWitness ``registerClockGrid,
-      sigWitness ``registerClock_macro_sentient,
+      sigWitness ``registerClock_insentient_proficient,
+      sigWitness ``clock_pole_readings_split,
+      sigWitness ``registerClock_rung_readings_split,
+      sigWitness ``rigid_terminus_vacuous,
+      sigWitness ``adaptive_liveTerminus,
       sigWitness ``sentience_share_square_inhabited,
       sigWitness ``registerClock_macro_selfConditioning
     ] }

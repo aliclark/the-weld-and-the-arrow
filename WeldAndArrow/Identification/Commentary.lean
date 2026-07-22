@@ -107,7 +107,15 @@ diagnosed as macro beings. Relative to `S`, `SentientTag S`, `StoneTag S`, and
 `Intermittent S` summarize marked, wholly unmarked-pole, and mixed fibers.
 `ActualFiberInhabited` remains mark-free for consumers that need occurrence
 rather than phenomenality. `Signature/Models.lean` holds the clock,
-register-clock, and inhabited sentience/share square witnesses.
+register-clock, source/receiver landing, and inhabited sentience/share square
+witnesses. The register clock fixes no reading: each use site names one.
+`registerClock_insentient_proficient` records the unmarked, actual,
+self-conditioning-under-this-coarsening, and patchy macro display; it does not
+turn the mixed-share fiber into a `StoneTag`. `rigid_terminus_vacuous` and
+`adaptive_liveTerminus` attach concrete witnesses to the empty/live terminus
+distinction. `insentient_source_shareDropLanding` supplies both source and
+receiver marks under `sourceReceiverReading` and names their separation through
+`sourceReceiverCoarsening`; neither is recovered from the grid.
 
 `Signature/DirectionConvention.lean` records the parallel delivery-axis reading
 in which a model may be diagnosed through finite clock resolution. A
@@ -338,8 +346,8 @@ register clock cannot be given a universal tick with `ResolutionBounded` over
 the injective `Nat` display; a lawful fully coarse display uses the one-point
 carrier, whose `DirectionVoid` is obtained through the existing legal
 all-equivalent display collapse. The independence witness keeps the register
-clock's macro sentience and self-conditioning separate from any direction
-coarsening or resolution-bound hypothesis.
+clock's macro actual-inhabitation and self-conditioning separate from any
+direction coarsening or resolution-bound hypothesis.
 
 `BeingNegative` is the parallel countermodel for designation: one fine grid
 allows both merge and split macro readings, so a unique being-boundary is not

@@ -730,172 +730,43 @@ end DirectedConvention
 
 end Grid
 
-/-- The adaptive clock's pole occurrence is marked sentient only by the
-    supplied reading.  Share-zero does not recover that mark. -/
-theorem sentient_pole_act_witness :
-    clockGrid.TerminusAct clockSentienceReading
-      ⟨Clock.adaptive, Listener.present, Chime.chime⟩ :=
-  ⟨⟨rfl, rfl⟩,
-    clockGrid.atBot_of_terminus_response adaptive_is_terminus rfl⟩
+/-- A live terminus supplies an actual pole-share weld in its own agent fiber.
+    This is mark-free: no sentience reading is needed to inhabit the tier. -/
+theorem poleTier_inhabited_of_liveTerminus
+    {Contrib : Type} [PreorderBot Contrib]
+    {G : Grid Contrib} {b : G.Being}
+    (h : G.LiveTerminus b) :
+    ∃ w : G.Weld, G.Actual w ∧ w.agent = b ∧
+      AtBot (G.share w) ∧ G.AtPoleClass w.agent := by
+  rcases h.left with ⟨w, hactual, hagent⟩
+  refine ⟨w, hactual, hagent, ?_, ?_⟩
+  · have hresponse :
+        G.respondsTo w.agent w.call = some w.response := hactual
+    rw [hagent] at hresponse
+    simpa [Grid.share, hagent] using
+      (h.right w.call w.response hresponse)
+  · simpa [Grid.AtPoleClass, hagent] using h.right
 
-/-- In the register clock, a live share-drop rung is not yet the pole. -/
-theorem rung_not_pole_witness :
-    ∃ before : Config Nat, ∃ received : registerClockGrid.Weld,
-      registerClockGrid.Actual received ∧
-        registerClockGrid.IsShareDrop before received ∧
-        ¬ AtBot (registerClockGrid.share received) := by
-  refine ⟨{ tendency := 5 }, ⟨(2 : Nat), (), (3 : Nat)⟩, ?_, ?_, ?_⟩
-  · rfl
-  · dsimp [Grid.IsShareDrop, Grid.share, registerClockGrid]
-    constructor
-    · show (2 : Nat) ≤ 5
-      decide
-    · show ¬ (5 : Nat) ≤ 2
-      decide
-  · dsimp [Grid.share, registerClockGrid, AtBot, shareBot]
-    show ¬ (2 : Nat) ≤ 0
-    decide
-
-/-- Kensho cannot be held: a share-drop reception to the pole-class can be
-    followed, in the same grid and by the same being, by a later actual weld
-    with live share. There is no stored attainment for the next reception to
-    inherit. -/
-theorem backsliding_witness :
-    ∃ (before : Config Nat) (kensho later : backslideGrid.Weld),
-      backslideGrid.Actual kensho ∧
-        backslideGrid.IsShareDrop before kensho ∧
-          AtBot (backslideGrid.share kensho) ∧
-            later.agent = kensho.agent ∧
-              backslideGrid.Actual later ∧
-                backslideGrid.HasSelfPoleIndex later := by
-  refine ⟨{ tendency := 5 }, ⟨(), Cue.gentle, ()⟩, ⟨(), Cue.harsh, ()⟩,
-    ?_, ?_, ?_, ?_, ?_, ?_⟩
-  · rfl
-  · dsimp [Grid.IsShareDrop, Grid.share, backslideGrid]
-    constructor
-    · show (0 : Nat) ≤ 5
-      decide
-    · show ¬ (5 : Nat) ≤ 0
-      decide
-  · dsimp [Grid.share, backslideGrid, AtBot, shareBot]
-    show (0 : Nat) ≤ 0
-    decide
-  · rfl
-  · rfl
-  · dsimp [Grid.HasSelfPoleIndex, Grid.share, backslideGrid, AtBot, shareBot]
-    show ¬ (5 : Nat) ≤ 0
-    decide
-
-/-- The same backsliding witness routed through `ReceptionPair`: after the
-    kensho reception the sequence is at the pole-class, and after the next
-    reception it is live again. -/
-theorem backsliding_rePitchSequence_witness :
-    ∃ (before : Config Nat) (p : Grid.ReceptionPair backslideGrid),
-      Grid.ReceptionPair.FirstConditionsSecond (G := backslideGrid) p ∧
-        p.second.weld.agent = p.first.weld.agent ∧
-          AtBot
-            ((Grid.ReceptionPair.rePitchSequence (G := backslideGrid) before p).fst.tendency) ∧
-            ¬ AtBot
-              ((Grid.ReceptionPair.rePitchSequence (G := backslideGrid) before p).snd.tendency) := by
-  refine ⟨{ tendency := 5 },
-    { first := { weld := ⟨(), Cue.gentle, ()⟩, actual := rfl },
-      second := { weld := ⟨(), Cue.harsh, ()⟩, actual := rfl } },
-    ?_, ?_, ?_, ?_⟩
-  · exact True.intro
-  · rfl
-  · dsimp [Grid.ReceptionPair.rePitchSequence, Grid.rePitch, Grid.share,
-      backslideGrid, AtBot, shareBot]
-    show (0 : Nat) ≤ 0
-    decide
-  · dsimp [Grid.ReceptionPair.rePitchSequence, Grid.rePitch, Grid.share,
-      backslideGrid, AtBot, shareBot]
-    show ¬ (5 : Nat) ≤ 0
-    decide
-
-/-- Cetanā witness A: two actual welds share the same field residue, while
-    their shares differ. Grading tracks the completed weld rather than a
-    common call-response event residue. -/
-theorem cetana_grading_tracks_weld_not_field_witness :
-    gradingCollisionGrid.Actual gradingCollisionLeft ∧
-      gradingCollisionGrid.Actual gradingCollisionRight ∧
-        gradingCollisionGrid.fieldOf gradingCollisionLeft =
-          gradingCollisionGrid.fieldOf gradingCollisionRight ∧
-          gradingCollisionGrid.share gradingCollisionLeft ≠
-            gradingCollisionGrid.share gradingCollisionRight := by
-  refine ⟨rfl, rfl, rfl, ?_⟩
-  dsimp [Grid.share, gradingCollisionGrid, gradingCollisionLeft,
-    gradingCollisionRight]
-  decide
-
-/-- Cetanā witness B: a live-share weld remains live even when every delivery
-    relation is removed, so grading can peak where object-axis standing fails. -/
-theorem cetana_live_share_without_object_standing_witness :
-    ∃ w : (registerClockGrid.withConditions (fun _ _ => False)).Weld,
-      (registerClockGrid.withConditions (fun _ _ => False)).Actual w ∧
-        (registerClockGrid.withConditions (fun _ _ => False)).HasSelfPoleIndex w ∧
-          ¬ Grid.DirectedConvention.ObjectAxisStanding
-            (registerClockGrid.withConditions (fun _ _ => False)) w := by
-  refine ⟨⟨(5 : Nat), (), (6 : Nat)⟩, ?_, ?_, ?_⟩
-  · rfl
-  · dsimp [Grid.HasSelfPoleIndex, Grid.share, registerClockGrid,
-      Grid.withConditions, AtBot, shareBot]
-    show ¬ (5 : Nat) ≤ 0
-    decide
-  · intro hstanding
-    rcases hstanding with ⟨reception, hdelivered⟩
-    exact hdelivered
+/-- `LiveTerminus` fixes the pole-share witness, while the supplied mark
+    conditionally determines which row of the act square contains it.  The
+    theorem remains constructive by making neither row choice itself. -/
+theorem poleTier_cell_of_liveTerminus
+    {Contrib : Type} [PreorderBot Contrib]
+    {G : Grid Contrib} {b : G.Being}
+    (S : G.SentienceReading) (h : G.LiveTerminus b) :
+    ∃ w : G.Weld, w.agent = b ∧ AtBot (G.share w) ∧
+      (S.sentient w → G.TerminusAct S w) ∧
+      (¬ S.sentient w → G.StoneAct S w) := by
+  rcases poleTier_inhabited_of_liveTerminus h with
+    ⟨w, hactual, hagent, hbot, _hatPole⟩
+  exact ⟨w, hagent, hbot,
+    fun hmarked => ⟨⟨hactual, hmarked⟩, hbot⟩,
+    fun hunmarked => ⟨⟨hactual, hunmarked⟩, hbot⟩⟩
 
 /-- Assertable and displayable are different verdict voices. -/
 theorem assertable_ne_displayable :
     Grid.VerdictVoice.assertable ≠ Grid.VerdictVoice.displayable := by
   intro h
   cases h
-
-/-- A standing tendency does not determine the dated reception: in the clock
-    model a live prior tendency can re-pitch to a pole-class received share. -/
-theorem standing_does_not_determine_dated :
-    ∃ before : Config Nat, ∃ received : clockGrid.Weld,
-      ¬ AtBot before.tendency ∧
-        AtBot (clockGrid.rePitch before received).tendency := by
-  refine ⟨{ tendency := 5 }, ⟨Clock.adaptive, Listener.present, Chime.chime⟩,
-    ?_, ?_⟩
-  · dsimp [AtBot, shareBot]
-    show ¬ (5 : Nat) ≤ 0
-    decide
-  · exact clockGrid.rePitch_tendency_atBot_of_terminus_response
-      { tendency := 5 } adaptive_is_terminus rfl
-
-/-- Subitism as possibility: a single received weld moves the carried tendency
-    from strictly above bottom to the pole-class. Magnitude is unconstrained by
-    construction; frequency is asserted nowhere. -/
-theorem subitism_possibility_witness :
-    ∃ (before : Config Nat) (received : clockGrid.Weld),
-      ¬ AtBot before.tendency ∧
-        clockGrid.IsShareDrop before received ∧
-          AtBot (clockGrid.rePitch before received).tendency := by
-  refine ⟨{ tendency := 5 }, ⟨Clock.adaptive, Listener.present, Chime.chime⟩,
-    ?_, ?_, ?_⟩
-  · dsimp [AtBot, shareBot]
-    show ¬ (5 : Nat) ≤ 0
-    decide
-  · dsimp [Grid.IsShareDrop, Grid.share, clockGrid]
-    constructor
-    · show (0 : Nat) ≤ 5
-      decide
-    · show ¬ (5 : Nat) ≤ 0
-      decide
-  · exact clockGrid.rePitch_tendency_atBot_of_terminus_response
-      { tendency := 5 } adaptive_is_terminus rfl
-
-/-- The pole-validating act-time is inhabited by a sentient terminus act in
-    the clock model under its supplied reading. -/
-theorem pole_tier_buddha_inhabited :
-    ∃ w : clockGrid.Weld,
-      clockGrid.TerminusAct clockSentienceReading w ∧
-        clockGrid.AtPoleClass w.agent := by
-  exact ⟨⟨Clock.adaptive, Listener.present, Chime.chime⟩,
-    sentient_pole_act_witness,
-    clockGrid.atPoleClass_of_terminus Clock.adaptive adaptive_is_terminus⟩
-
 
 end WAA

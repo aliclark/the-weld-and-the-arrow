@@ -308,10 +308,14 @@ produce the same call-response pair, no function from field residue
 `Call × Response` can correctly recover the agent for every actual weld.
 
 **`clockGrid` and `sentienceSquareGrid`.** The clock grid uses `Nat` with bottom
-`0`; its adaptive actual responses are terminus-typed, and
-`clockSentienceReading` supplies their mark. The rigid `none` cases remain seam
-data, not a stone population. `sentienceSquareGrid` is the dedicated four-cell
-model: `sentience_share_square_inhabited` gives a marked/live ordinary act, a
+`0`; its adaptive actual responses are terminus-typed, while
+`clock_pole_readings_split` places the same pole weld in the unmarked stone cell
+and the marked terminus cell under readings named at the use site. The rigid
+`none` cases remain seam data, not a stone population:
+`rigid_terminus_vacuous` pairs their vacuous `Terminus` typing with failure of
+`ActualAgentInhabited`, while `adaptive_liveTerminus` supplies the inhabited
+contrast. `sentienceSquareGrid` remains the dedicated four-cell model:
+`sentience_share_square_inhabited` gives a marked/live ordinary act, a
 marked/pole terminus act, an unmarked/live appropriation, and an unmarked/pole
 stone act.
 
@@ -320,10 +324,19 @@ registers as beings. Each register answers the tick by handing off to the next
 register; delivery follows that hand-off, and `grade n _ _ := n` makes a
 re-pitched tendency coincide extensionally with the acting register tag.
 `registerClockCoarsening` merges the fine registers into one macro tag at
-diagnosis-time. The checked facts are `registerClock_macro_sentient` and
-`registerClock_macro_selfConditioning`; the coincidence is recorded by
+diagnosis-time. No reading is fixed by the model: each use site names one.
+`registerClock_insentient_proficient` packages the all-insentient absence of a
+`SentientTag`, mark-free actual-fiber inhabitation, self-conditioning internal
+under this coarsening, and `Patchy`; in particular, it does not misclassify the
+mixed-share fiber as a `StoneTag`. The coincidence is recorded by
 `ConfigLeakWitness.registerClock_config_recovers_agent` as the countermodel to
 blanket information-flow noninterference.
+
+`sourceReceiverGrid` supplies the missing cross-fiber landing instance.
+`insentient_source_shareDropLanding` names both the reading and the identity
+coarsening: an unmarked clock-source deed lands at a marked receiver weld and
+drops the receiver-side carried tendency from `5` to the live share `1`.
+Neither mark nor the fiber boundary is recovered from the grid.
 
 **`backslideGrid`, `gradingCollisionGrid`, and `shareCollisionGrid`.**
 `backslideGrid` has one being
@@ -477,7 +490,8 @@ function.
 `standing_does_not_determine_dated`, `subitism_possibility_witness`,
 `cetana_grading_tracks_weld_not_field_witness`,
 `cetana_live_share_without_object_standing_witness`, and
-`pole_tier_buddha_inhabited`, with the fox run-through now checked in
+`poleTier_inhabited_of_liveTerminus` with its concrete
+`clock_poleTier_inhabited` discharge, with the fox run-through now checked in
 `FoxCase.foxGrid`. These are witness assemblies over the concrete grids, mostly
 by unfolding and `decide`.
 
@@ -881,7 +895,7 @@ The anchors are intentionally thin: `emptyCells_anchor`,
 `foxNeverTestsPole_anchor`, `foxNeverTestsPole_recordedUtterance_not_atBot`,
 `foxNeverTestsPole_recordedUtterance_not_atPoleClass`,
 `foxNeverTestsPole_oldMan_misfit_anchor`,
-`thirdArrival_sentient_at_pole`, `thirdArrival_not_clenchMismatch`,
+`thirdArrival_stone_at_pole`, `thirdArrival_not_clenchMismatch`,
 `fourthTruthWithheld_conditional`, `fourthTruthWithheld_detached_voice`,
 `noSafeStage_anchor`, `prudentialPrivilege_underivable_anchor`,
 `icchantikaDeclined_agent_anchor`, `icchantikaDeclined_receiver_anchor`, and
@@ -1158,8 +1172,8 @@ all-equivalent `TwoBottom` carrier, and
 `fullyCoarseRegisterClock_no_timeDirection` applies the one-tick
 resolution-bound theorem to the fully coarse grid. The theorem
 `registerClock_directionCoarsening_independence` is the soul-guard: macro
-sentience and self-conditioning for the register clock do not consume either a
-direction coarsening or a resolution-bound hypothesis.
+actual-inhabitation and self-conditioning for the register clock do not
+consume either a direction coarsening or a resolution-bound hypothesis.
 
 **`ContentNegative`.** `noActualGrid` has no actual welds and therefore no live
 act-time tier. It proves `contentBeingsRow_not_obeys_noActual` and
@@ -1418,5 +1432,6 @@ real regime.
 
 One structural caution remains: `Terminus` can be vacuously true of an agent
 with no actual welds. Use `LiveTerminus` or `ResponsiveTerminus` when
-non-vacuous actual occurrence matters. `StoneAct` is never vacuous: it includes
-an actual unmarked weld at pole share.
+non-vacuous actual occurrence matters. `rigid_terminus_vacuous` and
+`adaptive_liveTerminus` exhibit the two sides in `clockGrid`. `StoneAct` is
+never vacuous: it includes an actual unmarked weld at pole share.

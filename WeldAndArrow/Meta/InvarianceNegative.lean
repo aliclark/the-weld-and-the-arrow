@@ -256,21 +256,23 @@ theorem fullyCoarseRegisterClock_no_timeDirection
   fullyCoarseRegisterClockUnitTick.no_timeDirection_of_resolutionBounded_subsingleton
     fullyCoarseRegisterClock_resolutionBounded (fun _ _ => rfl) w₁ w₂
 
-/-- Function and internal-delivery witnesses for the macro register clock do
+/-- Actual-inhabitation and internal-delivery witnesses for the macro register clock do
     not consume direction-coarsening or resolution-boundedness hypotheses. -/
 theorem registerClock_directionCoarsening_independence :
     (∀ {Tick : Type} (_ρ : DirectionCoarsening registerClockGrid Tick),
-        registerClockCoarsening.SentientTag registerClockSentienceReading () ∧
+        registerClockCoarsening.ActualFiberInhabited () ∧
           registerClockCoarsening.SelfConditioningTag ()) ∧
       (∀ {Tick : Type} (ρ : DirectionCoarsening registerClockGrid Tick),
         ρ.ResolutionBounded ->
-          registerClockCoarsening.SentientTag registerClockSentienceReading () ∧
+          registerClockCoarsening.ActualFiberInhabited () ∧
             registerClockCoarsening.SelfConditioningTag ()) := by
   constructor
   · intro _Tick _ρ
-    exact ⟨registerClock_macro_sentient, registerClock_macro_selfConditioning⟩
+    exact ⟨registerClock_macro_actualFiberInhabited,
+      registerClock_macro_selfConditioning⟩
   · intro _Tick _ρ _hbounded
-    exact ⟨registerClock_macro_sentient, registerClock_macro_selfConditioning⟩
+    exact ⟨registerClock_macro_actualFiberInhabited,
+      registerClock_macro_selfConditioning⟩
 
 end DirectionCoarseningWitness
 

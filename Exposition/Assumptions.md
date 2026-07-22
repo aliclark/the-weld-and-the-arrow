@@ -188,9 +188,9 @@ An unmarked actual weld may retain live self-share. `InsentientAppropriation` is
 
 ### C.4 `Models.lean` witnesses are illustrative
 
-The clock and register-clock models anchor possibility checks and taxonomy examples; they are not uniqueness claims.
+The clock and register-clock models anchor possibility checks and mark-invariance witnesses; they are not uniqueness claims.
 
-**Checked anchors (Signature):** `WAA.clockGrid` (witness), `WAA.registerClockGrid` (witness), `WAA.registerClock_macro_sentient` (witness), `WAA.sentience_share_square_inhabited` (witness), `WAA.registerClock_macro_selfConditioning` (witness)
+**Checked anchors (Signature):** `WAA.clockGrid` (witness), `WAA.registerClockGrid` (witness), `WAA.registerClock_insentient_proficient` (witness), `WAA.clock_pole_readings_split` (witness), `WAA.registerClock_rung_readings_split` (witness), `WAA.rigid_terminus_vacuous` (witness), `WAA.adaptive_liveTerminus` (witness), `WAA.sentience_share_square_inhabited` (witness), `WAA.registerClock_macro_selfConditioning` (witness)
 
 ## Axiom audit
 
