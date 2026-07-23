@@ -57,12 +57,14 @@ def toRecorded {L : ClaimLanguage G} {sr : SpeechReading G L}
   offeredAt := Tier.actTime u.weld
   content := u.content
 
+omit [PreorderBot Contrib] in
 @[simp]
 theorem toRecorded_weld {L : ClaimLanguage G} {sr : SpeechReading G L}
     (u : ProducedUtterance sr) (hspeech : sr.door u.weld = .speech) :
     (u.toRecorded hspeech).weld = u.weld :=
   rfl
 
+omit [PreorderBot Contrib] in
 @[simp]
 theorem toRecorded_offeredAt {L : ClaimLanguage G} {sr : SpeechReading G L}
     (u : ProducedUtterance sr) (hspeech : sr.door u.weld = .speech) :

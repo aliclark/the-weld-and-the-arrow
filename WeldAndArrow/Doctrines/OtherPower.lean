@@ -24,6 +24,7 @@ namespace DirectedConvention
 variable {Designatum Contrib : Type} [PreorderBot Contrib]
 variable (G : CoreReadings Designatum Contrib)
 
+omit [PreorderBot Contrib] in
 /-- Changing only the delivery relation does not change the reception's grade,
     share, or actuality. The sower's identity is delivery data; reception
     typing reads the weld itself. -/
@@ -43,6 +44,7 @@ theorem reception_typing_ignores_sower
     G.share_independent_of_conditions conditions₁ conditions₂ reception,
     Iff.rfl⟩
 
+omit [PreorderBot Contrib] in
 /-- Same-agent lines and cross-agent lines both fill the ordinary reach-back
     relation once the model supplies the delivery line. The actuality
     hypothesis records that the reception is a deed; the conclusion is just the

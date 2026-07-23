@@ -38,6 +38,7 @@ def transpose (S : SentienceReading G) :
     SentienceReading (Grid.transpose G) :=
   S
 
+omit [PreorderBot Contrib] in
 @[simp]
 theorem transpose_sentient
     (S : SentienceReading G) (w : Grid.Weld G) :
@@ -65,24 +66,28 @@ def InsentientAppropriation
 def StoneAct (S : SentienceReading G) (w : Weld G) : Prop :=
   WAA.StoneAct G.occurrence G.response G.placement S w
 
+omit [PreorderBot Contrib] in
 theorem actual_of_sentientAct
     {S : SentienceReading G} {w : Weld G}
     (h : SentientAct G S w) :
     Actual G w :=
   h.left
 
+omit [PreorderBot Contrib] in
 theorem actual_of_insentientAct
     {S : SentienceReading G} {w : Weld G}
     (h : InsentientAct G S w) :
     Actual G w :=
   h.left
 
+omit [PreorderBot Contrib] in
 theorem not_insentientAct_of_sentientAct
     {S : SentienceReading G} {w : Weld G}
     (h : SentientAct G S w) :
     ¬ InsentientAct G S w :=
   fun hi => hi.right h.right
 
+omit [PreorderBot Contrib] in
 theorem not_sentientAct_of_insentientAct
     {S : SentienceReading G} {w : Weld G}
     (h : InsentientAct G S w) :
@@ -106,7 +111,7 @@ theorem actual_act_fourfold
 
 /-- The non-sentience readings visible to a would-be recovery function. -/
 abbrev SentienceGridData
-    (G : CoreReadings Designatum Contrib) : Type (max u v) :=
+    (_G : CoreReadings Designatum Contrib) : Type (max u v) :=
   RespondsToReading Designatum ×
     PlacementReading Designatum Contrib ×
       ConditionsReading Designatum
@@ -114,12 +119,14 @@ abbrev SentienceGridData
 def sentienceGridData : SentienceGridData G :=
   (G.response, G.placement, G.conditioning)
 
+omit [PreorderBot Contrib] in
 theorem actual_weld_readings_split
     (w : Weld G) (hactual : Actual G w) :
     SentientAct G (SentienceReading.allSentient G) w ∧
       InsentientAct G (SentienceReading.allInsentient G) w :=
   ⟨⟨hactual, True.intro⟩, ⟨hactual, fun h => h⟩⟩
 
+omit [PreorderBot Contrib] in
 theorem no_sentience_recovery
     (w : Weld G) (hactual : Actual G w) :
     ¬ ∃ recover : SentienceGridData G → Weld G → Prop,

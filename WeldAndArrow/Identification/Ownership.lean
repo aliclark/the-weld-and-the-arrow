@@ -402,6 +402,7 @@ end DirectedConvention
 def SelfAnchored (w : G.Weld) : Prop :=
   G.index w = w.agent
 
+omit [PreorderBot Contrib] in
 theorem selfAnchored (w : G.Weld) : SelfAnchored G w := rfl
 
 /- ==============================================================================
@@ -503,6 +504,7 @@ variable {Designatum Contrib : Type} [PreorderBot Contrib] {G : CoreReadings Des
 def assignedTier (_office : WaaOwnershipOffice) (w : G.Weld) : Grid.Tier G :=
   Grid.Tier.actTime w
 
+omit [PreorderBot Contrib] in
 theorem assignedTier_eq_actTime (office : WaaOwnershipOffice) (w : G.Weld) :
     office.assignedTier w = Grid.Tier.actTime w := rfl
 

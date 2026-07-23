@@ -38,11 +38,13 @@ def rePitchRun (before : Config Contrib) (run : List G.Weld) :
     Config Contrib :=
   run.foldl (fun cfg received => G.rePitch cfg received) before
 
+omit [PreorderBot Contrib] in
 @[simp]
 theorem rePitchRun_nil (before : Config Contrib) :
     rePitchRun G before [] = before :=
   rfl
 
+omit [PreorderBot Contrib] in
 @[simp]
 theorem rePitchRun_cons
     (before : Config Contrib) (received : G.Weld) (rest : List G.Weld) :
@@ -63,6 +65,7 @@ def WaaGradualArrival (before : Config Contrib) (run : List G.Weld) : Prop :=
    Rate invisibility
 ============================================================================== -/
 
+omit [PreorderBot Contrib] in
 /-- The post-reception configuration is blind to the prior rate-history. A
     sudden arrival and a gradual arrival ending in the same received weld hand
     the field the same configuration; this is the precise sense in which the
@@ -72,6 +75,7 @@ theorem rate_invisible_to_config
     G.rePitch before₁ received = G.rePitch before₂ received :=
   G.rePitch_forgets before₁ before₂ received
 
+omit [PreorderBot Contrib] in
 theorem rePitchRun_append_singleton
     (before : Config Contrib) (run : List G.Weld) (last : G.Weld) :
     rePitchRun G before (run ++ [last]) =
@@ -84,6 +88,7 @@ theorem rePitchRun_append_singleton
         G.rePitch (rePitchRun G (G.rePitch before received) rest) last
       exact ih (G.rePitch before received)
 
+omit [PreorderBot Contrib] in
 /-- Run histories that share their final received weld have the same final
     configuration, however different their earlier rates or stages were. -/
 theorem rePitchRun_forgets_same_final
@@ -96,6 +101,7 @@ theorem rePitchRun_forgets_same_final
   exact G.rePitch_forgets (rePitchRun G before₁ run₁)
     (rePitchRun G before₂ run₂) last
 
+omit [PreorderBot Contrib] in
 /-- Any score that factors through the final configuration agrees across run
     histories that share their final received weld. -/
 theorem score_of_rePitchRun_constant_of_same_final

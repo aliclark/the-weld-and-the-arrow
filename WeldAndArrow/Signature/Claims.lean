@@ -178,6 +178,7 @@ theorem not_freeze_of_obeysSeparateFuse
   fun hf => hf (h.right Tier.floor (fun hfloor => hfloor))
 
 /- Reading and motivation: Identification/Commentary.lean, C.1. -/
+omit [PreorderBot Contrib] in
 theorem not_freeze_of_same_claim (L : ClaimLanguage G) (p : L.Claim) :
     ¬ ({ language := L, sideA := p, sideB := p } : Distinction G).Freeze :=
   fun h => h Iff.rfl

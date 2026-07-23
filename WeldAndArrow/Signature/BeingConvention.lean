@@ -54,6 +54,7 @@ variable {G : CoreReadings Designatum Contrib} {Macro : Type} (κ : BeingCoarsen
 protected def id (G : CoreReadings Designatum Contrib) : BeingCoarsening G Designatum where
   proj := id
 
+omit [PreorderBot Contrib] in
 @[simp]
 theorem id_proj (p : Designatum) :
     (BeingCoarsening.id G).proj p = p :=
@@ -63,6 +64,7 @@ theorem id_proj (p : Designatum) :
 def total (G : CoreReadings Designatum Contrib) : BeingCoarsening G Unit where
   proj _ := ()
 
+omit [PreorderBot Contrib] in
 @[simp]
 theorem total_proj (p : Designatum) :
     (BeingCoarsening.total G).proj p = () :=
@@ -74,6 +76,7 @@ def comp {Macro' : Type} (κ : BeingCoarsening G Macro)
     BeingCoarsening G Macro' where
   proj := fun p => f (κ.proj p)
 
+omit [PreorderBot Contrib] in
 @[simp]
 theorem comp_proj {Macro' : Type} (κ : BeingCoarsening G Macro)
     (f : Macro → Macro') (p : Designatum) :
@@ -86,10 +89,12 @@ def InFiber (b : Macro) (w : G.Weld) : Prop := κ.proj w.agent = b
 /- Reading and motivation: Identification/Commentary.lean, C.1. -/
 def SameFiber (p q : Designatum) : Prop := κ.proj p = κ.proj q
 
+omit [PreorderBot Contrib] in
 theorem total_sameFiber (p q : Designatum) :
     (BeingCoarsening.total G).SameFiber p q :=
   rfl
 
+omit [PreorderBot Contrib] in
 theorem id_not_sameFiber_of_ne {p q : Designatum} (h : p ≠ q) :
     ¬ (BeingCoarsening.id G).SameFiber p q :=
   fun hsame => h hsame
@@ -119,12 +124,14 @@ def Intermittent (S : SentienceReading G) (b : Macro) : Prop :=
   (∃ w : G.Weld, G.SentientAct S w ∧ κ.InFiber b w) ∧
     (∃ w : G.Weld, G.InsentientAct S w ∧ κ.InFiber b w)
 
+omit [PreorderBot Contrib] in
 theorem actualFiberInhabited_of_sentientTag
     (S : SentienceReading G) {b : Macro} (h : κ.SentientTag S b) :
     κ.ActualFiberInhabited b := by
   rcases h with ⟨w, hsentient, hfiber⟩
   exact ⟨w, hsentient.left, hfiber⟩
 
+omit [PreorderBot Contrib] in
 theorem allSentient_sentientTag_iff_actualFiberInhabited (b : Macro) :
     κ.SentientTag (SentienceReading.allSentient G) b ↔
       κ.ActualFiberInhabited b := by
@@ -134,6 +141,7 @@ theorem allSentient_sentientTag_iff_actualFiberInhabited (b : Macro) :
   · rintro ⟨w, hactual, hfiber⟩
     exact ⟨w, ⟨hactual, True.intro⟩, hfiber⟩
 
+omit [PreorderBot Contrib] in
 theorem allInsentient_not_sentientTag (b : Macro) :
     ¬ κ.SentientTag (SentienceReading.allInsentient G) b := by
   rintro ⟨w, hsentient, _hfiber⟩
@@ -363,6 +371,7 @@ namespace Delegation
 /- Reading and motivation: Identification/Commentary.lean, C.1. -/
 def share {b : Macro} (d : κ.Delegation b) : Contrib := G.share d.weld
 
+omit [PreorderBot Contrib] in
 @[simp]
 theorem share_eq_delegate_share {b : Macro} (d : κ.Delegation b) :
     d.share = G.share d.weld :=
@@ -376,16 +385,19 @@ def transpose (κ : BeingCoarsening G Macro) :
     BeingCoarsening G.transpose Macro where
   proj := κ.proj
 
+omit [PreorderBot Contrib] in
 theorem transpose_inFiber_iff
     (κ : BeingCoarsening G Macro) (b : Macro) (w : G.Weld) :
     κ.transpose.InFiber b w ↔ κ.InFiber b w :=
   Iff.rfl
 
+omit [PreorderBot Contrib] in
 theorem transpose_sentientTag_iff
     (κ : BeingCoarsening G Macro) (S : SentienceReading G) (b : Macro) :
     κ.transpose.SentientTag S.transpose b ↔ κ.SentientTag S b :=
   Iff.rfl
 
+omit [PreorderBot Contrib] in
 /-- Direction-smuggling detector for the directed refinement: transposition
     reverses the delivery line while leaving fiber membership and actuality
     untouched. -/

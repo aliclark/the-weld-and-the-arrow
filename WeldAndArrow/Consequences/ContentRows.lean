@@ -58,8 +58,21 @@ def contentWeldRow (G : CoreReadings Designatum Contrib) : Distinction G :=
   contentLayerRow G .weldGrain
 
 /-- A content denial cannot fuse with the live-side claim at a non-live
-    act-time where that denial is true.  Concrete countermodels need only
-    supply the non-live occurrence and the denial witness. -/
+    act-time where that denial is true.  This pointwise certificate records
+    the exact tier at which fusion fails. -/
+theorem contentLayerRow_not_fused_of_nonlive_denial
+    (l : ConventionLayer) (w : G.Weld)
+    (hnonlive : ¬ G.HasSelfPoleIndex w)
+    (hdenial :
+      (contentLayerLanguage G).TrueAt (.actTime w) (.layerDenied l)) :
+    ¬ (contentLayerRow G l).Fused (.actTime w) := by
+  intro hfused
+  have hiff := hfused hnonlive
+  have hlive : G.HasSelfPoleIndex w := by
+    exact hiff.mpr hdenial
+  exact hnonlive hlive
+
+/-- The same local failure refutes the global separate/fuse rule. -/
 theorem contentLayerRow_not_obeys_of_nonlive_denial
     (l : ConventionLayer) (w : G.Weld)
     (hnonlive : ¬ G.HasSelfPoleIndex w)
@@ -67,10 +80,8 @@ theorem contentLayerRow_not_obeys_of_nonlive_denial
       (contentLayerLanguage G).TrueAt (.actTime w) (.layerDenied l)) :
     ¬ (contentLayerRow G l).ObeysSeparateFuse := by
   intro h
-  have hiff := h.right (.actTime w) hnonlive
-  have hlive : G.HasSelfPoleIndex w := by
-    exact hiff.mpr hdenial
-  exact hnonlive hlive
+  exact contentLayerRow_not_fused_of_nonlive_denial G l w hnonlive hdenial
+    (G.fused_of_obeysSeparateFuse h (.actTime w))
 
 /-- If the occurrence reading selects nothing, every content row obeys
     vacuously: only the floor tier remains.  This is a boundary theorem, not a

@@ -234,9 +234,7 @@ variable (G : CoreReadings Designatum Contrib)
 /- A.1 One carrier; occurrence and roles are readings. -/
 #check OccurrenceReading -- proof
 #check OccurrenceReading.Weld -- proof
-#check OccurrenceReading.RoleCoherent -- proof
 #check RespondsToReading -- proof
-#check RespondsToReading.WellTyped -- proof
 #check PlacementReading -- proof
 #check ConditionsReading -- proof
 #check CoreReadings -- convenience

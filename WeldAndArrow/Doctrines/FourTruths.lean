@@ -28,6 +28,7 @@ variable (G : CoreReadings Designatum Contrib)
 def WaaMismatchGrade (w : G.Weld) : Contrib :=
   G.share w
 
+omit [PreorderBot Contrib] in
 @[simp]
 theorem waaMismatchGrade_eq_share (w : G.Weld) :
     WaaMismatchGrade G w = G.share w :=

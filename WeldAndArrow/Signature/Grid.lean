@@ -101,6 +101,7 @@ theorem not_waaAppropriates_of_eq_shareBot
     ¬ WaaAppropriates G w :=
   not_waaAppropriates_of_atBot G w (atBot_of_eq_shareBot h)
 
+omit [PreorderBot Contrib] in
 theorem share_eq_grade_check (w : Weld G) :
     share G w = grade G w.1 :=
   rfl
@@ -142,6 +143,22 @@ def LiveTerminus (b : Designatum) : Prop :=
 def ResponsiveTerminus (b : Designatum) : Prop :=
   RespondsToEveryCall G b ∧ Terminus G b
 
+/-- Every selected occurrence by the designatum lies at the pole, whether or
+    not the response reading makes that occurrence actual.  This is the
+    explicit hypothetical counterpart to `Terminus`. -/
+def HypotheticalTerminus (b : Designatum) : Prop :=
+  ∀ w : Weld G, w.agent = b → AtBot (share G w)
+
+/-- A selected occurrence realizes a response-rule triple when its three role
+    faces are that agent, call, and response. -/
+def OccurrenceRealizes (b c r : Designatum) : Prop :=
+  ∃ w : Weld G, w.agent = b ∧ w.call = c ∧ w.response = r
+
+theorem terminus_of_hypotheticalTerminus
+    {b : Designatum} (h : HypotheticalTerminus G b) :
+    Terminus G b :=
+  fun w _hactual hagent => h w hagent
+
 theorem atBot_of_terminus_response
     {w : Weld G}
     (hterm : Terminus G w.agent) (hactual : Actual G w) :
@@ -164,15 +181,29 @@ theorem not_waaAppropriates_of_terminus_response
 
 def AtPoleClass (b : Designatum) : Prop := Terminus G b
 
-/-- A responsive terminus is live once an actual occurrence by it is supplied.
-    Unlike the retired triple substrate, a response value alone does not
-    manufacture an occurrence. -/
-theorem responsiveTerminus_live_of_call
-    (b c : Designatum) (h : ResponsiveTerminus G b)
-    (_hcall : G.occurrence.isCall c)
+/-- A responsive terminus is live once an actual occurrence by it is supplied. -/
+theorem responsiveTerminus_live_of_actual
+    (b : Designatum) (h : ResponsiveTerminus G b)
     (w : Weld G) (hactual : Actual G w) (hagent : w.agent = b) :
     LiveTerminus G b :=
   ⟨⟨w, hactual, hagent⟩, h.right⟩
+
+/-- A call makes a responsive terminus live only when response-rule outputs
+    are explicitly realized by selected occurrences.  `RespondsToEveryCall`
+    supplies the output; `hrealize` supplies the occurrence token. -/
+theorem responsiveTerminus_live_of_call
+    (b c : Designatum) (h : ResponsiveTerminus G b)
+    (hcall : G.occurrence.isCall c)
+    (hrealize : ∀ r, G.response.respondsTo b c = some r →
+      OccurrenceRealizes G b c r) :
+    LiveTerminus G b := by
+  rcases h.left c hcall with ⟨r, hresponse⟩
+  rcases hrealize r hresponse with ⟨w, hagent, hwcall, hwresponse⟩
+  apply responsiveTerminus_live_of_actual G b h w
+  · unfold Actual WAA.Actual
+    rw [hagent, hwcall, hwresponse]
+    exact hresponse
+  · exact hagent
 
 /- --------------------------------------------------------------------------
    Configuration and delivery structure
@@ -188,6 +219,7 @@ def IsShareDrop (before : Config Contrib) (received : Weld G) : Prop :=
 def ConditionsEither (w₁ w₂ : Weld G) : Prop :=
   conditions G w₁ w₂ ∨ conditions G w₂ w₁
 
+omit [PreorderBot Contrib] in
 theorem conditionsEither_symm
     {w₁ w₂ : Weld G} (h : ConditionsEither G w₁ w₂) :
     ConditionsEither G w₂ w₁ :=
@@ -208,14 +240,17 @@ def transpose (G : CoreReadings Designatum Contrib) :
   placement := G.placement
   conditioning := G.conditioning.transpose
 
+omit [PreorderBot Contrib] in
 theorem transpose_conditions (w₁ w₂ : Weld G) :
     conditions (transpose G) w₁ w₂ ↔ conditions G w₂ w₁ :=
   Iff.rfl
 
+omit [PreorderBot Contrib] in
 theorem transpose_transpose :
     transpose (transpose G) = G :=
   rfl
 
+omit [PreorderBot Contrib] in
 theorem transpose_conditionsEither_iff (w₁ w₂ : Weld G) :
     ConditionsEither (transpose G) w₁ w₂ ↔ ConditionsEither G w₁ w₂ :=
   ⟨fun h => h.elim Or.inr Or.inl,
@@ -243,6 +278,7 @@ def SameAgentDelivery (deed reception : Weld G) : Prop :=
 def CrossAgentDelivery (deed reception : Weld G) : Prop :=
   DeliveredTo G deed reception ∧ deed.agent ≠ reception.agent
 
+omit [PreorderBot Contrib] in
 theorem transpose_deliveredTo_iff (deed reception : Weld G) :
     DeliveredTo (transpose G) deed reception ↔ DeliveredTo G reception deed :=
   Iff.rfl
@@ -250,6 +286,7 @@ theorem transpose_deliveredTo_iff (deed reception : Weld G) :
 def NotDeliveredTo (deed reception : Weld G) : Prop :=
   ¬ conditions G deed reception
 
+omit [PreorderBot Contrib] in
 theorem deliveredTo_or_not (deed reception : Weld G)
     [hdec : Decidable (conditions G deed reception)] :
     DeliveredTo G deed reception ∨ NotDeliveredTo G deed reception :=
@@ -282,10 +319,12 @@ def ShareDropLine
 def WaaAimedAt (deed reception : Weld G) : Prop :=
   DeliveredTo G deed reception
 
+omit [PreorderBot Contrib] in
 theorem deliveredTo_iff_waaReachBackFull (deed reception : Weld G) :
     DeliveredTo G deed reception ↔ WaaReachBackFull G deed reception :=
   Iff.rfl
 
+omit [PreorderBot Contrib] in
 theorem objectAxisStanding_of_landsAt
     (deed reception : Weld G) (h : LandsAt G deed reception) :
     ObjectAxisStanding G deed :=
@@ -349,6 +388,7 @@ end ReceptionPair
 def fieldOf (w : Weld G) : Designatum × Designatum :=
   (w.call, w.response)
 
+omit [PreorderBot Contrib] in
 theorem no_agent_recovery_of_field_collision
     (w₁ w₂ : Weld G)
     (h₁ : Actual G w₁) (h₂ : Actual G w₂)
@@ -419,6 +459,14 @@ abbrev LiveTerminus (G : CoreReadings Designatum Contrib) :=
   Grid.LiveTerminus G
 abbrev ResponsiveTerminus (G : CoreReadings Designatum Contrib) :=
   Grid.ResponsiveTerminus G
+abbrev HypotheticalTerminus (G : CoreReadings Designatum Contrib) :=
+  Grid.HypotheticalTerminus G
+abbrev OccurrenceRealizes (G : CoreReadings Designatum Contrib) :=
+  Grid.OccurrenceRealizes G
+abbrev terminus_of_hypotheticalTerminus
+    (G : CoreReadings Designatum Contrib) {b : Designatum}
+    (h : G.HypotheticalTerminus b) :=
+  Grid.terminus_of_hypotheticalTerminus G h
 abbrev atBot_of_terminus_response
     (G : CoreReadings Designatum Contrib) {w : G.Weld}
     (hterm : G.Terminus w.agent) (hactual : G.Actual w) :=
@@ -433,6 +481,9 @@ abbrev not_waaAppropriates_of_terminus_response
   Grid.not_waaAppropriates_of_terminus_response G hterm hactual
 abbrev AtPoleClass (G : CoreReadings Designatum Contrib) :=
   Grid.AtPoleClass G
+abbrev responsiveTerminus_live_of_actual
+    (G : CoreReadings Designatum Contrib) :=
+  Grid.responsiveTerminus_live_of_actual G
 abbrev responsiveTerminus_live_of_call
     (G : CoreReadings Designatum Contrib) :=
   Grid.responsiveTerminus_live_of_call G

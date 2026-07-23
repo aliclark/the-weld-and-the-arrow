@@ -31,6 +31,7 @@ variable {G : CoreReadings Designatum Contrib} {Tick : Type} (ρ : DirectionCoar
 /-- Two welds lie inside the same clock tick. This is direction-neutral. -/
 def SameTick (w₁ w₂ : G.Weld) : Prop := ρ.tick w₁ = ρ.tick w₂
 
+omit [PreorderBot Contrib] in
 theorem sameTick_symm {w₁ w₂ : G.Weld} (h : ρ.SameTick w₁ w₂) :
     ρ.SameTick w₂ w₁ :=
   h.symm
@@ -72,6 +73,7 @@ def transpose (ρ : DirectionCoarsening G Tick) :
     DirectionCoarsening G.transpose Tick where
   tick := ρ.tick
 
+omit [PreorderBot Contrib] in
 theorem transpose_sameTick_iff (b₁ b₂ : G.Weld) :
     ρ.transpose.SameTick b₁ b₂ ↔ ρ.SameTick b₁ b₂ :=
   Iff.rfl
@@ -80,6 +82,7 @@ theorem transpose_resolutionBounded_iff :
     ρ.transpose.ResolutionBounded ↔ ρ.ResolutionBounded :=
   Iff.rfl
 
+omit [PreorderBot Contrib] in
 /-- Direction-smuggling detector for sub-tick delivery: transposition reverses
     the delivery line while leaving tick equality untouched. -/
 theorem transpose_subTickDelivery (deed reception : G.Weld) :

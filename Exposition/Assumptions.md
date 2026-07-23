@@ -223,6 +223,8 @@ The clock and register-clock models anchor possibility checks and mark-invarianc
 | `WAA.Grid.DirectedConvention.DirectionCoarsening.mapDir_resolutionBounded_iff` | None |
 | `WAA.DirectionCoarseningWitness.unit_directionVoid_via_mergeToUnit` | None |
 | `WAA.DirectionCoarseningWitness.twoResolution_directionCoarsening_independence` | None |
+| `WAA.DirectionCoarseningWitness.registerClock_directionCoarsening_independence` | `propext` |
+| `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.contentLayerRow_not_fused_of_nonlive_denial` | None |
 | `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.contentLayerRow_not_obeys_of_nonlive_denial` | None |
 | `WAA.Grid.DirectedConvention.BeingConvention.GridConvention.contentLayerRow_obeys_of_no_occurrences` | None |
 | `WAA.ContentNegative.contentBeingsRow_not_obeys_hypothetical` | `propext` |

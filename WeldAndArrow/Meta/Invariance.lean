@@ -400,13 +400,19 @@ end AgentRelabellingWitness
     particular model's stored value may extensionally coincide with an agent
     tag, as `ConfigLeakWitness` records in `Meta/InvarianceNegative.lean`. -/
 theorem no_natural_agent_recovery_from_config :
-    ¬ ∃ recover : CoreReadings Bool Contrib → Config Contrib → Bool,
-        ∀ (G : CoreReadings Bool Contrib) (σ : Equiv Bool Bool)
+    ¬ ∃ recover :
+        (Designatum : Type) → [Nonempty Designatum] →
+          CoreReadings Designatum Contrib → Config Contrib → Designatum,
+        ∀ (Designatum Designatum' : Type)
+          [Nonempty Designatum] [Nonempty Designatum']
+          (G : CoreReadings Designatum Contrib)
+          (σ : Equiv Designatum Designatum')
           (cfg : Config Contrib),
-            recover (G.relabel σ) cfg = σ (recover G cfg) := by
+            recover Designatum' (G.relabel σ) cfg =
+              σ (recover Designatum G cfg) := by
   rintro ⟨recover, natural⟩
   let cfg : Config Contrib := { tendency := shareBot }
-  have h := natural AgentRelabellingWitness.symmetricGrid
+  have h := natural Bool Bool AgentRelabellingWitness.symmetricGrid
     AgentRelabellingWitness.swap cfg
   have hgrid :
       (AgentRelabellingWitness.symmetricGrid
@@ -415,10 +421,10 @@ theorem no_natural_agent_recovery_from_config :
         AgentRelabellingWitness.symmetricGrid (Contrib := Contrib) := by
     ext d <;> cases d <;> rfl
   rw [hgrid] at h
-  change recover AgentRelabellingWitness.symmetricGrid cfg =
-    Bool.not (recover AgentRelabellingWitness.symmetricGrid cfg) at h
+  change recover Bool AgentRelabellingWitness.symmetricGrid cfg =
+    Bool.not (recover Bool AgentRelabellingWitness.symmetricGrid cfg) at h
   exact AgentRelabellingWitness.ne_not_self
-    (recover AgentRelabellingWitness.symmetricGrid cfg) h
+    (recover Bool AgentRelabellingWitness.symmetricGrid cfg) h
 
 /-- Transport a grid by reparameterizing only its Row-2 display carrier. -/
 def map (G : CoreReadings Designatum Contrib) (f : DisplayReparam Contrib Contrib') :

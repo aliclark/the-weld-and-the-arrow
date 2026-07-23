@@ -41,16 +41,19 @@ namespace Weld
 def sever {G : CoreReadings Designatum Contrib} (w : G.Weld) : SeveredTranscript G :=
   { agent := w.agent, response := w.response }
 
+omit [PreorderBot Contrib] in
 @[simp]
 theorem sever_agent {G : CoreReadings Designatum Contrib} (w : G.Weld) :
     (w.sever).agent = w.agent :=
   rfl
 
+omit [PreorderBot Contrib] in
 @[simp]
 theorem sever_response {G : CoreReadings Designatum Contrib} (w : G.Weld) :
     (w.sever).response = w.response :=
   rfl
 
+omit [PreorderBot Contrib] in
 /-- Two welds with the same attributed agent and response have the same
     severed transcript, regardless of the calls they answered. -/
 theorem sever_eq_of_agent_response {G : CoreReadings Designatum Contrib} {w₁ w₂ : G.Weld}
@@ -71,6 +74,7 @@ def sever {G : CoreReadings Designatum Contrib} {L : ClaimLanguage G}
     (u : RecordedUtterance G L) : SeveredTranscript G :=
   u.weld.sever
 
+omit [PreorderBot Contrib] in
 @[simp]
 theorem sever_eq_weld_sever {G : CoreReadings Designatum Contrib} {L : ClaimLanguage G}
     (u : RecordedUtterance G L) :
@@ -101,6 +105,7 @@ namespace GradeabilityNegative
 
 variable {Designatum Contrib : Type} [PreorderBot Contrib]
 
+omit [PreorderBot Contrib] in
 /-- If two same-agent/same-response welds differ in grade, the missing field is
     necessarily the call. -/
 theorem call_ne_of_severed_grade_collision
@@ -116,6 +121,7 @@ theorem call_ne_of_severed_grade_collision
   have hw : w₁ = w₂ := hfaces w₁ w₂ hagent hcall hresponse
   exact hshare (by rw [hw])
 
+omit [PreorderBot Contrib] in
 /-- Under a same-agent/same-response collision with different shares, no
     function from severed transcripts can correctly recover the grade of every
     actual weld. Because the collision already fixes the agent, the still

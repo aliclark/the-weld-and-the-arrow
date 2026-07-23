@@ -283,6 +283,7 @@ def deliveryCommandLanguage (G : CoreReadings Designatum Contrib) : ClaimLanguag
     | .actTime _, claim =>
         DirectedConvention.DeliveredTo G claim.deed claim.reception
 
+omit [PreorderBot Contrib] in
 /-- A recorded delivery-command utterance fits its offered tier only when the
     commanded delivery is in fact delivered. -/
 theorem deliveryCommand_unfit_of_not_delivered

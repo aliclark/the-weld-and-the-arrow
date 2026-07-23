@@ -43,23 +43,27 @@ variable (G : CoreReadings Designatum Contrib)
 
 /- Reading and motivation: Identification/Commentary.lean, C.2. -/
 
+omit [PreorderBot Contrib] in
 /-- The share projection is exactly the grade recorded for the weld. -/
 @[simp]
 theorem share_eq_grade (w : G.Weld) :
     G.share w = G.grade w.1 :=
   rfl
 
+omit [PreorderBot Contrib] in
 /-- An actual weld witnesses response-function at its own call. -/
 theorem mountsAt_of_actual (w : G.Weld) (h : G.Actual w) :
     G.MountsAt w.agent w.call :=
   ⟨w.response, h⟩
 
+omit [PreorderBot Contrib] in
 /-- An actual weld supplies the occurrence-form non-vacuity witness for its
     agent. -/
 theorem actualAgentInhabited_of_actual (w : G.Weld) (h : G.Actual w) :
     G.ActualAgentInhabited w.agent :=
   ⟨w, h, rfl⟩
 
+omit [PreorderBot Contrib] in
 /-- Mounting at a call is exactly the existence of an actual weld with that
     agent and call.  Function talk is thereby kept per occurrence. -/
 theorem mountsAt_iff_exists_actual (b : Designatum) (c : Designatum)
@@ -75,9 +79,11 @@ theorem mountsAt_iff_exists_actual (b : Designatum) (c : Designatum)
     subst hcall
     exact ⟨w.response, hactual⟩
 
-theorem respondsToEveryCall_of_no_call (h : Designatum → False) (b : Designatum) :
+omit [PreorderBot Contrib] in
+theorem respondsToEveryCall_of_no_call
+    (h : ∀ c, ¬ G.occurrence.isCall c) (b : Designatum) :
     G.RespondsToEveryCall b :=
-  fun c _hcall => False.elim (h c)
+  fun c hcall => False.elim (h c hcall)
 
 /- Reading and motivation: Identification/Commentary.lean, C.2. -/
 theorem atPoleClass_of_terminus (b : Designatum) (hterm : G.Terminus b) :
@@ -85,6 +91,7 @@ theorem atPoleClass_of_terminus (b : Designatum) (hterm : G.Terminus b) :
   hterm
 
 /- Reading and motivation: Identification/Commentary.lean, C.2. -/
+omit [PreorderBot Contrib] in
 theorem rePitch_tendency_eq_share
     (before : Config Contrib) (received : G.Weld) :
     (G.rePitch before received).tendency = G.share received :=
@@ -132,6 +139,7 @@ def withConditions (conditions' : Designatum → Designatum → Prop) :
   placement := G.placement
   conditioning := { conditions := conditions' }
 
+omit [PreorderBot Contrib] in
 @[simp]
 theorem withConditions_respondsTo
     (conditions' : Designatum → Designatum → Prop)
@@ -139,6 +147,7 @@ theorem withConditions_respondsTo
     (withConditions G conditions').respondsTo b c = G.respondsTo b c :=
   rfl
 
+omit [PreorderBot Contrib] in
 @[simp]
 theorem withConditions_grade
     (conditions' : Designatum → Designatum → Prop)
@@ -146,18 +155,21 @@ theorem withConditions_grade
     (withConditions G conditions').grade d = G.grade d :=
   rfl
 
+omit [PreorderBot Contrib] in
 @[simp]
 theorem withConditions_share
     (conditions' : Designatum → Designatum → Prop) (w : G.Weld) :
     (withConditions G conditions').share w = G.share w :=
   rfl
 
+omit [PreorderBot Contrib] in
 @[simp]
 theorem withConditions_actual_iff
     (conditions' : Designatum → Designatum → Prop) (w : G.Weld) :
     (withConditions G conditions').Actual w ↔ G.Actual w :=
   Iff.rfl
 
+omit [PreorderBot Contrib] in
 /-- Changing only `conditions` cannot change the grade assigned to a mounted
     response. This is the formal anchor for the cetana correlation at
     signature level: grade is blind to downstream delivery facts. -/
@@ -168,6 +180,7 @@ theorem grade_independent_of_conditions
       (withConditions G conditions₂).grade d :=
   rfl
 
+omit [PreorderBot Contrib] in
 /-- The same cetana anchor at the weld/share projection: what is graded is the
     weld's agent-call-response composition, not the later delivery relation. -/
 theorem share_independent_of_conditions
@@ -190,6 +203,7 @@ def withRespondsTo (respondsTo' : Designatum -> Designatum -> Option Designatum)
   placement := G.placement
   conditioning := G.conditioning
 
+omit [PreorderBot Contrib] in
 @[simp]
 theorem withRespondsTo_grade
     (respondsTo' : Designatum -> Designatum -> Option Designatum)
@@ -197,12 +211,14 @@ theorem withRespondsTo_grade
     (withRespondsTo G respondsTo').grade d = G.grade d :=
   rfl
 
+omit [PreorderBot Contrib] in
 @[simp]
 theorem withRespondsTo_share
     (respondsTo' : Designatum -> Designatum -> Option Designatum) (w : G.Weld) :
     (withRespondsTo G respondsTo').share w = G.share w :=
   rfl
 
+omit [PreorderBot Contrib] in
 @[simp]
 theorem withRespondsTo_conditions
     (respondsTo' : Designatum -> Designatum -> Option Designatum) :
@@ -213,6 +229,7 @@ theorem withRespondsTo_conditions
    Accumulation: `rePitch` has no history register
 ============================================================================== -/
 
+omit [PreorderBot Contrib] in
 /-- The post-reception configuration ignores the prior configuration and reads
     only the received weld's share. -/
 theorem rePitch_forgets
@@ -220,6 +237,7 @@ theorem rePitch_forgets
     G.rePitch before₁ received = G.rePitch before₂ received :=
   rfl
 
+omit [PreorderBot Contrib] in
 /-- Any run-valued score that factors through the post-reception `Config` is
     constant across histories that share their final reception. -/
 theorem accumulated_attainment_constant_of_same_final
@@ -249,6 +267,7 @@ theorem isShareDrop_of_shareDropLine
     G.IsShareDrop before reception :=
   h.right
 
+omit [PreorderBot Contrib] in
 /-- An environs-line is a delivery-fact. -/
 theorem deliveredTo_of_environsLine
     {b : Designatum} {deed reception : G.Weld}
@@ -368,22 +387,26 @@ end DirectedConvention
 
 namespace DirectedConvention
 
+omit [PreorderBot Contrib] in
 /-- A full reach-back is the same field-side fact as delivery. -/
 theorem waaReachBackFull_iff_deliveredTo (deed reception : G.Weld) :
     WaaReachBackFull G deed reception ↔ DeliveredTo G deed reception :=
   Iff.rfl
 
+omit [PreorderBot Contrib] in
 /-- The display-tier aiming lens unfolds to delivery and adds no mechanism. -/
 theorem waaAimedAt_iff_deliveredTo (deed reception : G.Weld) :
     WaaAimedAt G deed reception ↔ DeliveredTo G deed reception :=
   Iff.rfl
 
+omit [PreorderBot Contrib] in
 /-- Landing includes delivery. -/
 theorem deliveredTo_of_landsAt
     {deed reception : G.Weld} (h : LandsAt G deed reception) :
     DeliveredTo G deed reception :=
   h.left
 
+omit [PreorderBot Contrib] in
 /-- Landing includes actuality of the reception. -/
 theorem actual_of_landsAt
     {deed reception : G.Weld} (h : LandsAt G deed reception) :
@@ -452,16 +475,19 @@ namespace ReceptionPair
 
 variable {G : CoreReadings Designatum Contrib}
 
+omit [PreorderBot Contrib] in
 /-- The first member of a reception pair is actual. -/
 theorem first_actual (p : ReceptionPair G) :
     G.Actual p.first.weld :=
   p.first.actual
 
+omit [PreorderBot Contrib] in
 /-- The second member of a reception pair is actual. -/
 theorem second_actual (p : ReceptionPair G) :
     G.Actual p.second.weld :=
   p.second.actual
 
+omit [PreorderBot Contrib] in
 /-- The pair's named relation is just delivery from first to second. -/
 theorem firstConditionsSecond_iff_deliveredTo (p : ReceptionPair G) :
     p.FirstConditionsSecond ↔
@@ -469,12 +495,14 @@ theorem firstConditionsSecond_iff_deliveredTo (p : ReceptionPair G) :
   Iff.rfl
 
 /- Reading and motivation: Identification/Commentary.lean, C.2. -/
+omit [PreorderBot Contrib] in
 theorem rePitchSequence_first_tendency
     (before : Config Contrib) (p : ReceptionPair G) :
     (rePitchSequence (G := G) before p).fst.tendency = G.share p.first.weld :=
   rfl
 
 /- Reading and motivation: Identification/Commentary.lean, C.2. -/
+omit [PreorderBot Contrib] in
 theorem rePitchSequence_second_tendency
     (before : Config Contrib) (p : ReceptionPair G) :
     (rePitchSequence (G := G) before p).snd.tendency = G.share p.second.weld :=
@@ -570,12 +598,14 @@ namespace RecordedUtterance
 
 variable {G : CoreReadings Designatum Contrib} {L : ClaimLanguage G}
 
+omit [PreorderBot Contrib] in
 /-- The answered call is the call carried by the utterance's weld. -/
 @[simp]
 theorem answersCall_eq_weld_call (u : RecordedUtterance G L) :
     answersCall u = u.weld.call :=
   rfl
 
+omit [PreorderBot Contrib] in
 /-- Fitting the offered tier is exactly truth at that tier. -/
 theorem fitsOfferedTier_iff_trueAt (u : RecordedUtterance G L) :
     FitsOfferedTier u ↔ L.TrueAt u.offeredAt u.content :=

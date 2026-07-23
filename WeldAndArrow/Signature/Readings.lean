@@ -89,13 +89,6 @@ theorem response_mk (d : Designatum) (h : O.occurrence d) :
 
 end Weld
 
-/-- Every selected occurrence has correctly marked role faces.  This law is
-    requested only by theorems that use role typing; it is not forced on every
-    occurrence reading. -/
-def RoleCoherent (O : OccurrenceReading Designatum) : Prop :=
-  ∀ w : O.Weld,
-    O.isBeing w.agent ∧ O.isCall w.call ∧ O.isResponse w.response
-
 /-- Swap the call and response readings while retaining the occurrence
     carrier, occurrence predicate, and agent reading. -/
 def transposeCR (O : OccurrenceReading Designatum) :
@@ -174,21 +167,6 @@ end OccurrenceReading
 @[ext]
 structure RespondsToReading (Designatum : Type u) where
   respondsTo : Designatum → Designatum → Option Designatum
-
-namespace RespondsToReading
-
-/-- A response rule is well typed relative to an occurrence reading when
-    every returned value has the response role whenever its inputs have the
-    agent and call roles. -/
-def WellTyped (O : OccurrenceReading Designatum)
-    (R : RespondsToReading Designatum) : Prop :=
-  ∀ {b c r},
-    O.isBeing b →
-    O.isCall c →
-    R.respondsTo b c = some r →
-    O.isResponse r
-
-end RespondsToReading
 
 /-- A supplied placement of every designatum in the contribution display. -/
 @[ext]

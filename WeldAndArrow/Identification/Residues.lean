@@ -35,6 +35,7 @@ abbrev FieldRecovery (G : CoreReadings Designatum Contrib) : Type :=
 def CorrectFieldRecovery (recover : FieldRecovery G) : Prop :=
   ∀ w : G.Weld, G.Actual w → recover (G.fieldOf w) = G.index w
 
+omit [PreorderBot Contrib] in
 /-- A correct field-only recovery cannot distinguish two actual welds with the
     same field residue; it must assign them the same index. -/
 theorem correctFieldRecovery_forces_same_index_of_same_field
@@ -47,6 +48,7 @@ theorem correctFieldRecovery_forces_same_index_of_same_field
     _ = recover (G.fieldOf w₂) := congrArg recover hfield
     _ = G.index w₂ := hrec w₂ h₂
 
+omit [PreorderBot Contrib] in
 /-- If two actual welds share the field residue but differ in index, no
     field-only recovery can be correct. This is the modest internal fact that
     field residues under-determine the agent-index. -/
@@ -59,6 +61,7 @@ theorem no_agent_recovery_from_same_field_distinct_index
     hne (correctFieldRecovery_forces_same_index_of_same_field G
       hrec h₁ h₂ hfield)
 
+omit [PreorderBot Contrib] in
 /-- The concrete same-call/same-response witness used in the prose: two
     different beings can actually answer the same call with the same response,
     and the field residue cannot say which one acted. -/
@@ -115,6 +118,7 @@ structure FieldCollision (G : CoreReadings Designatum Contrib) where
   same_field : G.fieldOf w1 = G.fieldOf w2
   distinct_agent : w1.agent ≠ w2.agent
 
+omit [PreorderBot Contrib] in
 /-- No answer-function for the index-seeking form is correct under a field
     collision. The negation encloses the whole universe of candidate answers,
     so the obstruction belongs to the question-shape, not to one bad answer. -/
@@ -129,6 +133,7 @@ theorem no_indexSeeking_success_of_collision
       _ = G.index c.w2 := hans c.w2 c.actual2
   exact c.distinct_agent (by simpa [Grid.index] using hsame)
 
+omit [PreorderBot Contrib] in
 /-- Claim-level face of the same obstruction: one field residue has two
     actual-backed, distinct index claims. -/
 theorem indexClaim_not_functional_of_collision

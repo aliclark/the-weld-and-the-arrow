@@ -35,6 +35,7 @@ open BeingConvention
 def MountsOnlyIn (b : Designatum) (M : Designatum -> Prop) : Prop :=
   ∀ c r, G.respondsTo b c = some r -> M c
 
+omit [PreorderBot Contrib] in
 /-- An actual weld at a modality-restricted receiver carries a call in that
     modality. -/
 theorem modality_of_actual
@@ -43,6 +44,7 @@ theorem modality_of_actual
     M w.call :=
   hM w.call w.response hactual
 
+omit [PreorderBot Contrib] in
 /-- Any landing at a modality-restricted receiver carries a call in that
     modality. -/
 theorem landing_call_in_modality
@@ -52,6 +54,7 @@ theorem landing_call_in_modality
     M reception.call :=
   modality_of_actual G hM hland.right
 
+omit [PreorderBot Contrib] in
 /-- A weld whose call lies outside the receiver's modality cannot be actual. -/
 theorem not_actual_outside_modality
     {M : Designatum -> Prop} {w : G.Weld}
@@ -59,6 +62,7 @@ theorem not_actual_outside_modality
     ¬ G.Actual w :=
   fun hactual => hout (modality_of_actual G hM hactual)
 
+omit [PreorderBot Contrib] in
 /-- A reception whose call lies outside the receiver's modality cannot be a
     landing. -/
 theorem no_landing_outside_modality
@@ -69,6 +73,7 @@ theorem no_landing_outside_modality
 
 namespace BeingConvention
 
+omit [PreorderBot Contrib] in
 /-- If every fine tag under a macro tag shares a modality restriction, then any
     landing in that fiber carries a call in the same modality. -/
 theorem fiber_landing_call_in_modality
@@ -104,6 +109,7 @@ def receptionCommandLanguage : ClaimLanguage G where
     | .actTime _, claim =>
         DirectedConvention.LandsAt G claim.deed claim.reception
 
+omit [PreorderBot Contrib] in
 /-- A recorded reception-command utterance fits its offered tier only when the
     commanded reception actually lands. -/
 theorem receptionCommand_unfit_of_no_landing

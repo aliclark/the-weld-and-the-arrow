@@ -300,6 +300,28 @@ theorem twoResolution_directionCoarsening_independence :
     eventTick.ResolutionBounded ∧ ¬ oneTick.ResolutionBounded :=
   ⟨eventTick_resolutionBounded, oneTick_not_resolutionBounded⟩
 
+/-- The register clock's macro actuality and internal-delivery witnesses do
+    not consume either a clock choice or a resolution-boundedness proof.  This
+    dependency certificate is distinct from the two-clock counterexample
+    above. -/
+theorem registerClock_directionCoarsening_independence :
+    (∀ {Tick : Type}
+        (_ρ : Grid.DirectedConvention.DirectionCoarsening registerClockGrid Tick),
+        registerClockCoarsening.ActualFiberInhabited () ∧
+          registerClockCoarsening.SelfConditioningTag ()) ∧
+      (∀ {Tick : Type}
+        (ρ : Grid.DirectedConvention.DirectionCoarsening registerClockGrid Tick),
+        ρ.ResolutionBounded →
+          registerClockCoarsening.ActualFiberInhabited () ∧
+            registerClockCoarsening.SelfConditioningTag ()) := by
+  constructor
+  · intro _Tick _ρ
+    exact ⟨registerClock_macro_actualFiberInhabited,
+      registerClock_macro_selfConditioning⟩
+  · intro _Tick _ρ _hbounded
+    exact ⟨registerClock_macro_actualFiberInhabited,
+      registerClock_macro_selfConditioning⟩
+
 end DirectionCoarseningWitness
 
 /- ==========================================================================
@@ -369,31 +391,50 @@ theorem hypotheticalWeld_not_live :
     ¬ hypotheticalGrid.HasSelfPoleIndex hypotheticalWeld :=
   hypotheticalGrid_no_liveTier (.actTime hypotheticalWeld)
 
-/-- An unrealized occurrence makes the beings-denial true at a non-live
-    act-time, so the content-bearing beings row cannot obey fusion there. -/
-theorem contentBeingsRow_not_obeys_hypothetical :
-    ¬ (contentBeingsRow hypotheticalGrid).ObeysSeparateFuse := by
-  apply contentLayerRow_not_obeys_of_nonlive_denial
+/-- An unrealized occurrence makes the beings-denial true at its non-live
+    act-time. -/
+theorem contentBeingsRow_not_fused_hypothetical :
+    ¬ (contentBeingsRow hypotheticalGrid).Fused (.actTime hypotheticalWeld) := by
+  apply contentLayerRow_not_fused_of_nonlive_denial
     (G := hypotheticalGrid) .beings hypotheticalWeld hypotheticalWeld_not_live
   dsimp [contentLayerLanguage, Grid.ClaimLanguage.TrueAt]
   exact hypotheticalGrid_no_actual
 
+theorem contentBeingsRow_not_obeys_hypothetical :
+    ¬ (contentBeingsRow hypotheticalGrid).ObeysSeparateFuse := by
+  intro h
+  exact contentBeingsRow_not_fused_hypothetical
+    (hypotheticalGrid.fused_of_obeysSeparateFuse h (.actTime hypotheticalWeld))
+
 /-- The same unrealized occurrence supplies an act-time while the model has no
     live tier anywhere, exposing the grid-lens row's required hypothesis. -/
-theorem contentGridLensRow_not_obeys_hypothetical :
-    ¬ (contentGridLensRow hypotheticalGrid).ObeysSeparateFuse := by
-  apply contentLayerRow_not_obeys_of_nonlive_denial
+theorem contentGridLensRow_not_fused_hypothetical :
+    ¬ (contentGridLensRow hypotheticalGrid).Fused
+      (.actTime hypotheticalWeld) := by
+  apply contentLayerRow_not_fused_of_nonlive_denial
     (G := hypotheticalGrid) .gridLens hypotheticalWeld hypotheticalWeld_not_live
   dsimp [contentLayerLanguage, Grid.ClaimLanguage.TrueAt]
   exact hypotheticalGrid_no_liveTier
 
+theorem contentGridLensRow_not_obeys_hypothetical :
+    ¬ (contentGridLensRow hypotheticalGrid).ObeysSeparateFuse := by
+  intro h
+  exact contentGridLensRow_not_fused_hypothetical
+    (hypotheticalGrid.fused_of_obeysSeparateFuse h (.actTime hypotheticalWeld))
+
 /-- Weld-grain content needs actuality just as beings content does. -/
-theorem contentWeldRow_not_obeys_hypothetical :
-    ¬ (contentWeldRow hypotheticalGrid).ObeysSeparateFuse := by
-  apply contentLayerRow_not_obeys_of_nonlive_denial
+theorem contentWeldRow_not_fused_hypothetical :
+    ¬ (contentWeldRow hypotheticalGrid).Fused (.actTime hypotheticalWeld) := by
+  apply contentLayerRow_not_fused_of_nonlive_denial
     (G := hypotheticalGrid) .weldGrain hypotheticalWeld hypotheticalWeld_not_live
   dsimp [contentLayerLanguage, Grid.ClaimLanguage.TrueAt]
   exact hypotheticalGrid_no_actual
+
+theorem contentWeldRow_not_obeys_hypothetical :
+    ¬ (contentWeldRow hypotheticalGrid).ObeysSeparateFuse := by
+  intro h
+  exact contentWeldRow_not_fused_hypothetical
+    (hypotheticalGrid.fused_of_obeysSeparateFuse h (.actTime hypotheticalWeld))
 
 /- --------------------------------------------------------------------------
    Actual but fixed response across two distinct calls
@@ -474,27 +515,42 @@ theorem fixedResponseFirst_not_live :
   intro hlive
   exact hlive (Nat.le_refl 0)
 
-theorem contentIntraWeldArrowRow_not_obeys_fixedResponse :
-    ¬ (contentIntraWeldArrowRow fixedResponseGrid).ObeysSeparateFuse := by
-  apply contentLayerRow_not_obeys_of_nonlive_denial
+theorem contentIntraWeldArrowRow_not_fused_fixedResponse :
+    ¬ (contentIntraWeldArrowRow fixedResponseGrid).Fused
+      (.actTime fixedResponseFirst) := by
+  apply contentLayerRow_not_fused_of_nonlive_denial
     (G := fixedResponseGrid) .intraWeldArrow fixedResponseFirst
       fixedResponseFirst_not_live
   dsimp [contentLayerLanguage, Grid.ClaimLanguage.TrueAt]
   exact fixedResponseGrid_no_variation
 
+theorem contentIntraWeldArrowRow_not_obeys_fixedResponse :
+    ¬ (contentIntraWeldArrowRow fixedResponseGrid).ObeysSeparateFuse := by
+  intro h
+  exact contentIntraWeldArrowRow_not_fused_fixedResponse
+    (fixedResponseGrid.fused_of_obeysSeparateFuse h (.actTime fixedResponseFirst))
+
 /- --------------------------------------------------------------------------
    Direction denial at a non-live occurrence
 -------------------------------------------------------------------------- -/
 
-theorem contentBeforeAfterRow_not_obeys_twoBottom :
-    ¬ (contentBeforeAfterRow InvarianceNegative.twoBottomGrid).ObeysSeparateFuse := by
-  apply contentLayerRow_not_obeys_of_nonlive_denial
+theorem contentBeforeAfterRow_not_fused_twoBottom :
+    ¬ (contentBeforeAfterRow InvarianceNegative.twoBottomGrid).Fused
+      (.actTime InvarianceNegative.twoBottomWeld) := by
+  apply contentLayerRow_not_fused_of_nonlive_denial
     (G := InvarianceNegative.twoBottomGrid) .directedTime
       InvarianceNegative.twoBottomWeld
   · intro hlive
     exact hlive True.intro
   · dsimp [contentLayerLanguage, Grid.ClaimLanguage.TrueAt]
     exact DirectionNegative.not_strict_twoBottom
+
+theorem contentBeforeAfterRow_not_obeys_twoBottom :
+    ¬ (contentBeforeAfterRow InvarianceNegative.twoBottomGrid).ObeysSeparateFuse := by
+  intro h
+  exact contentBeforeAfterRow_not_fused_twoBottom
+    (InvarianceNegative.twoBottomGrid.fused_of_obeysSeparateFuse h
+      (.actTime InvarianceNegative.twoBottomWeld))
 
 end ContentNegative
 

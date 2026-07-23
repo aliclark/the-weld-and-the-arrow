@@ -51,13 +51,6 @@ def identificationRef : DocRef :=
     provenance := .source
     summary := "the karma identification, the offices-spine that earns the name, the sower/reaper split, the contemporary placements, the pole-typing corollary, the taxonomy's internal mis-feeds, and the disclaimers, enumerated" }
 
-def readingRef : DocRef :=
-  { id := "reading"
-    title := "Reading"
-    output := "Exposition/Reading.md"
-    provenance := .source
-    summary := "a plain-English reading of the checked Lean surface: the reading conventions (the `Waa` system-POV marking, the directed-convention namespace layers as ontological ordering, rfl-transparency notes), the preorder and pole-class preliminaries, the signature and its convention layers, the layer-by-layer readings of `Consequences`, `Doctrines`, `Identification`, and `Meta` with the numbered pins, the śūnyatā wrappers and reflexivity witness, the invariance discipline and its sibling countermodels, the verdict ledger, and the axiom audit; with what remains prose-bound flagged throughout" }
-
 def assumptionsRef : DocRef :=
   { id := "assumptions"
     title := "Assumptions"
@@ -80,8 +73,7 @@ def registry : List DocRef := [
   theoremsRef,
   identificationRef,
   assumptionsRef,
-  glossaryRef,
-  readingRef
+  glossaryRef
 ]
 
 def registryIds : List DocId := registry.map (fun ref => ref.id)
@@ -97,7 +89,7 @@ def DocRef.toDoc (ref : DocRef) : Doc :=
 
 def allDocs : List Doc := registry.map DocRef.toDoc
 
-example : registry.length = 8 := rfl
+example : registry.length = 7 := rfl
 
 theorem registry_ids_nodup : registryIds.Nodup := by
   decide
